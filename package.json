@@ -1,0 +1,6 @@
+{
+  "name": "@twilio/sendgrid-oai",
+  "devDependencies": {
+    "@stoplight/spectral-cli": "^6.1.0"
+  }
+}

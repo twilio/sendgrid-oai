@@ -1915,7 +1915,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/requestBodies/PostPatchIntegration"
+              "$ref": "#/components/schemas/PostPatchIntegrationRequest"
             }
           }
         }

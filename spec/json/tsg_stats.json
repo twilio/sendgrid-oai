@@ -788,7 +788,7 @@
         "tags": [
           "Stats"
         ],
-        "description": "**This endpoint allows you to retrieve your email statistics segmented by a specific client type.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\n## Available Client Types\n- phone\n- tablet\n- webmail\n- desktop\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/).",
+        "description": "**This endpoint allows you to retrieve your email statistics segmented by a specific client type.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\n### Available Client Types\n- phone\n- tablet\n- webmail\n- desktop\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/).",
         "parameters": [
           {
             "$ref": "#/components/parameters/OnBehalfOf"

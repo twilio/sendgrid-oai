@@ -608,7 +608,7 @@ paths:
         500 items will be returned per request via the Advanced Stats API endpoints.
 
 
-        ## Available Client Types
+        ### Available Client Types
 
         - phone
 

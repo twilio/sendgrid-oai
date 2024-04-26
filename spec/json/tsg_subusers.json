@@ -283,12 +283,7 @@
     "/v3/subusers/{subuser_name}": {
       "parameters": [
         {
-          "name": "subuser_name",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/parameters/UserName"
         }
       ],
       "patch": {
@@ -441,15 +436,215 @@
         }
       }
     },
+    "/v3/subusers/{subuser_name}/credits": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/UserName"
+        }
+      ],
+      "get": {
+        "operationId": "GetSubusersSubuserNameCredits",
+        "summary": "Get the Credits for a Subuser",
+        "tags": [
+          "Subusers"
+        ],
+        "description": "**This endpoint allows you to retrieve a Credits overview for a Subuser.**",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubuserCredits"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "remain": 99,
+                      "total": 100,
+                      "used": 1,
+                      "type": "recurring",
+                      "reset_frequency": "monthly"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "errors": [
+                        {
+                          "field": null,
+                          "message": "No user found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "PutSubusersSubuserNameCredits",
+        "summary": "Update the Credits for a Subuser",
+        "tags": [
+          "Subusers"
+        ],
+        "description": "**This endpoint allows you to update the Credits for a Subuser.**",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubuserCreditsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubuserCredits"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "remain": 100,
+                      "total": 100,
+                      "used": 0,
+                      "type": "recurring",
+                      "reset_frequency": "monthly"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "errors": [
+                        {
+                          "field": "type",
+                          "message": "Type should be set to 'recurring', 'nonrecurring', or 'unlimited'"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/subusers/{subuser_name}/credits/remaining": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/UserName"
+        }
+      ],
+      "patch": {
+        "operationId": "PatchSubusersSubuserNameCreditsRemaining",
+        "summary": "Update the remaining credits for a Subuser",
+        "tags": [
+          "Subusers"
+        ],
+        "description": "**This endpoint allows you to update the remaining credits for a Subuser.**",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "allocation_update": {
+                    "type": "integer",
+                    "description": "The number of credits to add to or subtract from the current remaining credits for the Subuser. Use a positive number to increase the remaining credits or a negative number to reduce the remaining credits."
+                  }
+                },
+                "required": [
+                  "allocation_update"
+                ],
+                "example": {
+                  "allocation_update": 99
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubuserCredits"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "remain": 100,
+                      "total": 100,
+                      "used": 0,
+                      "type": "recurring",
+                      "reset_frequency": "monthly"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "errors": [
+                        {
+                          "field": null,
+                          "message": "No user found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v3/subusers/{subuser_name}/ips": {
       "parameters": [
         {
-          "name": "subuser_name",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/parameters/UserName"
         }
       ],
       "put": {
@@ -534,12 +729,7 @@
     "/v3/subusers/{subuser_name}/stats/monthly": {
       "parameters": [
         {
-          "name": "subuser_name",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/parameters/UserName"
         }
       ],
       "get": {
@@ -1410,6 +1600,95 @@
           }
         }
       },
+      "SubuserCredits": {
+        "title": "Credits of a Subuser",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "unlimited",
+              "recurring",
+              "nonrecurring"
+            ],
+            "description": "Type determines how credits are reset for a Subuser. `unlimited` indicates that there is no limit to the Subuser's credits. `recurring` indicates that the credits for the Subuser are reset according to the frequency determined by `reset_frequency`. `nonrecurring` indicates that there is no recurring schedule to reset credits and resets must be done on an ad hoc basis."
+          },
+          "reset_frequency": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "monthly",
+              "weekly",
+              "daily"
+            ],
+            "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`, otherwise `null`."
+          },
+          "remain": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Total number of remaining credits. `remain` is `null` if the reset `type` for the Subuser's credits is set to `unlimited`.",
+            "minimum": 0
+          },
+          "total": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Total number of allowable credits. `total` is `null` if the reset `type` for the Subuser's credits is set to `unlimited` or `nonrecurring`.",
+            "minimum": 0
+          },
+          "used": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Total number of used credits. `used` is `null` if the reset `type` for the Subuser's credits is set to `unlimited` or `nonrecurring`.",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "type",
+          "reset_frequency",
+          "remain",
+          "total",
+          "used"
+        ],
+        "example": {
+          "type": "recurring",
+          "reset_frequency": "monthly",
+          "remain": 99,
+          "total": 100,
+          "used": 1
+        }
+      },
+      "SubuserCreditsRequest": {
+        "title": "Subuser Credits reset request body",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "unlimited",
+              "recurring",
+              "nonrecurring"
+            ],
+            "description": "Type determines how credits are reset for a Subuser. `unlimited` indicates that there is no limit to the Subuser's credits. `recurring` indicates that the credits for the Subuser are reset according to the frequency determined by `reset_frequency`. `nonrecurring` indicates that there is no recurring schedule to reset credits and resets must be done on an ad hoc basis."
+          },
+          "reset_frequency": {
+            "type": "string",
+            "enum": [
+              "monthly",
+              "weekly",
+              "daily"
+            ],
+            "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`. Do _not_ include `reset_frequency` if you choose a reset `type` value of `unlimited` or `nonrecurring`."
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of credits to which the Subuser is to be reset. If `type` is `nonrecurring` then the Subuser's credits will be reset to `total` on a one-time basis. If `type` is `recurring` then the Subuser's credits will be reset to `total` every time a reset is scheduled in accordance with the `reset_frequency`. Do _not_ include `total` if you choose a reset `type` value of `unlimited`.",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
       "SubuserStats": {
         "title": "subuser_stats",
         "type": "object",
@@ -1753,6 +2032,15 @@
           "type": "integer",
           "minimum": 0,
           "default": 0
+        }
+      },
+      "UserName": {
+        "name": "subuser_name",
+        "in": "path",
+        "required": true,
+        "description": "The username of the Subuser.",
+        "schema": {
+          "type": "string"
         }
       }
     },

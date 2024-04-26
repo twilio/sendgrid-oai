@@ -1712,7 +1712,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/requestBodies/PostPatchIntegration'
+            $ref: '#/components/schemas/PostPatchIntegrationRequest'
   headers: {}
   securitySchemes:
     BearerAuth:

@@ -542,7 +542,7 @@ paths:
         To send your message immediately, set the `send_at` property value to the
         string `now`. To schedule the Single Send for future delivery, set the `send_at`
         value to your desired send time in [ISO 8601 date time format](https://www.iso.org/iso-8601-date-and-time-format.html)
-        (yyyy-MM-ddTHH:mm:ssZ).'
+        (`yyyy-MM-ddTHH:mm:ssZ`).'
       requestBody:
         content:
           application/json:

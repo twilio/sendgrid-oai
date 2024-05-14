@@ -1363,8 +1363,8 @@ components:
           description: The URL of the next page of results. If this field isn't present,
             you're at the end of the list.
         count:
-          description: The number of items in the entire list, i.e., across all pages.
           type: number
+          description: The number of items in the entire list, i.e., across all pages.
     SelfMetadata:
       title: selfMetadata
       type: object

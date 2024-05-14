@@ -705,7 +705,7 @@
     },
     "responses": {
       "AccountProvisioningErrorResponse400": {
-        "description": "The request was formatted incorrectly or missing required parameters",
+        "description": "The request was formatted incorrectly or missing required parameters.",
         "content": {
           "application/json": {
             "schema": {

@@ -119,7 +119,7 @@ components:
         job_id: 12a975bd-c742-4713-8f47-cb3ae4e56c74
   responses:
     RecipientsDataErasure400:
-      description: The request was formatted incorrectly or missing required parameters
+      description: The request was formatted incorrectly or missing required parameters.
       content:
         application/json:
           schema:

@@ -87,7 +87,7 @@
             }
           },
           "400": {
-            "description": "\"title\": \"title can't be blank\"\n\"title\": \"title is too long (maximum is 100 characters)\"\n\"categories\": \"categories exceeds 10 category limit\"\n\"html_content\": \"html_content exceeds the 1MB limit\"\n\"plain_content\": \"plain_content exceeds the 1MB limit\"\n\"sender_id\": \"sender_id does not exist\"\n\"sender_id\": \"sender_id is not a verified sender identity\"\n\"list_ids\": \"list_ids do not all exist\"\n\"segment_ids\": \"segment_ids do not all exist\"\n\"ip_pool\": \"The ip pool you provided is invalid\"\n\"suppression_group_id\": \"suppression_group_id does not exist\"\n\"unsubscribes\": \"Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other.\"\n\"\": \"The JSON you have submitted cannot be parsed.\"\n\"\": \"You've reached your limit of 250 campaigns. Please delete one or more and try again.\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -404,7 +404,7 @@
             }
           },
           "404": {
-            "description": "\"\": \"not found\"",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -473,7 +473,7 @@
             }
           },
           "404": {
-            "description": "\"\": \"not found\"",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -585,7 +585,7 @@
             }
           },
           "400": {
-            "description": "\"title\": \"title can't be blank\"\n\"title\": \"title is too long (maximum is 100 characters)\"\n\"categories\": \"categories exceeds 10 category limit\"\n\"html_content\": \"html_content exceeds the 1MB limit\"\n\"plain_content\": \"plain_content exceeds the 1MB limit\"\n\"sender_id\": \"sender_id does not exist\"\n\"sender_id\": \"sender_id is not a verified sender identity\"\n\"list_ids\": \"list_ids do not all exist\"\n\"segment_ids\": \"segment_ids do not all exist\"\n\"ip_pool\": \"The ip pool you provided is invalid\"\n\"suppression_group_id\": \"suppression_group_id does not exist\"\n\"unsubscribes\": \"Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other.\"\n\"\": \"The JSON you have submitted cannot be parsed.\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -677,7 +677,7 @@
             }
           },
           "403": {
-            "description": "\"\": \"You may only update a campaign when it is in draft mode.\"",
+            "description": "You may only update a campaign when it is in draft mode.",
             "content": {
               "application/json": {
                 "schema": {
@@ -699,7 +699,7 @@
             }
           },
           "404": {
-            "description": "\"\": \"not found\"",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -812,7 +812,7 @@
             }
           },
           "400": {
-            "description": "\"subject\": \"subject can't be blank\"\n\"sender_id\": \"sender_id can't be blank\"\n\"plain_content\": \"plain_content can't be blank, please provide plain text or html content\"\n\"list_ids\": \"You must select at least 1 segment or 1 list to send to.\"\n\"send_at\": \"Please choose a future time for sending your campaign.\"\n\"unsubscribe_tag\": \"An [unsubscribe] tag in both your html and plain content is required to send a campaign.\"\n\"suppression_group_id\": \"Either a suppression_group_id or custom_unsubscribe_url is required to send a campaign.\"\n\"\": \"The JSON you have submitted cannot be parsed.\"\n\"\":\"You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -880,7 +880,7 @@
             }
           },
           "403": {
-            "description": "\"\": \"You cannot POST to a campaign that has already sent or scheduled. However you can update a scheduled campaign with a PATCH.\"",
+            "description": "You cannot POST to a campaign that has already sent or scheduled. However you can update a scheduled campaign with a PATCH.",
             "content": {
               "application/json": {
                 "schema": {
@@ -902,7 +902,7 @@
             }
           },
           "404": {
-            "description": "\"\": \"not found\"",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -991,7 +991,7 @@
             }
           },
           "400": {
-            "description": "\"\": \"The JSON you have submitted cannot be parsed.\"\n\"send_at\": \"Please choose a future time for sending your campaign.\"\n\"\":\"You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing\"",
+            "description": "The request was formatted incorrectly or you do not have enough credits to send this campaign.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1043,7 +1043,7 @@
             }
           },
           "404": {
-            "description": "\"\": \"not found\"",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1107,7 +1107,7 @@
             }
           },
           "404": {
-            "description": "\"\": \"not found\"",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1154,7 +1154,7 @@
             }
           },
           "403": {
-            "description": "\"\": \"This campaign is already In Progress.\"\n\"\": \"This campaign is already Sent.\"\n\"\": \"This campaign is already Paused.\"\n\"\": \"This campaign is already Canceled.\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1188,7 +1188,7 @@
             }
           },
           "404": {
-            "description": "\"\": \"not found\"",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1269,7 +1269,7 @@
             }
           },
           "400": {
-            "description": "\"subject\": \"subject can't be blank\"\n\"sender_id\": \"sender_id can't be blank\"\n\"plain_content\": \"plain_content can't be blank, please provide plain text or html content\"\n\"list_ids\": \"You must select at least 1 segment or 1 list to send to.\"\n\"unsubscribe_tag\": \"An [unsubscribe] tag in both your html and plain content is required to send a campaign.\"\n\"suppression_group_id\": \"Either a suppression_group_id or custom_unsubscribe_url is required to send a campaign.\"\n\"\": \"You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing\"",
+            "description": "The request was formatted incorrectly or you do not have enough credits to send this campaign.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1337,7 +1337,7 @@
             }
           },
           "403": {
-            "description": "\"\": \"You may only send a campaign when it is in draft mode.\"",
+            "description": "You may only send a campaign when it is in draft mode.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1359,7 +1359,7 @@
             }
           },
           "404": {
-            "description": "\"\": \"not found\"",
+            "description": "Not found\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1449,7 +1449,7 @@
             }
           },
           "400": {
-            "description": "\"\": \"The JSON you have submitted cannot be parsed.\"\n\"to\": \"Please provide an email address to which the test should be sent.\"\n\"to\": \"You can only send tests to 10 addresses at a time.\"\n\"subject\": \"Please add a subject to your campaign before sending a test.\"\n\"plain_content\": \"Plain content and html content can't both be blank. Please set one of these values before sending a test.\"\n\"sender_id\": \"Please assign a sender identity to your campaign before sending a test.\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1479,7 +1479,7 @@
             }
           },
           "404": {
-            "description": "\"\": \"not found\"",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {

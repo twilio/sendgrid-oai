@@ -77,35 +77,7 @@ paths:
                     plain_content: Check out our spring line!
                     status: Draft
         '400':
-          description: '"title": "title can''t be blank"
-
-            "title": "title is too long (maximum is 100 characters)"
-
-            "categories": "categories exceeds 10 category limit"
-
-            "html_content": "html_content exceeds the 1MB limit"
-
-            "plain_content": "plain_content exceeds the 1MB limit"
-
-            "sender_id": "sender_id does not exist"
-
-            "sender_id": "sender_id is not a verified sender identity"
-
-            "list_ids": "list_ids do not all exist"
-
-            "segment_ids": "segment_ids do not all exist"
-
-            "ip_pool": "The ip pool you provided is invalid"
-
-            "suppression_group_id": "suppression_group_id does not exist"
-
-            "unsubscribes": "Either suppression_group_id or custom_unsubscribe_url
-            may be set/used, but not both. Please remove one before setting the other."
-
-            "": "The JSON you have submitted cannot be parsed."
-
-            "": "You''ve reached your limit of 250 campaigns. Please delete one or
-            more and try again."'
+          description: The request was formatted incorrectly or missing required parameters.
           content:
             application/json:
               schema:
@@ -323,7 +295,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"": "not found"'
+          description: Not found
           content:
             application/json:
               schema:
@@ -362,7 +334,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"": "not found"'
+          description: Not found
           content:
             application/json:
               schema:
@@ -446,32 +418,7 @@ paths:
                     plain_content: Check out our summer line!
                     status: Draft
         '400':
-          description: '"title": "title can''t be blank"
-
-            "title": "title is too long (maximum is 100 characters)"
-
-            "categories": "categories exceeds 10 category limit"
-
-            "html_content": "html_content exceeds the 1MB limit"
-
-            "plain_content": "plain_content exceeds the 1MB limit"
-
-            "sender_id": "sender_id does not exist"
-
-            "sender_id": "sender_id is not a verified sender identity"
-
-            "list_ids": "list_ids do not all exist"
-
-            "segment_ids": "segment_ids do not all exist"
-
-            "ip_pool": "The ip pool you provided is invalid"
-
-            "suppression_group_id": "suppression_group_id does not exist"
-
-            "unsubscribes": "Either suppression_group_id or custom_unsubscribe_url
-            may be set/used, but not both. Please remove one before setting the other."
-
-            "": "The JSON you have submitted cannot be parsed."'
+          description: The request was formatted incorrectly or missing required parameters.
           content:
             application/json:
               schema:
@@ -521,7 +468,7 @@ paths:
                     - field: null
                       message: authorization required
         '403':
-          description: '"": "You may only update a campaign when it is in draft mode."'
+          description: You may only update a campaign when it is in draft mode.
           content:
             application/json:
               schema:
@@ -534,7 +481,7 @@ paths:
                       message: You may only update a campaign when it is in draft
                         mode.
         '404':
-          description: '"": "not found"'
+          description: Not found
           content:
             application/json:
               schema:
@@ -614,27 +561,7 @@ paths:
                     send_at: 1489771528
                     status: Scheduled
         '400':
-          description: '"subject": "subject can''t be blank"
-
-            "sender_id": "sender_id can''t be blank"
-
-            "plain_content": "plain_content can''t be blank, please provide plain
-            text or html content"
-
-            "list_ids": "You must select at least 1 segment or 1 list to send to."
-
-            "send_at": "Please choose a future time for sending your campaign."
-
-            "unsubscribe_tag": "An [unsubscribe] tag in both your html and plain content
-            is required to send a campaign."
-
-            "suppression_group_id": "Either a suppression_group_id or custom_unsubscribe_url
-            is required to send a campaign."
-
-            "": "The JSON you have submitted cannot be parsed."
-
-            "":"You do not have enough credits to send this campaign. Upgrade your
-            plan to send more: https://app.sendgrid.com/settings/billing"'
+          description: The request was formatted incorrectly or missing required parameters.
           content:
             application/json:
               schema:
@@ -675,8 +602,8 @@ paths:
                     - field: null
                       message: authorization required
         '403':
-          description: '"": "You cannot POST to a campaign that has already sent or
-            scheduled. However you can update a scheduled campaign with a PATCH."'
+          description: You cannot POST to a campaign that has already sent or scheduled.
+            However you can update a scheduled campaign with a PATCH.
           content:
             application/json:
               schema:
@@ -690,7 +617,7 @@ paths:
                         or scheduled. However you can update a scheduled campaign
                         with a PATCH.
         '404':
-          description: '"": "not found"'
+          description: Not found
           content:
             application/json:
               schema:
@@ -747,12 +674,8 @@ paths:
                 - send_at
                 - status
         '400':
-          description: '"": "The JSON you have submitted cannot be parsed."
-
-            "send_at": "Please choose a future time for sending your campaign."
-
-            "":"You do not have enough credits to send this campaign. Upgrade your
-            plan to send more: https://app.sendgrid.com/settings/billing"'
+          description: The request was formatted incorrectly or you do not have enough
+            credits to send this campaign.
           content:
             application/json:
               schema:
@@ -783,7 +706,7 @@ paths:
                       message: You cannot update the send_at value of non-scheduled
                         campaign.
         '404':
-          description: '"": "not found"'
+          description: Not found
           content:
             application/json:
               schema:
@@ -822,7 +745,7 @@ paths:
                   value:
                     send_at: 1490778528
         '404':
-          description: '"": "not found"'
+          description: Not found
           content:
             application/json:
               schema:
@@ -856,13 +779,7 @@ paths:
               schema:
                 nullable: true
         '403':
-          description: '"": "This campaign is already In Progress."
-
-            "": "This campaign is already Sent."
-
-            "": "This campaign is already Paused."
-
-            "": "This campaign is already Canceled."'
+          description: The request was formatted incorrectly or missing required parameters.
           content:
             application/json:
               schema:
@@ -880,7 +797,7 @@ paths:
                     - field: null
                       message: This campaign is already Canceled.
         '404':
-          description: '"": "not found"'
+          description: Not found
           content:
             application/json:
               schema:
@@ -933,23 +850,8 @@ paths:
                     id: 1234
                     status: Scheduled
         '400':
-          description: '"subject": "subject can''t be blank"
-
-            "sender_id": "sender_id can''t be blank"
-
-            "plain_content": "plain_content can''t be blank, please provide plain
-            text or html content"
-
-            "list_ids": "You must select at least 1 segment or 1 list to send to."
-
-            "unsubscribe_tag": "An [unsubscribe] tag in both your html and plain content
-            is required to send a campaign."
-
-            "suppression_group_id": "Either a suppression_group_id or custom_unsubscribe_url
-            is required to send a campaign."
-
-            "": "You do not have enough credits to send this campaign. Upgrade your
-            plan to send more: https://app.sendgrid.com/settings/billing"'
+          description: The request was formatted incorrectly or you do not have enough
+            credits to send this campaign.
           content:
             application/json:
               schema:
@@ -990,7 +892,7 @@ paths:
                     - field: null
                       message: authorization required
         '403':
-          description: '"": "You may only send a campaign when it is in draft mode."'
+          description: You may only send a campaign when it is in draft mode.
           content:
             application/json:
               schema:
@@ -1002,7 +904,7 @@ paths:
                     - field: null
                       message: You may only send a campaign when it is in draft mode.
         '404':
-          description: '"": "not found"'
+          description: Not found"
           content:
             application/json:
               schema:
@@ -1059,19 +961,7 @@ paths:
                 required:
                 - to
         '400':
-          description: '"": "The JSON you have submitted cannot be parsed."
-
-            "to": "Please provide an email address to which the test should be sent."
-
-            "to": "You can only send tests to 10 addresses at a time."
-
-            "subject": "Please add a subject to your campaign before sending a test."
-
-            "plain_content": "Plain content and html content can''t both be blank.
-            Please set one of these values before sending a test."
-
-            "sender_id": "Please assign a sender identity to your campaign before
-            sending a test."'
+          description: The request was formatted incorrectly or missing required parameters.
           content:
             application/json:
               schema:
@@ -1088,7 +978,7 @@ paths:
                       message: 'You do not have enough credits to send this campaign.
                         Upgrade your plan to send more: https://app.sendgrid.com/settings/billing'
         '404':
-          description: '"": "not found"'
+          description: Not found
           content:
             application/json:
               schema:

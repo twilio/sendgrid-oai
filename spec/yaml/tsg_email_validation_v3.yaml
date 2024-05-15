@@ -277,9 +277,7 @@ paths:
       tags:
       - Bulk Email Address Validation
       description: '**This endpoint returns a list of all of a user''s Bulk Email
-        Validation Jobs.**
-
-        '
+        Validation Jobs.**'
       responses:
         '200':
           description: The request was successful. The response contains a list of

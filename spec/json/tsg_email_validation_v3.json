@@ -338,7 +338,7 @@
         "tags": [
           "Bulk Email Address Validation"
         ],
-        "description": "**This endpoint returns a list of all of a user's Bulk Email Validation Jobs.**\n",
+        "description": "**This endpoint returns a list of all of a user's Bulk Email Validation Jobs.**",
         "responses": {
           "200": {
             "description": "The request was successful. The response contains a list of all of your Bulk Email Validation Jobs.",

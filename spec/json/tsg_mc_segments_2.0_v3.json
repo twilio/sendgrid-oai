@@ -698,6 +698,20 @@
             "format": "email",
             "description": "Email of the contact. This is a reserved field."
           },
+          "phone_number_id": {
+            "type": "string",
+            "description": "The contact's Phone Number ID. This must be a valid phone number."
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The contact's External ID.",
+            "maxLength": 254
+          },
+          "anonymous_id": {
+            "type": "string",
+            "description": "The contact's Anonymous ID.",
+            "maxLength": 254
+          },
           "alternate_emails": {
             "type": "array",
             "uniqueItems": true,
@@ -789,7 +803,6 @@
         },
         "required": [
           "id",
-          "email",
           "alternate_emails",
           "first_name",
           "last_name",

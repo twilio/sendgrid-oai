@@ -34,7 +34,7 @@
         "tags": [
           "Contacts"
         ],
-        "description": "**This endpoint allows the [upsert](https://en.wiktionary.org/wiki/upsert) (insert or update) of up to 30,000 contacts, or 6MB of data, whichever is lower**. \n\nBecause the creation and update of contacts is an asynchronous process, the response will not contain immediate feedback on the processing of your upserted contacts. Rather, it will contain an HTTP 202 response indicating the contacts are queued for processing or an HTTP 4XX error containing validation errors. Should you wish to get the resulting contact's ID or confirm your contacts have been updated or added, you can use the \"Get Contacts by Emails\" endpoint. \n\nPlease note that custom fields need to have been already created if you wish to set their values for the contacts being upserted. To do this, please use the \"Create Custom Field Definition\" endpoint.\n\nYou will see a `job_id` in the response to your request. This can be used to check the status of your upsert job. To do so, please use the \"Import Contacts Status\" endpoint.\n\nIf the contact already exists in the system, any entries submitted via this endpoint will update the existing contact. The contact to update will be determined only by the `email` field and any fields omitted from the request will remain as they were. A contact's ID cannot be used to update the contact.\n\nThe email field will be changed to all lower-case. If a contact is added with an email that exists but contains capital letters, the existing contact with the all lower-case email will be updated.",
+        "description": "**This endpoint allows the [upsert](https://en.wiktionary.org/wiki/upsert) (insert or update) of up to 30,000 contacts, or 6MB of data, whichever is lower**.\nBecause the creation and update of contacts is an asynchronous process, the response will not contain immediate feedback on the processing of your upserted contacts. Rather, it will contain an HTTP 202 response indicating the contacts are queued for processing or an HTTP 4XX error containing validation errors. Should you wish to get the resulting contact's ID or confirm that your contacts have been updated or added, you can use the [Get Contacts by Identifiers operation](https://www.twilio.com/docs/sendgrid/api-reference/contacts/get-contacts-by-identifiers).\nPlease note that custom fields need to have been already created if you wish to set their values for the contacts being upserted. To do this, please use the [Create Custom Field Definition endpoint](https://www.twilio.com/docs/sendgrid/api-reference/custom-fields/create-custom-field-definition).\nYou will see a `job_id` in the response to your request. This can be used to check the status of your upsert job. To do so, please use the [Import Contacts Status endpoint](https://www.twilio.com/docs/sendgrid/api-reference/contacts/import-contacts-status).\nIf the contact already exists in the system, any entries submitted via this endpoint will update the existing contact. In order to update a contact, all of its existing identifiers must be present. Any fields omitted from the request will remain as they were. A contact's ID cannot be used to update the contact.\nThe email field will be changed to all lower-case. If a contact is added with an email that exists but contains capital letters, the existing contact with the all lower-case email will be updated.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -51,7 +51,7 @@
                   },
                   "contacts": {
                     "type": "array",
-                    "description": "One or more contacts objects that you intend to upsert. The available fields for a contact, including the required `email` field are described below.",
+                    "description": "One or more contacts objects that you intend to upsert. Each contact needs to include at least one of `email`, `phone_number`, `external_id`, or `anonymous_id` as an identifier.",
                     "minItems": 1,
                     "maxItems": 30000,
                     "items": {
@@ -287,7 +287,7 @@
         "tags": [
           "Contacts"
         ],
-        "description": "**This endpoint returns the full details and all fields for the specified contact**.\n\nThe \"Get Contacts by Emails\" endpoint can be used to get the ID of a contact.",
+        "description": "**This endpoint returns the full details and all fields for the specified contact**.\nThe \"Get Contacts by Identifier\" endpoint can be used to get the ID of a contact.",
         "responses": {
           "200": {
             "description": "",
@@ -384,6 +384,109 @@
                 }
               }
             }
+          },
+          "500": {
+            "$ref": "#/components/responses/MarketingContacts500"
+          }
+        }
+      }
+    },
+    "/v3/marketing/contacts/{contact_id}/identifiers": {
+      "delete": {
+        "operationId": "DeleteMarketingContactsContactIdIdentifiers",
+        "summary": "Delete a Contact Identifier",
+        "tags": [
+          "Contacts"
+        ],
+        "description": "**This endpoint can be used to delete one identifier from a contact.**\n\nDeletion jobs are processed asynchronously.\n\nNote this is different from deleting a contact. If the contact has only one identifier, the asynchronous request will fail. All contacts are required to have at least one identifier.\n\nThe request body field `identifier_type` must have a valid value of \"EMAIL\", \"PHONENUMBERID\", \"EXTERNALID\", or \"ANONYMOUSID\".\n",
+        "parameters": [
+          {
+            "name": "contact_id",
+            "in": "path",
+            "description": "Must be set to the `contact_id` of the contact you want to remove the identifier from.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identifier_type": {
+                    "type": "string",
+                    "description": "A type of the following: EMAIL, PHONENUMBERID, EXTERNALID, or ANONYMOUSID."
+                  },
+                  "identifier_value": {
+                    "type": "string",
+                    "description": "The value of the identifier you want to remove from the contact."
+                  }
+                },
+                "required": [
+                  "identifier_type",
+                  "identifier_value"
+                ],
+                "example": {
+                  "identifier_type": "PHONENUMBERID",
+                  "identifier_value": "+15555555555"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Indicates that the deletion is queued for processing. Check the job status with the Import Contacts Status endpoint.",
+                  "properties": {
+                    "job_id": {
+                      "type": "object",
+                      "description": "The deletion job ID."
+                    }
+                  },
+                  "required": [
+                    "job_id"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/MarketingContacts401"
+          },
+          "403": {
+            "$ref": "#/components/responses/MarketingContacts403"
+          },
+          "404": {
+            "$ref": "#/components/responses/MarketingContacts404"
           },
           "500": {
             "$ref": "#/components/responses/MarketingContacts500"
@@ -803,7 +906,7 @@
         "tags": [
           "Contacts"
         ],
-        "description": "**This endpoint allows a CSV upload containing up to one million contacts or 5GB of data, whichever is smaller.**\n\nImports take place asynchronously: the endpoint returns a URL (`upload_uri`) and HTTP headers (`upload_headers`) which can subsequently be used to `PUT` a file of contacts to be  imported into our system.\n\nUploaded CSV files may also be [gzip-compressed](https://en.wikipedia.org/wiki/Gzip).\n\nIn either case, you must include the field `file_type` with the value `csv` in your request body.\n\nThe `field_mappings` paramter is a respective list of field definition IDs to map the uploaded CSV columns to. It allows you to use CSVs where one or more columns are skipped (`null`) or remapped to the contact field. \n\nFor example, if `field_mappings` is set to `[null, \"w1\", \"_rf1\"]`, this means skip column 0, map column 1 to the custom field with the ID `w1`, and map column 2 to the reserved field with the ID `_rf1`. See the \"Get All Field Definitions\" endpoint to fetch your custom and reserved field IDs to use with `field_mappings`.\n\nOnce you recieve the response body you can then initiate a **second** API call where you use the supplied URL and HTTP header to upload your file. For example:\n\n`curl --upload-file \"file/path.csv\" \"URL_GIVEN\" -H 'HEADER_GIVEN'`\n\nIf you'd like to monitor the status of your import job, use the `job_id` and the \"Import Contacts Status\" endpoint.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.",
+        "description": "**This endpoint allows a CSV upload containing up to one million contacts or 5GB of data, whichever is smaller. At least one identifier is required for a successful import.**\n\nImports take place asynchronously: the endpoint returns a URL (`upload_uri`) and HTTP headers (`upload_headers`) which can subsequently be used to `PUT` a file of contacts to be  imported into our system.\n\nUploaded CSV files may also be [gzip-compressed](https://en.wikipedia.org/wiki/Gzip).\n\nIn either case, you must include the field `file_type` with the value `csv` in your request body.\n\nThe `field_mappings` parameter is a respective list of field definition IDs to map the uploaded CSV columns to. It allows you to use CSVs where one or more columns are skipped (`null`) or remapped to the contact field.\n\nFor example, if `field_mappings` is set to `[null, \"w1\", \"_rf1\"]`, this means skip column 0, map column 1 to the custom field with the ID `w1`, and map column 2 to the reserved field with the ID `_rf1`. See the \"Get All Field Definitions\" endpoint to fetch your custom and reserved field IDs to use with `field_mappings`.\n\nOnce you receive the response body you can then initiate a **second** API call where you use the supplied URL and HTTP header to upload your file. For example:\n\n`curl --upload-file \"file/path.csv\" \"URL_GIVEN\" -H \"HEADER_GIVEN\"`\n\nIf you would like to monitor the status of your import job, use the `job_id` and the \"Import Contacts Status\" endpoint.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1149,6 +1252,20 @@
                       "type": "string",
                       "maxLength": 100
                     }
+                  },
+                  "phone_number_id": {
+                    "type": "string",
+                    "description": "The contact's Phone Number ID. This is required to be a valid phone number."
+                  },
+                  "external_id": {
+                    "type": "string",
+                    "description": "The contact's External ID.",
+                    "maxLength": 254
+                  },
+                  "anonymous_id": {
+                    "type": "string",
+                    "description": "The contact's Anonymous ID.",
+                    "maxLength": 254
                   }
                 },
                 "required": [
@@ -1381,6 +1498,202 @@
           }
         }
       }
+    },
+    "/v3/marketing/contacts/search/identifiers/{identifier_type}": {
+      "parameters": [
+        {
+          "name": "identifier_type",
+          "in": "path",
+          "required": true,
+          "description": "The type of identifier to search for.",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "email",
+              "phone_number_id",
+              "external_id",
+              "anonymous_id"
+            ]
+          }
+        }
+      ],
+      "post": {
+        "operationId": "PostMarketingContactsSearchIdentifiersIdentifierType",
+        "summary": "Get Contacts by Identifiers",
+        "tags": [
+          "Contacts"
+        ],
+        "description": "**This endpoint allows you to retrieve up to 100 contacts matching the searched identifier values for one type of specified identifier.**\n\n`identifier_type` must be a valid identifier type: `email`, `phone_number_id`, `external_id`, or `anonymous_id`.\n\nThis endpoint should be used in place of the [Search Contacts endpoint](https://www.twilio.com/docs/sendgrid/api-reference/contacts/search-contacts) when you can provide exact identifiers and do not need to include other [Segmentation Query Language (SGQL)](https://www.twilio.com/docs/sendgrid/for-developers/sending-email/segmentation-query-language/) filters when searching.\n\nThis endpoint returns a `200` status code when any contacts match the identifiers you supplied. When searching multiple identifiers in a single request, it is possible that some will match a contact while others will not. When a partially successful search like this is made, the matching contacts are returned in an object and an error message is returned for the identifiers that are not found.\n\nThis endpoint returns a `404` status code when no contacts are found for the provided identifiers.\n\nA `400` status code is returned if any searched addresses are invalid.\n\nTwilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "",
+                "properties": {
+                  "identifiers": {
+                    "type": "array",
+                    "description": "One or more more identifier values to search for in your Marketing Campaigns contacts.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "maxLength": 100
+                        },
+                        "phone_number_id": {
+                          "type": "string",
+                          "description": "The contact's Phone Number ID. This is required to be a valid phone number.",
+                          "maxLength": 254
+                        },
+                        "external_id": {
+                          "type": "string",
+                          "description": "The contact's External ID.",
+                          "maxLength": 254
+                        },
+                        "anonymous_id": {
+                          "type": "string",
+                          "description": "The contact's Anonymous ID.",
+                          "maxLength": 254
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "identifiers"
+                ],
+                "example": {
+                  "identifiers": [
+                    {
+                      "email": "contact@example.com"
+                    },
+                    {
+                      "phone_number_id": "23"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "An object containing one or more of the identifiers matching the searched identifiers in your contacts.",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "description": "An identifiers value matching a searched identifier in your contacts. For example, if you use the email identifier type, the email address will be returned.",
+                        "properties": {
+                          "contact": {
+                            "$ref": "#/components/schemas/ContactDetails3"
+                          },
+                          "error": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "result": {
+                    "jane_doe@example.com": {
+                      "contact": {
+                        "address_line_1": "",
+                        "address_line_2": "",
+                        "alternate_emails": [
+                          "janedoe@example1.com"
+                        ],
+                        "city": "",
+                        "country": "",
+                        "email": "jane_doe@example.com",
+                        "phone_number_id": "+14152279968",
+                        "external_id": "extid_1709597080488434000_1_1",
+                        "anonymous_id": "anonid_1709597080488436000_1_1",
+                        "first_name": "Jane",
+                        "id": "asdf-Jkl-zxCvBNm",
+                        "last_name": "Doe",
+                        "list_ids": [],
+                        "segment_ids": [],
+                        "postal_code": "",
+                        "state_province_region": "",
+                        "phone_number": "",
+                        "whatsapp": "",
+                        "line": "",
+                        "facebook": "",
+                        "unique_name": "",
+                        "custom_fields": {},
+                        "created_at": "2021-03-02T15:25:47Z",
+                        "updated_at": "2021-03-30T15:26:16Z",
+                        "_metadata": {
+                          "self": "<metadata_url>"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactsError"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/MarketingContacts401"
+          },
+          "403": {
+            "$ref": "#/components/responses/MarketingContacts403"
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactsError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1519,6 +1832,15 @@
           "email": {
             "type": "string"
           },
+          "phone_number_id": {
+            "type": "string"
+          },
+          "external_id": {
+            "type": "string"
+          },
+          "anonymous_id": {
+            "type": "string"
+          },
           "alternate_emails": {
             "type": "array",
             "items": {
@@ -1648,6 +1970,20 @@
             "description": "The contact's primary email. This is required to be a valid email.",
             "maxLength": 254
           },
+          "phone_number_id": {
+            "type": "string",
+            "description": "The contact's Phone Number ID. This must be a valid phone number."
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The contact's External ID.",
+            "maxLength": 254
+          },
+          "anonymous_id": {
+            "type": "string",
+            "description": "The contact's Anonymous ID.",
+            "maxLength": 254
+          },
           "first_name": {
             "type": "string",
             "description": "The contact's personal name.",
@@ -1682,10 +2018,7 @@
               "e2": "blue"
             }
           }
-        },
-        "required": [
-          "email"
-        ]
+        }
       },
       "Metadata": {
         "title": "metadata",

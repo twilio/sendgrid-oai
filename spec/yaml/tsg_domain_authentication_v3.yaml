@@ -203,6 +203,10 @@ paths:
                   type: string
                   description: Add a custom DKIM selector. Accepts three letters or
                     numbers.
+                region:
+                  type: string
+                  description: The region of the domain. Allowed values are `global`
+                    and `eu`. The default value is `global`.
               required:
               - domain
               example:
@@ -215,6 +219,8 @@ paths:
                 custom_spf: true
                 default: true
                 automatic_security: false
+                custom_dkim_selector: string
+                region: global
       responses:
         '201':
           description: ''

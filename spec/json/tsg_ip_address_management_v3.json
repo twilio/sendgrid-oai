@@ -69,7 +69,7 @@
                           },
                           "is_auto_warmup": {
                             "type": "boolean",
-                            "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address). This parameter is returned only if the IP address is set to automatically warm up."
+                            "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address)."
                           },
                           "is_parent_assigned": {
                             "type": [
@@ -99,6 +99,14 @@
                           "added_at": {
                             "type": "integer",
                             "description": "A timestamp representing when the IP address was added to your account."
+                          },
+                          "region": {
+                            "type": "string",
+                            "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request.",
+                            "enum": [
+                              "eu",
+                              "us"
+                            ]
                           }
                         }
                       }
@@ -106,51 +114,69 @@
                     "_metadata": {
                       "type": "object",
                       "properties": {
-                        "after_key": {
-                          "type": [
-                            "string",
-                            "null"
-                          ],
-                          "description": "Specifies which items to be returned by the API. When the `after_key` is specified, the API will return items beginning from the first item after the item specified. This parameter can be used in combination with `limit` to iterate through paginated results. The `after_key` cannot be used in combination with the `before_key` parameter."
-                        },
-                        "before_key": {
-                          "type": [
-                            "string",
-                            "null"
-                          ],
-                          "description": "Specifies which items to be returned by the API. When the `before_key` is specified, the API will return items beginning from the first item before the item specified. This parameter can be used in combination with `limit` to iterate through paginated results. The `before_key` cannot be used in combination with the `after_key` parameter."
-                        },
-                        "ip": {
-                          "type": "string",
-                          "description": "The IP address specified in the request with the `ip` query parameter. This parameter is returned only when an IP is included in the request."
-                        },
-                        "is_leased": {
-                          "type": "boolean",
-                          "description": "Indicates whether an IP address is leased from Twilio SendGrid. If `false`, the IP address is not a Twilio SendGrid IP; it is a customer's own IP that has been added to their Twilio SendGrid account. This parameter is returned only if the IP address is leased."
-                        },
-                        "is_enabled": {
-                          "type": "boolean",
-                          "description": "Indicates if the IP address is billed and able to send email. This parameter applies to non-Twilio SendGrid APIs that been added to your Twilio SendGrid account. This parameter's value is `null` for Twilio SendGrid IP addresses. This parameter is returned only if the IP address is enabled."
-                        },
-                        "is_parent_assigned": {
-                          "type": "boolean",
-                          "description": "Indicates if a parent on the account is able to send email from the IP address. This parameter is returned only if the IP address is parent assigned."
-                        },
-                        "pool": {
-                          "type": "string",
-                          "description": "The IP Pool ID specified in the request with the `pool` query parameter. This paramerter is returned only when an IP Pool is included in the request."
-                        },
-                        "start_added_at": {
-                          "type": "string",
-                          "description": "The beginning of the time window specified in the request with the `start_added_at` query parameter. This parameter is returned only when the `start_added_at` parameter is included in the request."
-                        },
-                        "end_added_at": {
-                          "type": "string",
-                          "description": "The end of the time window specified in the request with the `end_added_at` query parameter. This parameter is returned only when the `end_added_at` parameter is included in the request."
-                        },
-                        "limit": {
-                          "type": "string",
-                          "description": "The number of items returned in the request. This parameter is returned only when a `limit` is set using the `limit` query parameter in the request."
+                        "next_params": {
+                          "type": "object",
+                          "properties": {
+                            "after_key": {
+                              "type": [
+                                "string",
+                                "null"
+                              ],
+                              "description": "Specifies which items to be returned by the API. When the `after_key` is specified, the API will return items beginning from the first item after the item specified. This parameter can be used in combination with `limit` to iterate through paginated results. The `after_key` cannot be used in combination with the `before_key` parameter."
+                            },
+                            "before_key": {
+                              "type": [
+                                "string",
+                                "null"
+                              ],
+                              "description": "Specifies which items to be returned by the API. When the `before_key` is specified, the API will return items beginning from the first item before the item specified. This parameter can be used in combination with `limit` to iterate through paginated results. The `before_key` cannot be used in combination with the `after_key` parameter."
+                            },
+                            "ip": {
+                              "type": "string",
+                              "description": "The IP address specified in the request with the `ip` query parameter. This parameter is returned only when an IP is included in the request."
+                            },
+                            "is_leased": {
+                              "type": "boolean",
+                              "description": "Indicates whether an IP address is leased from Twilio SendGrid. If `false`, the IP address is not a Twilio SendGrid IP; it is a customer's own IP that has been added to their Twilio SendGrid account. This parameter is returned only if the IP address is leased."
+                            },
+                            "is_enabled": {
+                              "type": "boolean",
+                              "description": "Indicates if the IP address is billed and able to send email. This parameter applies to non-Twilio SendGrid APIs that been added to your Twilio SendGrid account. This parameter's value is `null` for Twilio SendGrid IP addresses. This parameter is returned only if the IP address is enabled."
+                            },
+                            "is_parent_assigned": {
+                              "type": "boolean",
+                              "description": "Indicates if a parent on the account is able to send email from the IP address. This parameter is returned only if the IP address is parent assigned."
+                            },
+                            "pool": {
+                              "type": "string",
+                              "description": "The IP Pool ID specified in the request with the `pool` query parameter. This parameter is returned only when an IP Pool is included in the request."
+                            },
+                            "start_added_at": {
+                              "type": "string",
+                              "description": "The beginning of the time window specified in the request with the `start_added_at` query parameter. This parameter is returned only when the `start_added_at` parameter is included in the request."
+                            },
+                            "end_added_at": {
+                              "type": "string",
+                              "description": "The end of the time window specified in the request with the `end_added_at` query parameter. This parameter is returned only when the `end_added_at` parameter is included in the request."
+                            },
+                            "limit": {
+                              "type": "string",
+                              "description": "The number of items returned in the request. This parameter is returned only when a `limit` is set using the `limit` query parameter in the request."
+                            },
+                            "region": {
+                              "type": "string",
+                              "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request,",
+                              "enum": [
+                                "all",
+                                "us",
+                                "eu"
+                              ]
+                            },
+                            "include_region": {
+                              "type": "string",
+                              "description": "Indicates whether or not to include the IP address's region. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request."
+                            }
+                          }
                         }
                       }
                     }
@@ -173,7 +199,8 @@
                           "updated_at": null,
                           "is_enabled": true,
                           "is_leased": true,
-                          "added_at": 1664390835
+                          "added_at": 1664390835,
+                          "region": "us"
                         }
                       ],
                       "_metadata": {
@@ -290,6 +317,12 @@
           },
           {
             "$ref": "#/components/parameters/IpAddressManagementEndAddedAt"
+          },
+          {
+            "$ref": "#/components/parameters/IpAddressManagementRegion"
+          },
+          {
+            "$ref": "#/components/parameters/IpAddressManagementIncludeRegion"
           }
         ]
       },
@@ -325,6 +358,14 @@
                       "items": {
                         "type": "string"
                       }
+                    },
+                    "region": {
+                      "type": "string",
+                      "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request.",
+                      "enum": [
+                        "eu",
+                        "us"
+                      ]
                     }
                   }
                 },
@@ -408,6 +449,20 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "region": {
+                    "type": "string",
+                    "default": "us",
+                    "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request.",
+                    "enum": [
+                      "eu",
+                      "us"
+                    ]
+                  },
+                  "include_region": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Boolean indicating whether or not to return the IP address's region information in the response. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)"
                   }
                 },
                 "required": [
@@ -437,6 +492,11 @@
         "tags": [
           "IP Address Management"
         ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IpAddressManagementIncludeRegion"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -451,11 +511,11 @@
                     },
                     "is_parent_assigned": {
                       "type": "boolean",
-                      "description": "Indicates if a parent on the account is able to send email from the IP address. This parameter is returned only if the IP address is parent assigned."
+                      "description": "Indicates if a parent on the account is able to send email from the IP address."
                     },
                     "is_auto_warmup": {
                       "type": "boolean",
-                      "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address). This parameter is returned only if the IP address is set to automatically warm up."
+                      "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address)."
                     },
                     "pools": {
                       "type": "array",
@@ -495,6 +555,10 @@
                     "is_leased": {
                       "type": "boolean",
                       "description": "Indicates whether an IP address is leased from Twilio SendGrid. If `false`, the IP address is not a Twilio SendGrid IP; it is a customer's own IP that has been added to their Twilio SendGrid account."
+                    },
+                    "region": {
+                      "type": "string",
+                      "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request. Possible values are `us` or `eu`."
                     }
                   }
                 },
@@ -513,7 +577,8 @@
                       "added_at": 1664390835,
                       "updated_at": null,
                       "is_enabled": true,
-                      "is_leased": true
+                      "is_leased": true,
+                      "region": "us"
                     }
                   }
                 }
@@ -573,7 +638,7 @@
                     },
                     "is_auto_warmup": {
                       "type": "boolean",
-                      "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address). This parameter is returned only if the IP address is set to automatically warm up."
+                      "description": "Indicates if the IP address is set to automatically [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address)."
                     },
                     "is_parent_assigned": {
                       "type": "boolean",
@@ -1001,6 +1066,12 @@
           },
           {
             "$ref": "#/components/parameters/IpAddressManagementQueryIp"
+          },
+          {
+            "$ref": "#/components/parameters/IpAddressManagementRegion"
+          },
+          {
+            "$ref": "#/components/parameters/IpAddressManagementIncludeRegion"
           }
         ],
         "responses": {
@@ -1023,6 +1094,17 @@
                           "id": {
                             "type": "string",
                             "description": "The unique ID of the IP Pool."
+                          },
+                          "regions": {
+                            "type": "array",
+                            "description": "An array of the unique regions of all the IP addresses returned within the IP pool.",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "eu",
+                                "us"
+                              ]
+                            }
                           },
                           "ips_preview": {
                             "type": "array",
@@ -1060,6 +1142,19 @@
                             "limit": {
                               "type": "string",
                               "description": "The `limit` specified in the request. This parameter will be included only if it was specified in the request. This is not the default limit enforced by the API."
+                            },
+                            "region": {
+                              "type": "string",
+                              "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request.",
+                              "enum": [
+                                "all",
+                                "us",
+                                "eu"
+                              ]
+                            },
+                            "include_region": {
+                              "type": "string",
+                              "description": "Indicates whether or not to include the IP address's region. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request."
                             }
                           }
                         }
@@ -1282,6 +1377,11 @@
           "IP Address Management"
         ],
         "operationId": "GetSendIpsPools",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IpAddressManagementIncludeRegion"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1308,6 +1408,27 @@
                     "total_ip_count": {
                       "description": "The total number of IP addresses in the IP Pool. An IP Pool can have a maximum of 100 associated IP addresses.",
                       "type": "integer"
+                    },
+                    "ip_count_by_region": {
+                      "type": "array",
+                      "description": "The total number of IP addresses by region. this object is only returned if the `include_region` parameter is included and set to `true` in the API request.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "region": {
+                            "type": "string",
+                            "description": "The region associated with the number of IPs listed in the `count` property.",
+                            "enum": [
+                              "us",
+                              "eu"
+                            ]
+                          },
+                          "count": {
+                            "type": "integer",
+                            "description": "The number of IP addresses in the pool that are assigned to the region specified in the `region` property for this count."
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -1517,6 +1638,14 @@
                             "type": "string",
                             "description": "An IP address assigned to the IP Pool."
                           },
+                          "region": {
+                            "type": "string",
+                            "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request.",
+                            "enum": [
+                              "eu",
+                              "us"
+                            ]
+                          },
                           "pools": {
                             "type": "array",
                             "description": "IP Pools the IP address is assigned to.",
@@ -1554,6 +1683,10 @@
                             "limit": {
                               "type": "string",
                               "description": "The `limit` specified in the request. This parameter will be included only if it was specified in the request. This is not the default limit enforced by the API."
+                            },
+                            "include_region": {
+                              "type": "string",
+                              "description": "Indicates whether or not to include the IP address's region. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request."
                             }
                           }
                         }
@@ -1622,6 +1755,9 @@
           },
           {
             "$ref": "#/components/parameters/IpAddressManagementAfterKey"
+          },
+          {
+            "$ref": "#/components/parameters/IpAddressManagementIncludeRegion"
           }
         ]
       },
@@ -2030,7 +2166,7 @@
         "schema": {
           "type": "string"
         },
-        "description": "Specifices an IP address. The `ip` query parameter can be used to filter results by IP address."
+        "description": "Specifies an IP address. The `ip` query parameter can be used to filter results by IP address."
       },
       "IpAddressManagementBeforeKey": {
         "name": "before_key",
@@ -2066,7 +2202,7 @@
         "schema": {
           "type": "boolean"
         },
-        "description": "Indicates if a parent on the account is able to send email from the IP address. When set to `true`, only enabled IP addresses will be returned."
+        "description": "A parent must be assigned to an IP address before the parent can send mail from the IP and before the address can be assigned to an IP pool. Set this parameter value to true to allow the parent to send mail from the IP and make the IP eligible for IP pool assignment using the IP pool endpoints."
       },
       "IpAddressManagementPool": {
         "name": "pool",
@@ -2093,7 +2229,31 @@
         "schema": {
           "type": "integer"
         },
-        "description": "The `start_added_at` and `end_added_at` parameters are used to set a time window. IP addresses that were added to your account in the specified time window will be returned. The `start_added_at` parameter sets the end of the time window."
+        "description": "The `start_added_at` and `end_added_at` parameters are used to set a time window. IP addresses that were added to your account in the specified time window will be returned. The `end_added_at` parameter sets the end of the time window."
+      },
+      "IpAddressManagementRegion": {
+        "name": "region",
+        "in": "query",
+        "required": false,
+        "description": "Allowed values are `all`, `eu`, and `us`. If you provide a specific region, results will include all pools that have at least one IP in the filtered region. If `all`, pools with at least one IP (regardless of region) will be returned. If the `region` filter is not provided, the query returns all pools, including empty ones. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "all",
+            "eu",
+            "us"
+          ]
+        }
+      },
+      "IpAddressManagementIncludeRegion": {
+        "name": "include_region",
+        "in": "query",
+        "required": false,
+        "description": "Boolean indicating whether or not to return the IP Pool's region information in the response. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
       }
     },
     "examples": {

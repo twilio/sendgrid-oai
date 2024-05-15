@@ -198,11 +198,11 @@ paths:
     put:
       operationId: PutValidationsEmailJobs
       summary: Request a presigned URL and headers for Bulk Email Address Validation
-        list upload
+        list upload.
       tags:
       - Bulk Email Address Validation
-      description: '**This endpoint returns a presigned URL and request headers. You
-        use this information to upload a list of email addresses for verification.**
+      description: '**This endpoint returns a presigned URL and request headers. Use
+        this information to upload a list of email addresses for verification.**
 
 
         Note that in a successful response the `content-type` header value matches
@@ -273,16 +273,17 @@ paths:
                     - message: error message
     get:
       operationId: GetValidationsEmailJobs
-      summary: This request lists all of a User's Bulk Email Validation Jobs.
+      summary: This request lists all of a user's Bulk Email Validation Jobs.
       tags:
       - Bulk Email Address Validation
-      description: '**This endpoint returns a list of all of your Bulk Email Validation
-        Jobs.**
+      description: '**This endpoint returns a list of all of a user''s Bulk Email
+        Validation Jobs.**
 
         '
       responses:
         '200':
-          description: Success
+          description: The request was successful. The response contains a list of
+            all of your Bulk Email Validation Jobs.
           content:
             application/json:
               schema:
@@ -380,7 +381,7 @@ components:
             addresses.
         upload_headers:
           type: array
-          description: Array containing headers and header values
+          description: Array containing headers and header values.
           items:
             type: object
             properties:

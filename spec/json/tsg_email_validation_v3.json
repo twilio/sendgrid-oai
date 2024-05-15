@@ -229,11 +229,11 @@
     "/v3/validations/email/jobs": {
       "put": {
         "operationId": "PutValidationsEmailJobs",
-        "summary": "Request a presigned URL and headers for Bulk Email Address Validation list upload",
+        "summary": "Request a presigned URL and headers for Bulk Email Address Validation list upload.",
         "tags": [
           "Bulk Email Address Validation"
         ],
-        "description": "**This endpoint returns a presigned URL and request headers. You use this information to upload a list of email addresses for verification.**\n\nNote that in a successful response the `content-type` header value matches the provided `file_type` parameter in the `PUT` request.\n\nOnce you have an `upload_uri` and the `upload_headers`, you're ready to upload your email address list for verification. For the expected format of the email address list and a sample upload request, see the [Bulk Email Address Validation Overview page](https://www.twilio.com/docs/sendgrid/ui/managing-contacts/email-address-validation/bulk-email-address-validation-overview).\n",
+        "description": "**This endpoint returns a presigned URL and request headers. Use this information to upload a list of email addresses for verification.**\n\nNote that in a successful response the `content-type` header value matches the provided `file_type` parameter in the `PUT` request.\n\nOnce you have an `upload_uri` and the `upload_headers`, you're ready to upload your email address list for verification. For the expected format of the email address list and a sample upload request, see the [Bulk Email Address Validation Overview page](https://www.twilio.com/docs/sendgrid/ui/managing-contacts/email-address-validation/bulk-email-address-validation-overview).\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -334,14 +334,14 @@
       },
       "get": {
         "operationId": "GetValidationsEmailJobs",
-        "summary": "This request lists all of a User's Bulk Email Validation Jobs.",
+        "summary": "This request lists all of a user's Bulk Email Validation Jobs.",
         "tags": [
           "Bulk Email Address Validation"
         ],
-        "description": "**This endpoint returns a list of all of your Bulk Email Validation Jobs.**\n",
+        "description": "**This endpoint returns a list of all of a user's Bulk Email Validation Jobs.**\n",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful. The response contains a list of all of your Bulk Email Validation Jobs.",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,7 +495,7 @@
           },
           "upload_headers": {
             "type": "array",
-            "description": "Array containing headers and header values",
+            "description": "Array containing headers and header values.",
             "items": {
               "type": "object",
               "properties": {

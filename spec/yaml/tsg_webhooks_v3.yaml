@@ -68,7 +68,7 @@ paths:
         You can optionally configure OAuth verification for your webhook at the time
         of creation by passing the appropriate values in the `oauth_client_id`, `oauth_client_secret`,
         and `oauth_token_url` properties. You can enable or disable OAuth for the
-        webhook after creation with the [**Update an Event Webhook**](https://docs.sendgrid.com/api-reference/update-an-event-webhook)
+        webhook after creation with the [**Update an Event Webhook**](https://docs.sendgrid.com/api-reference/webhooks/update-an-event-webhook)
         operation.
 
 
@@ -231,7 +231,7 @@ paths:
         when signature verification is enabled.
 
 
-        ###Event settings
+        ### Event settings
 
 
         Each webhook''s settings determine which events will be included in the POST
@@ -255,6 +255,7 @@ paths:
         with OAuth configured.'
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
+      - $ref: '#/components/parameters/Include'
       responses:
         '200':
           description: Success
@@ -392,7 +393,7 @@ paths:
                     - message: Invalid id provided.
     patch:
       operationId: PatchUserWebhooksEventSettingsSignedId
-      summary: Toggle signature verifitication for a single Event Webhook by ID
+      summary: Toggle signature verification for a single Event Webhook by ID
       tags:
       - Event Webhook
       description: '**This endpoint allows you to enable or disable signature verification
@@ -413,7 +414,7 @@ paths:
         be set `true` or `false` to enable or disable signature verification. This
         endpoint will return the public key required to verify Twilio SendGrid signatures
         if it is enabled or an empty string if signing is disabled. You can also retrieve
-        your public key using the [**Get an Event Webhook''s Public Key**](https://docs.sendgrid.com/api-reference/webhooks/get-signed-event-webhooks-public-signature)
+        your public key using the [**Get an Event Webhook''s Public Key**](https://docs.sendgrid.com/api-reference/webhooks/get-signed-event-webhooks-public-key)
         endpoint.
 
 
@@ -490,7 +491,7 @@ paths:
       summary: Test an Event Webhook's settings
       tags:
       - Event Webhook
-      description: "**This endpoint allows you to test an Event Webhook.**\n\n> Retry\
+      description: "**This endpoint allows you to test an Event Webhook.**\n\nRetry\
         \ logic for this endpoint differs from other endpoints, which use a rolling\
         \ 24-hour retry.\n\nThis endpoint will make a POST request with a fake event\
         \ notification to a URL you provide. This allows you to verify that you have\
@@ -560,6 +561,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
       - $ref: '#/components/parameters/RequestId'
+      - $ref: '#/components/parameters/Include'
       responses:
         '200':
           description: ''
@@ -656,7 +658,7 @@ paths:
         it will prevent the webhook from sending events to your designated URL.
 
 
-        ###URL
+        ### URL
 
 
         A webhook''s URL is the endpoint where you want the webhook to send POST requests
@@ -702,6 +704,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
       - $ref: '#/components/parameters/RequestId'
+      - $ref: '#/components/parameters/Include'
       requestBody:
         content:
           application/json:
@@ -828,7 +831,7 @@ paths:
 
         This endpoint will permanently delete the webhook specified. If you instead
         want to disable a webhook, you can set the `enabled` property to `false` with
-        the [**Update an Event Webhook**](https://docs.sendgrid.com/api-reference/update-an-event-webhook)
+        the [**Update an Event Webhook**](https://docs.sendgrid.com/api-reference/webhooks/update-an-event-webhook)
         endpoint.'
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
@@ -1066,18 +1069,18 @@ paths:
       tags:
       - Parse Webhook
       description: '**This endpoint allows you to retrieve the statistics for your
-        Parse Webhook useage.**
+        Parse Webhook usage.**
 
 
         SendGrid''s Inbound Parse Webhook allows you to parse the contents and attachments
-        of incomming emails. The Parse API can then POST the parsed emails to a URL
+        of incoming emails. The Parse API can then POST the parsed emails to a URL
         that you specify. The Inbound Parse Webhook cannot parse messages greater
         than 30MB in size, including all attachments.
 
 
         There are a number of pre-made integrations for the SendGrid Parse Webhook
         which make processing events easy. You can find these integrations in the
-        [Library Index](https://sendgrid.com/docs/Integrate/libraries.html#-Webhook-Libraries).'
+        [Library Index](https://docs.sendgrid.com/for-developers/sending-email/libraries#webhook-libraries).'
       parameters:
       - name: limit
         in: query
@@ -1435,6 +1438,10 @@ components:
         url:
           type: string
           description: The URL where SendGrid will send event data.
+        account_status_change:
+          type: boolean
+          description: Indicates if the webhook is configured to send account status
+            change events related to compliance action taken by SendGrid.
         group_resubscribe:
           type: boolean
           description: Indicates if the webhook is configured to send group resubscribe
@@ -1668,6 +1675,18 @@ components:
                     message:
                       type: string
   parameters:
+    Include:
+      name: include
+      in: query
+      description: Use this to include optional fields in the response payload. When
+        this is set to `include=account_status_change`, the `account_status_change`
+        field will be part of the response payload and set to `false` by default.
+        See [Update an event webhook](https://docs.sendgrid.com/api-reference/webhooks/update-an-event-webhook)
+        for enabling this webhook notification which lets you subscribe to account
+        status change events related to compliance action taken by SendGrid.
+      required: false
+      schema:
+        type: string
     RequestId:
       name: id
       in: path

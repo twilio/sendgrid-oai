@@ -985,7 +985,7 @@ paths:
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
         '200':
-          description: TODO
+          description: 200 OK
           content:
             application/json:
               schema:

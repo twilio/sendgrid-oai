@@ -82,7 +82,7 @@
             }
           },
           "400": {
-            "description": "\"\" : \"Returned if request body is invalid JSON\"\n\"type\" : \"Returned if custom field type is invalid or not provided\"\n\"name\" : \"Returned if custom field name is not provided\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -476,7 +476,7 @@
             }
           },
           "400": {
-            "description": "\"name\" : \"Returned if list name is a duplicate of an existing list or segment\"\n\"name\" : \"Returned if list name is not a string\"\n\"\" : \"Returned if request body is invalid JSON\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -863,7 +863,7 @@
             }
           },
           "400": {
-            "description": "\"name\" : \"Returned if list name is a duplicate of existing list or segment\"\n\"name\" : \"Returned if list name is invalid or not provided\"\n\"list_id\" : \"Returned if list_id is not valid\"\n\"\" : \"Returned if request body is invalid JSON\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1239,7 +1239,7 @@
             }
           },
           "400": {
-            "description": "\"list_id\" : \"Returned if list_id is not a valid integer\"\n\"\" : \"Returned if no valid recipient ids were passed\"\n\"\" : \"Returned if no recipients were added\"\n\"\" : \"Returned if request body is invalid JSON\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1660,7 +1660,7 @@
             }
           },
           "400": {
-            "description": "\"\" : \"Returned if request body is not valid json\"",
+            "description": "The request body is not valid json",
             "content": {
               "application/json": {
                 "schema": {
@@ -1765,7 +1765,7 @@
             }
           },
           "400": {
-            "description": "\"\" : \"Returned if request body is not valid json\"",
+            "description": "The request body is not valid json",
             "content": {
               "application/json": {
                 "schema": {
@@ -1850,7 +1850,7 @@
             }
           },
           "400": {
-            "description": "\"\" : \"Returned if no recipients are deleted\"\n\"\" : \"Returned if all of the provided recipient ids are invalid\"\n\"\" : \"Returned if request body is not valid json\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2455,7 +2455,7 @@
             }
           },
           "400": {
-            "description": "\"\" : \"Returned if no search params are specified\"\n\"field\" : \"Returned if the provided field is invalid or does not exist\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2885,7 +2885,7 @@
             }
           },
           "400": {
-            "description": "\"name\" : \"Returned if the name is not valid\"\n\"list_id\" : \"Returned if the list_id is not valid\"\n\"and_or\" : \"Returned if and_or and set value is not passed into the request body\"\n\"and_or\" : \"Returned if and_or is set on the only condition passed\"\n\"and_or\" : \"Returned if and_or is set on all conditions\"\n\"and_or\" : \"Returned if and_or is not set on more than one condition and less than all conditions\"\n\"operator\" : \"Returned if operator and set value is not passed into the request body\"\n\"value\" : \"Returned if value and set value is not passed into the request body\"\n\"field\" : \"Returned if field and set value is not passed into the request body\"\n\"\" : \"Returned if request body is not valid json\"\n\"\" : \"Returned if invalid value is passed into one of the request body parameters\"",
+            "description": "The request was formatted incorrectly or missing required parameters.",
             "content": {
               "application/json": {
                 "schema": {

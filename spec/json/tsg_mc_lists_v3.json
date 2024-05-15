@@ -192,7 +192,7 @@
         "tags": [
           "Lists"
         ],
-        "description": "**This endpoint returns data about a specific list.**\n\nSetting the optional parameter `contact_sample=true` returns the `contact_sample` in the response body. Up to fifty of the most recent contacts uploaded or attached to a list will be returned, sorted alphabetically, by email address.\n\nThe full contact count is also returned.",
+        "description": "**This endpoint returns data about a specific list.**\nSetting the optional parameter `contact_sample=true` returns the `contact_sample` in the response body. Up to 50 of the most recent contacts uploaded or attached to a list will be returned.\nThe full contact count is also returned.",
         "parameters": [
           {
             "name": "contact_sample",
@@ -643,6 +643,15 @@
           "email": {
             "type": "string",
             "format": "email"
+          },
+          "phone_number_id": {
+            "type": "string"
+          },
+          "external_id": {
+            "type": "string"
+          },
+          "anonymous_id": {
+            "type": "string"
           },
           "alternate_emails": {
             "items": {

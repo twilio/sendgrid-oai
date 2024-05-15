@@ -213,6 +213,10 @@
                   "custom_dkim_selector": {
                     "type": "string",
                     "description": "Add a custom DKIM selector. Accepts three letters or numbers."
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "The region of the domain. Allowed values are `global` and `eu`. The default value is `global`."
                   }
                 },
                 "required": [
@@ -228,7 +232,9 @@
                   ],
                   "custom_spf": true,
                   "default": true,
-                  "automatic_security": false
+                  "automatic_security": false,
+                  "custom_dkim_selector": "string",
+                  "region": "global"
                 }
               }
             }

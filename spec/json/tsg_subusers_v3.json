@@ -53,6 +53,29 @@
             }
           },
           {
+            "name": "region",
+            "in": "query",
+            "description": "Filter for Subusers in this region. If not provided, all Subusers will be returned. All users can also be explicitly requested by using the filter `all`. Users who are not pinned to a region will be displayed as `global`. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "global",
+                "eu"
+              ],
+              "default": "all"
+            }
+          },
+          {
+            "name": "include_region",
+            "in": "query",
+            "description": "Optional flag to include the regions of the Subusers in the response. If not provided, the region will be omitted from the response. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
             "$ref": "#/components/parameters/PaginationCommonOffset"
           }
         ],
@@ -145,6 +168,20 @@
                       "type": "string",
                       "format": "ipv4"
                     }
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "The region this Subuser should be assigned to. Can be `global` or `eu`. (Regional email is in Public Beta and requires SendGrid Pro plan or above.).",
+                    "enum": [
+                      "global",
+                      "eu"
+                    ],
+                    "default": "global"
+                  },
+                  "include_region": {
+                    "type": "boolean",
+                    "description": "A flag that determines if the Subuser's region should be returned in the response. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
+                    "default": false
                   }
                 },
                 "required": [
@@ -160,7 +197,9 @@
                   "ips": [
                     "1.1.1.1",
                     "2.2.2.2"
-                  ]
+                  ],
+                  "region": "global",
+                  "include_region": true
                 }
               }
             }
@@ -1545,6 +1584,14 @@
             "type": "string",
             "description": "The email address to contact this subuser.",
             "format": "email"
+          },
+          "region": {
+            "type": "string",
+            "description": "The region this Subuser is assigned to. This property is returned only if the `include_region` parameter was included and set to `true` in the API request.",
+            "enum": [
+              "global",
+              "eu"
+            ]
           }
         },
         "required": [
@@ -1584,6 +1631,15 @@
                 "type": "string"
               }
             }
+          },
+          "region": {
+            "type": "string",
+            "description": "The region this Subuser is assigned to. The property is returned only if the `include_region` parameter is included and set to `true` in the API request.",
+            "enum": [
+              "global",
+              "eu"
+            ],
+            "default": "global"
           }
         },
         "required": [
@@ -1597,7 +1653,8 @@
           "email": "example@example.com",
           "credit_allocation": {
             "type": "unlimited"
-          }
+          },
+          "region": "global"
         }
       },
       "SubuserCredits": {

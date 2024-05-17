@@ -396,7 +396,7 @@ paths:
       summary: Delete a Sender Identity
       tags:
       - Sender Identities
-      description: '**This endoint allows you to delete one of your sender identities.**'
+      description: '**This endpoint allows you to delete one of your sender identities.**'
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
@@ -465,7 +465,7 @@ paths:
       summary: Resend Sender Identity Verification
       tags:
       - Sender Identities
-      description: '**This enpdoint allows you to resend a sender identity verification
+      description: '**This endpoint allows you to resend a sender identity verification
         email.**'
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'

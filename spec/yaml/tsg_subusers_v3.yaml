@@ -637,7 +637,7 @@ paths:
                       description: The sender reputation this subuser has attained.
                     username:
                       type: string
-                      description: The subuser that has this reputation.f
+                      description: The subuser that has this reputation.
                   required:
                   - reputation
                   - username

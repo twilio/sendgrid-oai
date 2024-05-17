@@ -245,7 +245,7 @@ paths:
                   - ip: 208.115.214.22
                     pools: []
                     whitelabeled: true
-                    rdns: o1.email.burgermail.com
+                    rdns: o1.email.example.com
                     start_date: 1409616000
                     subusers: []
                     warmup: false

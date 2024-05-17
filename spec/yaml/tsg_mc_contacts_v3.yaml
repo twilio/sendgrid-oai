@@ -739,7 +739,7 @@ paths:
 
         Imports take place asynchronously: the endpoint returns a URL (`upload_uri`)
         and HTTP headers (`upload_headers`) which can subsequently be used to `PUT`
-        a file of contacts to be  imported into our system.
+        a file of contacts to be imported into our system.
 
 
         Uploaded CSV files may also be [gzip-compressed](https://en.wikipedia.org/wiki/Gzip).
@@ -887,8 +887,8 @@ paths:
         \ file and open it to view more details.\n\nThe job `status` field indicates\
         \ whether the job is `pending`, `completed`, `errored`, or `failed`. \n\n\
         Pending means not started. Completed means finished without any errors. Errored\
-        \ means finished with some errors. Failed means finshed with all errors, or\
-        \ the job was entirely unprocessable: for example, if you attempt to import\
+        \ means finished with some errors. Failed means finished with all errors,\
+        \ or the job was entirely unprocessable: for example, if you attempt to import\
         \ file format we do not support.\n\nThe `results` object will have fields\
         \ depending on the job type.\n\nTwilio SendGrid recommends exporting your\
         \ contacts regularly as a backup to avoid issues or lost data."
@@ -942,7 +942,7 @@ paths:
 
 
         Formatting the `created_at` and `updated_at` values as Unix timestamps is
-        deprecated. Instead they are returned as ISO format as string.'
+        deprecated. Instead, they are returned as ISO format as string.'
       requestBody:
         content:
           application/json:
@@ -1033,7 +1033,7 @@ paths:
         \ and do not need to include other [Segmentation Query Language (SGQL)](https://sendgrid.com/docs/for-developers/sending-email/segmentation-query-language/)\
         \ filters when searching.\n\nIf you need to access a large percentage of your\
         \ contacts, we recommend exporting your contacts with the \"Export Contacts\"\
-        \ endpoint and filtering the results client side.\n\nThis endpoint returns\
+        \ endpoint and filtering the client side results.\n\nThis endpoint returns\
         \ a `200` status code when any contacts match the address(es) you supplied.\
         \ When searching multiple addresses in a single request, it is possible that\
         \ some addresses will match a contact while others will not. When a partially\

@@ -215,7 +215,7 @@
         "tags": [
           "Stats"
         ],
-        "description": "**This endpoint allows you to export Single Send stats as .CSV data**.\n\nYou can specify one Single Send or many: include as many Single Send IDs as you need, separating them with commas, as the value of the `ids` query string paramter.\n\nThe data is returned as plain text response but in .CSV format, so your application making the call can present the information in whatever way is most appropriate, or just save the data as a .csv file.",
+        "description": "**This endpoint allows you to export Single Send stats as .CSV data**.\n\nYou can specify one Single Send or many: include as many Single Send IDs as you need, separating them with commas, as the value of the `ids` query string parameter.\n\nThe data is returned as plain text response but in .CSV format, so your application making the call can present the information in whatever way is most appropriate, or just save the data as a .csv file.",
         "parameters": [
           {
             "name": "ids",
@@ -235,7 +235,7 @@
           {
             "name": "timezone",
             "in": "query",
-            "description": "The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented; i.e. `\"America/Chicago\"`. This parameter changes the timezone format only; it does not alter which stats are returned.",
+            "description": "The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_timezones) string representing the timezone in which the stats are to be presented; i.e. `\"America/Chicago\"`. This parameter changes the timezone format only; it does not alter which stats are returned.",
             "schema": {
               "type": "string",
               "default": "UTC"
@@ -440,7 +440,7 @@
         "tags": [
           "Stats"
         ],
-        "description": "**This endpoint allows you to export Single Send stats as .CSV data**.\n\nYou can specify one Single Send or many: include as many Single Send IDs as you need, separating them with commas, as the value of the `ids` query string paramter.\n\nThe data is returned as plain text response but in .CSV format, so your application making the call can present the information in whatever way is most appropriate, or just save the data as a .csv file.",
+        "description": "**This endpoint allows you to export Single Send stats as .CSV data**.\n\nYou can specify one Single Send or many: include as many Single Send IDs as you need, separating them with commas, as the value of the `ids` query string parameter.\n\nThe data is returned as plain text response but in .CSV format, so your application making the call can present the information in whatever way is most appropriate, or just save the data as a .csv file.",
         "parameters": [
           {
             "name": "ids",
@@ -460,7 +460,7 @@
           {
             "name": "timezone",
             "in": "query",
-            "description": "The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented; i.e. `\"America/Chicago\"`. This parameter changes the timezone format only; it does not alter which stats are returned.",
+            "description": "The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_timezones) string representing the timezone in which the stats are to be presented; i.e. `\"America/Chicago\"`. This parameter changes the timezone format only; it does not alter which stats are returned.",
             "schema": {
               "type": "string",
               "default": "UTC"
@@ -593,7 +593,7 @@
               "properties": {
                 "id": {
                   "type": "string",
-                  "description": "This is the ID of the Single Dend you require stats for.",
+                  "description": "This is the ID of the Single Send you require stats for.",
                   "format": "uuid"
                 },
                 "ab_variation": {
@@ -933,7 +933,7 @@
       "TimezoneBaseProps": {
         "name": "timezone",
         "in": "query",
-        "description": "[IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented, e.g., \"America/Chicago\".",
+        "description": "[IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_timezones) string representing the timezone in which the stats are to be presented, e.g., \"America/Chicago\".",
         "schema": {
           "type": "string",
           "default": "UTC"

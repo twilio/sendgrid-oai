@@ -913,7 +913,7 @@
                       },
                       "username": {
                         "type": "string",
-                        "description": "The subuser that has this reputation.f"
+                        "description": "The subuser that has this reputation."
                       }
                     },
                     "required": [

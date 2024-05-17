@@ -599,7 +599,7 @@
         "tags": [
           "Sender Identities"
         ],
-        "description": "**This endoint allows you to delete one of your sender identities.**",
+        "description": "**This endpoint allows you to delete one of your sender identities.**",
         "parameters": [
           {
             "$ref": "#/components/parameters/OnBehalfOf"
@@ -714,7 +714,7 @@
         "tags": [
           "Sender Identities"
         ],
-        "description": "**This enpdoint allows you to resend a sender identity verification email.**",
+        "description": "**This endpoint allows you to resend a sender identity verification email.**",
         "parameters": [
           {
             "$ref": "#/components/parameters/OnBehalfOf"

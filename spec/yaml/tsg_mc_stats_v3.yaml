@@ -174,7 +174,7 @@ paths:
 
         You can specify one Single Send or many: include as many Single Send IDs as
         you need, separating them with commas, as the value of the `ids` query string
-        paramter.
+        parameter.
 
 
         The data is returned as plain text response but in .CSV format, so your application
@@ -194,7 +194,7 @@ paths:
           maxItems: 50
       - name: timezone
         in: query
-        description: The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones)
+        description: The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_timezones)
           string representing the timezone in which the stats are to be presented;
           i.e. `"America/Chicago"`. This parameter changes the timezone format only;
           it does not alter which stats are returned.
@@ -353,7 +353,7 @@ paths:
 
         You can specify one Single Send or many: include as many Single Send IDs as
         you need, separating them with commas, as the value of the `ids` query string
-        paramter.
+        parameter.
 
 
         The data is returned as plain text response but in .CSV format, so your application
@@ -373,7 +373,7 @@ paths:
           maxItems: 50
       - name: timezone
         in: query
-        description: The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones)
+        description: The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_timezones)
           string representing the timezone in which the stats are to be presented;
           i.e. `"America/Chicago"`. This parameter changes the timezone format only;
           it does not alter which stats are returned.
@@ -481,7 +481,7 @@ components:
             properties:
               id:
                 type: string
-                description: This is the ID of the Single Dend you require stats for.
+                description: This is the ID of the Single Send you require stats for.
                 format: uuid
               ab_variation:
                 type: string
@@ -761,7 +761,7 @@ components:
     TimezoneBaseProps:
       name: timezone
       in: query
-      description: '[IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones)
+      description: '[IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_timezones)
         string representing the timezone in which the stats are to be presented, e.g.,
         "America/Chicago".'
       schema:

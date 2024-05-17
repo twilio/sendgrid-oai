@@ -440,7 +440,7 @@
         {
           "name": "domain_id",
           "in": "path",
-          "description": "ID of the authenticated domain to associate with the subuser",
+          "description": "ID of the authenticated domain to associate with the subuser.",
           "required": true,
           "schema": {
             "type": "integer"

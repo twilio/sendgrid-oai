@@ -937,7 +937,7 @@ components:
               type: string
             sender_id:
               description: The ID of the verified Sender. You can retrieve a verified
-                Sender's ID from the ["Get Verified Senders" endpoint](https://docs.sendgrid.com/api-reference/sender-verification/get-verified-senders)
+                Sender's ID from the ["Get Verified Senders" endpoint](https://www.twilio.com/docs/sendgrid/api-reference/sender-verification/get-all-verified-senders)
                 or by pulling it from the Sender's detail page URL in the SendGrid
                 App.
               nullable: true
@@ -1091,7 +1091,7 @@ components:
             sender_id:
               description: The ID of the verified sender from whom the Single Send
                 will be sent. You can retrieve a verified sender's ID from the [**Get
-                Verified Senders** endpoint](https://docs.sendgrid.com/api-reference/sender-verification/get-verified-senders)
+                Verified Senders** endpoint](https://www.twilio.com/docs/sendgrid/api-reference/sender-verification/get-all-verified-senders)
                 or by pulling it from the sender's detail page URL in the SendGrid
                 App.
               nullable: true

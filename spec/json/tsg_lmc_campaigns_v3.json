@@ -589,7 +589,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
                   "response": {
@@ -681,7 +681,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
                   "response": {

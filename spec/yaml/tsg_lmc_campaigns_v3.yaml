@@ -422,7 +422,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/ErrorResponse'
               examples:
                 response:
                   value:
@@ -472,7 +472,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/ErrorResponse'
               examples:
                 response:
                   value:

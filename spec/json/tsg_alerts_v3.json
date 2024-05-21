@@ -34,7 +34,7 @@
         "tags": [
           "Alerts"
         ],
-        "description": "**This endpoint allows you to create a new alert.**\n\nAlerts allow you to specify an email address to receive notifications regarding your email usage or statistics. There are two types of alerts that can be created with this endpoint:\n\n* `usage_limit` allows you to set the threshold at which an alert will be sent.\n* `stats_notification` allows you to set how frequently you would like to receive email statistics reports. For example, \"daily\", \"weekly\", or \"monthly\".\n\nFor more information about alerts, please see our [Alerts documentation](https://sendgrid.com/docs/ui/account-and-settings/alerts/).",
+        "description": "**This endpoint allows you to create a new alert.**",
         "parameters": [
           {
             "name": "Authorization",
@@ -180,7 +180,7 @@
         "tags": [
           "Alerts"
         ],
-        "description": "**This endpoint allows you to retrieve all of your alerts.**\n\nAlerts allow you to specify an email address to receive notifications regarding your email usage or statistics. \n* Usage alerts allow you to set the threshold at which an alert will be sent.\n* Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, \"daily\", \"weekly\", or \"monthly\".\n\nFor more information about alerts, please see our [Alerts documentation](https://sendgrid.com/docs/ui/account-and-settings/alerts/).",
+        "description": "**This endpoint allows you to retrieve all of your alerts.**",
         "parameters": [
           {
             "name": "Authorization",
@@ -299,7 +299,7 @@
         "tags": [
           "Alerts"
         ],
-        "description": "**This endpoint allows you to retrieve a specific alert.**\n\nAlerts allow you to specify an email address to receive notifications regarding your email usage or statistics. \n* Usage alerts allow you to set the threshold at which an alert will be sent.\n* Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, \"daily\", \"weekly\", or \"monthly\".\n\nFor more information about alerts, please see our [Alerts documentation](https://sendgrid.com/docs/ui/account-and-settings/alerts/).",
+        "description": "**This endpoint allows you to retrieve a specific alert.**",
         "parameters": [
           {
             "name": "Authorization",
@@ -384,7 +384,7 @@
         "tags": [
           "Alerts"
         ],
-        "description": "**This endpoint allows you to delete an alert.**\n\nAlerts allow you to specify an email address to receive notifications regarding your email usage or statistics. \n* Usage alerts allow you to set the threshold at which an alert will be sent.\n* Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, \"daily\", \"weekly\", or \"monthly\".\n\nFor more information about alerts, please see our [Alerts documentation](https://sendgrid.com/docs/ui/account-and-settings/alerts/).",
+        "description": "**This endpoint allows you to delete an alert.**",
         "parameters": [
           {
             "$ref": "#/components/parameters/OnBehalfOf"
@@ -410,7 +410,7 @@
         "tags": [
           "Alerts"
         ],
-        "description": "**This endpoint allows you to update an alert.**\n\nAlerts allow you to specify an email address to receive notifications regarding your email usage or statistics. \n* Usage alerts allow you to set the threshold at which an alert will be sent.\n* Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, \"daily\", \"weekly\", or \"monthly\".\n\nFor more information about alerts, please see our [Alerts documentation](https://sendgrid.com/docs/ui/account-and-settings/alerts/).",
+        "description": "**This endpoint allows you to update an alert.**",
         "parameters": [
           {
             "$ref": "#/components/parameters/OnBehalfOf"

@@ -31,16 +31,14 @@ paths:
         partner settings that you can enable.**
 
 
-        Our partner settings allow you to integrate your SendGrid account with our
-        partners to increase your SendGrid experience and functionality. For more
-        information about our partners, and how you can begin integrating with them,
-        please visit our [Partners documentation](https://sendgrid.com/docs/ui/account-and-settings/partners/).
-
-
         You can use the `limit` query parameter to set the page size. If your list
         contains more items than the page size permits, you can make multiple requests.
+
+
         Use the `offset` query parameter to control the position in the list from
-        which to start retrieving additional items.'
+        which to start retrieving additional items.''
+
+        '
       parameters:
       - name: limit
         in: query

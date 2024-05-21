@@ -34,7 +34,7 @@
         "tags": [
           "Partner Settings"
         ],
-        "description": "**This endpoint allows you to retrieve a paginated list of all partner settings that you can enable.**\n\nOur partner settings allow you to integrate your SendGrid account with our partners to increase your SendGrid experience and functionality. For more information about our partners, and how you can begin integrating with them, please visit our [Partners documentation](https://sendgrid.com/docs/ui/account-and-settings/partners/).\n\nYou can use the `limit` query parameter to set the page size. If your list contains more items than the page size permits, you can make multiple requests. Use the `offset` query parameter to control the position in the list from which to start retrieving additional items.",
+        "description": "**This endpoint allows you to retrieve a paginated list of all partner settings that you can enable.**\n\nYou can use the `limit` query parameter to set the page size. If your list contains more items than the page size permits, you can make multiple requests.\n\nUse the `offset` query parameter to control the position in the list from which to start retrieving additional items.'\n",
         "parameters": [
           {
             "name": "limit",

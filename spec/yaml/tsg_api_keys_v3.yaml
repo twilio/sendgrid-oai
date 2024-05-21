@@ -40,24 +40,17 @@ paths:
         Once you have created a first key with scopes to manage additional API keys,
         you can use this API for all other key management.
 
-
-        > There is a limit of 100 API Keys on your account.
-
-
         A JSON request body containing a `name` property is required when making requests
         to this endpoint. If the number of maximum keys, 100, is reached, a `403`
         status will be returned.
-
 
         Though the `name` field is required, it does not need to be unique. A unique
         API key ID will be generated for each key you create and returned in the response
         body.
 
-
         It is not necessary to pass a `scopes` field to the API when creating a key,
         but you should be aware that omitting the `scopes` field from your request
         will create a key with "Full Access" permissions by default.
-
 
         See the [API Key Permissions List](https://docs.sendgrid.com/api-reference/how-to-use-the-sendgrid-v3-api/authorization)
         for all available scopes. An API key''s scopes can be updated after creation

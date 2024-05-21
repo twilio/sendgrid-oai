@@ -325,10 +325,11 @@ paths:
               examples:
                 response:
                   value:
-                    id: 1
-                    ip: 192.168.1.1
-                    created_at: 1441824715
-                    updated_at: 1441824715
+                    result:
+                    - id: 1
+                      ip: 192.168.1.1
+                      created_at: 1441824715
+                      updated_at: 1441824715
     delete:
       operationId: DeleteAccessSettingsWhitelistRuleId
       summary: Remove a specific IP from the allowed list
@@ -359,7 +360,7 @@ components:
       properties:
         result:
           type: array
-          description: An array listing all of your allowed IPs.
+          description: An array listing one or more of your allowed IPs.
           items:
             type: object
             properties:

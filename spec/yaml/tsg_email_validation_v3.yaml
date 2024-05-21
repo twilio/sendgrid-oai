@@ -159,7 +159,7 @@ paths:
                             properties:
                               has_known_bounces:
                                 type: boolean
-                                description: WHether email sent to this address from
+                                description: Whether email sent to this address from
                                   your account has bounced.
                               has_suspected_bounces:
                                 type: boolean

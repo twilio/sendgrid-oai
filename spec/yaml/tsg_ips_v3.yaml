@@ -844,4 +844,4 @@ tags:
   description: Twilio SendGrid IP Address Pool API Operations
 externalDocs:
   description: Twilio SendGrid's official developer documentation.
-  url: https://docs.sendgrid.com
+  url: https://www.twilio.com/docs/sendgrid

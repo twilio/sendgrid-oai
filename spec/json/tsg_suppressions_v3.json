@@ -107,6 +107,7 @@
           {
             "name": "id",
             "in": "query",
+            "description": "The ID of the suppression group(s) you want to retrieve.",
             "schema": {
               "type": "integer"
             }
@@ -2413,6 +2414,6 @@
   ],
   "externalDocs": {
     "description": "Twilio SendGrid's official developer documentation.",
-    "url": "https://docs.sendgrid.com"
+    "url": "https://www.twilio.com/docs/sendgrid"
   }
 }

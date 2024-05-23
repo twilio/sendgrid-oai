@@ -1756,4 +1756,4 @@ tags:
   description: Twilio SendGrid Marketing Campaigns Contacts API
 externalDocs:
   description: Twilio SendGrid's official developer documentation.
-  url: https://docs.sendgrid.com
+  url: https://www.twilio.com/docs/sendgrid

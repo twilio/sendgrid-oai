@@ -1365,7 +1365,7 @@
         "tags": [
           "Stats"
         ],
-        "description": "**This endpoint allows you to retrieve your email statistics segmented by country and state/province.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/index.html).",
+        "description": "**This endpoint allows you to retrieve your email statistics segmented by country and state/province.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [User Guide](https://wwww.twilio.com/docs/sendgrid/ui/analytics-and-reporting/stats-overview).",
         "parameters": [
           {
             "name": "country",
@@ -3406,6 +3406,6 @@
   ],
   "externalDocs": {
     "description": "Twilio SendGrid's official developer documentation.",
-    "url": "https://docs.sendgrid.com"
+    "url": "https://www.twilio.com/docs/sendgrid"
   }
 }

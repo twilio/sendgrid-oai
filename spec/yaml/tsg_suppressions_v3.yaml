@@ -104,6 +104,7 @@ paths:
       parameters:
       - name: id
         in: query
+        description: The ID of the suppression group(s) you want to retrieve.
         schema:
           type: integer
       - $ref: '#/components/parameters/OnBehalfOf'
@@ -1776,4 +1777,4 @@ tags:
   description: 'Twilio SendGrid Suppressions API: Spam Reports operations'
 externalDocs:
   description: Twilio SendGrid's official developer documentation.
-  url: https://docs.sendgrid.com
+  url: https://www.twilio.com/docs/sendgrid

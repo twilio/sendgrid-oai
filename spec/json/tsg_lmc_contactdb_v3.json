@@ -299,7 +299,7 @@
             }
           },
           "404": {
-            "description": "\"custom_field_id\" : \"Returned if custom_field_id does not exist\"",
+            "description": "The `custom_field_id` does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -352,7 +352,7 @@
             }
           },
           "400": {
-            "description": "\"id\" : \"Returned if custom_field_id is not valid\"",
+            "description": "The `custom_field_id` is not valid",
             "content": {
               "application/json": {
                 "schema": {
@@ -398,7 +398,7 @@
             }
           },
           "404": {
-            "description": "\"custom_field_id\" : \"Returned if custom_field_id does not exist\"",
+            "description": "The `custom_field_id` does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -621,7 +621,7 @@
             }
           },
           "400": {
-            "description": "\"id\" : \"Returned if all list ids are not valid\"",
+            "description": "All list ids are not valid",
             "content": {
               "application/json": {
                 "schema": {
@@ -719,7 +719,7 @@
             }
           },
           "400": {
-            "description": "\"list_id\" : \"Returned if list_id is not valid\"",
+            "description": "Provided `list_id` is not valid",
             "content": {
               "application/json": {
                 "schema": {
@@ -762,7 +762,7 @@
             }
           },
           "404": {
-            "description": "\"list_id\" : \"Returned if list_id does not exist\"",
+            "description": "Provided `list_id` does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -884,7 +884,7 @@
             }
           },
           "404": {
-            "description": "\"list_id\" : \"Returned if list_id does not exist\"",
+            "description": "Returned if `list_id` does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -945,7 +945,7 @@
             }
           },
           "400": {
-            "description": "\"list_id\" : \"Returned if list_id is not valid\"\n\"delete_contacts\" : \"Returned if delete_contacts is not valid\"",
+            "description": "Returned if `list_id` or `delete_contacts` are not valid",
             "content": {
               "application/json": {
                 "schema": {
@@ -993,7 +993,7 @@
             }
           },
           "404": {
-            "description": "\"list_id\" : \"Returned if list_id does not exist\"",
+            "description": "Returned if `list_id` does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -1138,7 +1138,7 @@
             }
           },
           "400": {
-            "description": "\"list_id\" : \"Returned if list_id is not a valid integer\"\n\"page\" : \"Returned if page is not a valid integer\"\n\"page\" : \"Returned if page is less than 1\"\n\"page_size\" : \"Returned if page_size is not a valid integer\"\n\"page_size\" : \"Returned if page_size is less than 1 or greater than 1000\"",
+            "description": "Input failed validation",
             "content": {
               "application/json": {
                 "schema": {
@@ -1176,7 +1176,7 @@
             }
           },
           "404": {
-            "description": "\"list_id\" : \"Returned if list_id does not exist\"",
+            "description": "Returned if `list_id` does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -1295,7 +1295,7 @@
             }
           },
           "404": {
-            "description": "\"list_id\": \"Returned if list_id does not exist\"",
+            "description": "Returned if `list_id` does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -1368,7 +1368,7 @@
             }
           },
           "400": {
-            "description": "\"list_id\" : \"Returned if list_id is invalid\"\n\"recipient_id\" : \"Returned if recipient_id is invalid\"",
+            "description": "Input failed validation",
             "content": {
               "application/json": {
                 "schema": {
@@ -1416,7 +1416,7 @@
             }
           },
           "404": {
-            "description": "\"list_id\" : \"Returned if list_id does not exist\"\n\"recipient_id\" : \"Returned if recipient_id does not exist\"",
+            "description": "Input failed validation",
             "content": {
               "application/json": {
                 "schema": {
@@ -1488,7 +1488,7 @@
             }
           },
           "400": {
-            "description": "\"list_id\" : \"Returned if list_id is not valid\"\n\"recipient_id\" : \"Returned if recipient_id is not valid\"",
+            "description": "Input failed validation",
             "content": {
               "application/json": {
                 "schema": {
@@ -1536,7 +1536,7 @@
             }
           },
           "404": {
-            "description": "\"list_id\" : \"Returned if list_id does not exist\"\n\"recipient_id\" : \"Returned if recipient_id does not exist\"",
+            "description": "Returned if list_id or recipient_id does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -1946,7 +1946,7 @@
             }
           },
           "400": {
-            "description": "\"page\" : \"Returned if page is not a valid integer\"\n\"page\" : \"Returned if page is less than 1\"\n\"page_size\" : \"Returned if page_size is not a valid integer\"\n\"page_size\" : \"Returned if page_size is less than 1 or greater than 1000\"",
+            "description": "Input failed validation",
             "content": {
               "application/json": {
                 "schema": {
@@ -2016,7 +2016,7 @@
             }
           },
           "400": {
-            "description": "\"recipient_id\" : \"Returned if recipient_id is not valid\"",
+            "description": "Returned if `recipient_id` is not valid",
             "content": {
               "application/json": {
                 "schema": {
@@ -2048,7 +2048,7 @@
             }
           },
           "404": {
-            "description": "\"recipient_id\" : \"Returned if record for recipient id does not exist\"",
+            "description": "A record for that recipient id does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -2083,7 +2083,7 @@
             }
           },
           "400": {
-            "description": "\"recipient_id\" : \"Returned if recipient_id is not valid\"",
+            "description": "Returned if `recipient_id` is not valid",
             "content": {
               "application/json": {
                 "schema": {
@@ -2127,7 +2127,7 @@
             }
           },
           "404": {
-            "description": "\"recipient_id\" : \"Returned if record for recipient id does not exist\"",
+            "description": "A record for that recipient id does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -2208,7 +2208,7 @@
             }
           },
           "400": {
-            "description": "\"recipient_id\" : \"Returned if recipient_id is not valid\"",
+            "description": "Returned if `recipient_id` is not valid",
             "content": {
               "application/json": {
                 "schema": {
@@ -2252,7 +2252,7 @@
             }
           },
           "404": {
-            "description": "\"recipient_id\" : \"Returned if record for the recipient id does not exist\"",
+            "description": "Returned if a record for the recipient id does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -3122,7 +3122,7 @@
             }
           },
           "400": {
-            "description": "\"segment_id\" : \"Returned if segment_id is not valid\"",
+            "description": "The segment_id is not valid",
             "content": {
               "application/json": {
                 "schema": {
@@ -3165,7 +3165,7 @@
             }
           },
           "404": {
-            "description": "\"segment_id\" : \"Returned if segment_id does not exist\"",
+            "description": "Returned if `segment_id` does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -3399,7 +3399,7 @@
             }
           },
           "400": {
-            "description": "\"segment_id\" : \"Returned if segment_id is not valid\"\n\"delete_contacts\" : \"Returned if delete_contacts is not a valid boolean\"",
+            "description": "Either segment_id or delete_contacts is not valid",
             "content": {
               "application/json": {
                 "schema": {
@@ -3447,7 +3447,7 @@
             }
           },
           "404": {
-            "description": "\"segment_id\" : \"Returned if segment_id does not exist\"",
+            "description": "Returned if `segment_id` does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -3560,7 +3560,7 @@
             }
           },
           "400": {
-            "description": "\"page\" : \"Returned if page is not a valid integer\"\n\"page\" : \"Returned if page is less than 1\"\n\"page_size\" : \"Returned if page_size is not a valid integer\"",
+            "description": "Input failed validation",
             "content": {
               "application/json": {
                 "schema": {
@@ -3592,7 +3592,7 @@
             }
           },
           "404": {
-            "description": "\"segment_id\" : \"Returned if segment_id is not valid\"\n\"segment_id\" : \"Returned if segment_id does not exist\"",
+            "description": "The segment_id is not valid or does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -4114,6 +4114,6 @@
   ],
   "externalDocs": {
     "description": "Twilio SendGrid's official developer documentation.",
-    "url": "https://docs.sendgrid.com"
+    "url": "https://www.twilio.com/docs/sendgrid"
   }
 }

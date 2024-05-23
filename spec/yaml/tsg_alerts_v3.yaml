@@ -35,14 +35,7 @@ paths:
       - Alerts
       description: '**This endpoint allows you to create a new alert.**'
       parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      - name: on-behalf-of
-        in: header
-        schema:
-          type: string
+      - $ref: '#/components/parameters/OnBehalfOf'
       requestBody:
         content:
           application/json:
@@ -116,9 +109,9 @@ paths:
                       modified.
                   percentage:
                     type: integer
-                    description: '"If the alert is of type usage_limit, this indicates
+                    description: If the alert is of type `usage_limit`, this indicates
                       the percentage of email usage that must be reached before the
-                      alert will be sent.'
+                      alert will be sent.
                 required:
                 - created_at
                 - email_to
@@ -152,10 +145,6 @@ paths:
       - Alerts
       description: '**This endpoint allows you to retrieve all of your alerts.**'
       parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
         '200':
@@ -239,10 +228,6 @@ paths:
       - Alerts
       description: '**This endpoint allows you to retrieve a specific alert.**'
       parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
         '200':
@@ -432,4 +417,4 @@ tags:
   description: Twilio SendGrid Alerts API.
 externalDocs:
   description: Twilio SendGrid's official developer documentation.
-  url: https://docs.sendgrid.com
+  url: https://www.twilio.com/docs/sendgrid

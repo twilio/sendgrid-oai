@@ -1734,4 +1734,4 @@ tags:
   description: Twilio SendGrid Parse Webhook API
 externalDocs:
   description: Twilio SendGrid's official developer documentation.
-  url: https://docs.sendgrid.com
+  url: https://www.twilio.com/docs/sendgrid

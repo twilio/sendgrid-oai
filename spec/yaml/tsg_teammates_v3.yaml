@@ -773,21 +773,7 @@ paths:
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
         '204':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        message:
-                          type: string
-                        field:
-                          type: string
+          description: The Teammate was successfully deleted.
         '404':
           description: ''
           content:
@@ -1033,4 +1019,4 @@ tags:
   description: Twilio SendGrid Teammates API
 externalDocs:
   description: Twilio SendGrid's official developer documentation.
-  url: https://docs.sendgrid.com
+  url: https://www.twilio.com/docs/sendgrid

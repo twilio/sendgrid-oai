@@ -963,7 +963,7 @@ paths:
         Advanced Stats provide a more in-depth view of your email statistics and the
         actions taken by your recipients. You can segment these statistics by geographic
         location, device type, client type, browser, and mailbox provider. For more
-        information about statistics, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/index.html).'
+        information about statistics, please see our [User Guide](https://wwww.twilio.com/docs/sendgrid/ui/analytics-and-reporting/stats-overview).'
       parameters:
       - name: country
         in: query
@@ -2431,4 +2431,4 @@ tags:
   description: Twilio SendGrid Stats API
 externalDocs:
   description: Twilio SendGrid's official developer documentation.
-  url: https://docs.sendgrid.com
+  url: https://www.twilio.com/docs/sendgrid

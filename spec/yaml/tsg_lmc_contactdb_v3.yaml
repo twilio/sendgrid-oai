@@ -193,8 +193,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"custom_field_id" : "Returned if custom_field_id does not
-            exist"'
+          description: The `custom_field_id` does not exist
           content:
             application/json:
               schema:
@@ -224,7 +223,7 @@ paths:
                   value:
                     message: Custom Field delete is processing.
         '400':
-          description: '"id" : "Returned if custom_field_id is not valid"'
+          description: The `custom_field_id` is not valid
           content:
             application/json:
               schema:
@@ -248,8 +247,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"custom_field_id" : "Returned if custom_field_id does not
-            exist"'
+          description: The `custom_field_id` does not exist
           content:
             application/json:
               schema:
@@ -382,7 +380,7 @@ paths:
               schema:
                 nullable: true
         '400':
-          description: '"id" : "Returned if all list ids are not valid"'
+          description: All list ids are not valid
           content:
             application/json:
               schema:
@@ -439,7 +437,7 @@ paths:
                     name: listname
                     recipient_count: 0
         '400':
-          description: '"list_id" : "Returned if list_id is not valid"'
+          description: Provided `list_id` is not valid
           content:
             application/json:
               schema:
@@ -462,7 +460,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"list_id" : "Returned if list_id does not exist"'
+          description: Provided `list_id` does not exist
           content:
             application/json:
               schema:
@@ -537,7 +535,7 @@ paths:
                     errors:
                     - message: invalid id
         '404':
-          description: '"list_id" : "Returned if list_id does not exist"'
+          description: Returned if `list_id` does not exist
           content:
             application/json:
               schema:
@@ -575,9 +573,7 @@ paths:
               schema:
                 nullable: true
         '400':
-          description: '"list_id" : "Returned if list_id is not valid"
-
-            "delete_contacts" : "Returned if delete_contacts is not valid"'
+          description: Returned if `list_id` or `delete_contacts` are not valid
           content:
             application/json:
               schema:
@@ -603,7 +599,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"list_id" : "Returned if list_id does not exist"'
+          description: Returned if `list_id` does not exist
           content:
             application/json:
               schema:
@@ -696,15 +692,7 @@ paths:
                       last_opened: 1438616109
                       updated_at: 1438616119
         '400':
-          description: '"list_id" : "Returned if list_id is not a valid integer"
-
-            "page" : "Returned if page is not a valid integer"
-
-            "page" : "Returned if page is less than 1"
-
-            "page_size" : "Returned if page_size is not a valid integer"
-
-            "page_size" : "Returned if page_size is less than 1 or greater than 1000"'
+          description: Input failed validation
           content:
             application/json:
               schema:
@@ -725,7 +713,7 @@ paths:
                       message: Returned if page_size is less than 1 or greater than
                         1000
         '404':
-          description: '"list_id" : "Returned if list_id does not exist"'
+          description: Returned if `list_id` does not exist
           content:
             application/json:
               schema:
@@ -796,7 +784,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"list_id": "Returned if list_id does not exist"'
+          description: Returned if `list_id` does not exist
           content:
             application/json:
               schema:
@@ -839,9 +827,7 @@ paths:
               schema:
                 nullable: true
         '400':
-          description: '"list_id" : "Returned if list_id is invalid"
-
-            "recipient_id" : "Returned if recipient_id is invalid"'
+          description: Input failed validation
           content:
             application/json:
               schema:
@@ -867,9 +853,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"list_id" : "Returned if list_id does not exist"
-
-            "recipient_id" : "Returned if recipient_id does not exist"'
+          description: Input failed validation
           content:
             application/json:
               schema:
@@ -913,9 +897,7 @@ paths:
               schema:
                 nullable: true
         '400':
-          description: '"list_id" : "Returned if list_id is not valid"
-
-            "recipient_id" : "Returned if recipient_id is not valid"'
+          description: Input failed validation
           content:
             application/json:
               schema:
@@ -941,9 +923,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"list_id" : "Returned if list_id does not exist"
-
-            "recipient_id" : "Returned if recipient_id does not exist"'
+          description: Returned if list_id or recipient_id does not exist
           content:
             application/json:
               schema:
@@ -1219,13 +1199,7 @@ paths:
                 required:
                 - recipients
         '400':
-          description: '"page" : "Returned if page is not a valid integer"
-
-            "page" : "Returned if page is less than 1"
-
-            "page_size" : "Returned if page_size is not a valid integer"
-
-            "page_size" : "Returned if page_size is less than 1 or greater than 1000"'
+          description: Input failed validation
           content:
             application/json:
               schema:
@@ -1267,7 +1241,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ContactdbRecipient200'
         '400':
-          description: '"recipient_id" : "Returned if recipient_id is not valid"'
+          description: Returned if `recipient_id` is not valid
           content:
             application/json:
               schema:
@@ -1285,8 +1259,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"recipient_id" : "Returned if record for recipient id does
-            not exist"'
+          description: A record for that recipient id does not exist
           content:
             application/json:
               schema:
@@ -1312,7 +1285,7 @@ paths:
               schema:
                 type: object
         '400':
-          description: '"recipient_id" : "Returned if recipient_id is not valid"'
+          description: Returned if `recipient_id` is not valid
           content:
             application/json:
               schema:
@@ -1336,8 +1309,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"recipient_id" : "Returned if record for recipient id does
-            not exist"'
+          description: A record for that recipient id does not exist
           content:
             application/json:
               schema:
@@ -1389,7 +1361,7 @@ paths:
                       name: Example list
                       recipient_count: 42
         '400':
-          description: '"recipient_id" : "Returned if recipient_id is not valid"'
+          description: Returned if `recipient_id` is not valid
           content:
             application/json:
               schema:
@@ -1413,8 +1385,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"recipient_id" : "Returned if record for the recipient id
-            does not exist"'
+          description: Returned if a record for the recipient id does not exist
           content:
             application/json:
               schema:
@@ -2003,7 +1974,7 @@ paths:
                       and_or: ''
                     recipient_count: 1
         '400':
-          description: '"segment_id" : "Returned if segment_id is not valid"'
+          description: The segment_id is not valid
           content:
             application/json:
               schema:
@@ -2026,7 +1997,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"segment_id" : "Returned if segment_id does not exist"'
+          description: Returned if `segment_id` does not exist
           content:
             application/json:
               schema:
@@ -2174,9 +2145,7 @@ paths:
               schema:
                 nullable: true
         '400':
-          description: '"segment_id" : "Returned if segment_id is not valid"
-
-            "delete_contacts" : "Returned if delete_contacts is not a valid boolean"'
+          description: Either segment_id or delete_contacts is not valid
           content:
             application/json:
               schema:
@@ -2202,7 +2171,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"segment_id" : "Returned if segment_id does not exist"'
+          description: Returned if `segment_id` does not exist
           content:
             application/json:
               schema:
@@ -2272,11 +2241,7 @@ paths:
                         value: Indiana
                         type: text
         '400':
-          description: '"page" : "Returned if page is not a valid integer"
-
-            "page" : "Returned if page is less than 1"
-
-            "page_size" : "Returned if page_size is not a valid integer"'
+          description: Input failed validation
           content:
             application/json:
               schema:
@@ -2294,9 +2259,7 @@ paths:
                     - field: null
                       message: authorization required
         '404':
-          description: '"segment_id" : "Returned if segment_id is not valid"
-
-            "segment_id" : "Returned if segment_id does not exist"'
+          description: The segment_id is not valid or does not exist
           content:
             application/json:
               schema:
@@ -2676,4 +2639,4 @@ tags:
   description: 'Twilio SendGrid Legacy Marketing Campaigns Contacts: Segments API'
 externalDocs:
   description: Twilio SendGrid's official developer documentation.
-  url: https://docs.sendgrid.com
+  url: https://www.twilio.com/docs/sendgrid

@@ -665,4 +665,4 @@ tags:
   description: Twilio SendGrid Legacy Marketing Campaigns Sender Identities API
 externalDocs:
   description: Twilio SendGrid's official developer documentation.
-  url: https://docs.sendgrid.com
+  url: https://www.twilio.com/docs/sendgrid

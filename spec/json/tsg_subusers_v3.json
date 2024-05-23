@@ -1551,7 +1551,52 @@
                   "response": {
                     "value": {
                       "date": "2015-10-11",
-                      "stats": []
+                      "stats": [
+                        {
+                          "metrics": {
+                            "blocks": 0,
+                            "bounce_drops": 0,
+                            "bounces": 0,
+                            "clicks": 0,
+                            "deferred": 0,
+                            "delivered": 0,
+                            "invalid_emails": 0,
+                            "opens": 0,
+                            "processed": 0,
+                            "requests": 0,
+                            "spam_report_drops": 0,
+                            "spam_reports": 0,
+                            "unique_clicks": 0,
+                            "unique_opens": 0,
+                            "unsubscribe_drops": 0,
+                            "unsubscribes": 0
+                          },
+                          "name": "cat1",
+                          "type": "category"
+                        },
+                        {
+                          "metrics": {
+                            "blocks": 0,
+                            "bounce_drops": 0,
+                            "bounces": 0,
+                            "clicks": 0,
+                            "deferred": 0,
+                            "delivered": 0,
+                            "invalid_emails": 0,
+                            "opens": 0,
+                            "processed": 0,
+                            "requests": 0,
+                            "spam_report_drops": 0,
+                            "spam_reports": 0,
+                            "unique_clicks": 0,
+                            "unique_opens": 0,
+                            "unsubscribe_drops": 0,
+                            "unsubscribes": 0
+                          },
+                          "name": "cat2",
+                          "type": "category"
+                        }
+                      ]
                     }
                   }
                 }
@@ -2124,6 +2169,6 @@
   ],
   "externalDocs": {
     "description": "Twilio SendGrid's official developer documentation.",
-    "url": "https://docs.sendgrid.com"
+    "url": "https://www.twilio.com/docs/sendgrid"
   }
 }

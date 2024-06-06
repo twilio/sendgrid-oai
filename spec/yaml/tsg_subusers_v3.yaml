@@ -249,8 +249,8 @@ paths:
               properties:
                 disabled:
                   type: boolean
-                  description: Whether or not this subuser is disabled. True means
-                    disabled, False means enabled.
+                  description: Whether or not this subuser is disabled. `true` means
+                    disabled, `false` means enabled.
               example:
                 disabled: false
       responses:
@@ -325,6 +325,40 @@ paths:
                     errors:
                     - field: null
                       message: authorization required
+  /v3/subusers/{subuser_name}/website_access:
+    parameters:
+    - name: subuser_name
+      in: path
+      required: true
+      schema:
+        type: string
+    patch:
+      operationId: PatchSubusersSubuserNameWebsiteAccess
+      summary: Enable/Disable website access for a Subuser
+      tags:
+      - Subuser Website Access
+      description: Enable/Disable website access for a Subuser, while still preserving
+        email send functionality.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                disabled:
+                  type: boolean
+                  description: Whether or not to disable website access to the Subuser.
+                    `true` means disabled, `false` means enabled.
+              example:
+                disabled: true
+      responses:
+        '204':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
   /v3/subusers/{subuser_name}/credits:
     parameters:
     - $ref: '#/components/parameters/UserName'

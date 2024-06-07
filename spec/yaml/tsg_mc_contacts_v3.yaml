@@ -78,7 +78,7 @@ paths:
                 contacts:
                   type: array
                   description: One or more contacts objects that you intend to upsert.
-                    Each contact needs to include at least one of `email`, `phone_number`,
+                    Each contact needs to include at least one of `email`, `phone_number_id`,
                     `external_id`, or `anonymous_id` as an identifier.
                   minItems: 1
                   maxItems: 30000

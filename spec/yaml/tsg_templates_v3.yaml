@@ -33,6 +33,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: templates
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -59,10 +61,8 @@ paths:
                 generation:
                   type: string
                   description: Defines whether the template supports dynamic replacement.
-                  enum:
-                  - legacy
-                  - dynamic
                   default: legacy
+                  $ref: '#/components/schemas/Generation'
               required:
               - name
               example:
@@ -97,11 +97,8 @@ paths:
         required: false
         schema:
           type: string
-          enum:
-          - legacy
-          - dynamic
-          - legacy,dynamic
           default: legacy
+          $ref: '#/components/schemas/Schema'
       - name: page_size
         in: query
         description: The number of templates to be returned in each page of results
@@ -492,9 +489,7 @@ components:
             (0 is inactive, 1 is active). Only one version of a template can be active.
             The first version created for a template will automatically be set to
             Active.
-          enum:
-          - 0
-          - 1
+          $ref: '#/components/schemas/Active'
         name:
           type: string
           description: Name of the transactional template version.
@@ -520,10 +515,8 @@ components:
           maxLength: 255
         editor:
           type: string
-          enum:
-          - code
-          - design
           description: The editor used in the UI.
+          $ref: '#/components/schemas/Editor'
         test_data:
           type: string
           description: For dynamic templates only, the mock json data that will be
@@ -556,9 +549,7 @@ components:
           description: Set the version as the active version associated with the template.
             Only one version of a template can be active. The first version created
             for a template will automatically be set to Active.
-          enum:
-          - 0
-          - 1
+          $ref: '#/components/schemas/Active1'
         name:
           type: string
           description: Name of the transactional template version.
@@ -584,10 +575,8 @@ components:
           description: Plain text content of the Design.
         editor:
           type: string
-          enum:
-          - code
-          - design
           description: The editor used in the UI.
+          $ref: '#/components/schemas/Editor1'
         thumbnail_url:
           type: string
           description: A Thumbnail preview of the template's html content.
@@ -608,9 +597,7 @@ components:
         generation:
           type: string
           description: Defines the generation of the template.
-          enum:
-          - legacy
-          - dynamic
+          $ref: '#/components/schemas/Generation1'
         'updated_at ':
           type: string
           description: The date and time that this transactional template version
@@ -657,6 +644,42 @@ components:
         count:
           type: integer
           minimum: 0
+    Generation:
+      type: string
+      enum:
+      - legacy
+      - dynamic
+    Schema:
+      type: string
+      enum:
+      - legacy
+      - dynamic
+      - legacy,dynamic
+    Active:
+      type: integer
+      enum:
+      - 0
+      - 1
+    Editor:
+      type: string
+      enum:
+      - code
+      - design
+    Active1:
+      type: integer
+      enum:
+      - 0
+      - 1
+    Editor1:
+      type: string
+      enum:
+      - code
+      - design
+    Generation1:
+      type: string
+      enum:
+      - legacy
+      - dynamic
   responses: {}
   parameters:
     OnBehalfOf:

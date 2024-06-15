@@ -24,6 +24,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: lmc_campaigns
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -548,8 +550,7 @@ paths:
                   status:
                     type: string
                     description: The status of your campaign.
-                    enum:
-                    - Scheduled
+                    $ref: '#/components/schemas/Status'
                 required:
                 - id
                 - send_at
@@ -1053,10 +1054,8 @@ components:
           type: string
         editor:
           type: string
-          enum:
-          - code
-          - design
           description: The editor used in the UI.
+          $ref: '#/components/schemas/Editor'
       required:
       - title
       example:
@@ -1114,6 +1113,15 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+    Status:
+      type: string
+      enum:
+      - Scheduled
+    Editor:
+      type: string
+      enum:
+      - code
+      - design
   responses: {}
   parameters:
     OnBehalfOf:

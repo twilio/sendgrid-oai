@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "stats"
+    }
   },
   "servers": [
     {
@@ -313,11 +316,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "day",
-                "week",
-                "month"
-              ]
+              "$ref": "#/components/schemas/Schema"
             }
           },
           {
@@ -471,11 +470,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "desc",
-                "asc"
-              ],
-              "default": "desc"
+              "default": "desc",
+              "$ref": "#/components/schemas/Schema1"
             }
           },
           {
@@ -523,11 +519,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "day",
-                "week",
-                "month"
-              ]
+              "$ref": "#/components/schemas/Schema2"
             }
           },
           {
@@ -773,12 +765,7 @@
           "required": true,
           "schema": {
             "type": "string",
-            "enum": [
-              "phone",
-              "tablet",
-              "webmail",
-              "desktop"
-            ]
+            "$ref": "#/components/schemas/Schema3"
           }
         }
       ],
@@ -1373,10 +1360,7 @@
             "description": "The country you would like to see statistics for. Currently only supported for US and CA.",
             "schema": {
               "type": "string",
-              "enum": [
-                "US",
-                "CA"
-              ]
+              "$ref": "#/components/schemas/Schema4"
             }
           },
           {
@@ -3276,6 +3260,61 @@
             }
           }
         ]
+      },
+      "Schema": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
+        ]
+      },
+      "Schema1": {
+        "type": "string",
+        "enum": [
+          "desc",
+          "asc"
+        ]
+      },
+      "Schema2": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
+        ]
+      },
+      "Schema3": {
+        "type": "string",
+        "enum": [
+          "phone",
+          "tablet",
+          "webmail",
+          "desktop"
+        ]
+      },
+      "Schema4": {
+        "type": "string",
+        "enum": [
+          "US",
+          "CA"
+        ]
+      },
+      "Schema5": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
+        ]
+      },
+      "Schema6": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
+        ]
       }
     },
     "responses": {},
@@ -3316,11 +3355,7 @@
         "required": false,
         "schema": {
           "type": "string",
-          "enum": [
-            "day",
-            "week",
-            "month"
-          ]
+          "$ref": "#/components/schemas/Schema5"
         }
       },
       "StatsAdvancedQueryStringsLimitOffsetLimit": {
@@ -3348,11 +3383,7 @@
         "required": false,
         "schema": {
           "type": "string",
-          "enum": [
-            "day",
-            "week",
-            "month"
-          ]
+          "$ref": "#/components/schemas/Schema6"
         }
       },
       "StatsAdvancedQueryStringsLimitOffsetStartDate": {

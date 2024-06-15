@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "mail"
+    }
   },
   "servers": [
     {
@@ -227,6 +230,19 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "Schema": {
+        "type": "string",
+        "enum": [
+          "gzip"
+        ]
+      },
+      "Disposition": {
+        "type": "string",
+        "enum": [
+          "inline",
+          "attachment"
+        ]
       }
     },
     "responses": {
@@ -557,9 +573,7 @@
         "required": false,
         "schema": {
           "type": "string",
-          "enum": [
-            "gzip"
-          ]
+          "$ref": "#/components/schemas/Schema"
         }
       }
     },
@@ -715,10 +729,7 @@
                         "type": "string",
                         "default": "attachment",
                         "description": "The attachment's content-disposition specifies how you would like the attachment to be displayed. For example, `inline` results in the attached file being displayed automatically within the message while `attachment` results in the attached file requiring some action to be taken before it is displayed such as opening or downloading the file.",
-                        "enum": [
-                          "inline",
-                          "attachment"
-                        ]
+                        "$ref": "#/components/schemas/Disposition"
                       },
                       "content_id": {
                         "type": "string",

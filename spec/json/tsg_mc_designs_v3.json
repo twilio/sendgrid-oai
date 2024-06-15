@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "mc_designs"
+    }
   },
   "servers": [
     {
@@ -862,10 +865,7 @@
           "editor": {
             "type": "string",
             "description": "The editor used in the UI.",
-            "enum": [
-              "code",
-              "design"
-            ]
+            "$ref": "#/components/schemas/Editor"
           }
         },
         "example": {
@@ -958,6 +958,13 @@
               }
             }
           }
+        ]
+      },
+      "Editor": {
+        "type": "string",
+        "enum": [
+          "code",
+          "design"
         ]
       }
     },

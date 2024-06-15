@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "mc_custom_fields"
+    }
   },
   "servers": [
     {
@@ -48,11 +51,7 @@
                   },
                   "field_type": {
                     "type": "string",
-                    "enum": [
-                      "Text",
-                      "Number",
-                      "Date"
-                    ]
+                    "$ref": "#/components/schemas/Field_type"
                   }
                 },
                 "required": [
@@ -492,11 +491,7 @@
             },
             "field_type": {
               "type": "string",
-              "enum": [
-                "Text",
-                "Number",
-                "Date"
-              ]
+              "$ref": "#/components/schemas/Field_type1"
             },
             "read_only": {
               "type": "boolean",
@@ -575,11 +570,7 @@
           },
           "field_type": {
             "type": "string",
-            "enum": [
-              "Text",
-              "Number",
-              "Date"
-            ]
+            "$ref": "#/components/schemas/Field_type2"
           }
         },
         "required": [
@@ -592,6 +583,30 @@
           "name": "custom_field_name",
           "field_type": "Date"
         }
+      },
+      "Field_type": {
+        "type": "string",
+        "enum": [
+          "Text",
+          "Number",
+          "Date"
+        ]
+      },
+      "Field_type1": {
+        "type": "string",
+        "enum": [
+          "Text",
+          "Number",
+          "Date"
+        ]
+      },
+      "Field_type2": {
+        "type": "string",
+        "enum": [
+          "Text",
+          "Number",
+          "Date"
+        ]
       }
     },
     "responses": {},

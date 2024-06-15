@@ -20,6 +20,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: ip_address_management
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -101,9 +103,7 @@ paths:
                             This property will only be returned if the `include_region`
                             query parameter is included and set to `true` as part
                             of the API request.
-                          enum:
-                          - eu
-                          - us
+                          $ref: '#/components/schemas/Region'
                   _metadata:
                     type: object
                     properties:
@@ -186,10 +186,7 @@ paths:
                               This property will only be returned if the `include_region`
                               query parameter is included and set to `true` as part
                               of the API request,
-                            enum:
-                            - all
-                            - us
-                            - eu
+                            $ref: '#/components/schemas/Region1'
                           include_region:
                             type: string
                             description: Indicates whether or not to include the IP
@@ -325,9 +322,7 @@ paths:
                     description: The region to which the IP address is assigned. This
                       property will only be returned if the `include_region` query
                       parameter is included and set to `true` as part of the API request.
-                    enum:
-                    - eu
-                    - us
+                    $ref: '#/components/schemas/Region2'
               examples:
                 '201':
                   value:
@@ -392,9 +387,7 @@ paths:
                   description: The region to which the IP address is assigned. This
                     property will only be returned if the `include_region` query parameter
                     is included and set to `true` as part of the API request.
-                  enum:
-                  - eu
-                  - us
+                  $ref: '#/components/schemas/Region3'
                 include_region:
                   type: boolean
                   default: false
@@ -875,9 +868,7 @@ paths:
                             addresses returned within the IP pool.
                           items:
                             type: string
-                            enum:
-                            - eu
-                            - us
+                            $ref: '#/components/schemas/Items'
                         ips_preview:
                           type: array
                           maxItems: 10
@@ -926,10 +917,7 @@ paths:
                               This property will only be returned if the `include_region`
                               query parameter is included and set to `true` as part
                               of the API request.
-                            enum:
-                            - all
-                            - us
-                            - eu
+                            $ref: '#/components/schemas/Region4'
                           include_region:
                             type: string
                             description: Indicates whether or not to include the IP
@@ -1117,9 +1105,7 @@ paths:
                           type: string
                           description: The region associated with the number of IPs
                             listed in the `count` property.
-                          enum:
-                          - us
-                          - eu
+                          $ref: '#/components/schemas/Region5'
                         count:
                           type: integer
                           description: The number of IP addresses in the pool that
@@ -1277,9 +1263,7 @@ paths:
                             This property will only be returned if the `include_region`
                             query parameter is included and set to `true` as part
                             of the API request.
-                          enum:
-                          - eu
-                          - us
+                          $ref: '#/components/schemas/Region6'
                         pools:
                           type: array
                           description: IP Pools the IP address is assigned to.
@@ -1531,6 +1515,54 @@ components:
                 type: string
                 description: An error-specific message that provides more information
                   about the error's cause.
+    Region:
+      type: string
+      enum:
+      - eu
+      - us
+    Region1:
+      type: string
+      enum:
+      - all
+      - us
+      - eu
+    Region2:
+      type: string
+      enum:
+      - eu
+      - us
+    Region3:
+      type: string
+      enum:
+      - eu
+      - us
+    Items:
+      type: string
+      enum:
+      - eu
+      - us
+    Region4:
+      type: string
+      enum:
+      - all
+      - us
+      - eu
+    Region5:
+      type: string
+      enum:
+      - us
+      - eu
+    Region6:
+      type: string
+      enum:
+      - eu
+      - us
+    Schema:
+      type: string
+      enum:
+      - all
+      - eu
+      - us
   responses:
     IpAddressManagement401:
       description: Unauthorized
@@ -1706,10 +1738,7 @@ components:
         Pro plan or above.)
       schema:
         type: string
-        enum:
-        - all
-        - eu
-        - us
+        $ref: '#/components/schemas/Schema'
     IpAddressManagementIncludeRegion:
       name: include_region
       in: query

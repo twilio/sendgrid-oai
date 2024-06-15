@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "lmc_campaigns"
+    }
   },
   "servers": [
     {
@@ -788,9 +791,7 @@
                     "status": {
                       "type": "string",
                       "description": "The status of your campaign.",
-                      "enum": [
-                        "Scheduled"
-                      ]
+                      "$ref": "#/components/schemas/Status"
                     }
                   },
                   "required": [
@@ -1575,11 +1576,8 @@
           },
           "editor": {
             "type": "string",
-            "enum": [
-              "code",
-              "design"
-            ],
-            "description": "The editor used in the UI."
+            "description": "The editor used in the UI.",
+            "$ref": "#/components/schemas/Editor"
           }
         },
         "required": [
@@ -1660,6 +1658,19 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "Status": {
+        "type": "string",
+        "enum": [
+          "Scheduled"
+        ]
+      },
+      "Editor": {
+        "type": "string",
+        "enum": [
+          "code",
+          "design"
+        ]
       }
     },
     "responses": {},

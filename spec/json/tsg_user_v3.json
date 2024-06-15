@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "user"
+    }
   },
   "servers": [
     {
@@ -52,10 +55,7 @@
                     "type": {
                       "type": "string",
                       "description": "The type of account for this user.",
-                      "enum": [
-                        "free",
-                        "paid"
-                      ]
+                      "$ref": "#/components/schemas/Type"
                     },
                     "reputation": {
                       "type": "number",
@@ -698,6 +698,13 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "Type": {
+        "type": "string",
+        "enum": [
+          "free",
+          "paid"
+        ]
       }
     },
     "responses": {},

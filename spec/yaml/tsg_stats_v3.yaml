@@ -31,6 +31,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: stats
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -240,10 +242,7 @@ paths:
         required: false
         schema:
           type: string
-          enum:
-          - day
-          - week
-          - month
+          $ref: '#/components/schemas/Schema'
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
         '200':
@@ -363,10 +362,8 @@ paths:
         required: false
         schema:
           type: string
-          enum:
-          - desc
-          - asc
           default: desc
+          $ref: '#/components/schemas/Schema1'
       - name: start_date
         in: query
         description: The starting date of the statistics to retrieve. Must follow
@@ -402,10 +399,7 @@ paths:
         required: false
         schema:
           type: string
-          enum:
-          - day
-          - week
-          - month
+          $ref: '#/components/schemas/Schema2'
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
         '200':
@@ -590,11 +584,7 @@ paths:
       required: true
       schema:
         type: string
-        enum:
-        - phone
-        - tablet
-        - webmail
-        - desktop
+        $ref: '#/components/schemas/Schema3'
     get:
       operationId: GetClientsClientTypeStats
       summary: Retrieve stats by a specific client type.
@@ -971,9 +961,7 @@ paths:
           supported for US and CA.
         schema:
           type: string
-          enum:
-          - US
-          - CA
+          $ref: '#/components/schemas/Schema4'
       - $ref: '#/components/parameters/OnBehalfOf'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset'
@@ -2313,6 +2301,47 @@ components:
           unsubscribes:
             type: integer
             description: The number of recipients who unsubscribed from your emails.
+    Schema:
+      type: string
+      enum:
+      - day
+      - week
+      - month
+    Schema1:
+      type: string
+      enum:
+      - desc
+      - asc
+    Schema2:
+      type: string
+      enum:
+      - day
+      - week
+      - month
+    Schema3:
+      type: string
+      enum:
+      - phone
+      - tablet
+      - webmail
+      - desktop
+    Schema4:
+      type: string
+      enum:
+      - US
+      - CA
+    Schema5:
+      type: string
+      enum:
+      - day
+      - week
+      - month
+    Schema6:
+      type: string
+      enum:
+      - day
+      - week
+      - month
   responses: {}
   parameters:
     PaginationCommonOffset:
@@ -2354,10 +2383,7 @@ components:
       required: false
       schema:
         type: string
-        enum:
-        - day
-        - week
-        - month
+        $ref: '#/components/schemas/Schema5'
     StatsAdvancedQueryStringsLimitOffsetLimit:
       name: limit
       in: query
@@ -2379,10 +2405,7 @@ components:
       required: false
       schema:
         type: string
-        enum:
-        - day
-        - week
-        - month
+        $ref: '#/components/schemas/Schema6'
     StatsAdvancedQueryStringsLimitOffsetStartDate:
       name: start_date
       in: query

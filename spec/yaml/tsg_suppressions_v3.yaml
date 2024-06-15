@@ -36,6 +36,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: suppressions
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -864,9 +866,7 @@ paths:
         schema:
           default: application/json
           type: string
-          enum:
-          - application/json
-          - text/csv
+          $ref: '#/components/schemas/Schema'
       - name: start_date
         in: query
         description: The start of the time range, in YYYY-MM-DD format, when a bounce
@@ -902,14 +902,7 @@ paths:
                             properties:
                               classification:
                                 type: string
-                                enum:
-                                - Content
-                                - Frequency or Volume Too High
-                                - Invalid Address
-                                - Mailbox Unavailable
-                                - Reputation
-                                - Technical Failure
-                                - Unclassified
+                                $ref: '#/components/schemas/Classification'
                               count:
                                 type: integer
               examples:
@@ -952,9 +945,7 @@ paths:
         schema:
           type: string
           default: application/json
-          enum:
-          - application/json
-          - text/csv
+          $ref: '#/components/schemas/Schema1'
       - name: classification
         in: path
         description: 'The classification you want to filter by. Possible values are:
@@ -962,14 +953,7 @@ paths:
           `Reputation`, `Technical Failure`, `Unclassified`.'
         schema:
           type: string
-          enum:
-          - Content
-          - Frequency or Volume Too High
-          - Invalid Address
-          - Mailbox Unavailable
-          - Reputation
-          - Technical Failure
-          - Unclassified
+          $ref: '#/components/schemas/Schema2'
         required: true
       - name: start_date
         in: query
@@ -1685,6 +1669,36 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+    Schema:
+      type: string
+      enum:
+      - application/json
+      - text/csv
+    Classification:
+      type: string
+      enum:
+      - Content
+      - Frequency or Volume Too High
+      - Invalid Address
+      - Mailbox Unavailable
+      - Reputation
+      - Technical Failure
+      - Unclassified
+    Schema1:
+      type: string
+      enum:
+      - application/json
+      - text/csv
+    Schema2:
+      type: string
+      enum:
+      - Content
+      - Frequency or Volume Too High
+      - Invalid Address
+      - Mailbox Unavailable
+      - Reputation
+      - Technical Failure
+      - Unclassified
   responses: {}
   parameters:
     EmailPartialMatch:

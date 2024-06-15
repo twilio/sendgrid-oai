@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "ip_address_management"
+    }
   },
   "servers": [
     {
@@ -103,10 +106,7 @@
                           "region": {
                             "type": "string",
                             "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request.",
-                            "enum": [
-                              "eu",
-                              "us"
-                            ]
+                            "$ref": "#/components/schemas/Region"
                           }
                         }
                       }
@@ -166,11 +166,7 @@
                             "region": {
                               "type": "string",
                               "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request,",
-                              "enum": [
-                                "all",
-                                "us",
-                                "eu"
-                              ]
+                              "$ref": "#/components/schemas/Region1"
                             },
                             "include_region": {
                               "type": "string",
@@ -362,10 +358,7 @@
                     "region": {
                       "type": "string",
                       "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request.",
-                      "enum": [
-                        "eu",
-                        "us"
-                      ]
+                      "$ref": "#/components/schemas/Region2"
                     }
                   }
                 },
@@ -454,10 +447,7 @@
                     "type": "string",
                     "default": "us",
                     "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request.",
-                    "enum": [
-                      "eu",
-                      "us"
-                    ]
+                    "$ref": "#/components/schemas/Region3"
                   },
                   "include_region": {
                     "type": "boolean",
@@ -1100,10 +1090,7 @@
                             "description": "An array of the unique regions of all the IP addresses returned within the IP pool.",
                             "items": {
                               "type": "string",
-                              "enum": [
-                                "eu",
-                                "us"
-                              ]
+                              "$ref": "#/components/schemas/Items"
                             }
                           },
                           "ips_preview": {
@@ -1146,11 +1133,7 @@
                             "region": {
                               "type": "string",
                               "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request.",
-                              "enum": [
-                                "all",
-                                "us",
-                                "eu"
-                              ]
+                              "$ref": "#/components/schemas/Region4"
                             },
                             "include_region": {
                               "type": "string",
@@ -1418,10 +1401,7 @@
                           "region": {
                             "type": "string",
                             "description": "The region associated with the number of IPs listed in the `count` property.",
-                            "enum": [
-                              "us",
-                              "eu"
-                            ]
+                            "$ref": "#/components/schemas/Region5"
                           },
                           "count": {
                             "type": "integer",
@@ -1641,10 +1621,7 @@
                           "region": {
                             "type": "string",
                             "description": "The region to which the IP address is assigned. This property will only be returned if the `include_region` query parameter is included and set to `true` as part of the API request.",
-                            "enum": [
-                              "eu",
-                              "us"
-                            ]
+                            "$ref": "#/components/schemas/Region6"
                           },
                           "pools": {
                             "type": "array",
@@ -2023,6 +2000,72 @@
             }
           }
         }
+      },
+      "Region": {
+        "type": "string",
+        "enum": [
+          "eu",
+          "us"
+        ]
+      },
+      "Region1": {
+        "type": "string",
+        "enum": [
+          "all",
+          "us",
+          "eu"
+        ]
+      },
+      "Region2": {
+        "type": "string",
+        "enum": [
+          "eu",
+          "us"
+        ]
+      },
+      "Region3": {
+        "type": "string",
+        "enum": [
+          "eu",
+          "us"
+        ]
+      },
+      "Items": {
+        "type": "string",
+        "enum": [
+          "eu",
+          "us"
+        ]
+      },
+      "Region4": {
+        "type": "string",
+        "enum": [
+          "all",
+          "us",
+          "eu"
+        ]
+      },
+      "Region5": {
+        "type": "string",
+        "enum": [
+          "us",
+          "eu"
+        ]
+      },
+      "Region6": {
+        "type": "string",
+        "enum": [
+          "eu",
+          "us"
+        ]
+      },
+      "Schema": {
+        "type": "string",
+        "enum": [
+          "all",
+          "eu",
+          "us"
+        ]
       }
     },
     "responses": {
@@ -2238,11 +2281,7 @@
         "description": "Allowed values are `all`, `eu`, and `us`. If you provide a specific region, results will include all pools that have at least one IP in the filtered region. If `all`, pools with at least one IP (regardless of region) will be returned. If the `region` filter is not provided, the query returns all pools, including empty ones. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
         "schema": {
           "type": "string",
-          "enum": [
-            "all",
-            "eu",
-            "us"
-          ]
+          "$ref": "#/components/schemas/Schema"
         }
       },
       "IpAddressManagementIncludeRegion": {

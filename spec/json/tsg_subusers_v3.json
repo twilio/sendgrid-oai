@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "subusers"
+    }
   },
   "servers": [
     {
@@ -58,12 +61,8 @@
             "description": "Filter for Subusers in this region. If not provided, all Subusers will be returned. All users can also be explicitly requested by using the filter `all`. Users who are not pinned to a region will be displayed as `global`. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
             "schema": {
               "type": "string",
-              "enum": [
-                "all",
-                "global",
-                "eu"
-              ],
-              "default": "all"
+              "default": "all",
+              "$ref": "#/components/schemas/Schema"
             }
           },
           {
@@ -172,11 +171,8 @@
                   "region": {
                     "type": "string",
                     "description": "The region this Subuser should be assigned to. Can be `global` or `eu`. (Regional email is in Public Beta and requires SendGrid Pro plan or above.).",
-                    "enum": [
-                      "global",
-                      "eu"
-                    ],
-                    "default": "global"
+                    "default": "global",
+                    "$ref": "#/components/schemas/Region"
                   },
                   "include_region": {
                     "type": "boolean",
@@ -340,7 +336,7 @@
                 "properties": {
                   "disabled": {
                     "type": "boolean",
-                    "description": "Whether or not this subuser is disabled. True means disabled, False means enabled."
+                    "description": "Whether or not this subuser is disabled. `true` means disabled, `false` means enabled."
                   }
                 },
                 "example": {
@@ -468,6 +464,57 @@
                       ]
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/subusers/{subuser_name}/website_access": {
+      "parameters": [
+        {
+          "name": "subuser_name",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "patch": {
+        "operationId": "PatchSubusersSubuserNameWebsiteAccess",
+        "summary": "Enable/Disable website access for a Subuser",
+        "tags": [
+          "Subuser Website Access"
+        ],
+        "description": "Enable/Disable website access for a Subuser, while still preserving email send functionality.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "disabled": {
+                    "type": "boolean",
+                    "description": "Whether or not to disable website access to the Subuser. `true` means disabled, `false` means enabled."
+                  }
+                },
+                "example": {
+                  "disabled": true
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
                 }
               }
             }
@@ -805,11 +852,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "desc",
-                "asc"
-              ],
-              "default": "desc"
+              "default": "desc",
+              "$ref": "#/components/schemas/Schema1"
             }
           },
           {
@@ -976,11 +1020,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "day",
-                "week",
-                "month"
-              ]
+              "$ref": "#/components/schemas/Schema2"
             }
           },
           {
@@ -1338,18 +1378,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "blocks",
-                "bounces",
-                "clicks",
-                "delivered",
-                "opens",
-                "requests",
-                "unique_clicks",
-                "unique_opens",
-                "unsubscribes"
-              ],
-              "default": "delivered"
+              "default": "delivered",
+              "$ref": "#/components/schemas/Schema3"
             }
           },
           {
@@ -1359,11 +1389,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "desc",
-                "asc"
-              ],
-              "default": "desc"
+              "default": "desc",
+              "$ref": "#/components/schemas/Schema4"
             }
           },
           {
@@ -1474,11 +1501,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "desc",
-                "asc"
-              ],
-              "default": "desc"
+              "default": "desc",
+              "$ref": "#/components/schemas/Schema5"
             }
           },
           {
@@ -1633,10 +1657,7 @@
           "region": {
             "type": "string",
             "description": "The region this Subuser is assigned to. This property is returned only if the `include_region` parameter was included and set to `true` in the API request.",
-            "enum": [
-              "global",
-              "eu"
-            ]
+            "$ref": "#/components/schemas/Region1"
           }
         },
         "required": [
@@ -1680,11 +1701,8 @@
           "region": {
             "type": "string",
             "description": "The region this Subuser is assigned to. The property is returned only if the `include_region` parameter is included and set to `true` in the API request.",
-            "enum": [
-              "global",
-              "eu"
-            ],
-            "default": "global"
+            "default": "global",
+            "$ref": "#/components/schemas/Region2"
           }
         },
         "required": [
@@ -1708,22 +1726,14 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "unlimited",
-              "recurring",
-              "nonrecurring"
-            ],
-            "description": "Type determines how credits are reset for a Subuser. `unlimited` indicates that there is no limit to the Subuser's credits. `recurring` indicates that the credits for the Subuser are reset according to the frequency determined by `reset_frequency`. `nonrecurring` indicates that there is no recurring schedule to reset credits and resets must be done on an ad hoc basis."
+            "description": "Type determines how credits are reset for a Subuser. `unlimited` indicates that there is no limit to the Subuser's credits. `recurring` indicates that the credits for the Subuser are reset according to the frequency determined by `reset_frequency`. `nonrecurring` indicates that there is no recurring schedule to reset credits and resets must be done on an ad hoc basis.",
+            "$ref": "#/components/schemas/Type"
           },
           "reset_frequency": {
             "type": "string",
             "nullable": true,
-            "enum": [
-              "monthly",
-              "weekly",
-              "daily"
-            ],
-            "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`, otherwise `null`."
+            "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`, otherwise `null`.",
+            "$ref": "#/components/schemas/Reset_frequency"
           },
           "remain": {
             "type": "integer",
@@ -1765,21 +1775,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "unlimited",
-              "recurring",
-              "nonrecurring"
-            ],
-            "description": "Type determines how credits are reset for a Subuser. `unlimited` indicates that there is no limit to the Subuser's credits. `recurring` indicates that the credits for the Subuser are reset according to the frequency determined by `reset_frequency`. `nonrecurring` indicates that there is no recurring schedule to reset credits and resets must be done on an ad hoc basis."
+            "description": "Type determines how credits are reset for a Subuser. `unlimited` indicates that there is no limit to the Subuser's credits. `recurring` indicates that the credits for the Subuser are reset according to the frequency determined by `reset_frequency`. `nonrecurring` indicates that there is no recurring schedule to reset credits and resets must be done on an ad hoc basis.",
+            "$ref": "#/components/schemas/Type1"
           },
           "reset_frequency": {
             "type": "string",
-            "enum": [
-              "monthly",
-              "weekly",
-              "daily"
-            ],
-            "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`. Do _not_ include `reset_frequency` if you choose a reset `type` value of `unlimited` or `nonrecurring`."
+            "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`. Do _not_ include `reset_frequency` if you choose a reset `type` value of `unlimited` or `nonrecurring`.",
+            "$ref": "#/components/schemas/Reset_frequency1"
           },
           "total": {
             "type": "integer",
@@ -2121,6 +2123,110 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "Schema": {
+        "type": "string",
+        "enum": [
+          "all",
+          "global",
+          "eu"
+        ]
+      },
+      "Region": {
+        "type": "string",
+        "enum": [
+          "global",
+          "eu"
+        ]
+      },
+      "Schema1": {
+        "type": "string",
+        "enum": [
+          "desc",
+          "asc"
+        ]
+      },
+      "Schema2": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
+        ]
+      },
+      "Schema3": {
+        "type": "string",
+        "enum": [
+          "blocks",
+          "bounces",
+          "clicks",
+          "delivered",
+          "opens",
+          "requests",
+          "unique_clicks",
+          "unique_opens",
+          "unsubscribes"
+        ]
+      },
+      "Schema4": {
+        "type": "string",
+        "enum": [
+          "desc",
+          "asc"
+        ]
+      },
+      "Schema5": {
+        "type": "string",
+        "enum": [
+          "desc",
+          "asc"
+        ]
+      },
+      "Region1": {
+        "type": "string",
+        "enum": [
+          "global",
+          "eu"
+        ]
+      },
+      "Region2": {
+        "type": "string",
+        "enum": [
+          "global",
+          "eu"
+        ]
+      },
+      "Type": {
+        "type": "string",
+        "enum": [
+          "unlimited",
+          "recurring",
+          "nonrecurring"
+        ]
+      },
+      "Reset_frequency": {
+        "type": "string",
+        "enum": [
+          "monthly",
+          "weekly",
+          "daily"
+        ]
+      },
+      "Type1": {
+        "type": "string",
+        "enum": [
+          "unlimited",
+          "recurring",
+          "nonrecurring"
+        ]
+      },
+      "Reset_frequency1": {
+        "type": "string",
+        "enum": [
+          "monthly",
+          "weekly",
+          "daily"
+        ]
       }
     },
     "responses": {},

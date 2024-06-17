@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "webhooks"
+    }
   },
   "servers": [
     {
@@ -134,50 +137,29 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "properties": {
-                        "errors": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "message": {
-                                "type": "string",
-                                "description": "Error message."
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "errors": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string",
-                                "description": "The ID of a Webhook that exists on your account that is already configured to send events to the endpoint URL you provided."
-                              },
-                              "message": {
-                                "type": "string",
-                                "description": "Error message."
-                              },
-                              "url": {
-                                "type": "string",
-                                "description": "The URL that is already configured as a Webhook endpoint for one of your existing Webhooks."
-                              }
-                            }
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "The ID of a Webhook that exists on your account that is already configured to send events to the endpoint URL you provided."
+                          },
+                          "message": {
+                            "type": "string",
+                            "description": "Error message."
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "The URL that is already configured as a Webhook endpoint for one of your existing Webhooks."
                           }
                         }
                       }
                     }
-                  ]
+                  }
                 },
                 "examples": {
                   "Bad URL": {
@@ -717,50 +699,29 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "properties": {
-                        "errors": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "message": {
-                                "type": "string",
-                                "description": "Error message."
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "errors": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string",
-                                "description": "The ID of a Webhook that exists on your account that is already configured to send events to the endpoint URL you provided."
-                              },
-                              "message": {
-                                "type": "string",
-                                "description": "Error message."
-                              },
-                              "url": {
-                                "type": "string",
-                                "description": "The URL that is already configured as a Webhook endpoint for one of your existing Webhooks."
-                              }
-                            }
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "The ID of a Webhook that exists on your account that is already configured to send events to the endpoint URL you provided."
+                          },
+                          "message": {
+                            "type": "string",
+                            "description": "Error message."
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "The URL that is already configured as a Webhook endpoint for one of your existing Webhooks."
                           }
                         }
                       }
                     }
-                  ]
+                  }
                 },
                 "examples": {
                   "Account Change": {
@@ -1174,11 +1135,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "day",
-                "week",
-                "month"
-              ]
+              "$ref": "#/components/schemas/Schema"
             }
           },
           {
@@ -1917,6 +1874,14 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "Schema": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
+        ]
       }
     },
     "responses": {

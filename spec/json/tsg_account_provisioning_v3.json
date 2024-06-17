@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "account_provisioning"
+    }
   },
   "servers": [
     {
@@ -609,14 +612,8 @@
         "properties": {
           "state": {
             "type": "string",
-            "enum": [
-              "activated",
-              "deactivated",
-              "suspended",
-              "banned",
-              "indeterminate"
-            ],
-            "description": "The state of the account (e.g., `activated`, `deactivated`, `suspended`, `banned`, or `indeterminate`)"
+            "description": "The state of the account (e.g., `activated`, `deactivated`, `suspended`, `banned`, or `indeterminate`)",
+            "$ref": "#/components/schemas/State"
           }
         },
         "required": [
@@ -632,11 +629,8 @@
         "properties": {
           "state": {
             "type": "string",
-            "enum": [
-              "activated",
-              "deactivated"
-            ],
-            "description": "The state of the account (e.g., `activated`, `deactivated`)"
+            "description": "The state of the account (e.g., `activated`, `deactivated`)",
+            "$ref": "#/components/schemas/State1"
           }
         },
         "required": [
@@ -657,11 +651,8 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "package",
-              "addon"
-            ],
-            "description": "Defines the type of offering (e.g., package or addon)."
+            "description": "Defines the type of offering (e.g., package or addon).",
+            "$ref": "#/components/schemas/Type"
           },
           "quantity": {
             "type": "integer",
@@ -700,6 +691,30 @@
           "message",
           "field",
           "error_id"
+        ]
+      },
+      "State": {
+        "type": "string",
+        "enum": [
+          "activated",
+          "deactivated",
+          "suspended",
+          "banned",
+          "indeterminate"
+        ]
+      },
+      "State1": {
+        "type": "string",
+        "enum": [
+          "activated",
+          "deactivated"
+        ]
+      },
+      "Type": {
+        "type": "string",
+        "enum": [
+          "package",
+          "addon"
         ]
       }
     },

@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "domain_authentication"
+    }
   },
   "servers": [
     {
@@ -436,24 +439,24 @@
       }
     },
     "/v3/whitelabel/domains/{domain_id}/subuser": {
-      "parameters": [
-        {
-          "name": "domain_id",
-          "in": "path",
-          "description": "ID of the authenticated domain to associate with the subuser.",
-          "required": true,
-          "schema": {
-            "type": "integer"
-          }
-        }
-      ],
       "post": {
         "operationId": "PostWhitelabelDomainsDomainIdSubuser",
         "summary": "Associate an authenticated domain with a given user.",
         "tags": [
           "Domain Authentication"
         ],
-        "description": "**This endpoint allows you to associate a specific authenticated domain with a subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.",
+        "description": "**This endpoint allows you to associate a specific authenticated domain with a subuser.**\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.\n\n\n[You can associate more than one domain with a subuser using the `v3/whitelabel/domains/{domain_id}/subuser:add` endpoint](https://www.twilio.com/docs/sendgrid/api-reference/domain-authentication/associate-an-authenticated-domain-with-a-subuser-multiple).",
+        "parameters": [
+          {
+            "name": "domain_id",
+            "in": "path",
+            "description": "ID of the authenticated domain to associate with the subuser.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -489,7 +492,143 @@
                       "id": 1,
                       "domain": "example.com",
                       "subdomain": "mail",
-                      "username": "mail@example.com",
+                      "username": "jdoe",
+                      "user_id": 7,
+                      "ips": [],
+                      "custom_spf": true,
+                      "default": false,
+                      "legacy": false,
+                      "automatic_security": false,
+                      "valid": false,
+                      "dns": {
+                        "mail_server": {
+                          "host": "mail.example.com",
+                          "type": "mx",
+                          "data": "sendgrid.net",
+                          "valid": false
+                        },
+                        "subdomain_spf": {
+                          "host": "mail.example.com",
+                          "type": "txt",
+                          "data": "v=spf1 ip4:192.168.1.1 ip4:192.168.0.1 -all",
+                          "valid": false
+                        },
+                        "domain_spf": {
+                          "host": "example.com",
+                          "type": "txt",
+                          "data": "v=spf1 include:mail.example.com -all",
+                          "valid": false
+                        },
+                        "dkim": {
+                          "host": "s1._domainkey.example.com",
+                          "type": "txt",
+                          "data": "k=rsa; t=s; p=publicKey",
+                          "valid": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteWhitelabelDomainsSubuserMultiple",
+        "summary": "Disassociate an authenticated domain from a given user for users with up to five associated domains.",
+        "tags": [
+          "Domain Authentication"
+        ],
+        "description": "**This endpoint allows you to disassociate a specific authenticated domain from a subuser, for users with up to five associated domains.**\n\n\nThis functionality allows subusers to send mail using their parent's domain. Authenticated domains can be associated with (i.e. assigned to) subusers kknt, and a subuser can have up to five associated authenticated domains. \n\nYou can dissociate an authenticated domain from any subuser that has one or more authenticated domains using this endpoint.",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Username for the subuser to find associated authenticated domain.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domain_id",
+            "in": "path",
+            "description": "ID of the authenticated domain to be disassociated with the subuser.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/whitelabel/domains/{domain_id}/subuser:add": {
+      "parameters": [
+        {
+          "name": "domain_id",
+          "in": "path",
+          "description": "ID of the authenticated domain to associate with the subuser.",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "post": {
+        "operationId": "PostWhitelabelDomainsDomainIdSubuserMultiple",
+        "summary": "Associate an authenticated domain with a given user, for up to five domains.",
+        "tags": [
+          "Domain Authentication"
+        ],
+        "description": "**This endpoint allows you to associate a specific authenticated domain with a subuser. It can be used to associate up to five authenticated domains.**\n\n\nThis functionality allows subusers to send mail using their parent's domain. Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.\n\n\nA subuser can have up to five associated authenticated domains. To see the domains that have already been associated with this user, you can [use the API to list the domains currently associated with the subuser](https://www.twilio.com/docs/sendgrid/api-reference/domain-authentication/list-the-authenticated-domain-associated-with-a-subuser-multiple).\n\n\nWhen selecting a domain to send email from, SendGrid checks for domains in the following order and chooses the first one that appears in the hierarchy: \n1. Domain assigned by the subuser that matches the email's `From` address domain. \n2. The subuser's default domain. \n3. Domain assigned by the parent user that matches the `From` address domain. \n4. Parent user's default domain. \n5. sendgrid.net",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "Username to associate with the authenticated domain."
+                  }
+                },
+                "required": [
+                  "username"
+                ],
+                "example": {
+                  "username": "jdoe"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticatedDomainSpf"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 1,
+                      "domain": "example.com",
+                      "subdomain": "mail",
+                      "username": "jdoe",
                       "user_id": 7,
                       "ips": [],
                       "custom_spf": true,
@@ -934,7 +1073,7 @@
         "tags": [
           "Domain Authentication"
         ],
-        "description": "**This endpoint allows you to retrieve all of the authenticated domains that have been assigned to a specific subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.",
+        "description": "**This endpoint allows you to retrieve all of the authenticated domains that have been assigned to a specific subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.\n\n\nNote that if you used the [`/v3/whitelabel/domains/{domain_id}/subuser:add` endpoint]( https://www.twilio.com/docs/sendgrid/api-reference/domain-authentication/associate-an-authenticated-domain-with-a-subuser-multiple) to add multiple domains to the subuser, you can use the [`/v3/whitelabel/domains/subuser/all` endpoint](https://www.twilio.com/docs/sendgrid/api-reference/domain-authentication/list-the-authenticated-domain-associated-with-a-subuser-multiple) to list those associated domains.",
         "parameters": [
           {
             "name": "username",
@@ -1008,7 +1147,7 @@
         "tags": [
           "Domain Authentication"
         ],
-        "description": "**This endpoint allows you to disassociate a specific authenticated domain from a subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.",
+        "description": "**This endpoint allows you to disassociate a specific authenticated domain from a subuser.**\n\nAuthenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.\n\n\nNote that if you used the [`/v3/whitelabel/domains/{domain_id}/subuser:add` endpoint](https://www.twilio.com/docs/sendgrid/api-reference/domain-authentication/associate-an-authenticated-domain-with-a-subuser-multiple) to add multiple domains to the subuser, you should use the [`/v3/whitelabel/domains/{domain_id}/subuser` endpoint](https://www.twilio.com/docs/sendgrid/api-reference/domain-authentication/disassociate-an-authenticated-domain-from-a-subuser-multiple) to disassociate those domains.",
         "parameters": [
           {
             "name": "username",
@@ -1026,6 +1165,118 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/whitelabel/domains/subuser/all": {
+      "get": {
+        "operationId": "GetWhitelabelDomainsSubuserMultiple",
+        "summary": "List all the authenticated domains associated with the given user.",
+        "tags": [
+          "Domain Authentication"
+        ],
+        "description": "**This endpoint allows you to retrieve all of the authenticated domains that have been assigned to a specific subuser.**\n\n\nThis functionality allows subusers to send mail using their parent's domain. Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account, and a subuser can have up to five associated domains. \n\nTo associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.\n\n\nWhen selecting a domain to send email from, SendGrid checks for domains in the following order and chooses the first one that appears in the hierarchy: \n1. Domain assigned by the subuser that matches the email's `From` address domain. \n2. The subuser's default domain. \n3. Domain assigned by the parent user that matches the `From` address domain. \n4. Parent user's default domain. \n5. sendgrid.net",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Username for the subuser to find associated authenticated domains.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AuthenticatedDomain"
+                      }
+                    ]
+                  }
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "domain": "example.com",
+                        "subdomain": "mail",
+                        "username": "jdoe",
+                        "user_id": 7,
+                        "ips": [],
+                        "custom_spf": true,
+                        "default": false,
+                        "legacy": false,
+                        "automatic_security": false,
+                        "valid": false,
+                        "dns": {
+                          "mail_cname": {
+                            "valid": true,
+                            "type": "cname",
+                            "host": "mail.example.com",
+                            "data": "u7.wl.sendgrid.net"
+                          },
+                          "dkim1": {
+                            "valid": true,
+                            "type": "cname",
+                            "host": "s1._domainkey.example.com",
+                            "data": "s1._domainkey.u7.wl.sendgrid.net"
+                          },
+                          "dkim2": {
+                            "valid": true,
+                            "type": "cname",
+                            "host": "s2._domainkey.example.com",
+                            "data": "s2._domainkey.u7.wl.sendgrid.net"
+                          }
+                        }
+                      },
+                      {
+                        "id": 2,
+                        "domain": "example.com",
+                        "subdomain": "mail2",
+                        "username": "jdoe2",
+                        "user_id": 7,
+                        "ips": [],
+                        "custom_spf": true,
+                        "default": true,
+                        "legacy": false,
+                        "automatic_security": true,
+                        "valid": false,
+                        "dns": {
+                          "mail_cname": {
+                            "valid": true,
+                            "type": "cname",
+                            "host": "mail2.example2.com",
+                            "data": "u7.sgsandbox.net"
+                          },
+                          "dkim1": {
+                            "host": "s1._domainkey.example.com",
+                            "type": "cname",
+                            "data": "s1._domainkey.u7.wl.sgsandbox.net",
+                            "valid": true
+                          },
+                          "dkim2": {
+                            "valid": true,
+                            "type": "cname",
+                            "host": "s2._domainkey.example2.com",
+                            "data": "s2._domainkey.u7.w1.sgsandbox.net"
+                          }
+                        }
+                      }
+                    ]
+                  }
                 }
               }
             }

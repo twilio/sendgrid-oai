@@ -23,6 +23,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: mc_stats
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -496,10 +498,7 @@ components:
                 description: This is the A/B phase of the Single Send stat returned.
                   If the `group_by` parameter doesn't include `ab_phase` in the request,
                   then the value is "all".
-                enum:
-                - send
-                - test
-                - all
+                $ref: '#/components/schemas/Ab_phase'
               aggregation:
                 type: string
                 description: This describes the time unit to which the stat is rolled
@@ -551,10 +550,7 @@ components:
                 description: This is the A/B phase of the Single Send stat returned.
                   If the `ab_phase` query parameter was not provided, it will return
                   `"all"`.
-                enum:
-                - send
-                - test
-                - all
+                $ref: '#/components/schemas/Ab_phase1'
               clicks:
                 type: integer
                 minimum: 1
@@ -677,6 +673,42 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+    Ab_phase:
+      type: string
+      enum:
+      - send
+      - test
+      - all
+    Ab_phase1:
+      type: string
+      enum:
+      - send
+      - test
+      - all
+    Items:
+      type: string
+      enum:
+      - step_id
+    Schema:
+      type: string
+      enum:
+      - day
+      - total
+    Items1:
+      type: string
+      enum:
+      - ab_variation
+      - ab_phase
+    Items2:
+      type: string
+      enum:
+      - ab_variation
+      - ab_phase
+    Schema1:
+      type: string
+      enum:
+      - test
+      - send
   responses:
     Stats400:
       description: ''
@@ -714,8 +746,7 @@ components:
         type: array
         items:
           type: string
-          enum:
-          - step_id
+          $ref: '#/components/schemas/Items'
     AutomationQueryParamsStepId:
       name: step_ids
       in: query
@@ -736,10 +767,8 @@ components:
         `"day"` are supported.
       schema:
         type: string
-        enum:
-        - day
-        - total
         default: total
+        $ref: '#/components/schemas/Schema'
     StartDateBaseProps:
       name: start_date
       in: query
@@ -778,9 +807,7 @@ components:
         type: array
         items:
           type: string
-          enum:
-          - ab_variation
-          - ab_phase
+          $ref: '#/components/schemas/Items1'
     SinglesendQueryParams2GroupBy:
       name: group_by
       in: query
@@ -792,9 +819,7 @@ components:
         type: array
         items:
           type: string
-          enum:
-          - ab_variation
-          - ab_phase
+          $ref: '#/components/schemas/Items2'
     SinglesendQueryParams2VariationId:
       name: ab_variation_id
       in: query
@@ -806,9 +831,7 @@ components:
       in: query
       schema:
         type: string
-        enum:
-        - test
-        - send
+        $ref: '#/components/schemas/Schema1'
   examples: {}
   requestBodies: {}
   headers: {}

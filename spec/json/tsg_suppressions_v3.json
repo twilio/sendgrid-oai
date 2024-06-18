@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "suppressions"
+    }
   },
   "servers": [
     {
@@ -1184,10 +1187,7 @@
             "schema": {
               "default": "application/json",
               "type": "string",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ]
+              "$ref": "#/components/schemas/Schema"
             }
           },
           {
@@ -1233,15 +1233,7 @@
                               "properties": {
                                 "classification": {
                                   "type": "string",
-                                  "enum": [
-                                    "Content",
-                                    "Frequency or Volume Too High",
-                                    "Invalid Address",
-                                    "Mailbox Unavailable",
-                                    "Reputation",
-                                    "Technical Failure",
-                                    "Unclassified"
-                                  ]
+                                  "$ref": "#/components/schemas/Classification"
                                 },
                                 "count": {
                                   "type": "integer"
@@ -1321,10 +1313,7 @@
             "schema": {
               "type": "string",
               "default": "application/json",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ]
+              "$ref": "#/components/schemas/Schema1"
             }
           },
           {
@@ -1333,15 +1322,7 @@
             "description": "The classification you want to filter by. Possible values are: `Content`, `Frequency or Volume Too High`, `Invalid Address`, `Mailbox Unavailable`, `Reputation`, `Technical Failure`, `Unclassified`.",
             "schema": {
               "type": "string",
-              "enum": [
-                "Content",
-                "Frequency or Volume Too High",
-                "Invalid Address",
-                "Mailbox Unavailable",
-                "Reputation",
-                "Technical Failure",
-                "Unclassified"
-              ]
+              "$ref": "#/components/schemas/Schema2"
             },
             "required": true
           },
@@ -2316,6 +2297,44 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "Schema": {
+        "type": "string",
+        "enum": [
+          "application/json",
+          "text/csv"
+        ]
+      },
+      "Classification": {
+        "type": "string",
+        "enum": [
+          "Content",
+          "Frequency or Volume Too High",
+          "Invalid Address",
+          "Mailbox Unavailable",
+          "Reputation",
+          "Technical Failure",
+          "Unclassified"
+        ]
+      },
+      "Schema1": {
+        "type": "string",
+        "enum": [
+          "application/json",
+          "text/csv"
+        ]
+      },
+      "Schema2": {
+        "type": "string",
+        "enum": [
+          "Content",
+          "Frequency or Volume Too High",
+          "Invalid Address",
+          "Mailbox Unavailable",
+          "Reputation",
+          "Technical Failure",
+          "Unclassified"
+        ]
       }
     },
     "responses": {},

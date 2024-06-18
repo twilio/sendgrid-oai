@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "templates"
+    }
   },
   "servers": [
     {
@@ -54,11 +57,8 @@
                   "generation": {
                     "type": "string",
                     "description": "Defines whether the template supports dynamic replacement.",
-                    "enum": [
-                      "legacy",
-                      "dynamic"
-                    ],
-                    "default": "legacy"
+                    "default": "legacy",
+                    "$ref": "#/components/schemas/Generation"
                   }
                 },
                 "required": [
@@ -111,12 +111,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "legacy",
-                "dynamic",
-                "legacy,dynamic"
-              ],
-              "default": "legacy"
+              "default": "legacy",
+              "$ref": "#/components/schemas/Schema"
             }
           },
           {
@@ -706,10 +702,7 @@
           "active": {
             "type": "integer",
             "description": "Set the version as the active version associated with the template (0 is inactive, 1 is active). Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
-            "enum": [
-              0,
-              1
-            ]
+            "$ref": "#/components/schemas/Active"
           },
           "name": {
             "type": "string",
@@ -739,11 +732,8 @@
           },
           "editor": {
             "type": "string",
-            "enum": [
-              "code",
-              "design"
-            ],
-            "description": "The editor used in the UI."
+            "description": "The editor used in the UI.",
+            "$ref": "#/components/schemas/Editor"
           },
           "test_data": {
             "type": "string",
@@ -781,10 +771,7 @@
           "active": {
             "type": "integer",
             "description": "Set the version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
-            "enum": [
-              0,
-              1
-            ]
+            "$ref": "#/components/schemas/Active1"
           },
           "name": {
             "type": "string",
@@ -815,11 +802,8 @@
           },
           "editor": {
             "type": "string",
-            "enum": [
-              "code",
-              "design"
-            ],
-            "description": "The editor used in the UI."
+            "description": "The editor used in the UI.",
+            "$ref": "#/components/schemas/Editor1"
           },
           "thumbnail_url": {
             "type": "string",
@@ -846,10 +830,7 @@
           "generation": {
             "type": "string",
             "description": "Defines the generation of the template.",
-            "enum": [
-              "legacy",
-              "dynamic"
-            ]
+            "$ref": "#/components/schemas/Generation1"
           },
           "updated_at ": {
             "type": "string",
@@ -912,6 +893,56 @@
             "minimum": 0
           }
         }
+      },
+      "Generation": {
+        "type": "string",
+        "enum": [
+          "legacy",
+          "dynamic"
+        ]
+      },
+      "Schema": {
+        "type": "string",
+        "enum": [
+          "legacy",
+          "dynamic",
+          "legacy,dynamic"
+        ]
+      },
+      "Active": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "Editor": {
+        "type": "string",
+        "enum": [
+          "code",
+          "design"
+        ]
+      },
+      "Active1": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "Editor1": {
+        "type": "string",
+        "enum": [
+          "code",
+          "design"
+        ]
+      },
+      "Generation1": {
+        "type": "string",
+        "enum": [
+          "legacy",
+          "dynamic"
+        ]
       }
     },
     "responses": {},

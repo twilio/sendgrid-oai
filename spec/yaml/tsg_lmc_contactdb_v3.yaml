@@ -25,6 +25,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: lmc_contactdb
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -559,9 +561,7 @@ paths:
           to deleting the list.
         schema:
           type: boolean
-          enum:
-          - true
-          - false
+          $ref: '#/components/schemas/Schema'
       - $ref: '#/components/parameters/OnBehalfOf'
       requestBody:
         $ref: '#/components/requestBodies/DeleteContactdbListsListId'
@@ -2321,10 +2321,7 @@ components:
         type:
           type: string
           description: The type of the field.
-          enum:
-          - date
-          - text
-          - number
+          $ref: '#/components/schemas/Type'
       example:
         name: first_name
         type: text
@@ -2504,18 +2501,10 @@ components:
           type: string
         operator:
           type: string
-          enum:
-          - eq
-          - ne
-          - lt
-          - gt
-          - contains
+          $ref: '#/components/schemas/Operator'
         and_or:
           type: string
-          enum:
-          - and
-          - or
-          - ''
+          $ref: '#/components/schemas/And_or'
       required:
       - field
       - value
@@ -2595,6 +2584,31 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+    Schema:
+      type: boolean
+      enum:
+      - true
+      - false
+    Type:
+      type: string
+      enum:
+      - date
+      - text
+      - number
+    Operator:
+      type: string
+      enum:
+      - eq
+      - ne
+      - lt
+      - gt
+      - contains
+    And_or:
+      type: string
+      enum:
+      - and
+      - or
+      - ''
   responses: {}
   parameters:
     OnBehalfOf:

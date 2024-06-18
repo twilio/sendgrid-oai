@@ -33,6 +33,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: sso
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -1358,11 +1360,7 @@ components:
             allows you to allocate a group of pre-defined permissions rather than
             assigning each scope individually. See [**Teammate Permissions**](https://docs.sendgrid.com/ui/account-and-settings/teammate-permissions)
             for a full list of the scopes assigned to each persona.
-          enum:
-          - accountant
-          - developer
-          - marketer
-          - observer
+          $ref: '#/components/schemas/Persona'
         scopes:
           type: array
           description: "Add or remove permissions from a Teammate using this `scopes`\
@@ -1402,9 +1400,7 @@ components:
                   the specified Subuser with this property. This property value may
                   be either `admin` or `restricted`. When set to `restricted`, the
                   Teammate has only the permissions assigned in the `scopes` property.
-                enum:
-                - admin
-                - restricted
+                $ref: '#/components/schemas/Permission_type'
               scopes:
                 type: array
                 description: "Add or remove permissions that the Teammate can access\
@@ -1597,9 +1593,7 @@ components:
                   Subuser. This property value may be either `admin` or `restricted`.
                   When is property is set to `restricted`, the Teammate has only the
                   permissions assigned in the `scopes` property.
-                enum:
-                - admin
-                - restricted
+                $ref: '#/components/schemas/Permission_type1'
               scopes:
                 type: array
                 description: The permissions or scopes that the Teammate can access
@@ -1649,10 +1643,7 @@ components:
             type: string
             description: A Teammate can be an `admin`, `owner`, or `teammate`. Each
               role is associated with the scope of the Teammate's permissions.
-            enum:
-            - admin
-            - owner
-            - teammate
+            $ref: '#/components/schemas/User_type'
           website:
             type: string
             description: A website associated with the Teammate.
@@ -1674,6 +1665,29 @@ components:
             type: string
           error_id:
             type: string
+    Persona:
+      type: string
+      enum:
+      - accountant
+      - developer
+      - marketer
+      - observer
+    Permission_type:
+      type: string
+      enum:
+      - admin
+      - restricted
+    Permission_type1:
+      type: string
+      enum:
+      - admin
+      - restricted
+    User_type:
+      type: string
+      enum:
+      - admin
+      - owner
+      - teammate
   responses:
     Sso400:
       description: ''

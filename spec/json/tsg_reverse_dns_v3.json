@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "reverse_dns"
+    }
   },
   "servers": [
     {
@@ -336,10 +339,7 @@
                     "valid": {
                       "type": "boolean",
                       "description": "Indicates if the reverse DNS record is valid.",
-                      "enum": [
-                        true,
-                        false
-                      ]
+                      "$ref": "#/components/schemas/Valid"
                     },
                     "validation_results": {
                       "type": "object",
@@ -351,10 +351,7 @@
                             "valid": {
                               "type": "boolean",
                               "description": "Indicates if the reverse DNS record could be validated.",
-                              "enum": [
-                                true,
-                                false
-                              ]
+                              "$ref": "#/components/schemas/Valid1"
                             },
                             "reason": {
                               "description": "The reason the reverse DNS record could not be validated. Is `null` if the reverse DNS record was validated.",
@@ -603,6 +600,20 @@
             "data": "192.168.1.1"
           }
         }
+      },
+      "Valid": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Valid1": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
       }
     },
     "responses": {},

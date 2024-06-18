@@ -22,6 +22,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: teammates
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -179,10 +181,7 @@ paths:
                           type: string
                           description: 'Indicate the type of user: owner user, teammate
                             admin user, or normal teammate'
-                          enum:
-                          - admin
-                          - owner
-                          - teammate
+                          $ref: '#/components/schemas/User_type'
                         is_admin:
                           type: boolean
                           description: Set to true if teammate has admin privileges
@@ -351,9 +350,7 @@ paths:
                             or `restricted`. When is property is set to `restricted`,
                             the Teammate has only the permissions assigned in the
                             `scopes` property.
-                          enum:
-                          - admin
-                          - restricted
+                          $ref: '#/components/schemas/Permission_type'
                         scopes:
                           type: array
                           description: The permissions or scopes that the Teammate
@@ -545,10 +542,7 @@ paths:
                     type: string
                     description: 'Indicate the type of user: account owner, teammate
                       admin user, or normal teammate'
-                    enum:
-                    - admin
-                    - owner
-                    - teammate
+                    $ref: '#/components/schemas/User_type1'
                   is_admin:
                     type: boolean
                     description: Set to true if teammate has admin privileges
@@ -664,10 +658,7 @@ paths:
                     type: string
                     description: 'Indicate the type of user: owner user, teammate
                       admin user, or normal teammate'
-                    enum:
-                    - admin
-                    - owner
-                    - teammate
+                    $ref: '#/components/schemas/User_type2'
                   is_admin:
                     type: boolean
                     description: Set to true if teammate has admin priveleges
@@ -970,7 +961,30 @@ paths:
                     - message: invalid pending key
                       field: pending_key
 components:
-  schemas: {}
+  schemas:
+    User_type:
+      type: string
+      enum:
+      - admin
+      - owner
+      - teammate
+    Permission_type:
+      type: string
+      enum:
+      - admin
+      - restricted
+    User_type1:
+      type: string
+      enum:
+      - admin
+      - owner
+      - teammate
+    User_type2:
+      type: string
+      enum:
+      - admin
+      - owner
+      - teammate
   responses: {}
   parameters:
     OnBehalfOf:

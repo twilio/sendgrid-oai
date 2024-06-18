@@ -23,6 +23,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: lmc_senders
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API

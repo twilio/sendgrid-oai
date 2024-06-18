@@ -39,6 +39,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: email_validation
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -94,10 +96,7 @@ paths:
                         type: string
                         description: A generic classification of whether or not the
                           email address is valid.
-                        enum:
-                        - Valid
-                        - Risky
-                        - Invalid
+                        $ref: '#/components/schemas/Verdict'
                       score:
                         type: number
                         description: A numeric representation of the email validity.
@@ -223,10 +222,8 @@ paths:
               properties:
                 file_type:
                   type: string
-                  enum:
-                  - csv
-                  - zip
                   description: The format of the file you wish to upload.
+                  $ref: '#/components/schemas/File_type'
               required:
               - file_type
               example:
@@ -407,13 +404,7 @@ components:
               status:
                 type: string
                 description: The status of the Bulk Email Address Validation Job.
-                enum:
-                - Initiated
-                - Queued
-                - Ready
-                - Processing
-                - Done
-                - Error
+                $ref: '#/components/schemas/Status'
               started_at:
                 description: The ISO8601 timestamp when the Job was created. This
                   is the time at which the upload request was sent to the `upload_uri`.
@@ -435,13 +426,7 @@ components:
             status:
               type: string
               description: The status of the Bulk Email Address Validation Job.
-              enum:
-              - Initiated
-              - Queued
-              - Ready
-              - Processing
-              - Done
-              - Error
+              $ref: '#/components/schemas/Status1'
             segments:
               type: number
               description: The total number of segments in the Bulk Email Address
@@ -496,6 +481,35 @@ components:
         id:
           type: string
           description: ID representing the error.
+    Verdict:
+      type: string
+      enum:
+      - Valid
+      - Risky
+      - Invalid
+    File_type:
+      type: string
+      enum:
+      - csv
+      - zip
+    Status:
+      type: string
+      enum:
+      - Initiated
+      - Queued
+      - Ready
+      - Processing
+      - Done
+      - Error
+    Status1:
+      type: string
+      enum:
+      - Initiated
+      - Queued
+      - Ready
+      - Processing
+      - Done
+      - Error
   responses: {}
   parameters: {}
   examples: {}

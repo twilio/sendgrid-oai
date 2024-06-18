@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "email_activity"
+    }
   },
   "servers": [
     {
@@ -108,11 +111,7 @@
                           },
                           "status": {
                             "type": "string",
-                            "enum": [
-                              "processed",
-                              "delivered",
-                              "not_delivered"
-                            ]
+                            "$ref": "#/components/schemas/Status"
                           },
                           "opens_count": {
                             "type": "integer"
@@ -373,19 +372,7 @@
                               "event_name": {
                                 "type": "string",
                                 "description": "Name of event",
-                                "enum": [
-                                  "bounced",
-                                  "opened",
-                                  "clicked",
-                                  "processed",
-                                  "dropped",
-                                  "delivered",
-                                  "deferred",
-                                  "spam_report",
-                                  "unsubscribe",
-                                  "group_unsubscribe",
-                                  "group_resubscribe"
-                                ]
+                                "$ref": "#/components/schemas/Event_name"
                               },
                               "processed": {
                                 "description": "The date when the event was processed",
@@ -410,10 +397,7 @@
                               "bounce_type": {
                                 "type": "string",
                                 "description": "Use to distinguish between types of bounces",
-                                "enum": [
-                                  "soft",
-                                  "hard"
-                                ]
+                                "$ref": "#/components/schemas/Bounce_type"
                               },
                               "http_user_agent": {
                                 "type": "string",
@@ -458,10 +442,7 @@
                         "outbound_ip_type": {
                           "type": "string",
                           "description": "Whether or not the outbound IP is dedicated vs shared",
-                          "enum": [
-                            "dedicated",
-                            "shared"
-                          ]
+                          "$ref": "#/components/schemas/Outbound_ip_type"
                         }
                       },
                       "required": [
@@ -503,11 +484,7 @@
                     "status": {
                       "type": "string",
                       "description": "Quick summary of the status of a message",
-                      "enum": [
-                        "processed",
-                        "not_delivered",
-                        "delivered"
-                      ]
+                      "$ref": "#/components/schemas/Status1"
                     },
                     "template_id": {
                       "type": "string",
@@ -540,19 +517,7 @@
                           "event_name": {
                             "type": "string",
                             "description": "Name of event",
-                            "enum": [
-                              "bounced",
-                              "opened",
-                              "clicked",
-                              "processed",
-                              "dropped",
-                              "delivered",
-                              "deferred",
-                              "spam_report",
-                              "unsubscribe",
-                              "group_unsubscribe",
-                              "group_resubscribe"
-                            ]
+                            "$ref": "#/components/schemas/Event_name1"
                           },
                           "processed": {
                             "description": "Date of when event occurred",
@@ -577,10 +542,7 @@
                           "bounce_type": {
                             "type": "string",
                             "description": "Use to distinguish between types of bounces",
-                            "enum": [
-                              "soft",
-                              "hard"
-                            ]
+                            "$ref": "#/components/schemas/Bounce_type1"
                           },
                           "http_user_agent": {
                             "type": "string",
@@ -635,10 +597,7 @@
                     "outbound_ip_type": {
                       "type": "string",
                       "description": "Whether or not the outbound IP is dedicated vs shared",
-                      "enum": [
-                        "dedicated",
-                        "shared"
-                      ]
+                      "$ref": "#/components/schemas/Outbound_ip_type1"
                     }
                   },
                   "required": [
@@ -874,9 +833,7 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "enum": [
-                        "pending"
-                      ]
+                      "$ref": "#/components/schemas/Status2"
                     },
                     "message": {
                       "type": "string"
@@ -1156,13 +1113,99 @@
           "status": {
             "type": "string",
             "description": "The message's status.",
-            "enum": [
-              "processed",
-              "delivered",
-              "not_delivered"
-            ]
+            "$ref": "#/components/schemas/Status3"
           }
         }
+      },
+      "Status": {
+        "type": "string",
+        "enum": [
+          "processed",
+          "delivered",
+          "not_delivered"
+        ]
+      },
+      "Event_name": {
+        "type": "string",
+        "enum": [
+          "bounced",
+          "opened",
+          "clicked",
+          "processed",
+          "dropped",
+          "delivered",
+          "deferred",
+          "spam_report",
+          "unsubscribe",
+          "group_unsubscribe",
+          "group_resubscribe"
+        ]
+      },
+      "Bounce_type": {
+        "type": "string",
+        "enum": [
+          "soft",
+          "hard"
+        ]
+      },
+      "Outbound_ip_type": {
+        "type": "string",
+        "enum": [
+          "dedicated",
+          "shared"
+        ]
+      },
+      "Status1": {
+        "type": "string",
+        "enum": [
+          "processed",
+          "not_delivered",
+          "delivered"
+        ]
+      },
+      "Event_name1": {
+        "type": "string",
+        "enum": [
+          "bounced",
+          "opened",
+          "clicked",
+          "processed",
+          "dropped",
+          "delivered",
+          "deferred",
+          "spam_report",
+          "unsubscribe",
+          "group_unsubscribe",
+          "group_resubscribe"
+        ]
+      },
+      "Bounce_type1": {
+        "type": "string",
+        "enum": [
+          "soft",
+          "hard"
+        ]
+      },
+      "Outbound_ip_type1": {
+        "type": "string",
+        "enum": [
+          "dedicated",
+          "shared"
+        ]
+      },
+      "Status2": {
+        "type": "string",
+        "enum": [
+          "pending"
+        ]
+      },
+      "Status3": {
+        "type": "string",
+        "enum": [
+          "processed",
+          "delivered",
+          "not_delivered"
+        ]
       }
     },
     "responses": {},

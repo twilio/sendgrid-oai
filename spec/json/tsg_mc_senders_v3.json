@@ -47,48 +47,77 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SenderRequest"
+                "type": "object",
+                "properties": {
+                  "nickname": {
+                    "type": "string",
+                    "description": "A nickname for the Sender. Not used for sending."
                   },
-                  {
+                  "from": {
                     "type": "object",
                     "properties": {
-                      "from": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/SenderRequest/properties/from"
-                          },
-                          {
-                            "required": [
-                              "email",
-                              "name"
-                            ]
-                          }
-                        ]
+                      "email": {
+                        "type": "string",
+                        "description": "The email address from which your recipient will receive emails."
                       },
-                      "reply_to": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/SenderRequest/properties/reply_to"
-                          },
-                          {
-                            "required": [
-                              "email"
-                            ]
-                          }
-                        ]
+                      "name": {
+                        "type": "string",
+                        "description": "The name appended to the from email field. Typically your name or company name."
                       }
                     },
                     "required": [
-                      "nickname",
-                      "from",
-                      "reply_to",
-                      "address",
-                      "city",
-                      "country"
+                      "name",
+                      "email"
                     ]
+                  },
+                  "reply_to": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string",
+                        "description": "The email address to which your recipient will reply."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "The name appended to the reply to email field. Typically your name or company name."
+                      }
+                    },
+                    "required": [
+                      "email"
+                    ]
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "The physical address of the Sender."
+                  },
+                  "address_2": {
+                    "type": "string",
+                    "description": "Additional Sender address information."
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "The city of the Sender."
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "The state of the Sender."
+                  },
+                  "zip": {
+                    "type": "string",
+                    "description": "The zipcode of the Sender."
+                  },
+                  "country": {
+                    "type": "string",
+                    "description": "The country of the Sender."
                   }
+                },
+                "required": [
+                  "country",
+                  "reply_to",
+                  "from",
+                  "address",
+                  "city",
+                  "nickname"
                 ]
               }
             }
@@ -276,84 +305,6 @@
     "schemas": {
       "Sender": {
         "title": "Sender",
-        "allOf": [
-          {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "integer",
-                "description": "The unique identifier of the Sender."
-              }
-            }
-          },
-          {
-            "$ref": "#/components/schemas/SenderRequest"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "verified": {
-                "type": "boolean",
-                "description": "A boolean flag indicating whether the Sender is verified or not. Only verified Senders can be used to send email."
-              },
-              "locked": {
-                "type": "boolean",
-                "description": "A boolean flag that is `true` when the Sender is associated with a campaign in Draft, Scheduled, or In Progress status. You cannot update or delete a locked Sender."
-              },
-              "updated_at": {
-                "type": "integer",
-                "description": "The time the Sender was last updated."
-              },
-              "created_at": {
-                "type": "integer",
-                "description": "The time the Sender was created."
-              }
-            }
-          },
-          {
-            "type": "object",
-            "properties": {
-              "from": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SenderRequest/properties/from"
-                  },
-                  {
-                    "required": [
-                      "email",
-                      "name"
-                    ]
-                  }
-                ]
-              },
-              "reply_to": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SenderRequest/properties/reply_to"
-                  },
-                  {
-                    "required": [
-                      "email"
-                    ]
-                  }
-                ]
-              }
-            },
-            "required": [
-              "id",
-              "nickname",
-              "from",
-              "reply_to",
-              "address",
-              "city",
-              "country",
-              "verified",
-              "locked",
-              "created_at",
-              "updated_at"
-            ]
-          }
-        ],
         "example": {
           "id": 1,
           "nickname": "Example Orders",
@@ -375,7 +326,104 @@
           "updated_at": 1449872165,
           "created_at": 1449872165,
           "locked": false
-        }
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier of the Sender."
+          },
+          "nickname": {
+            "type": "string",
+            "description": "A nickname for the Sender. Not used for sending."
+          },
+          "from": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "The email address from which your recipient will receive emails."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name appended to the from email field. Typically your name or company name."
+              }
+            },
+            "required": [
+              "name",
+              "email"
+            ]
+          },
+          "reply_to": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "The email address to which your recipient will reply."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name appended to the reply to email field. Typically your name or company name."
+              }
+            },
+            "required": [
+              "email"
+            ]
+          },
+          "address": {
+            "type": "string",
+            "description": "The physical address of the Sender."
+          },
+          "address_2": {
+            "type": "string",
+            "description": "Additional Sender address information."
+          },
+          "city": {
+            "type": "string",
+            "description": "The city of the Sender."
+          },
+          "state": {
+            "type": "string",
+            "description": "The state of the Sender."
+          },
+          "zip": {
+            "type": "string",
+            "description": "The zipcode of the Sender."
+          },
+          "country": {
+            "type": "string",
+            "description": "The country of the Sender."
+          },
+          "verified": {
+            "type": "boolean",
+            "description": "A boolean flag indicating whether the Sender is verified or not. Only verified Senders can be used to send email."
+          },
+          "locked": {
+            "type": "boolean",
+            "description": "A boolean flag that is `true` when the Sender is associated with a campaign in Draft, Scheduled, or In Progress status. You cannot update or delete a locked Sender."
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the Sender was last updated."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the Sender was created."
+          }
+        },
+        "required": [
+          "verified",
+          "country",
+          "reply_to",
+          "from",
+          "locked",
+          "address",
+          "city",
+          "updated_at",
+          "nickname",
+          "created_at",
+          "id"
+        ]
       },
       "SenderRequest": {
         "title": "Sender Request",

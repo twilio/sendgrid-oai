@@ -616,7 +616,7 @@
               "destination_region": {
                 "description": "The workspace region where the Segment Source write key lives.",
                 "type": "string",
-                "$ref": "#/components/schemas/Destination_region"
+                "$ref": "#/components/schemas/DestinationRegion"
               }
             }
           },
@@ -674,7 +674,7 @@
               "destination_region": {
                 "description": "The workspace region where the Segment Source write key lives.",
                 "type": "string",
-                "$ref": "#/components/schemas/Destination_region1"
+                "$ref": "#/components/schemas/DestinationRegion1"
               }
             }
           },
@@ -725,7 +725,7 @@
               "destination_region": {
                 "description": "The workspace region where the Segment Source write key lives.",
                 "type": "string",
-                "$ref": "#/components/schemas/Destination_region2"
+                "$ref": "#/components/schemas/DestinationRegion2"
               }
             }
           },
@@ -825,7 +825,7 @@
           "machine_opened"
         ]
       },
-      "Destination_region": {
+      "DestinationRegion": {
         "type": "string",
         "enum": [
           "EU",
@@ -855,7 +855,7 @@
           "machine_opened"
         ]
       },
-      "Destination_region1": {
+      "DestinationRegion1": {
         "type": "string",
         "enum": [
           "EU",
@@ -879,7 +879,7 @@
           "machine_opened"
         ]
       },
-      "Destination_region2": {
+      "DestinationRegion2": {
         "type": "string",
         "enum": [
           "EU",

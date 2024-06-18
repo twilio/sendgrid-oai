@@ -21,7 +21,7 @@ info:
     See **Getting Started with the Email Activity Feed API** for help building queries
     and working with this API. You can also work with email activity in the **Activity**
     section of the [Twilio SendGrid application user interface](https://app.sendgrid.com/email_activity).'
-  termsOfService: 'https: //www.twilio.com/legal/tos'
+  termsOfService: https://www.twilio.com/legal/tos
   contact:
     name: Twilio SendGrid Support
     url: https://support.sendgrid.com/hc/en-us
@@ -77,21 +77,6 @@ paths:
                   messages:
                     type: array
                     items:
-                      allOf:
-                      - $ref: '#/components/schemas/EmailActivityResponseBaseProps'
-                      - type: object
-                        properties:
-                          opens_count:
-                            type: integer
-                            description: The number of times the message was opened.
-                          clicks_count:
-                            type: integer
-                            description: The number of times links in the message
-                              were clicked.
-                          last_event_time:
-                            type: string
-                            description: A timestamp of the last event received for
-                              the specific message in iso 8601 format.
                       title: Abbv. Message
                       type: object
                       properties:
@@ -224,176 +209,39 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                - $ref: '#/components/schemas/EmailActivityResponseBaseProps'
-                - type: object
-                  example:
-                    from_email: jane_doe@example.com
-                    msg_id: in aliquip id aliqua
-                    subject: est incididunt adipisicing pariatur
-                    to_email: send@test.com
-                    status: not_delivered
-                    template_id: 123e4567-e89b-12d3-a456-426655440000
-                    asm_group_id: 11376349
-                    teammate: ''
-                    api_key_id: sdfsdfsdf123
-                    originating_ip: 2.3.4.5
-                    events:
-                    - event_name: bounced
-                      processed: '2017-10-13T18:56:21Z'
-                      bounce_type: soft
-                      http_user_agent: in tempor ex dolore est
-                      mx_server: quis proident
-                      server_response: some error message
-                    categories:
-                    - hi
-                    - bye
-                    unique_args: '{''key'': ''value''}'
-                    outbound_ip: 1.2.3.4
-                    outbound_ip_type: dedicated
-                  properties:
-                    template_id:
-                      type: string
-                      description: The ID associated with a Twilio SendGrid email
-                        template used to format the message.
-                    asm_group_id:
-                      type: integer
-                      minimum: 1
-                      description: The unsubscribe group associated with this email.
-                    teammate:
-                      type: string
-                      description: Teammate's username
-                      minLength: 0
-                      maxLength: 64
-                      pattern: ^$|^[A-Za-z0-9]+
-                    api_key_id:
-                      type: string
-                      minLength: 3
-                      maxLength: 50
-                      pattern: ^[A-Za-z0-9]+
-                      description: The ID of the API Key used to authenticate the
-                        sending request for the message.
-                    events:
-                      type: array
-                      description: List of events related to email message
-                      items:
-                        title: Event
-                        type: object
-                        example:
-                          event_name: bounced
-                          processed: '2017-10-13T18:56:21Z'
-                          reason: some reason
-                          url: http://3LX,MU}N=B8'd,K}>bEma{l~!ad%peIF}y>qHfLPWQ$l9b\!6.1H?$Z9H"il-_gZD>/JPYsGqH4x4_3v090TCtnFalXGFiAdooDxgrDAYNXShUywSxwYr8gKeyc/4sal4VJ3IxEWsG74V5MYQ0mz27jhy7n5DHsUtApQ6zXHS13uO5vYBlJHpJRfuT6/F5nIpkHre2w3eTtN7M6pg9V5stjnnsavKkzQxyTv15CMSDLFwR_BTZwofhWpyBU7B9ypYL79vT97N3LDZyoaM/fNsOLPIqfGBer_Mx9_StergbQYANyOmOSjR6pZof01ky/ZcNDhpu3CkSl4MTtQ3NMCX780pOKQ5SYIPigyvz9IC9WtrCNcOkTxdOPdY0_4MJU4EuTTPmGvO/14KaJCDjIjgrbIqpzuUEL5mET0t2VeVlwvtnOnlHaBE8sic20ze2E0Xt3ETqXyzVJRjLDKh/LWkW8OVp_xkLBCCW7LQngRukKcOiWjMXeCEhYI9HoZ0RsMEWZC8KzRaHc4OI0uXPD4M9pav1LGrI/_0t_RnBnfnqGKsBJr0kdQi/Y6QN_aeawIqX5hDNIU3MF/wWKVWLS0ZFbDfK6KVv5oAid83EpwKoazAMA8MTfEXvHQLO7k7XYWX1Il3eGXL6/wCA96I1SOabzJkZHo2HsFpIC/VBk52Lnpp0xtDH/OCdlQ5e4PpxXQeklp70LPOndr7QKSYEQNUc48n36ixvTjhgpgO8wHsFFYqGcuBMHg9oaCARppQomiQDWYuVPVDynJHdsM1_gWl4/NSs8Y9PL7DrQXOu0UiFRRE0TUsvgqyUgJzlGjUnRziyYeROO75D0K_3aTtbGbCmhaxecos40a1w0PDCNkFp1W/iHwY7922drhsoM6ShwqqwGpAh5HLuU6Q5gqyckeai6YN7HCh9DdHPhhJcatgtMHZDKfQUBVt9ecUlDgiCFF_OnRX/GpzttcsL8E2FoXL9_eAWvSqjodROqx7MZCA/ORdnR/IssPCYP1kTHTIL5mZxv4UGEpyNjUzt4GdSJJTm0nztltWDYX8_Ezl2JvpLVnGVTJxobb4yQIJhe3n64khbOFyFLKHWEniIolm/AxpZQYmseWlVqrIz3YXU59XaSbTTrdCHNhvwF1ogXiiggN6TZ2B3QY_mBEtAp/SD0ONPVqEUkTNAFWTgnnlv6ZIMdMbTw5uZwtFRlB7qDvQouml9kujGmRu6k7zZMTOwWowRNtpboLUcL2NzkVgK6N1Zi2vq/Nt4NJvM5_l1dpIIbwJv_CIcZQZOqPtRWULa2iVxfmJJQaqgLQPwSHQH1zuRJMhraEsPjqVQRC0pZpSt/24VBDN8y31Ye/y_ekWxMdZCvr978C/WrdcTi29kxjJLyT9BII7BsgT5vLuI2l7ntqRAhAUWMs/h9JR0i8RbX5OfB46q41/TfmSdgi97bCR2HfgflyypXwKhRfKYU2MVpu2Dd90WQUlm7hZV8dSfGusuMj/nPMpRVWcbnvlAdsehJCPbLv6n4qdLSPeoMBo32acAGgu1BwBG8JsBgbH43yYi5X7UdGRWKqm_ZbqaDEKH3ncU/uA8EOJb41VfGho4LUeOi1IeYwVAhFEyO6YbteYZecEubrNFZrWWjZUqhzouzY95TeWU8E4StCXVPKlYPiFiwUSX20kG0lVtDbAy/7u4f4x0cYlFOvI1UN1qoOExmNxnxzQQFeM5exWfW2JrRXq5e0UdAJr4q2o9Y_0WaGfhL/nP6Ei06YajDKr11dK5H0LX/9CGTC37HFZeopyopzP_7fvGFkqIRoGTS48pLaIFz3gwpQNlWXUFCsd/PnRlsqJ3SBQSgp_AQe2cP6iBNy2bJI8lkxwY5YVDDdjxusuCcafdjfs2aUa/4tr_iMnNBnd27GxjQI28_JGJlfbOaajVJOxuPMT4ELpYCfPiFjdSbJyE0/gCwtj0rgDKSLWJnOPJ5TAJ935gCqeIsBhOhfcZX413GdilBZRRYEjCVKfOuWzHZ3GW/8yjyk5e_WMNv5F6xggl07w90DBwpx/Q/iWfncqMuSfoeFeqHQkDL9F5W19j1cGuAcyfIYMAXztHXpgTKh9vZcsLYC7LcgKr4FQj3JjEvtnDG2PjcMjGF/MnbCRCz22Ho410_vE9M1Hpq0wdk_i5DbZKNoSwlPgey9URkpuX146TcDdsx_VWDenCepY5HwMr9CPOY9hzUs/c5AWeUMXk/gvsI81Jkv5rHpEnNBUZXYzfqkwQfffhmrc/StLCtzRRlja8dpsEWdkzoKR9Kdxq1qAs5f0sdrGjVRLTT_s1Q2P59zhA/QmS4bubi64cYot3gSIgdNnkjA2GjCp1ETVa548_U9B6boTKDVmaKJlVIDvqL84RC3WI7Er/8opi2lZ48W83Ur47BRh38oOnI0agrCyZz8bp1w_gfVRlSO8PS0i/l_/qxq5xpLbhPkdxVoyZVsNAZchfnmkIHyIk5IK6EUDXdMR21y6OvKW50ZbooAtk9ymynBj4dAYMsd25RV7FE1I1vRTsiDw52/.E5WC0Ymo2zn.qelSbhzr-4laArYiWP.dwJB6qm_6rs0Rm5UXYaYtUNbh76_jJp_X1xQUCDSgbr2KOkDU0"Q/-4dV"Yk3QGg[(O86=Pf"e17K4'r{)kicofHSXcMmP@>VF^`~4j4F*L/1]tD+Lw!WI!@]*OZm6C`M$u96}*O<U;_cZ84k.|nIqpAaeiroItOenDBL
-                          bounce_type: soft
-                          http_user_agent: in tempor ex dolore est
-                          mx_server: quis proident
-                        properties:
-                          event_name:
-                            type: string
-                            description: Name of event
-                            $ref: '#/components/schemas/Event_name'
-                          processed:
-                            description: The date when the event was processed
-                            type: string
-                          reason:
-                            type: string
-                            description: Explanation of what caused the message to
-                              be "bounced", "deferred", or "blocked". Usually contains
-                              error message from the server - e.g. message from gmail
-                              why mail was deferred.
-                            maxLength: 1024
-                          attempt_num:
-                            type: integer
-                            description: 'Used with "deferred" events to indicate
-                              the attempt number out of 10. One "deferred" entry will
-                              exists under events array for each time a message was
-                              deferred with error message from the server. '
-                            minimum: 1
-                            maximum: 10
-                          url:
-                            type: string
-                            description: Used with "clicked" event to indicate which
-                              url the user clicked.
-                            pattern: ^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$
-                          bounce_type:
-                            type: string
-                            description: Use to distinguish between types of bounces
-                            $ref: '#/components/schemas/Bounce_type'
-                          http_user_agent:
-                            type: string
-                            description: Client recipient used to click or open message
-                          mx_server:
-                            type: string
-                            description: The MX server that received the email. For
-                              example, mx.gmail.com
-                        required:
-                        - event_name
-                        - processed
-                        - bounce_type
-                        - http_user_agent
-                        - mx_server
-                    originating_ip:
-                      type: string
-                      format: ipv4
-                      description: This is the IP of the user who sent the message.
-                    categories:
-                      type: array
-                      description: Categories users associated to the message
-                      items:
-                        type: string
-                    unique_args:
-                      type: string
-                      default: 'Null'
-                      description: JSON hash of key-value pairs associated with the
-                        message.
-                    outbound_ip:
-                      type: string
-                      description: IP used to send to the remote Mail Transfer Agent.
-                      format: ipv4
-                    outbound_ip_type:
-                      type: string
-                      description: Whether or not the outbound IP is dedicated vs
-                        shared
-                      $ref: '#/components/schemas/Outbound_ip_type'
-                  required:
-                  - template_id
-                  - asm_group_id
-                  - teammate
-                  - api_key_id
-                  - events
-                  - originating_ip
-                  - categories
-                  - unique_args
-                  - outbound_ip
-                  - outbound_ip_type
                 title: Message
                 type: object
                 properties:
                   from_email:
                     type: string
-                    pattern: \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b
+                    format: email
+                    default: test0@example.com
+                    description: The 'From' email address used to deliver the message.
+                      This address should be a verified sender in your Twilio SendGrid
+                      account.
                   msg_id:
                     type: string
-                    minLength: 5
-                    maxLength: 50
-                    pattern: ^[A-Za-z0-9]+
+                    description: A unique ID assigned to the message. This ID can
+                      be used to retrieve activity data for the specific message.
                   subject:
                     type: string
-                    minLength: 3
-                    maxLength: 255
+                    description: The email's subject line.
                   to_email:
                     type: string
-                    pattern: \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b
+                    format: email
+                    description: The intended recipient's email address.
                   status:
                     type: string
-                    description: Quick summary of the status of a message
-                    $ref: '#/components/schemas/Status1'
+                    description: The message's status.
+                    $ref: '#/components/schemas/Status3'
                   template_id:
                     type: string
-                    format: uuid
+                    description: The ID associated with a Twilio SendGrid email template
+                      used to format the message.
                   asm_group_id:
                     type: integer
                     minimum: 1
+                    description: The unsubscribe group associated with this email.
                   teammate:
                     type: string
                     description: Teammate's username
@@ -405,25 +253,36 @@ paths:
                     minLength: 3
                     maxLength: 50
                     pattern: ^[A-Za-z0-9]+
+                    description: The ID of the API Key used to authenticate the sending
+                      request for the message.
                   events:
                     type: array
                     description: List of events related to email message
                     items:
                       title: Event
                       type: object
+                      example:
+                        event_name: bounced
+                        processed: '2017-10-13T18:56:21Z'
+                        reason: some reason
+                        url: http://3LX,MU}N=B8'd,K}>bEma{l~!ad%peIF}y>qHfLPWQ$l9b\!6.1H?$Z9H"il-_gZD>/JPYsGqH4x4_3v090TCtnFalXGFiAdooDxgrDAYNXShUywSxwYr8gKeyc/4sal4VJ3IxEWsG74V5MYQ0mz27jhy7n5DHsUtApQ6zXHS13uO5vYBlJHpJRfuT6/F5nIpkHre2w3eTtN7M6pg9V5stjnnsavKkzQxyTv15CMSDLFwR_BTZwofhWpyBU7B9ypYL79vT97N3LDZyoaM/fNsOLPIqfGBer_Mx9_StergbQYANyOmOSjR6pZof01ky/ZcNDhpu3CkSl4MTtQ3NMCX780pOKQ5SYIPigyvz9IC9WtrCNcOkTxdOPdY0_4MJU4EuTTPmGvO/14KaJCDjIjgrbIqpzuUEL5mET0t2VeVlwvtnOnlHaBE8sic20ze2E0Xt3ETqXyzVJRjLDKh/LWkW8OVp_xkLBCCW7LQngRukKcOiWjMXeCEhYI9HoZ0RsMEWZC8KzRaHc4OI0uXPD4M9pav1LGrI/_0t_RnBnfnqGKsBJr0kdQi/Y6QN_aeawIqX5hDNIU3MF/wWKVWLS0ZFbDfK6KVv5oAid83EpwKoazAMA8MTfEXvHQLO7k7XYWX1Il3eGXL6/wCA96I1SOabzJkZHo2HsFpIC/VBk52Lnpp0xtDH/OCdlQ5e4PpxXQeklp70LPOndr7QKSYEQNUc48n36ixvTjhgpgO8wHsFFYqGcuBMHg9oaCARppQomiQDWYuVPVDynJHdsM1_gWl4/NSs8Y9PL7DrQXOu0UiFRRE0TUsvgqyUgJzlGjUnRziyYeROO75D0K_3aTtbGbCmhaxecos40a1w0PDCNkFp1W/iHwY7922drhsoM6ShwqqwGpAh5HLuU6Q5gqyckeai6YN7HCh9DdHPhhJcatgtMHZDKfQUBVt9ecUlDgiCFF_OnRX/GpzttcsL8E2FoXL9_eAWvSqjodROqx7MZCA/ORdnR/IssPCYP1kTHTIL5mZxv4UGEpyNjUzt4GdSJJTm0nztltWDYX8_Ezl2JvpLVnGVTJxobb4yQIJhe3n64khbOFyFLKHWEniIolm/AxpZQYmseWlVqrIz3YXU59XaSbTTrdCHNhvwF1ogXiiggN6TZ2B3QY_mBEtAp/SD0ONPVqEUkTNAFWTgnnlv6ZIMdMbTw5uZwtFRlB7qDvQouml9kujGmRu6k7zZMTOwWowRNtpboLUcL2NzkVgK6N1Zi2vq/Nt4NJvM5_l1dpIIbwJv_CIcZQZOqPtRWULa2iVxfmJJQaqgLQPwSHQH1zuRJMhraEsPjqVQRC0pZpSt/24VBDN8y31Ye/y_ekWxMdZCvr978C/WrdcTi29kxjJLyT9BII7BsgT5vLuI2l7ntqRAhAUWMs/h9JR0i8RbX5OfB46q41/TfmSdgi97bCR2HfgflyypXwKhRfKYU2MVpu2Dd90WQUlm7hZV8dSfGusuMj/nPMpRVWcbnvlAdsehJCPbLv6n4qdLSPeoMBo32acAGgu1BwBG8JsBgbH43yYi5X7UdGRWKqm_ZbqaDEKH3ncU/uA8EOJb41VfGho4LUeOi1IeYwVAhFEyO6YbteYZecEubrNFZrWWjZUqhzouzY95TeWU8E4StCXVPKlYPiFiwUSX20kG0lVtDbAy/7u4f4x0cYlFOvI1UN1qoOExmNxnxzQQFeM5exWfW2JrRXq5e0UdAJr4q2o9Y_0WaGfhL/nP6Ei06YajDKr11dK5H0LX/9CGTC37HFZeopyopzP_7fvGFkqIRoGTS48pLaIFz3gwpQNlWXUFCsd/PnRlsqJ3SBQSgp_AQe2cP6iBNy2bJI8lkxwY5YVDDdjxusuCcafdjfs2aUa/4tr_iMnNBnd27GxjQI28_JGJlfbOaajVJOxuPMT4ELpYCfPiFjdSbJyE0/gCwtj0rgDKSLWJnOPJ5TAJ935gCqeIsBhOhfcZX413GdilBZRRYEjCVKfOuWzHZ3GW/8yjyk5e_WMNv5F6xggl07w90DBwpx/Q/iWfncqMuSfoeFeqHQkDL9F5W19j1cGuAcyfIYMAXztHXpgTKh9vZcsLYC7LcgKr4FQj3JjEvtnDG2PjcMjGF/MnbCRCz22Ho410_vE9M1Hpq0wdk_i5DbZKNoSwlPgey9URkpuX146TcDdsx_VWDenCepY5HwMr9CPOY9hzUs/c5AWeUMXk/gvsI81Jkv5rHpEnNBUZXYzfqkwQfffhmrc/StLCtzRRlja8dpsEWdkzoKR9Kdxq1qAs5f0sdrGjVRLTT_s1Q2P59zhA/QmS4bubi64cYot3gSIgdNnkjA2GjCp1ETVa548_U9B6boTKDVmaKJlVIDvqL84RC3WI7Er/8opi2lZ48W83Ur47BRh38oOnI0agrCyZz8bp1w_gfVRlSO8PS0i/l_/qxq5xpLbhPkdxVoyZVsNAZchfnmkIHyIk5IK6EUDXdMR21y6OvKW50ZbooAtk9ymynBj4dAYMsd25RV7FE1I1vRTsiDw52/.E5WC0Ymo2zn.qelSbhzr-4laArYiWP.dwJB6qm_6rs0Rm5UXYaYtUNbh76_jJp_X1xQUCDSgbr2KOkDU0"Q/-4dV"Yk3QGg[(O86=Pf"e17K4'r{)kicofHSXcMmP@>VF^`~4j4F*L/1]tD+Lw!WI!@]*OZm6C`M$u96}*O<U;_cZ84k.|nIqpAaeiroItOenDBL
+                        bounce_type: soft
+                        http_user_agent: in tempor ex dolore est
+                        mx_server: quis proident
                       properties:
                         event_name:
                           type: string
                           description: Name of event
-                          $ref: '#/components/schemas/Event_name1'
+                          $ref: '#/components/schemas/EventName'
                         processed:
-                          description: Date of when event occurred
+                          description: The date when the event was processed
                           type: string
                         reason:
                           type: string
-                          description: Explanation of what caused "bounced", "deferred",
-                            or "blocked". Usually contains error message from the
-                            server - e.g. message from gmail why mail was deferred
+                          description: Explanation of what caused the message to be
+                            "bounced", "deferred", or "blocked". Usually contains
+                            error message from the server - e.g. message from gmail
+                            why mail was deferred.
                           maxLength: 1024
                         attempt_num:
                           type: integer
@@ -441,28 +300,20 @@ paths:
                         bounce_type:
                           type: string
                           description: Use to distinguish between types of bounces
-                          $ref: '#/components/schemas/Bounce_type1'
+                          $ref: '#/components/schemas/BounceType'
                         http_user_agent:
                           type: string
                           description: Client recipient used to click or open message
                         mx_server:
                           type: string
-                          description: For example mx.gmail.com
+                          description: The MX server that received the email. For
+                            example, mx.gmail.com
                       required:
                       - event_name
                       - processed
-                      - url
                       - bounce_type
                       - http_user_agent
                       - mx_server
-                      example:
-                        event_name: bounced
-                        processed: '2017-10-13T18:56:21Z'
-                        reason: some reason
-                        url: http://3LX,MU}N=B8'd,K}>bEma{l~!ad%peIF}y>qHfLPWQ$l9b\!6.1H?$Z9H"il-_gZD>/JPYsGqH4x4_3v090TCtnFalXGFiAdooDxgrDAYNXShUywSxwYr8gKeyc/4sal4VJ3IxEWsG74V5MYQ0mz27jhy7n5DHsUtApQ6zXHS13uO5vYBlJHpJRfuT6/F5nIpkHre2w3eTtN7M6pg9V5stjnnsavKkzQxyTv15CMSDLFwR_BTZwofhWpyBU7B9ypYL79vT97N3LDZyoaM/fNsOLPIqfGBer_Mx9_StergbQYANyOmOSjR6pZof01ky/ZcNDhpu3CkSl4MTtQ3NMCX780pOKQ5SYIPigyvz9IC9WtrCNcOkTxdOPdY0_4MJU4EuTTPmGvO/14KaJCDjIjgrbIqpzuUEL5mET0t2VeVlwvtnOnlHaBE8sic20ze2E0Xt3ETqXyzVJRjLDKh/LWkW8OVp_xkLBCCW7LQngRukKcOiWjMXeCEhYI9HoZ0RsMEWZC8KzRaHc4OI0uXPD4M9pav1LGrI/_0t_RnBnfnqGKsBJr0kdQi/Y6QN_aeawIqX5hDNIU3MF/wWKVWLS0ZFbDfK6KVv5oAid83EpwKoazAMA8MTfEXvHQLO7k7XYWX1Il3eGXL6/wCA96I1SOabzJkZHo2HsFpIC/VBk52Lnpp0xtDH/OCdlQ5e4PpxXQeklp70LPOndr7QKSYEQNUc48n36ixvTjhgpgO8wHsFFYqGcuBMHg9oaCARppQomiQDWYuVPVDynJHdsM1_gWl4/NSs8Y9PL7DrQXOu0UiFRRE0TUsvgqyUgJzlGjUnRziyYeROO75D0K_3aTtbGbCmhaxecos40a1w0PDCNkFp1W/iHwY7922drhsoM6ShwqqwGpAh5HLuU6Q5gqyckeai6YN7HCh9DdHPhhJcatgtMHZDKfQUBVt9ecUlDgiCFF_OnRX/GpzttcsL8E2FoXL9_eAWvSqjodROqx7MZCA/ORdnR/IssPCYP1kTHTIL5mZxv4UGEpyNjUzt4GdSJJTm0nztltWDYX8_Ezl2JvpLVnGVTJxobb4yQIJhe3n64khbOFyFLKHWEniIolm/AxpZQYmseWlVqrIz3YXU59XaSbTTrdCHNhvwF1ogXiiggN6TZ2B3QY_mBEtAp/SD0ONPVqEUkTNAFWTgnnlv6ZIMdMbTw5uZwtFRlB7qDvQouml9kujGmRu6k7zZMTOwWowRNtpboLUcL2NzkVgK6N1Zi2vq/Nt4NJvM5_l1dpIIbwJv_CIcZQZOqPtRWULa2iVxfmJJQaqgLQPwSHQH1zuRJMhraEsPjqVQRC0pZpSt/24VBDN8y31Ye/y_ekWxMdZCvr978C/WrdcTi29kxjJLyT9BII7BsgT5vLuI2l7ntqRAhAUWMs/h9JR0i8RbX5OfB46q41/TfmSdgi97bCR2HfgflyypXwKhRfKYU2MVpu2Dd90WQUlm7hZV8dSfGusuMj/nPMpRVWcbnvlAdsehJCPbLv6n4qdLSPeoMBo32acAGgu1BwBG8JsBgbH43yYi5X7UdGRWKqm_ZbqaDEKH3ncU/uA8EOJb41VfGho4LUeOi1IeYwVAhFEyO6YbteYZecEubrNFZrWWjZUqhzouzY95TeWU8E4StCXVPKlYPiFiwUSX20kG0lVtDbAy/7u4f4x0cYlFOvI1UN1qoOExmNxnxzQQFeM5exWfW2JrRXq5e0UdAJr4q2o9Y_0WaGfhL/nP6Ei06YajDKr11dK5H0LX/9CGTC37HFZeopyopzP_7fvGFkqIRoGTS48pLaIFz3gwpQNlWXUFCsd/PnRlsqJ3SBQSgp_AQe2cP6iBNy2bJI8lkxwY5YVDDdjxusuCcafdjfs2aUa/4tr_iMnNBnd27GxjQI28_JGJlfbOaajVJOxuPMT4ELpYCfPiFjdSbJyE0/gCwtj0rgDKSLWJnOPJ5TAJ935gCqeIsBhOhfcZX413GdilBZRRYEjCVKfOuWzHZ3GW/8yjyk5e_WMNv5F6xggl07w90DBwpx/Q/iWfncqMuSfoeFeqHQkDL9F5W19j1cGuAcyfIYMAXztHXpgTKh9vZcsLYC7LcgKr4FQj3JjEvtnDG2PjcMjGF/MnbCRCz22Ho410_vE9M1Hpq0wdk_i5DbZKNoSwlPgey9URkpuX146TcDdsx_VWDenCepY5HwMr9CPOY9hzUs/c5AWeUMXk/gvsI81Jkv5rHpEnNBUZXYzfqkwQfffhmrc/StLCtzRRlja8dpsEWdkzoKR9Kdxq1qAs5f0sdrGjVRLTT_s1Q2P59zhA/QmS4bubi64cYot3gSIgdNnkjA2GjCp1ETVa548_U9B6boTKDVmaKJlVIDvqL84RC3WI7Er/8opi2lZ48W83Ur47BRh38oOnI0agrCyZz8bp1w_gfVRlSO8PS0i/l_/qxq5xpLbhPkdxVoyZVsNAZchfnmkIHyIk5IK6EUDXdMR21y6OvKW50ZbooAtk9ymynBj4dAYMsd25RV7FE1I1vRTsiDw52/.E5WC0Ymo2zn.qelSbhzr-4laArYiWP.dwJB6qm_6rs0Rm5UXYaYtUNbh76_jJp_X1xQUCDSgbr2KOkDU0"Q/-4dV"Yk3QGg[(O86=Pf"e17K4'r{)kicofHSXcMmP@>VF^`~4j4F*L/1]tD+Lw!WI!@]*OZm6C`M$u96}*O<U;_cZ84k.|nIqpAaeiroItOenDBL
-                        bounce_type: soft
-                        http_user_agent: in tempor ex dolore est
-                        mx_server: quis proident
                   originating_ip:
                     type: string
                     format: ipv4
@@ -475,32 +326,27 @@ paths:
                   unique_args:
                     type: string
                     default: 'Null'
-                    description: JSON hash of arbitrary key-value pairs
+                    description: JSON hash of key-value pairs associated with the
+                      message.
                   outbound_ip:
                     type: string
-                    description: IP used to send to the remote MTA. Used by UI to
-                      display IP in detailed view
+                    description: IP used to send to the remote Mail Transfer Agent.
                     format: ipv4
                   outbound_ip_type:
                     type: string
                     description: Whether or not the outbound IP is dedicated vs shared
-                    $ref: '#/components/schemas/Outbound_ip_type1'
+                    $ref: '#/components/schemas/OutboundIpType'
                 required:
-                - from_email
-                - msg_id
-                - subject
-                - to_email
-                - status
-                - template_id
-                - asm_group_id
+                - outbound_ip_type
                 - teammate
-                - api_key_id
+                - asm_group_id
+                - outbound_ip
+                - template_id
                 - events
                 - originating_ip
-                - categories
                 - unique_args
-                - outbound_ip
-                - outbound_ip_type
+                - categories
+                - api_key_id
                 example:
                   from_email: test@test.com
                   msg_id: in aliquip id aliqua
@@ -845,7 +691,7 @@ components:
       - processed
       - delivered
       - not_delivered
-    Event_name:
+    EventName:
       type: string
       enum:
       - bounced
@@ -859,12 +705,12 @@ components:
       - unsubscribe
       - group_unsubscribe
       - group_resubscribe
-    Bounce_type:
+    BounceType:
       type: string
       enum:
       - soft
       - hard
-    Outbound_ip_type:
+    OutboundIpType:
       type: string
       enum:
       - dedicated
@@ -875,7 +721,7 @@ components:
       - processed
       - not_delivered
       - delivered
-    Event_name1:
+    EventName1:
       type: string
       enum:
       - bounced
@@ -889,12 +735,12 @@ components:
       - unsubscribe
       - group_unsubscribe
       - group_resubscribe
-    Bounce_type1:
+    BounceType1:
       type: string
       enum:
       - soft
       - hard
-    Outbound_ip_type1:
+    OutboundIpType1:
       type: string
       enum:
       - dedicated

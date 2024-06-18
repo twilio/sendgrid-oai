@@ -602,7 +602,7 @@
                     "type": "string",
                     "description": "File type for export file. Choose from `json` or `csv`.",
                     "default": "csv",
-                    "$ref": "#/components/schemas/File_type"
+                    "$ref": "#/components/schemas/FileType"
                   },
                   "max_file_size": {
                     "description": "The maximum size of an export file in MB. Note that when this option is specified, multiple output files may be returned from the export.",
@@ -923,7 +923,7 @@
                   "file_type": {
                     "type": "string",
                     "description": "Upload file type.",
-                    "$ref": "#/components/schemas/File_type1"
+                    "$ref": "#/components/schemas/FileType1"
                   },
                   "field_mappings": {
                     "type": "array",
@@ -2068,14 +2068,14 @@
           }
         }
       },
-      "File_type": {
+      "FileType": {
         "type": "string",
         "enum": [
           "csv",
           "json"
         ]
       },
-      "File_type1": {
+      "FileType1": {
         "type": "string",
         "enum": [
           "csv"

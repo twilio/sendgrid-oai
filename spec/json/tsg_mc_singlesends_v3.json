@@ -1464,7 +1464,7 @@
           "winner_criteria": {
             "type": "string",
             "description": "How the winner will be decided",
-            "$ref": "#/components/schemas/Winner_criteria"
+            "$ref": "#/components/schemas/WinnerCriteria"
           },
           "test_percentage": {
             "type": "integer",
@@ -1582,7 +1582,7 @@
           "content"
         ]
       },
-      "Winner_criteria": {
+      "WinnerCriteria": {
         "type": "string",
         "enum": [
           "open",

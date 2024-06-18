@@ -1199,10 +1199,165 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/AuthenticatedDomain"
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "The ID of the authenticated domain."
+                      },
+                      "user_id": {
+                        "type": "number",
+                        "description": "The ID of the user that this domain is associated with."
+                      },
+                      "subdomain": {
+                        "type": "string",
+                        "description": "The subdomain to use for this authenticated domain."
+                      },
+                      "domain": {
+                        "type": "string",
+                        "description": "The domain to be authenticated."
+                      },
+                      "username": {
+                        "type": "string",
+                        "description": "The username that this domain will be associated with."
+                      },
+                      "ips": {
+                        "type": "array",
+                        "description": "The IPs to be included in the custom SPF record for this authenticated domain.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "custom_spf": {
+                        "type": "boolean",
+                        "description": "Indicates whether this authenticated domain uses custom SPF."
+                      },
+                      "default": {
+                        "type": "boolean",
+                        "description": "Indicates if this is the default authenticated domain."
+                      },
+                      "legacy": {
+                        "type": "boolean",
+                        "description": "Indicates if this authenticated domain was created using the legacy whitelabel tool. If it is a legacy whitelabel, it will still function, but you'll need to create a new authenticated domain if you need to update it."
+                      },
+                      "automatic_security": {
+                        "type": "boolean",
+                        "description": "Indicates if this authenticated domain uses automated security."
+                      },
+                      "valid": {
+                        "type": "boolean",
+                        "description": "Indicates if this is a valid authenticated domain."
+                      },
+                      "dns": {
+                        "type": "object",
+                        "description": "The DNS records used to authenticate the sending domain.",
+                        "required": [
+                          "mail_cname",
+                          "dkim1",
+                          "dkim2"
+                        ],
+                        "properties": {
+                          "mail_cname": {
+                            "type": "object",
+                            "description": "The CNAME for your sending domain that points to sendgrid.net.",
+                            "required": [
+                              "valid",
+                              "type",
+                              "host",
+                              "data"
+                            ],
+                            "properties": {
+                              "valid": {
+                                "type": "boolean",
+                                "description": "Indicates if this is a valid CNAME."
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "The type of DNS record."
+                              },
+                              "host": {
+                                "type": "string",
+                                "description": "The domain that this CNAME is created for.",
+                                "format": "hostname"
+                              },
+                              "data": {
+                                "type": "string",
+                                "description": "The CNAME record."
+                              }
+                            }
+                          },
+                          "dkim1": {
+                            "type": "object",
+                            "description": "A DNS record.",
+                            "required": [
+                              "valid",
+                              "type",
+                              "host",
+                              "data"
+                            ],
+                            "properties": {
+                              "valid": {
+                                "type": "boolean",
+                                "description": "Indicates if this is a valid DNS record."
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "The type of DNS record."
+                              },
+                              "host": {
+                                "type": "string",
+                                "description": "The domain that this DNS record was created for."
+                              },
+                              "data": {
+                                "type": "string",
+                                "description": "The DNS record."
+                              }
+                            }
+                          },
+                          "dkim2": {
+                            "type": "object",
+                            "description": "A DNS record.",
+                            "required": [
+                              "valid",
+                              "type",
+                              "host",
+                              "data"
+                            ],
+                            "properties": {
+                              "valid": {
+                                "type": "boolean",
+                                "description": "Indicates if this is a valid DNS record."
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "The type of DNS record."
+                              },
+                              "host": {
+                                "type": "string",
+                                "description": "The domain that this DNS record was created for."
+                              },
+                              "data": {
+                                "type": "string",
+                                "description": "The DNS record."
+                              }
+                            }
+                          }
+                        }
                       }
+                    },
+                    "required": [
+                      "automatic_security",
+                      "username",
+                      "legacy",
+                      "default",
+                      "domain",
+                      "ips",
+                      "valid",
+                      "custom_spf",
+                      "dns",
+                      "user_id",
+                      "subdomain",
+                      "id"
                     ]
                   }
                 },
@@ -1682,35 +1837,185 @@
             "schema": {
               "type": "array",
               "items": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AuthenticatedDomain"
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "description": "The ID of the authenticated domain."
                   },
-                  {
+                  "user_id": {
+                    "type": "number",
+                    "description": "The ID of the user that this domain is associated with."
+                  },
+                  "subdomain": {
+                    "type": "string",
+                    "description": "The subdomain to use for this authenticated domain."
+                  },
+                  "domain": {
+                    "type": "string",
+                    "description": "The domain to be authenticated."
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "The username that this domain will be associated with."
+                  },
+                  "ips": {
+                    "type": "array",
+                    "description": "The IPs to be included in the custom SPF record for this authenticated domain.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "custom_spf": {
+                    "type": "boolean",
+                    "description": "Indicates whether this authenticated domain uses custom SPF."
+                  },
+                  "default": {
+                    "type": "boolean",
+                    "description": "Indicates if this is the default authenticated domain."
+                  },
+                  "legacy": {
+                    "type": "boolean",
+                    "description": "Indicates if this authenticated domain was created using the legacy whitelabel tool. If it is a legacy whitelabel, it will still function, but you'll need to create a new authenticated domain if you need to update it."
+                  },
+                  "automatic_security": {
+                    "type": "boolean",
+                    "description": "Indicates if this authenticated domain uses automated security."
+                  },
+                  "valid": {
+                    "type": "boolean",
+                    "description": "Indicates if this is a valid authenticated domain."
+                  },
+                  "dns": {
                     "type": "object",
+                    "description": "The DNS records used to authenticate the sending domain.",
+                    "required": [
+                      "mail_cname",
+                      "dkim1",
+                      "dkim2"
+                    ],
                     "properties": {
-                      "subusers": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "user_id": {
-                              "type": "integer",
-                              "description": "The ID of the subuser that this authenticated domain will be associated with."
-                            },
-                            "username": {
-                              "type": "string",
-                              "description": "The username of the subuser that this authenticated domain is associated with."
-                            }
+                      "mail_cname": {
+                        "type": "object",
+                        "description": "The CNAME for your sending domain that points to sendgrid.net.",
+                        "required": [
+                          "valid",
+                          "type",
+                          "host",
+                          "data"
+                        ],
+                        "properties": {
+                          "valid": {
+                            "type": "boolean",
+                            "description": "Indicates if this is a valid CNAME."
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "The type of DNS record."
+                          },
+                          "host": {
+                            "type": "string",
+                            "description": "The domain that this CNAME is created for.",
+                            "format": "hostname"
+                          },
+                          "data": {
+                            "type": "string",
+                            "description": "The CNAME record."
                           }
                         }
                       },
-                      "last_validation_attempt_at": {
-                        "type": "integer",
-                        "description": "A Unix epoch timestamp representing the last time of a validation attempt."
+                      "dkim1": {
+                        "type": "object",
+                        "description": "A DNS record.",
+                        "required": [
+                          "valid",
+                          "type",
+                          "host",
+                          "data"
+                        ],
+                        "properties": {
+                          "valid": {
+                            "type": "boolean",
+                            "description": "Indicates if this is a valid DNS record."
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "The type of DNS record."
+                          },
+                          "host": {
+                            "type": "string",
+                            "description": "The domain that this DNS record was created for."
+                          },
+                          "data": {
+                            "type": "string",
+                            "description": "The DNS record."
+                          }
+                        }
+                      },
+                      "dkim2": {
+                        "type": "object",
+                        "description": "A DNS record.",
+                        "required": [
+                          "valid",
+                          "type",
+                          "host",
+                          "data"
+                        ],
+                        "properties": {
+                          "valid": {
+                            "type": "boolean",
+                            "description": "Indicates if this is a valid DNS record."
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "The type of DNS record."
+                          },
+                          "host": {
+                            "type": "string",
+                            "description": "The domain that this DNS record was created for."
+                          },
+                          "data": {
+                            "type": "string",
+                            "description": "The DNS record."
+                          }
+                        }
                       }
                     }
+                  },
+                  "subusers": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "user_id": {
+                          "type": "integer",
+                          "description": "The ID of the subuser that this authenticated domain will be associated with."
+                        },
+                        "username": {
+                          "type": "string",
+                          "description": "The username of the subuser that this authenticated domain is associated with."
+                        }
+                      }
+                    }
+                  },
+                  "last_validation_attempt_at": {
+                    "type": "integer",
+                    "description": "A Unix epoch timestamp representing the last time of a validation attempt."
                   }
+                },
+                "required": [
+                  "automatic_security",
+                  "username",
+                  "legacy",
+                  "default",
+                  "domain",
+                  "ips",
+                  "valid",
+                  "custom_spf",
+                  "dns",
+                  "user_id",
+                  "subdomain",
+                  "id"
                 ]
               },
               "example": [

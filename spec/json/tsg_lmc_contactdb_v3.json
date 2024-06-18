@@ -3694,20 +3694,22 @@
       },
       "ContactdbCustomFieldId2xx": {
         "title": "ContactDB Custom field schema with ID.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactdbCustomField"
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the field"
           },
-          {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "number",
-                "description": "The ID of the custom field."
-              }
-            }
+          "type": {
+            "type": "string",
+            "description": "The type of the field.",
+            "$ref": "#/components/schemas/Type"
+          },
+          "id": {
+            "type": "number",
+            "description": "The ID of the custom field."
           }
-        ]
+        }
       },
       "ContactdbList2xx": {
         "title": "ContactDB lists",
@@ -3739,21 +3741,27 @@
       },
       "ContactdbCustomFieldIdValue": {
         "title": "ContactDB Custom field schema.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactdbCustomFieldId2xx"
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the field"
           },
-          {
-            "type": "object",
-            "properties": {
-              "value": {
-                "description": "The value of this recipient's custom field",
-                "nullable": true,
-                "type": "string"
-              }
-            }
+          "type": {
+            "type": "string",
+            "description": "The type of the field.",
+            "$ref": "#/components/schemas/Type"
+          },
+          "id": {
+            "type": "number",
+            "description": "The ID of the custom field."
+          },
+          "value": {
+            "description": "The value of this recipient's custom field",
+            "nullable": true,
+            "type": "string"
           }
-        ]
+        }
       },
       "ContactdbRecipient200": {
         "title": "ContactDB: Recipient",
@@ -3933,7 +3941,7 @@
           },
           "and_or": {
             "type": "string",
-            "$ref": "#/components/schemas/And_or"
+            "$ref": "#/components/schemas/AndOr"
           }
         },
         "required": [
@@ -3998,22 +4006,36 @@
       },
       "ContactdbSegmentsId200": {
         "title": "ContactDB:: Segments with ID",
-        "allOf": [
-          {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "number",
-                "description": "The ID of the segment."
-              }
-            },
-            "required": [
-              "id"
-            ]
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The ID of the segment."
           },
-          {
-            "$ref": "#/components/schemas/ContactdbSegments"
+          "name": {
+            "type": "string",
+            "description": "The name of this segment."
+          },
+          "list_id": {
+            "type": "integer",
+            "description": "The list id from which to make this segment. Not including this ID will mean your segment is created from the main contactdb rather than a list."
+          },
+          "conditions": {
+            "type": "array",
+            "description": "The conditions for a recipient to be included in this segment.",
+            "items": {
+              "$ref": "#/components/schemas/ContactdbSegmentsConditions"
+            }
+          },
+          "recipient_count": {
+            "type": "number",
+            "description": "The count of recipients in this list. This is not included on creation of segments."
           }
+        },
+        "required": [
+          "conditions",
+          "name",
+          "id"
         ]
       },
       "ErrorResponse": {
@@ -4071,7 +4093,7 @@
           "contains"
         ]
       },
-      "And_or": {
+      "AndOr": {
         "type": "string",
         "enum": [
           "and",

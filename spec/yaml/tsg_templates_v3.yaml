@@ -455,12 +455,6 @@ components:
   schemas:
     TransactionalTemplate:
       title: 'Transactional Templates: Template'
-      allOf:
-      - $ref: '#/components/schemas/TransactionalTemplatesTemplateLean'
-      - type: object
-        properties:
-          warning:
-            $ref: '#/components/schemas/TransactionalTemplateWarning'
       example:
         id: 33feeff2-5069-43fe-8853-428651e5be79
         name: example_name
@@ -468,17 +462,97 @@ components:
         warning:
           message: Sample warning message
         generation: legacy
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the transactional template.
+          minLength: 36
+          maxLength: 36
+          format: uuid
+        name:
+          type: string
+          description: The name for the transactional template.
+          maxLength: 100
+        generation:
+          type: string
+          description: Defines the generation of the template.
+          $ref: '#/components/schemas/Generation1'
+        'updated_at ':
+          type: string
+          description: The date and time that this transactional template version
+            was updated.
+          pattern: ^(\d{4}-\d{2}-\d{2}) ((\d{2}):(\d{2}):(\d{2}))$
+        versions:
+          type: array
+          description: The different versions of this transactional template.
+          items:
+            $ref: '#/components/schemas/TransactionalTemplatesVersionOutputLean'
+        warning:
+          $ref: '#/components/schemas/TransactionalTemplateWarning'
+      required:
+      - name
+      - id
+      - generation
+      - 'updated_at '
     TransactionalTemplateVersionOutput:
       title: 'Transactional Templates: Version Output'
-      allOf:
-      - type: object
-        properties:
-          warnings:
-            type: array
-            items:
-              $ref: '#/components/schemas/TransactionalTemplateWarning'
-      - $ref: '#/components/schemas/TransactionalTemplateVersionCreate'
-      - $ref: '#/components/schemas/TransactionalTemplatesVersionOutputLean'
+      type: object
+      properties:
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionalTemplateWarning'
+        active:
+          type: integer
+          description: Set the version as the active version associated with the template.
+            Only one version of a template can be active. The first version created
+            for a template will automatically be set to Active.
+          $ref: '#/components/schemas/Active1'
+        name:
+          type: string
+          description: Name of the transactional template version.
+          maxLength: 100
+        html_content:
+          type: string
+          description: The HTML content of the Design.
+        plain_content:
+          type: string
+          description: Plain text content of the Design.
+        generate_plain_content:
+          type: boolean
+          description: If true, plain_content is always generated from html_content.
+            If false, plain_content is not altered.
+          default: true
+        subject:
+          type: string
+          description: Subject of the new transactional template version.
+          maxLength: 255
+        editor:
+          type: string
+          description: The editor used in the UI.
+          $ref: '#/components/schemas/Editor1'
+        test_data:
+          type: string
+          description: For dynamic templates only, the mock json data that will be
+            used for template preview and test sends.
+        id:
+          type: string
+          description: ID of the transactional template version.
+          format: uuid
+        template_id:
+          type: string
+          description: ID of the transactional template.
+        updated_at:
+          type: string
+          description: The date and time that this transactional template version
+            was updated.
+        thumbnail_url:
+          type: string
+          description: A Thumbnail preview of the template's html content.
+      required:
+      - name
+      - subject
     TransactionalTemplateVersionCreate:
       title: 'Transactional Templates: Version Create'
       type: object

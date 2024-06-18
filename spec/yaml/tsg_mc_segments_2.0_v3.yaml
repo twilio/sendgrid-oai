@@ -120,6 +120,8 @@ paths:
         required: false
         schema:
           type: array
+          items:
+            type: string
       - name: parent_list_ids
         in: query
         description: A comma separated list up to 50 in size, to filter segments on.  Only

@@ -242,7 +242,7 @@
                   "file_type": {
                     "type": "string",
                     "description": "The format of the file you wish to upload.",
-                    "$ref": "#/components/schemas/File_type"
+                    "$ref": "#/components/schemas/FileType"
                   }
                 },
                 "required": [
@@ -635,7 +635,7 @@
           "Invalid"
         ]
       },
-      "File_type": {
+      "FileType": {
         "type": "string",
         "enum": [
           "csv",

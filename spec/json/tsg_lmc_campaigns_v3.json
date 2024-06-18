@@ -1608,25 +1608,87 @@
       },
       "Campaigns2xx": {
         "title": "Campaigns Response",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/PostCampaignsRequest"
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The display title of your campaign. This will be viewable by you in the Marketing Campaigns UI."
           },
-          {
-            "type": "object",
-            "properties": {
-              "status": {
-                "type": "string",
-                "description": "The status of your campaign."
-              },
-              "id": {
-                "type": "integer"
-              }
+          "subject": {
+            "description": "The subject of your campaign that your recipients will see.",
+            "nullable": true,
+            "type": "string"
+          },
+          "sender_id": {
+            "description": "The ID of the \"sender\" identity that you have created. Your recipients will see this as the \"from\" on your marketing emails.",
+            "nullable": true,
+            "type": "integer"
+          },
+          "list_ids": {
+            "description": "The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs",
+            "items": {
+              "type": "integer"
             },
-            "required": [
-              "status"
-            ]
+            "nullable": true,
+            "type": "array"
+          },
+          "segment_ids": {
+            "description": "The segment IDs that you are sending this list to. You can have both segment IDs and list IDs. Segments are limited to 10 segment IDs.",
+            "items": {
+              "type": "integer"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "categories": {
+            "description": "The categories you would like associated to this campaign.",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "suppression_group_id": {
+            "description": "The suppression group that this marketing email belongs to, allowing recipients to opt-out of emails of this type.",
+            "nullable": true,
+            "type": "integer"
+          },
+          "custom_unsubscribe_url": {
+            "description": "This is the url of the custom unsubscribe page that you provide for customers to unsubscribe from your suppression groups.",
+            "nullable": true,
+            "type": "string"
+          },
+          "ip_pool": {
+            "description": "The pool of IPs that you would like to send this email from.",
+            "nullable": true,
+            "type": "string"
+          },
+          "html_content": {
+            "description": "The HTML of your marketing email.",
+            "nullable": true,
+            "type": "string"
+          },
+          "plain_content": {
+            "description": "The plain text content of your emails.",
+            "nullable": true,
+            "type": "string"
+          },
+          "editor": {
+            "type": "string",
+            "description": "The editor used in the UI.",
+            "$ref": "#/components/schemas/Editor"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of your campaign."
+          },
+          "id": {
+            "type": "integer"
           }
+        },
+        "required": [
+          "title",
+          "status"
         ]
       },
       "ErrorResponse": {

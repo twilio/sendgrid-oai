@@ -213,19 +213,29 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/List"
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The generated ID for your list.",
+                      "minLength": 36,
+                      "maxLength": 36
                     },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "contact_sample": {
-                          "$ref": "#/components/schemas/ContactDetails"
-                        }
-                      }
+                    "name": {
+                      "type": "string",
+                      "description": "The name you gave your list."
+                    },
+                    "contact_count": {
+                      "type": "integer",
+                      "description": "The number of contacts currently stored on the list."
+                    },
+                    "_metadata": {
+                      "$ref": "#/components/schemas/SelfMetadata"
+                    },
+                    "contact_sample": {
+                      "$ref": "#/components/schemas/ContactDetails"
                     }
-                  ]
+                  }
                 },
                 "examples": {
                   "response": {

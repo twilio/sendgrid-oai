@@ -188,30 +188,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/SuppressionGroupRequestBaseProps"
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "The name of your suppression group. Required when creating a group.",
+                      "maxLength": 30
                     },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "description": "The ID of the suppression group."
-                        },
-                        "unsubscribes": {
-                          "type": "integer",
-                          "description": "The number of unsubscribes, or suppressions, in this group."
-                        },
-                        "last_email_sent_at": {
-                          "nullable": true,
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "id"
-                      ]
+                    "description": {
+                      "type": "string",
+                      "description": "A brief description of your suppression group. Required when creating a group.",
+                      "maxLength": 100
+                    },
+                    "is_default": {
+                      "type": "boolean",
+                      "description": "Indicates if you would like this to be your default suppression group."
+                    },
+                    "id": {
+                      "type": "integer",
+                      "description": "The ID of the suppression group."
+                    },
+                    "unsubscribes": {
+                      "type": "integer",
+                      "description": "The number of unsubscribes, or suppressions, in this group."
+                    },
+                    "last_email_sent_at": {
+                      "nullable": true,
+                      "type": "string"
                     }
+                  },
+                  "required": [
+                    "id"
                   ]
                 },
                 "examples": {
@@ -247,15 +254,27 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SuppressionGroupRequestBaseProps"
-                  }
-                ],
                 "example": {
                   "id": 103,
                   "name": "Item Suggestions",
                   "description": "Suggestions for items our users might like."
+                },
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of your suppression group. Required when creating a group.",
+                    "maxLength": 30
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "A brief description of your suppression group. Required when creating a group.",
+                    "maxLength": 100
+                  },
+                  "is_default": {
+                    "type": "boolean",
+                    "description": "Indicates if you would like this to be your default suppression group."
+                  }
                 }
               }
             }

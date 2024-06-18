@@ -330,29 +330,26 @@
     "schemas": {
       "ScheduledSendStatus": {
         "title": "User Scheduled Send status",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/MailBatchId"
-          },
-          {
-            "type": "object",
-            "description": "The status of the scheduled send.",
-            "properties": {
-              "status": {
-                "type": "string",
-                "description": "The status of the scheduled send.",
-                "$ref": "#/components/schemas/Status2"
-              }
-            },
-            "required": [
-              "status"
-            ]
-          }
-        ],
         "example": {
           "batch_id": "HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi",
           "status": "pause"
-        }
+        },
+        "type": "object",
+        "properties": {
+          "batch_id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-\\_]"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the scheduled send.",
+            "$ref": "#/components/schemas/Status2"
+          }
+        },
+        "required": [
+          "batch_id",
+          "status"
+        ]
       },
       "MailBatchId": {
         "title": "Mail Batch ID",

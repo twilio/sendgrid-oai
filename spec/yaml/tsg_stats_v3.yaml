@@ -2070,39 +2070,36 @@ components:
     AdvancedStatsMailboxProvider:
       title: 'Stats: Advanced Stats for Mailbox Provider'
       description: The individual events and their stats.
-      allOf:
-      - $ref: '#/components/schemas/AdvancedStatsClicksOpens'
-      - type: object
-        description: The individual events and their stats.
-        properties:
-          blocks:
-            type: integer
-            description: The number of emails that were not allowed to be delivered
-              by ISPs.
-          bounces:
-            type: integer
-            description: The number of emails that bounced instead of being delivered.
-          deferred:
-            type: integer
-            description: The number of emails that temporarily could not be delivered.
-          delivered:
-            type: integer
-            description: The number of emails SendGrid was able to confirm were actually
-              delivered to a recipient.
-          drops:
-            type: integer
-            description: The number of emails that were not delivered due to the recipient
-              email address being on a suppression list.
-          requests:
-            type: integer
-            description: The number of emails that were requested to be delivered.
-          processed:
-            type: integer
-            description: Requests from your website, application, or mail client via
-              SMTP Relay or the Web API that SendGrid processed.
-          spam_reports:
-            type: integer
-            description: The number of recipients who marked your email as spam.
+      type: object
+      properties:
+        blocks:
+          type: integer
+          description: The number of emails that were not allowed to be delivered
+            by ISPs.
+        bounces:
+          type: integer
+          description: The number of emails that bounced instead of being delivered.
+        deferred:
+          type: integer
+          description: The number of emails that temporarily could not be delivered.
+        delivered:
+          type: integer
+          description: The number of emails SendGrid was able to confirm were actually
+            delivered to a recipient.
+        drops:
+          type: integer
+          description: The number of emails that were not delivered due to the recipient
+            email address being on a suppression list.
+        requests:
+          type: integer
+          description: The number of emails that were requested to be delivered.
+        processed:
+          type: integer
+          description: Requests from your website, application, or mail client via
+            SMTP Relay or the Web API that SendGrid processed.
+        spam_reports:
+          type: integer
+          description: The number of recipients who marked your email as spam.
     CategoryStats:
       title: 'Stats: Category Stats'
       type: object
@@ -2250,57 +2247,78 @@ components:
     AdvancedStatsClicksOpens:
       title: 'Stats: Advanced Stats with Clicks and Opens'
       description: The individual events and their stats.
-      allOf:
-      - $ref: '#/components/schemas/AdvancedStatsClicks'
-      - $ref: '#/components/schemas/AdvancedStatsOpens'
+      type: object
+      properties:
+        clicks:
+          type: integer
+          description: The number of links that were clicked in your emails.
+        unique_clicks:
+          type: integer
+          description: The number of unique recipients who clicked links in your emails.
+        opens:
+          type: integer
+          description: The total number of times your emails were opened by recipients.
+        unique_opens:
+          type: integer
+          description: The number of unique recipients who opened your emails.
     StatsAdvancedGlobalStats:
       title: 'Stats: Advanced Global Stats'
-      allOf:
-      - $ref: '#/components/schemas/AdvancedStatsClicksOpens'
-      - type: object
-        properties:
-          blocks:
-            type: integer
-            description: The number of emails that were not allowed to be delivered
-              by ISPs.
-          bounce_drops:
-            type: integer
-            description: The number of emails that were dropped because of a bounce.
-          bounces:
-            type: integer
-            description: The number of emails that bounced instead of being delivered.
-          deferred:
-            type: integer
-            description: 'The number of emails that temporarily could not be delivered. '
-          delivered:
-            type: integer
-            description: The number of emails SendGrid was able to confirm were actually
-              delivered to a recipient.
-          invalid_emails:
-            type: integer
-            description: The number of recipients who had malformed email addresses
-              or whose mail provider reported the address as invalid.
-          processed:
-            type: integer
-            description: Requests from your website, application, or mail client via
-              SMTP Relay or the API that SendGrid processed.
-          requests:
-            type: integer
-            description: The number of emails that were requested to be delivered.
-          spam_report_drops:
-            type: integer
-            description: The number of emails that were dropped due to a recipient
-              previously marking your emails as spam.
-          spam_reports:
-            type: integer
-            description: The number of recipients who marked your email as spam.
-          unsubscribe_drops:
-            type: integer
-            description: The number of emails dropped due to a recipient unsubscribing
-              from your emails.
-          unsubscribes:
-            type: integer
-            description: The number of recipients who unsubscribed from your emails.
+      type: object
+      properties:
+        clicks:
+          type: integer
+          description: The number of links that were clicked in your emails.
+        unique_clicks:
+          type: integer
+          description: The number of unique recipients who clicked links in your emails.
+        opens:
+          type: integer
+          description: The total number of times your emails were opened by recipients.
+        unique_opens:
+          type: integer
+          description: The number of unique recipients who opened your emails.
+        blocks:
+          type: integer
+          description: The number of emails that were not allowed to be delivered
+            by ISPs.
+        bounce_drops:
+          type: integer
+          description: The number of emails that were dropped because of a bounce.
+        bounces:
+          type: integer
+          description: The number of emails that bounced instead of being delivered.
+        deferred:
+          type: integer
+          description: 'The number of emails that temporarily could not be delivered. '
+        delivered:
+          type: integer
+          description: The number of emails SendGrid was able to confirm were actually
+            delivered to a recipient.
+        invalid_emails:
+          type: integer
+          description: The number of recipients who had malformed email addresses
+            or whose mail provider reported the address as invalid.
+        processed:
+          type: integer
+          description: Requests from your website, application, or mail client via
+            SMTP Relay or the API that SendGrid processed.
+        requests:
+          type: integer
+          description: The number of emails that were requested to be delivered.
+        spam_report_drops:
+          type: integer
+          description: The number of emails that were dropped due to a recipient previously
+            marking your emails as spam.
+        spam_reports:
+          type: integer
+          description: The number of recipients who marked your email as spam.
+        unsubscribe_drops:
+          type: integer
+          description: The number of emails dropped due to a recipient unsubscribing
+            from your emails.
+        unsubscribes:
+          type: integer
+          description: The number of recipients who unsubscribed from your emails.
     Schema:
       type: string
       enum:

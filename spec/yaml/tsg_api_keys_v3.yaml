@@ -391,15 +391,6 @@ components:
         name: Mail Send
     ApiKeyScopesResponse:
       title: API Key Name, ID, and Scopes
-      allOf:
-      - type: object
-        properties:
-          scopes:
-            type: array
-            description: The permissions this API Key has access to.
-            items:
-              type: string
-      - $ref: '#/components/schemas/ApiKeyResponse'
       example:
         api_key_id: qfTQ6KG0QBiwWdJ0-pCLCA
         name: Mail Send
@@ -416,6 +407,19 @@ components:
         - sender_verification_eligible
         - sender_verification_legacy
         - 2fa_required
+      type: object
+      properties:
+        scopes:
+          type: array
+          description: The permissions this API Key has access to.
+          items:
+            type: string
+        api_key_id:
+          type: string
+          description: 'The ID of your API Key. '
+        name:
+          type: string
+          description: The name of your API Key.
     ErrorResponse:
       type: object
       properties:

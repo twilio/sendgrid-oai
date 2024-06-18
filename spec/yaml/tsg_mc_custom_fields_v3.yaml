@@ -73,7 +73,7 @@ paths:
                   maxLength: 100
                 field_type:
                   type: string
-                  $ref: '#/components/schemas/Field_type'
+                  $ref: '#/components/schemas/FieldType'
               required:
               - name
               - field_type
@@ -86,12 +86,23 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                - $ref: '#/components/schemas/CustomFieldDefinitionsResponse'
-                - type: object
-                  properties:
-                    _metadata:
-                      $ref: '#/components/schemas/Metadata'
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 100
+                  field_type:
+                    type: string
+                    $ref: '#/components/schemas/FieldType2'
+                  _metadata:
+                    $ref: '#/components/schemas/Metadata'
+                required:
+                - name
+                - id
+                - field_type
               examples:
                 response:
                   value:
@@ -272,12 +283,23 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                - $ref: '#/components/schemas/CustomFieldDefinitionsResponse'
-                - type: object
-                  properties:
-                    _metadata:
-                      $ref: '#/components/schemas/Metadata'
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 100
+                  field_type:
+                    type: string
+                    $ref: '#/components/schemas/FieldType2'
+                  _metadata:
+                    $ref: '#/components/schemas/Metadata'
+                required:
+                - name
+                - id
+                - field_type
               examples:
                 response:
                   value:
@@ -354,7 +376,7 @@ components:
             maxLength: 100
           field_type:
             type: string
-            $ref: '#/components/schemas/Field_type1'
+            $ref: '#/components/schemas/FieldType1'
           read_only:
             type: boolean
             default: false
@@ -410,7 +432,7 @@ components:
           maxLength: 100
         field_type:
           type: string
-          $ref: '#/components/schemas/Field_type2'
+          $ref: '#/components/schemas/FieldType2'
       required:
       - id
       - name
@@ -419,19 +441,19 @@ components:
         id: a1_D
         name: custom_field_name
         field_type: Date
-    Field_type:
+    FieldType:
       type: string
       enum:
       - Text
       - Number
       - Date
-    Field_type1:
+    FieldType1:
       type: string
       enum:
       - Text
       - Number
       - Date
-    Field_type2:
+    FieldType2:
       type: string
       enum:
       - Text

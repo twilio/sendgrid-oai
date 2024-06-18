@@ -1733,7 +1733,7 @@
             "type": "string",
             "nullable": true,
             "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`, otherwise `null`.",
-            "$ref": "#/components/schemas/Reset_frequency"
+            "$ref": "#/components/schemas/ResetFrequency"
           },
           "remain": {
             "type": "integer",
@@ -1781,7 +1781,7 @@
           "reset_frequency": {
             "type": "string",
             "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`. Do _not_ include `reset_frequency` if you choose a reset `type` value of `unlimited` or `nonrecurring`.",
-            "$ref": "#/components/schemas/Reset_frequency1"
+            "$ref": "#/components/schemas/ResetFrequency1"
           },
           "total": {
             "type": "integer",
@@ -2204,7 +2204,7 @@
           "nonrecurring"
         ]
       },
-      "Reset_frequency": {
+      "ResetFrequency": {
         "type": "string",
         "enum": [
           "monthly",
@@ -2220,7 +2220,7 @@
           "nonrecurring"
         ]
       },
-      "Reset_frequency1": {
+      "ResetFrequency1": {
         "type": "string",
         "enum": [
           "monthly",

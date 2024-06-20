@@ -1,5 +1,12 @@
 {
   "name": "@twilio/sendgrid-oai",
+  "scripts": {
+    "lint": "spectral lint spec/*/*.*{json,yaml}",
+    "lint:api": "spectral lint spec/$npm_config_api",
+    "new": "node scripts/new-api.js",
+    "stoplight": "npx @stoplight/cli@6 push --ci-token ${STOPLIGHT_PROJECT_CI_TOKEN}",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "devDependencies": {
     "@stoplight/spectral-cli": "^6.1.0"
   }

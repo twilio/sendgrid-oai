@@ -47,7 +47,7 @@ servers:
 paths:
   /v3/validations/email:
     post:
-      operationId: PostValidationsEmail
+      operationId: ValidateEmail
       summary: Validate an email
       tags:
       - Email Address Validation
@@ -195,7 +195,7 @@ paths:
                       ip_address: 192.168.1.1
   /v3/validations/email/jobs:
     put:
-      operationId: PutValidationsEmailJobs
+      operationId: ListEmailJobForVerification
       summary: Request a presigned URL and headers for Bulk Email Address Validation
         list upload.
       tags:
@@ -223,7 +223,7 @@ paths:
                 file_type:
                   type: string
                   description: The format of the file you wish to upload.
-                  $ref: '#/components/schemas/File_type'
+                  $ref: '#/components/schemas/FileType'
               required:
               - file_type
               example:
@@ -317,7 +317,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetValidationsEmailJobsJobId
+      operationId: GetEmailJobForVerification
       summary: This request returns a single Bulk Email Validation Job.
       tags:
       - Bulk Email Address Validation
@@ -487,7 +487,7 @@ components:
       - Valid
       - Risky
       - Invalid
-    File_type:
+    FileType:
       type: string
       enum:
       - csv

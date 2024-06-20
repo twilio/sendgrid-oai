@@ -30,7 +30,7 @@ servers:
 paths:
   /v3/user/account:
     get:
-      operationId: GetUserAccount
+      operationId: ListAccount
       summary: Get a user's account information.
       tags:
       - Users API
@@ -66,7 +66,7 @@ paths:
                     type: paid
   /v3/user/credits:
     get:
-      operationId: GetUserCredits
+      operationId: ListCredit
       summary: Retrieve your credit balance
       tags:
       - Users API
@@ -130,7 +130,7 @@ paths:
                     reset_frequency: monthly
   /v3/user/email:
     get:
-      operationId: GetUserEmail
+      operationId: ListEmail
       summary: Retrieve your account email address
       tags:
       - Users API
@@ -157,7 +157,7 @@ paths:
                   value:
                     email: test@example.com
     put:
-      operationId: PutUserEmail
+      operationId: UpdateEmail
       summary: Update your account email address
       tags:
       - Users API
@@ -197,7 +197,7 @@ paths:
                     email: example@example.com
   /v3/user/password:
     put:
-      operationId: PutUserPassword
+      operationId: UpdatePassword
       summary: Update your password
       tags:
       - Users API
@@ -232,7 +232,7 @@ paths:
                 properties: {}
   /v3/user/profile:
     get:
-      operationId: GetUserProfile
+      operationId: ListProfile
       summary: Get a user's profile
       description: '**This endpoint allows you to retrieve your current profile details.**'
       tags:
@@ -307,7 +307,7 @@ paths:
                     website: http://www.sendgrid.com
                     zip: '92868'
     patch:
-      operationId: PatchUserProfile
+      operationId: UpdateProfile
       summary: Update a user's profile
       tags:
       - Users API
@@ -358,7 +358,7 @@ paths:
                       message: authorization required
   /v3/user/username:
     get:
-      operationId: GetUserUsername
+      operationId: ListUsername
       summary: Retrieve your username
       tags:
       - Users API
@@ -388,7 +388,7 @@ paths:
                     username: test_username
                     user_id: 1
     put:
-      operationId: PputUserUsername
+      operationId: UpdateUsername
       summary: Update your username
       tags:
       - Users API

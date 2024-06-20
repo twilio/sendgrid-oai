@@ -31,7 +31,7 @@ servers:
 paths:
   /v3/marketing/stats/automations:
     get:
-      operationId: GetMarketingStatsAutomations
+      operationId: ListAutomationStat
       summary: Get All Automation Stats
       tags:
       - Stats
@@ -87,7 +87,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetMarketingStatsAutomationsId
+      operationId: GetAutomationStat
       summary: Get Automation Stats by ID
       tags:
       - Stats
@@ -134,7 +134,7 @@ paths:
         type: string
         format: uuid
     get:
-      operationId: GetMarketingStatsAutomationsIdLinks
+      operationId: ListClickTrackingStat
       summary: Get Automation Click Tracking Stats by ID
       tags:
       - Stats
@@ -166,7 +166,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
   /v3/marketing/stats/automations/export:
     get:
-      operationId: GetMarketingStatsAutomationsExport
+      operationId: ExportAutomationStat
       summary: Export Single Send Stats
       tags:
       - Stats
@@ -215,7 +215,7 @@ paths:
           description: ''
   /v3/marketing/stats/singlesends:
     get:
-      operationId: GetMarketingStatsSinglesends
+      operationId: ListSingleSendStat
       summary: Get All Single Sends Stats
       tags:
       - Stats
@@ -268,7 +268,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetMarketingStatsSinglesendsId
+      operationId: GetSingleSendStat
       summary: Get Single Send Stats by ID
       tags:
       - Stats
@@ -312,7 +312,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetMarketingStatsSinglesendsIdLinks
+      operationId: ListSingleSendTrackingStat
       summary: Get Single Send Click Tracking Stats by ID
       tags:
       - Stats
@@ -345,7 +345,7 @@ paths:
                 type: object
   /v3/marketing/stats/singlesends/export:
     get:
-      operationId: GetMarketingStatsSinglesendsExport
+      operationId: ExportSingleSendStat
       summary: Export Single Send Stats
       tags:
       - Stats
@@ -498,7 +498,7 @@ components:
                 description: This is the A/B phase of the Single Send stat returned.
                   If the `group_by` parameter doesn't include `ab_phase` in the request,
                   then the value is "all".
-                $ref: '#/components/schemas/Ab_phase'
+                $ref: '#/components/schemas/AbPhase'
               aggregation:
                 type: string
                 description: This describes the time unit to which the stat is rolled
@@ -550,7 +550,7 @@ components:
                 description: This is the A/B phase of the Single Send stat returned.
                   If the `ab_phase` query parameter was not provided, it will return
                   `"all"`.
-                $ref: '#/components/schemas/Ab_phase1'
+                $ref: '#/components/schemas/AbPhase1'
               clicks:
                 type: integer
                 minimum: 1
@@ -673,13 +673,13 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
-    Ab_phase:
+    AbPhase:
       type: string
       enum:
       - send
       - test
       - all
-    Ab_phase1:
+    AbPhase1:
       type: string
       enum:
       - send

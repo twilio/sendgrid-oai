@@ -32,7 +32,7 @@
   "paths": {
     "/v3/teammates": {
       "post": {
-        "operationId": "PostTeammates",
+        "operationId": "InviteTeammate",
         "summary": "Invite teammate",
         "tags": [
           "Teammates"
@@ -157,7 +157,7 @@
         }
       },
       "get": {
-        "operationId": "GetTeammates",
+        "operationId": "ListTeammate",
         "summary": "Retrieve all teammates",
         "tags": [
           "Teammates"
@@ -214,7 +214,7 @@
                           "user_type": {
                             "type": "string",
                             "description": "Indicate the type of user: owner user, teammate admin user, or normal teammate",
-                            "$ref": "#/components/schemas/User_type"
+                            "$ref": "#/components/schemas/UserType"
                           },
                           "is_admin": {
                             "type": "boolean",
@@ -363,7 +363,7 @@
         }
       ],
       "get": {
-        "operationId": "GetTeammatesTeammateNameSubuserAccess",
+        "operationId": "ListSubuserByTemplate",
         "summary": "Get Teammate Subuser Access",
         "tags": [
           "Teammates"
@@ -407,7 +407,7 @@
                           "permission_type": {
                             "type": "string",
                             "description": "The level of access the Teammate has to the specified Subuser. This property value may be either `admin` or `restricted`. When is property is set to `restricted`, the Teammate has only the permissions assigned in the `scopes` property.",
-                            "$ref": "#/components/schemas/Permission_type"
+                            "$ref": "#/components/schemas/PermissionType"
                           },
                           "scopes": {
                             "type": "array",
@@ -633,7 +633,7 @@
         }
       ],
       "get": {
-        "operationId": "GetTeammatesUsername",
+        "operationId": "GetTeammate",
         "summary": "Retrieve specific teammate",
         "tags": [
           "Teammates"
@@ -676,7 +676,7 @@
                     "user_type": {
                       "type": "string",
                       "description": "Indicate the type of user: account owner, teammate admin user, or normal teammate",
-                      "$ref": "#/components/schemas/User_type1"
+                      "$ref": "#/components/schemas/UserType1"
                     },
                     "is_admin": {
                       "type": "boolean",
@@ -748,7 +748,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchTeammatesUsername",
+        "operationId": "UpdateTeammate",
         "summary": "Update teammate's permissions",
         "tags": [
           "Teammates"
@@ -826,7 +826,7 @@
                     "user_type": {
                       "type": "string",
                       "description": "Indicate the type of user: owner user, teammate admin user, or normal teammate",
-                      "$ref": "#/components/schemas/User_type2"
+                      "$ref": "#/components/schemas/UserType2"
                     },
                     "is_admin": {
                       "type": "boolean",
@@ -973,7 +973,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteTeammatesUsername",
+        "operationId": "DeleteTeammate",
         "summary": "Delete teammate",
         "tags": [
           "Teammates"
@@ -1031,7 +1031,7 @@
     },
     "/v3/teammates/pending": {
       "get": {
-        "operationId": "GetTeammatesPending",
+        "operationId": "ListPendingTeammate",
         "summary": "Retrieve all pending teammates",
         "tags": [
           "Teammates"
@@ -1127,7 +1127,7 @@
         }
       ],
       "delete": {
-        "operationId": "DeleteTeammatesPendingToken",
+        "operationId": "DeletePendingTeammate",
         "summary": "Delete pending teammate",
         "tags": [
           "Teammates"
@@ -1184,7 +1184,7 @@
         }
       ],
       "post": {
-        "operationId": "PostTeammatesPendingTokenResend",
+        "operationId": "ResendTeammateInvite",
         "summary": "Resend teammate invite",
         "tags": [
           "Teammates"
@@ -1284,7 +1284,7 @@
   },
   "components": {
     "schemas": {
-      "User_type": {
+      "UserType": {
         "type": "string",
         "enum": [
           "admin",
@@ -1292,14 +1292,14 @@
           "teammate"
         ]
       },
-      "Permission_type": {
+      "PermissionType": {
         "type": "string",
         "enum": [
           "admin",
           "restricted"
         ]
       },
-      "User_type1": {
+      "UserType1": {
         "type": "string",
         "enum": [
           "admin",
@@ -1307,7 +1307,7 @@
           "teammate"
         ]
       },
-      "User_type2": {
+      "UserType2": {
         "type": "string",
         "enum": [
           "admin",

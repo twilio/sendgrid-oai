@@ -29,7 +29,7 @@ servers:
 paths:
   /v3/ips:
     post:
-      operationId: PostIps
+      operationId: AddIp
       summary: Add IPs
       tags:
       - IP Addresses
@@ -124,7 +124,7 @@ paths:
                     - field: null
                       message: one or more subusers do not belong to this user
     get:
-      operationId: GetIps
+      operationId: ListIp
       summary: Retrieve all IP addresses
       tags:
       - IP Addresses
@@ -259,7 +259,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetIpsIpAddress
+      operationId: GetIp
       summary: Retrieve all IP pools an IP address belongs to
       tags:
       - IP Addresses
@@ -333,7 +333,7 @@ paths:
                     whitelabeled: true
   /v3/ips/assigned:
     get:
-      operationId: GetIpsAssigned
+      operationId: ListAssignedIp
       summary: Retrieve all assigned IPs
       tags:
       - IP Addresses
@@ -386,7 +386,7 @@ paths:
                     start_date: 1409616000
   /v3/ips/pools:
     post:
-      operationId: PostIpsPools
+      operationId: CreateIpPool
       summary: Create an IP pool
       tags:
       - IP Pools
@@ -422,7 +422,7 @@ paths:
                   value:
                     name: marketing
     get:
-      operationId: GetIpsPools
+      operationId: ListIpPool
       summary: Retrieve all IP pools
       tags:
       - IP Pools
@@ -451,7 +451,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetIpsPoolsPoolName
+      operationId: GetIpPool
       summary: Retrieve all the IPs in a specified pool
       tags:
       - IP Pools
@@ -508,7 +508,7 @@ paths:
                     - field: error
                       message: Unable to locate specified IPs Pool
     put:
-      operationId: PutIpsPoolsPoolName
+      operationId: UpdateIpPool
       summary: Rename an IP pool
       tags:
       - IP Pools
@@ -562,7 +562,7 @@ paths:
                     - field: null
                       message: ip pool not found
     delete:
-      operationId: DeleteIpsPoolsPoolName
+      operationId: DeleteIpPool
       summary: Delete an IP pool
       tags:
       - IP Pools
@@ -599,7 +599,7 @@ paths:
       schema:
         type: string
     post:
-      operationId: PostIpsPoolsPoolNameIps
+      operationId: AddIpToIpPool
       summary: Add an IP address to a pool
       tags:
       - IP Pools
@@ -702,7 +702,7 @@ paths:
       schema:
         type: string
     delete:
-      operationId: DeleteIpsPoolsPoolNameIpsIp
+      operationId: DeleteIpFromIpPool
       summary: Remove an IP address from a pool
       tags:
       - IP Pools
@@ -732,7 +732,7 @@ paths:
                     error: Unable to locate specified IPs Pool
   /v3/ips/remaining:
     get:
-      operationId: GetIpsRemaining
+      operationId: ListRemainingIpCount
       summary: Get remaining IPs count
       tags:
       - IP Addresses

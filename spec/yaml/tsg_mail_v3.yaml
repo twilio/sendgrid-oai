@@ -50,7 +50,7 @@ paths:
         for more information about pausing and cancelling a mail send.
 
         '
-      operationId: PostMailBatch
+      operationId: CreateMailBatch
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
@@ -87,7 +87,7 @@ paths:
         A batch ID does not need to be assigned to a send to be considered valid.
         A successful response means only that the batch ID has been created, but it
         does not indicate that the ID has been assigned to a send.'
-      operationId: GetMailBatchId
+      operationId: GetMailBatch
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
@@ -120,7 +120,7 @@ paths:
         and helper libraries to get you working with this endpoint even faster.
 
         '
-      operationId: PostMailSend
+      operationId: SendMail
       parameters:
       - $ref: '#/components/parameters/MailBodyCompression'
       requestBody:

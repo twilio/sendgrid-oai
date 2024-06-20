@@ -29,7 +29,7 @@ servers:
 paths:
   /v3/partners/accounts:
     get:
-      operationId: GetParenterAccounts
+      operationId: ListAccount
       summary: Get all accounts
       tags:
       - Account
@@ -74,7 +74,7 @@ paths:
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
     post:
-      operationId: PostPartnerAccounts
+      operationId: CreateAccount
       summary: Create an account
       description: Creates a new account, with specified offering, under the organization.
       parameters:
@@ -127,7 +127,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
     delete:
-      operationId: DeletePartnerAcounts
+      operationId: DeleteAccount
       summary: Delete an account
       description: Delete a specific account under your organization by account ID.
       tags:
@@ -147,7 +147,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
     get:
-      operationId: GetPartnerAccountsAccountIdOfferings
+      operationId: ListAccountOffering
       summary: Get account offerings
       description: Retrieves offering information about the specified account.
       tags:
@@ -168,7 +168,7 @@ paths:
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
     put:
-      operationId: PutPartnerAccountsAccountIdOfferings
+      operationId: UpdateAccountOffering
       summary: Update account offerings
       description: Changes a package offering for the specified account. Please note
         that an account can have only one package offering. Also associates one or
@@ -213,7 +213,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
     post:
-      operationId: PostPartnerAccountsAccountIdSso
+      operationId: AuthenticateAccount
       summary: Authenticate an account with single sign on
       description: Authenticates and logs in a user to Twilio Sendgrid as a specific
         admin identity configured for SSO by partner. Any additional teammates or
@@ -233,7 +233,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
     get:
-      operationId: GetPartnerAccountsAccountIdState
+      operationId: GetAccountState
       summary: Get an account's state
       description: Retrieve the state of the specified account.
       tags:
@@ -254,7 +254,7 @@ paths:
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
     put:
-      operationId: PutPartnerAccountsAccountIdState
+      operationId: UpdateAccountState
       summary: Update an account's state
       description: Update the state of the specified account.
       tags:
@@ -276,7 +276,7 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
   /v3/partners/offerings:
     get:
-      operationId: GetPartnerOfferings
+      operationId: ListOffering
       summary: Get all available offerings
       tags:
       - Offering

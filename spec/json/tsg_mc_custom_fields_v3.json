@@ -32,7 +32,7 @@
   "paths": {
     "/v3/marketing/field_definitions": {
       "post": {
-        "operationId": "PostMarketingFieldDefinitions",
+        "operationId": "CreateFieldDefinition",
         "summary": "Create Custom Field Definition",
         "tags": [
           "Custom Fields"
@@ -51,7 +51,7 @@
                   },
                   "field_type": {
                     "type": "string",
-                    "$ref": "#/components/schemas/Field_type"
+                    "$ref": "#/components/schemas/FieldType"
                   }
                 },
                 "required": [
@@ -72,18 +72,28 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/CustomFieldDefinitionsResponse"
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
                     },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "_metadata": {
-                          "$ref": "#/components/schemas/Metadata"
-                        }
-                      }
+                    "name": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 100
+                    },
+                    "field_type": {
+                      "type": "string",
+                      "$ref": "#/components/schemas/FieldType2"
+                    },
+                    "_metadata": {
+                      "$ref": "#/components/schemas/Metadata"
                     }
+                  },
+                  "required": [
+                    "field_type",
+                    "name",
+                    "id"
                   ]
                 },
                 "examples": {
@@ -126,7 +136,7 @@
         }
       },
       "get": {
-        "operationId": "GetMarketingFieldDefinitions",
+        "operationId": "ListFieldDefinition",
         "summary": "Get All Field Definitions",
         "tags": [
           "Custom Fields"
@@ -330,7 +340,7 @@
         }
       ],
       "patch": {
-        "operationId": "PatchMarketingFieldDefinitionsCustomFieldId",
+        "operationId": "UpdateFieldDefinition",
         "summary": "Update Custom Field Definition",
         "tags": [
           "Custom Fields"
@@ -364,18 +374,28 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/CustomFieldDefinitionsResponse"
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
                     },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "_metadata": {
-                          "$ref": "#/components/schemas/Metadata"
-                        }
-                      }
+                    "name": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 100
+                    },
+                    "field_type": {
+                      "type": "string",
+                      "$ref": "#/components/schemas/FieldType2"
+                    },
+                    "_metadata": {
+                      "$ref": "#/components/schemas/Metadata"
                     }
+                  },
+                  "required": [
+                    "field_type",
+                    "name",
+                    "id"
                   ]
                 },
                 "examples": {
@@ -440,7 +460,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteMarketingFieldDefinitionsCustomFieldId",
+        "operationId": "DeleteFieldDefinition",
         "summary": "Delete Custom Field Definition",
         "tags": [
           "Custom Fields"
@@ -491,7 +511,7 @@
             },
             "field_type": {
               "type": "string",
-              "$ref": "#/components/schemas/Field_type1"
+              "$ref": "#/components/schemas/FieldType1"
             },
             "read_only": {
               "type": "boolean",
@@ -570,7 +590,7 @@
           },
           "field_type": {
             "type": "string",
-            "$ref": "#/components/schemas/Field_type2"
+            "$ref": "#/components/schemas/FieldType2"
           }
         },
         "required": [
@@ -584,7 +604,7 @@
           "field_type": "Date"
         }
       },
-      "Field_type": {
+      "FieldType": {
         "type": "string",
         "enum": [
           "Text",
@@ -592,7 +612,7 @@
           "Date"
         ]
       },
-      "Field_type1": {
+      "FieldType1": {
         "type": "string",
         "enum": [
           "Text",
@@ -600,7 +620,7 @@
           "Date"
         ]
       },
-      "Field_type2": {
+      "FieldType2": {
         "type": "string",
         "enum": [
           "Text",

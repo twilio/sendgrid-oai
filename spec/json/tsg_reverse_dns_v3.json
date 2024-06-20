@@ -32,7 +32,7 @@
   "paths": {
     "/v3/whitelabel/ips": {
       "post": {
-        "operationId": "PostWhitelabelIps",
+        "operationId": "SetUpReverseDns",
         "summary": "Set up reverse DNS",
         "tags": [
           "Reverse DNS"
@@ -109,7 +109,7 @@
         }
       },
       "get": {
-        "operationId": "GetWhitelabelIps",
+        "operationId": "ListReverseDns",
         "summary": "Retrieve all reverse DNS records",
         "tags": [
           "Reverse DNS"
@@ -225,7 +225,7 @@
         }
       ],
       "get": {
-        "operationId": "GetWhitelabelIpsId",
+        "operationId": "GetReverseDns",
         "summary": "Retrieve a reverse DNS record",
         "tags": [
           "Reverse DNS"
@@ -275,7 +275,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteWhitelabelIpsId",
+        "operationId": "DeleteReverseDns",
         "summary": "Delete a reverse DNS record",
         "tags": [
           "Reverse DNS"
@@ -313,7 +313,7 @@
         }
       ],
       "post": {
-        "operationId": "PostWhitelabelIpsIdValidate",
+        "operationId": "ValidateReverseDns",
         "summary": "Validate a reverse DNS record",
         "tags": [
           "Reverse DNS"

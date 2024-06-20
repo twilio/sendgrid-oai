@@ -32,7 +32,7 @@
   "paths": {
     "/v3/contactdb/custom_fields": {
       "post": {
-        "operationId": "PostContactdbCustomFields",
+        "operationId": "CreateCustomField",
         "summary": "Create a Custom Field",
         "tags": [
           "Custom Fields"
@@ -117,7 +117,7 @@
         }
       },
       "get": {
-        "operationId": "GetContactdbCustomFields",
+        "operationId": "ListCustomField",
         "summary": "Retrieve all custom fields",
         "tags": [
           "Custom Fields"
@@ -227,7 +227,7 @@
         }
       ],
       "get": {
-        "operationId": "GetContactdbCustomFieldsCustomFieldId",
+        "operationId": "GetCustomField",
         "summary": "Retrieve a Custom Field",
         "tags": [
           "Custom Fields"
@@ -325,7 +325,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteContactdbCustomFieldsCustomFieldId",
+        "operationId": "DeleteCustomField",
         "summary": "Delete a Custom Field",
         "tags": [
           "Custom Fields"
@@ -426,7 +426,7 @@
     },
     "/v3/contactdb/lists": {
       "post": {
-        "operationId": "PostContactdbLists",
+        "operationId": "CreateContactDbList",
         "summary": "Create a List",
         "tags": [
           "Lists"
@@ -533,7 +533,7 @@
         }
       },
       "get": {
-        "operationId": "GetContactdbLists",
+        "operationId": "ListContactDbList",
         "summary": "Retrieve all lists",
         "tags": [
           "Lists"
@@ -583,7 +583,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteContactdbLists",
+        "operationId": "DeleteContactDbLists",
         "summary": "Delete Multiple lists",
         "tags": [
           "Lists"
@@ -682,7 +682,7 @@
         }
       ],
       "get": {
-        "operationId": "GetContactdbListsListId",
+        "operationId": "GetContactDbList",
         "summary": "Retrieve a single list",
         "tags": [
           "Lists"
@@ -789,7 +789,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchContactdbListsListId",
+        "operationId": "UpdateContactDbList",
         "summary": "Update a List",
         "tags": [
           "Lists"
@@ -910,7 +910,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteContactdbListsListId",
+        "operationId": "DeleteContactDbList",
         "summary": "Delete a List",
         "tags": [
           "Lists"
@@ -1029,7 +1029,7 @@
         }
       ],
       "get": {
-        "operationId": "GetContactdbListsListIdRecipients",
+        "operationId": "ListRecipientsFromContactDbList",
         "summary": "Retrieve all recipients on a List",
         "tags": [
           "Lists"
@@ -1200,7 +1200,7 @@
         }
       },
       "post": {
-        "operationId": "PostContactdblistsListIdRecipients",
+        "operationId": "AddRecipientsToContactDbList",
         "summary": "Add Multiple Recipients to a List",
         "tags": [
           "Lists"
@@ -1345,7 +1345,7 @@
         }
       ],
       "post": {
-        "operationId": "PostContactdbListsListIdRecipientsRecipientId",
+        "operationId": "AddRecipientToContactDbList",
         "summary": "Add a Single Recipient to a List",
         "tags": [
           "Lists"
@@ -1444,7 +1444,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteContactdbListsListIdRecipientsRecipientId",
+        "operationId": "DeleteRecipientFromContactDbList",
         "summary": "Delete a Single Recipient from a Single List",
         "tags": [
           "Lists"
@@ -1566,7 +1566,7 @@
     },
     "/v3/contactdb/recipients": {
       "post": {
-        "operationId": "PostContactdbRecipients",
+        "operationId": "AddRecipient",
         "summary": "Add recipients",
         "tags": [
           "Recipients"
@@ -1706,7 +1706,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchContactdbRecipients",
+        "operationId": "UpdateRecipient",
         "summary": "Update Recipient",
         "tags": [
           "Recipients"
@@ -1811,7 +1811,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteContactdbRecipients",
+        "operationId": "DeleteRecipients",
         "summary": "Delete Recipients",
         "tags": [
           "Recipients"
@@ -1895,7 +1895,7 @@
         }
       },
       "get": {
-        "operationId": "GetContactdbRecipients",
+        "operationId": "ListRecipient",
         "summary": "Retrieve recipients",
         "tags": [
           "Recipients"
@@ -1993,7 +1993,7 @@
         }
       ],
       "get": {
-        "operationId": "GetContactdbRecipientsRecipientId",
+        "operationId": "GetRecipient",
         "summary": "Retrieve a single recipient",
         "tags": [
           "Recipients"
@@ -2060,7 +2060,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteContactdbRecipientsRecipientId",
+        "operationId": "DeleteRecipient",
         "summary": "Delete a Recipient",
         "tags": [
           "Recipients"
@@ -2164,7 +2164,7 @@
         }
       ],
       "get": {
-        "operationId": "GetContactdbRecipientsRecipientIdLists",
+        "operationId": "GetRecipientList",
         "summary": "Retrieve the lists that a recipient is on",
         "tags": [
           "Recipients"
@@ -2278,7 +2278,7 @@
     },
     "/v3/contactdb/recipients/billable_count": {
       "get": {
-        "operationId": "GetContactdbRecipientsBillableCount",
+        "operationId": "GetBillable",
         "summary": "Retrieve the count of billable recipients",
         "tags": [
           "Recipients"
@@ -2334,7 +2334,7 @@
     },
     "/v3/contactdb/recipients/count": {
       "get": {
-        "operationId": "GetContactdbRecipientsCount",
+        "operationId": "ListRecipientCount",
         "summary": "Retrieve a Count of Recipients",
         "tags": [
           "Recipients"
@@ -2390,7 +2390,7 @@
     },
     "/v3/contactdb/recipients/search": {
       "get": {
-        "operationId": "GetContactdbRecipientsSearch",
+        "operationId": "ListSearchRecipient",
         "summary": "Search recipients",
         "tags": [
           "Recipients"
@@ -2503,7 +2503,7 @@
         }
       },
       "post": {
-        "operationId": "PostContactdbRecipientsSearch",
+        "operationId": "SearchRecipient",
         "summary": "Search recipients",
         "tags": [
           "Recipients"
@@ -2706,7 +2706,7 @@
     },
     "/v3/contactdb/reserved_fields": {
       "get": {
-        "operationId": "GetContactdbReservedFields",
+        "operationId": "ListReservedField",
         "summary": "Retrieve reserved fields",
         "tags": [
           "Custom Fields"
@@ -2823,7 +2823,7 @@
     },
     "/v3/contactdb/segments": {
       "post": {
-        "operationId": "PostContactdbSegments",
+        "operationId": "CreateSegment",
         "summary": "Create a Segment",
         "tags": [
           "Segments"
@@ -2969,7 +2969,7 @@
         }
       },
       "get": {
-        "operationId": "GetContactdbSegments",
+        "operationId": "ListSegment",
         "summary": "Retrieve all segments",
         "tags": [
           "Segments"
@@ -3072,7 +3072,7 @@
         }
       ],
       "get": {
-        "operationId": "GetContactdbSegmentsSegmentId",
+        "operationId": "GetSegment",
         "summary": "Retrieve a segment",
         "tags": [
           "Segments"
@@ -3188,7 +3188,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchContactdbSegmentsSegmentId",
+        "operationId": "UpdateSegment",
         "summary": "Update a segment",
         "tags": [
           "Segments"
@@ -3365,7 +3365,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteContactdbSegmentsSegmentId",
+        "operationId": "DeleteSegment",
         "summary": "Delete a segment",
         "tags": [
           "Segments"
@@ -3484,7 +3484,7 @@
         }
       ],
       "get": {
-        "operationId": "GetContactdbSegmentsSegmentIdRecipients",
+        "operationId": "ListRecipientForSegment",
         "summary": "Retrieve recipients on a segment",
         "tags": [
           "Segments"
@@ -3606,7 +3606,7 @@
     },
     "/v3/contactdb/status": {
       "get": {
-        "operationId": "GetContactdbStatus",
+        "operationId": "ListStatus",
         "summary": "Get Recipient Upload Status",
         "tags": [
           "Recipients"
@@ -3694,20 +3694,22 @@
       },
       "ContactdbCustomFieldId2xx": {
         "title": "ContactDB Custom field schema with ID.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactdbCustomField"
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the field"
           },
-          {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "number",
-                "description": "The ID of the custom field."
-              }
-            }
+          "type": {
+            "type": "string",
+            "description": "The type of the field.",
+            "$ref": "#/components/schemas/Type"
+          },
+          "id": {
+            "type": "number",
+            "description": "The ID of the custom field."
           }
-        ]
+        }
       },
       "ContactdbList2xx": {
         "title": "ContactDB lists",
@@ -3739,21 +3741,27 @@
       },
       "ContactdbCustomFieldIdValue": {
         "title": "ContactDB Custom field schema.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactdbCustomFieldId2xx"
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the field"
           },
-          {
-            "type": "object",
-            "properties": {
-              "value": {
-                "description": "The value of this recipient's custom field",
-                "nullable": true,
-                "type": "string"
-              }
-            }
+          "type": {
+            "type": "string",
+            "description": "The type of the field.",
+            "$ref": "#/components/schemas/Type"
+          },
+          "id": {
+            "type": "number",
+            "description": "The ID of the custom field."
+          },
+          "value": {
+            "description": "The value of this recipient's custom field",
+            "nullable": true,
+            "type": "string"
           }
-        ]
+        }
       },
       "ContactdbRecipient200": {
         "title": "ContactDB: Recipient",
@@ -3933,7 +3941,7 @@
           },
           "and_or": {
             "type": "string",
-            "$ref": "#/components/schemas/And_or"
+            "$ref": "#/components/schemas/AndOr"
           }
         },
         "required": [
@@ -3998,22 +4006,36 @@
       },
       "ContactdbSegmentsId200": {
         "title": "ContactDB:: Segments with ID",
-        "allOf": [
-          {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "number",
-                "description": "The ID of the segment."
-              }
-            },
-            "required": [
-              "id"
-            ]
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The ID of the segment."
           },
-          {
-            "$ref": "#/components/schemas/ContactdbSegments"
+          "name": {
+            "type": "string",
+            "description": "The name of this segment."
+          },
+          "list_id": {
+            "type": "integer",
+            "description": "The list id from which to make this segment. Not including this ID will mean your segment is created from the main contactdb rather than a list."
+          },
+          "conditions": {
+            "type": "array",
+            "description": "The conditions for a recipient to be included in this segment.",
+            "items": {
+              "$ref": "#/components/schemas/ContactdbSegmentsConditions"
+            }
+          },
+          "recipient_count": {
+            "type": "number",
+            "description": "The count of recipients in this list. This is not included on creation of segments."
           }
+        },
+        "required": [
+          "name",
+          "conditions",
+          "id"
         ]
       },
       "ErrorResponse": {
@@ -4071,7 +4093,7 @@
           "contains"
         ]
       },
-      "And_or": {
+      "AndOr": {
         "type": "string",
         "enum": [
           "and",

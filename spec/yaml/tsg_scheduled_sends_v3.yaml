@@ -48,7 +48,7 @@ servers:
 paths:
   /v3/user/scheduled_sends:
     post:
-      operationId: PostUserScheduledSends
+      operationId: CreateScheduledSend
       summary: Cancel or pause a scheduled send
       tags:
       - Scheduled Sends
@@ -114,7 +114,7 @@ paths:
         '500':
           $ref: '#/components/responses/ScheduledSends500'
     get:
-      operationId: GetUserScheduledSends
+      operationId: ListScheduledSend
       summary: Retrieve all scheduled sends
       tags:
       - Scheduled Sends
@@ -164,7 +164,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetUserScheduledSendsBatchId
+      operationId: GetScheduledSend
       summary: Retrieve scheduled send
       tags:
       - Scheduled Sends
@@ -200,7 +200,7 @@ paths:
         '500':
           $ref: '#/components/responses/ScheduledSends500'
     patch:
-      operationId: PatchUserScheduledSendsBatchId
+      operationId: UpdateScheduledSend
       summary: Update a scheduled send
       tags:
       - Scheduled Sends
@@ -246,7 +246,7 @@ paths:
         '500':
           $ref: '#/components/responses/ScheduledSends500'
     delete:
-      operationId: DeleteUserScheduledSendsBatchId
+      operationId: DeleteScheduledSend
       summary: Delete a cancellation or pause from a scheduled send
       tags:
       - Scheduled Sends
@@ -275,20 +275,21 @@ components:
   schemas:
     ScheduledSendStatus:
       title: User Scheduled Send status
-      allOf:
-      - $ref: '#/components/schemas/MailBatchId'
-      - type: object
-        description: The status of the scheduled send.
-        properties:
-          status:
-            type: string
-            description: The status of the scheduled send.
-            $ref: '#/components/schemas/Status2'
-        required:
-        - status
       example:
         batch_id: HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi
         status: pause
+      type: object
+      properties:
+        batch_id:
+          type: string
+          pattern: ^[a-zA-Z0-9\-\_]
+        status:
+          type: string
+          description: The status of the scheduled send.
+          $ref: '#/components/schemas/Status2'
+      required:
+      - status
+      - batch_id
     MailBatchId:
       title: Mail Batch ID
       type: object

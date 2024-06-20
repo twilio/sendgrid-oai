@@ -36,7 +36,7 @@ servers:
 paths:
   /v3/designs:
     post:
-      operationId: PostDesigns
+      operationId: CreateDesign
       summary: Create Design
       tags:
       - Designs
@@ -209,7 +209,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrors'
     get:
-      operationId: GetDesigns
+      operationId: ListDesign
       summary: List Designs
       tags:
       - Designs
@@ -292,7 +292,7 @@ paths:
         type: string
         format: uuid
     post:
-      operationId: PostDesignsId
+      operationId: DuplicateDesign
       summary: Duplicate Design
       tags:
       - Designs
@@ -467,7 +467,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrors'
     get:
-      operationId: GetDesignsId
+      operationId: GetDesign
       summary: Get Design
       tags:
       - Designs
@@ -639,7 +639,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrors'
     patch:
-      operationId: PatchDesignsId
+      operationId: UpdateDesign
       summary: Update Design
       tags:
       - Designs
@@ -951,7 +951,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrors'
     delete:
-      operationId: DeleteDesignsId
+      operationId: DeleteDesign
       summary: Delete Design
       tags:
       - Designs
@@ -981,7 +981,7 @@ paths:
                 $ref: '#/components/schemas/ApiErrors'
   /v3/designs/pre-builts:
     get:
-      operationId: GetDesignsPrebuilts
+      operationId: ListPreBuiltDesign
       summary: List SendGrid Pre-built Designs
       tags:
       - Designs
@@ -1091,7 +1091,7 @@ paths:
         type: string
         format: uuid
     post:
-      operationId: PostDesignsPrebuiltsId
+      operationId: DuplicatePreBuiltDesign
       summary: Duplicate SendGrid Pre-built Design
       tags:
       - Designs
@@ -1422,7 +1422,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrors'
     get:
-      operationId: GetDesignsPrebuiltsId
+      operationId: GetPreBuiltDesign
       summary: Get SendGrid Pre-built Design
       tags:
       - Designs
@@ -1751,22 +1751,6 @@ components:
   schemas:
     DesignInput:
       title: Design Input
-      allOf:
-      - $ref: '#/components/schemas/DesignDuplicateInput'
-      - $ref: '#/components/schemas/DesignCommonProperties'
-      - type: object
-        properties:
-          html_content:
-            type: string
-            description: The HTML content of the Design.
-            maxLength: 1048576
-          plain_content:
-            type: string
-            description: Plain text content of the Design.
-            maxLength: 1048576
-            default: <generated from html_content if left empty>
-        required:
-        - html_content
       example:
         name: Ahoy, World!
         editor: design
@@ -1881,33 +1865,52 @@ components:
 
           Unsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}}
           )'
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the new design.
+          default: 'Duplicate: <original design name>'
+        editor:
+          type: string
+          description: The editor used in the UI.
+          $ref: '#/components/schemas/Editor'
+        html_content:
+          type: string
+          description: The HTML content of the Design.
+          maxLength: 1048576
+        plain_content:
+          type: string
+          description: Plain text content of the Design.
+          maxLength: 1048576
+          default: <generated from html_content if left empty>
+      required:
+      - html_content
     DesignOutput:
       title: Design Output
-      allOf:
-      - $ref: '#/components/schemas/DesignOutputSummary'
-      - $ref: '#/components/schemas/DesignInput'
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the new design.
+          default: 'Duplicate: <original design name>'
+        editor:
+          type: string
+          description: The editor used in the UI.
+          $ref: '#/components/schemas/Editor'
+        html_content:
+          type: string
+          description: The HTML content of the Design.
+          maxLength: 1048576
+        plain_content:
+          type: string
+          description: Plain text content of the Design.
+          maxLength: 1048576
+          default: <generated from html_content if left empty>
+      required:
+      - html_content
     DesignOutputSummary:
       title: Design Output - Summary
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            description: ID of the Design.
-            format: uuid
-          updated_at:
-            type: string
-            description: Datetime that Design was last updated.
-            format: ISO 8601 date-time
-          created_at:
-            type: string
-            description: Datetime that Design was created.
-            format: ISO 8601 date-time
-          thumbnail_url:
-            type: string
-            description: A Thumbnail preview of the template's html content.
-      - $ref: '#/components/schemas/DesignDuplicateInput'
-      - $ref: '#/components/schemas/DesignCommonProperties'
       example:
         result:
         - id: 3247eaea-c912-42a3-b0bc-60bdaf210396
@@ -1944,6 +1947,31 @@ components:
         _metadata:
           self: https://api.sendgrid.com/v3/designs?page_token=vHdvHCg0w1F-TmWJcPNpTEnFY2aPEmRBHONwOgZ6TgJbX2_I
           count: 3
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Design.
+          format: uuid
+        updated_at:
+          type: string
+          description: Datetime that Design was last updated.
+          format: ISO 8601 date-time
+        created_at:
+          type: string
+          description: Datetime that Design was created.
+          format: ISO 8601 date-time
+        thumbnail_url:
+          type: string
+          description: A Thumbnail preview of the template's html content.
+        name:
+          type: string
+          description: The name of the new design.
+          default: 'Duplicate: <original design name>'
+        editor:
+          type: string
+          description: The editor used in the UI.
+          $ref: '#/components/schemas/Editor'
     DesignDuplicateInput:
       title: Design Duplicate Design Input
       type: object
@@ -1999,27 +2027,33 @@ components:
           minimum: 0
     DesignCommonProperties:
       title: Design Common Fields
-      allOf:
-      - $ref: '#/components/schemas/DesignDuplicateInput'
-      - type: object
-        properties:
-          generate_plain_content:
-            type: boolean
-            description: If true, plain_content is always generated from html_content.
-              If false, plain_content is not altered.
-            default: true
-          subject:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the new design.
+          default: 'Duplicate: <original design name>'
+        editor:
+          type: string
+          description: The editor used in the UI.
+          $ref: '#/components/schemas/Editor'
+        generate_plain_content:
+          type: boolean
+          description: If true, plain_content is always generated from html_content.
+            If false, plain_content is not altered.
+          default: true
+        subject:
+          type: string
+          description: Subject of the Design.
+          maxLength: 5000
+        categories:
+          type: array
+          description: The list of categories applied to the design
+          uniqueItems: true
+          maxItems: 10
+          items:
             type: string
-            description: Subject of the Design.
-            maxLength: 5000
-          categories:
-            type: array
-            description: The list of categories applied to the design
-            uniqueItems: true
-            maxItems: 10
-            items:
-              type: string
-              maxLength: 255
+            maxLength: 255
     Editor:
       type: string
       enum:

@@ -29,7 +29,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/OnBehalfOf'
     post:
-      operationId: PostMarketingSenders
+      operationId: CreateSender
       summary: Create a Sender
       tags:
       - Senders
@@ -46,28 +46,63 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-              - $ref: '#/components/schemas/SenderRequest'
-              - type: object
-                properties:
-                  from:
-                    allOf:
-                    - $ref: '#/components/schemas/SenderRequest/properties/from'
-                    - required:
-                      - email
-                      - name
-                  reply_to:
-                    allOf:
-                    - $ref: '#/components/schemas/SenderRequest/properties/reply_to'
-                    - required:
-                      - email
-                required:
-                - nickname
-                - from
-                - reply_to
-                - address
-                - city
-                - country
+              type: object
+              properties:
+                nickname:
+                  type: string
+                  description: A nickname for the Sender. Not used for sending.
+                from:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      description: The email address from which your recipient will
+                        receive emails.
+                    name:
+                      type: string
+                      description: The name appended to the from email field. Typically
+                        your name or company name.
+                  required:
+                  - email
+                  - name
+                reply_to:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      description: The email address to which your recipient will
+                        reply.
+                    name:
+                      type: string
+                      description: The name appended to the reply to email field.
+                        Typically your name or company name.
+                  required:
+                  - email
+                address:
+                  type: string
+                  description: The physical address of the Sender.
+                address_2:
+                  type: string
+                  description: Additional Sender address information.
+                city:
+                  type: string
+                  description: The city of the Sender.
+                state:
+                  type: string
+                  description: The state of the Sender.
+                zip:
+                  type: string
+                  description: The zipcode of the Sender.
+                country:
+                  type: string
+                  description: The country of the Sender.
+              required:
+              - country
+              - nickname
+              - address
+              - city
+              - reply_to
+              - from
       responses:
         '201':
           description: ''
@@ -84,7 +119,7 @@ paths:
         '500':
           $ref: '#/components/responses/Senders500'
     get:
-      operationId: GetMarketingSenders
+      operationId: ListSender
       summary: Get a list of all Senders
       tags:
       - Senders
@@ -109,7 +144,7 @@ paths:
     - $ref: '#/components/parameters/OnBehalfOf'
     - $ref: '#/components/parameters/SenderId'
     get:
-      operationId: GetMarketingSendersId
+      operationId: GetSender
       summary: Get a specific Sender
       tags:
       - Senders
@@ -125,7 +160,7 @@ paths:
         '404':
           $ref: '#/components/responses/Senders404'
     patch:
-      operationId: PatchMarketingSendersId
+      operationId: UpdateSender
       summary: Update a Sender
       tags:
       - Senders
@@ -159,7 +194,7 @@ paths:
         '404':
           $ref: '#/components/responses/Senders404'
     delete:
-      operationId: DeleteMarketingSendersId
+      operationId: DeleteSender
       summary: Delete a Sender
       tags:
       - Senders
@@ -176,7 +211,7 @@ paths:
     - $ref: '#/components/parameters/OnBehalfOf'
     - $ref: '#/components/parameters/SenderId'
     post:
-      operationId: PostMarketingSendersIdResendVerification
+      operationId: ResetSenderVerification
       summary: Resend a Sender verification
       tags:
       - Senders
@@ -193,55 +228,6 @@ components:
   schemas:
     Sender:
       title: Sender
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: integer
-            description: The unique identifier of the Sender.
-      - $ref: '#/components/schemas/SenderRequest'
-      - type: object
-        properties:
-          verified:
-            type: boolean
-            description: A boolean flag indicating whether the Sender is verified
-              or not. Only verified Senders can be used to send email.
-          locked:
-            type: boolean
-            description: A boolean flag that is `true` when the Sender is associated
-              with a campaign in Draft, Scheduled, or In Progress status. You cannot
-              update or delete a locked Sender.
-          updated_at:
-            type: integer
-            description: The time the Sender was last updated.
-          created_at:
-            type: integer
-            description: The time the Sender was created.
-      - type: object
-        properties:
-          from:
-            allOf:
-            - $ref: '#/components/schemas/SenderRequest/properties/from'
-            - required:
-              - email
-              - name
-          reply_to:
-            allOf:
-            - $ref: '#/components/schemas/SenderRequest/properties/reply_to'
-            - required:
-              - email
-        required:
-        - id
-        - nickname
-        - from
-        - reply_to
-        - address
-        - city
-        - country
-        - verified
-        - locked
-        - created_at
-        - updated_at
       example:
         id: 1
         nickname: Example Orders
@@ -261,6 +247,85 @@ components:
         updated_at: 1449872165
         created_at: 1449872165
         locked: false
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the Sender.
+        nickname:
+          type: string
+          description: A nickname for the Sender. Not used for sending.
+        from:
+          type: object
+          properties:
+            email:
+              type: string
+              description: The email address from which your recipient will receive
+                emails.
+            name:
+              type: string
+              description: The name appended to the from email field. Typically your
+                name or company name.
+          required:
+          - email
+          - name
+        reply_to:
+          type: object
+          properties:
+            email:
+              type: string
+              description: The email address to which your recipient will reply.
+            name:
+              type: string
+              description: The name appended to the reply to email field. Typically
+                your name or company name.
+          required:
+          - email
+        address:
+          type: string
+          description: The physical address of the Sender.
+        address_2:
+          type: string
+          description: Additional Sender address information.
+        city:
+          type: string
+          description: The city of the Sender.
+        state:
+          type: string
+          description: The state of the Sender.
+        zip:
+          type: string
+          description: The zipcode of the Sender.
+        country:
+          type: string
+          description: The country of the Sender.
+        verified:
+          type: boolean
+          description: A boolean flag indicating whether the Sender is verified or
+            not. Only verified Senders can be used to send email.
+        locked:
+          type: boolean
+          description: A boolean flag that is `true` when the Sender is associated
+            with a campaign in Draft, Scheduled, or In Progress status. You cannot
+            update or delete a locked Sender.
+        updated_at:
+          type: integer
+          description: The time the Sender was last updated.
+        created_at:
+          type: integer
+          description: The time the Sender was created.
+      required:
+      - id
+      - created_at
+      - country
+      - nickname
+      - verified
+      - address
+      - city
+      - locked
+      - updated_at
+      - reply_to
+      - from
     SenderRequest:
       title: Sender Request
       type: object

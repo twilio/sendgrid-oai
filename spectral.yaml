@@ -1,0 +1,120 @@
+extends: spectral:oas
+
+formats: ["oas3_1"]
+
+rules:
+  require-openapi-rule:
+    severity: error
+    message: openapi field must be present with a non empty value
+    given: $
+    then:
+      field: openapi
+      function: truthy
+
+  component-name-rule:
+    severity: error
+    recommended: true
+    message: Semantic error - Component names can only contain the characters A-Z a-z 0-9 - . _
+    given: "$.components[schemas].*~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-zA-Z0-9\\.\\-_]+$"
+
+  operation-id-length-rule:
+    severity: warn
+    message: operationID length should be between 4 and 50
+    given: "$.paths.[*].operationId"
+    then:
+      function: length
+      functionOptions:
+        max: 85
+        min: 4
+
+  operationId-should-be-pascal-case:
+    description: operationIds should be PascalCase.
+    type: style
+    given: "$.paths.[*].operationId"
+    severity: error
+    message: "{{property}} should be PascalCase"
+    then:
+      function: casing
+      functionOptions:
+        type: pascal
+
+  schemas-should-be-pascal-case:
+    description: Schemas should be PascalCase.
+    type: style
+    given: "$.components['schemas'].*~"
+    severity: error
+    message: "{{property}} should be PascalCase"
+    then:
+      function: casing
+      functionOptions:
+        type: pascal
+
+  responses-should-be-pascal-case:
+    description: Responses should be PascalCase.
+    type: style
+    given: "$.components['responses'].*~"
+    severity: error
+    message: "{{property}} should be PascalCase"
+    then:
+      function: casing
+      functionOptions:
+        type: pascal
+
+  parameters-should-be-pascal-case:
+    description: Parameters should be PascalCase.
+    type: style
+    given: "$.components['parameters'].*~"
+    severity: error
+    message: "{{property}} should be PascalCase"
+    then:
+      function: casing
+      functionOptions:
+        type: pascal
+
+  examples-should-be-pascal-case:
+    description: Examples should be PascalCase.
+    type: style
+    given: "$.components['examples'].*~"
+    severity: error
+    message: "{{property}} should be PascalCase"
+    then:
+      function: casing
+      functionOptions:
+        type: pascal
+
+  requestBodies-should-be-pascal-case:
+    description: requestBodies should be PascalCase.
+    type: style
+    given: "$.components['requestBodies'].*~"
+    severity: error
+    message: "{{property}} should be PascalCase"
+    then:
+      function: casing
+      functionOptions:
+        type: pascal
+
+  headers-should-be-pascal-case:
+    description: Headers should be PascalCase.
+    type: style
+    given: "$.components['headers'].*~"
+    severity: error
+    message: "{{property}} should be PascalCase"
+    then:
+      function: casing
+      functionOptions:
+        type: pascal
+
+  securitySchemes-should-be-pascal-case:
+    description: Headers should be PascalCase.
+    type: style
+    given: "$.components['securitySchemes'].*~"
+    severity: error
+    message: "{{property}} should be PascalCase"
+    then:
+      function: casing
+      functionOptions:
+        type: pascal

@@ -258,7 +258,7 @@ paths:
           $ref: '#/components/responses/IpAddressManagement401'
         '500':
           $ref: '#/components/responses/IpAddressManagement500'
-      operationId: GetSendIpsIps
+      operationId: ListIp
       description: 'This operation returns a list of all IP addresses associated with
         your account. A sample of IP details is returned with each IP, including which
         Pools the IP is associated with, whether the IP is set to warm up automatically,
@@ -289,7 +289,7 @@ paths:
       summary: Add a Twilio SendGrid IP Address
       tags:
       - IP Address Management
-      operationId: PostSendIpsIps
+      operationId: AddIp
       responses:
         '201':
           description: Created
@@ -500,7 +500,7 @@ paths:
           $ref: '#/components/responses/IpAddressManagement401'
         '500':
           $ref: '#/components/responses/IpAddressManagement500'
-      operationId: GetSendIpsIpsIp
+      operationId: GetIp
       description: This operation returns details for a specified IP address. Details
         include whether the IP is assigned to a parent account, set to warm up automatically,
         which Pools the IP is associated with, when the IP was added and modified,
@@ -513,7 +513,7 @@ paths:
       summary: Update Details for an IP Address
       tags:
       - IP Address Management
-      operationId: PatchSendIpsIpsIp
+      operationId: UpdateIp
       responses:
         '200':
           description: OK
@@ -667,7 +667,7 @@ paths:
           $ref: '#/components/responses/IpAddressManagement401'
         '500':
           $ref: '#/components/responses/IpAddressManagement500'
-      operationId: GetSendIpsIpsIpSubusers
+      operationId: ListSubUserAssignedToIp
       description: 'This operation returns a list of Subuser IDs that have been assigned
         the specified IP address. To retrieve more information about the returned
         Subusers, use the [Subusers API](https://docs.sendgrid.com/api-reference/subusers-api/list-all-subusers).
@@ -696,7 +696,7 @@ paths:
       summary: Assign a Batch of Subusers to an IP
       tags:
       - IP Address Management
-      operationId: PostSendIpsIpsIpSubusers
+      operationId: AddSubUsersToIp
       responses:
         '200':
           description: OK
@@ -774,7 +774,7 @@ paths:
       summary: Delete a Batch of Subusers from an IP
       tags:
       - IP Address Management
-      operationId: PostSendIpsIpsIpSubusersBatchAdd
+      operationId: DeleteSubUsersFromIp
       responses:
         '204':
           description: No Content
@@ -829,7 +829,7 @@ paths:
       summary: GET all IP Pools that have Associated IPs
       tags:
       - IP Address Management
-      operationId: GetSendIpsIpsIpSubusersBatchDelete
+      operationId: ListIpPool
       description: 'This operation returns a list of your IP Pools and a sample of
         each Pools'' associated IP addresses.
 
@@ -974,7 +974,7 @@ paths:
       summary: Create an IP Pool with a Name and IP Assignments
       tags:
       - IP Address Management
-      operationId: PostSendIpsPools
+      operationId: CreateIpPool
       responses:
         '201':
           description: Created
@@ -1066,7 +1066,7 @@ paths:
       summary: Get Details for an IP Pool
       tags:
       - IP Address Management
-      operationId: GetSendIpsPools
+      operationId: GetIpPool
       parameters:
       - $ref: '#/components/parameters/IpAddressManagementIncludeRegion'
       responses:
@@ -1147,7 +1147,7 @@ paths:
       summary: Update an IP Pool Name
       tags:
       - IP Address Management
-      operationId: PutSendIpsPoolsPoolId
+      operationId: UpdateIpPool
       responses:
         '200':
           description: OK
@@ -1214,7 +1214,7 @@ paths:
       summary: Delete IP Pool
       tags:
       - IP Address Management
-      operationId: DeleteSendIpsPoolsPoolId
+      operationId: DeleteIpPool
       responses:
         '204':
           description: No Content
@@ -1335,7 +1335,7 @@ paths:
           $ref: '#/components/responses/IpAddressManagement401'
         '500':
           $ref: '#/components/responses/IpAddressManagement500'
-      operationId: GetSendIpsPoolsPoolIdIps
+      operationId: ListIpAssignedToIpPool
       description: This operation returns the IP addresses that are assigned to the
         specified IP pool.
       parameters:
@@ -1351,7 +1351,7 @@ paths:
       summary: Add a Batch of IPs to an IP Pool
       tags:
       - IP Address Management
-      operationId: PostSendIpsPoolsPoolIdIps
+      operationId: AddIpsToIpPool
       responses:
         '200':
           description: OK
@@ -1436,7 +1436,7 @@ paths:
       summary: Delete a Batch of IPs from an IP Pool
       tags:
       - IP Address Management
-      operationId: PostSendIpsPoolsPoolIdIpsBatchAdd
+      operationId: DeleteIpsFromIpPool
       responses:
         '204':
           description: No Content

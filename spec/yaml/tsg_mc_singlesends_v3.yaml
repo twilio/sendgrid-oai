@@ -39,7 +39,7 @@ servers:
 paths:
   /v3/marketing/singlesends:
     post:
-      operationId: PostMarketingSinglesends
+      operationId: CreateSingleSend
       summary: Create Single Send
       tags:
       - Single Sends
@@ -125,7 +125,7 @@ paths:
                         error_id:
                           type: string
     get:
-      operationId: GetMarketingSinglesends
+      operationId: ListSingleSend
       summary: Get All Single Sends
       tags:
       - Single Sends
@@ -177,7 +177,7 @@ paths:
                         error_id:
                           type: string
     delete:
-      operationId: DeleteMarketingSinglesends
+      operationId: DeleteSingleSends
       summary: Bulk Delete Single Sends
       tags:
       - Single Sends
@@ -250,7 +250,7 @@ paths:
       schema:
         type: string
     post:
-      operationId: PostMarketingSinglesendsId
+      operationId: DuplicateSingleSend
       summary: Duplicate Single Send
       tags:
       - Single Sends
@@ -324,7 +324,7 @@ paths:
                         error_id:
                           type: string
     patch:
-      operationId: PatchMarketingSinglesendsId
+      operationId: UpdateSingleSend
       summary: Update Single Send
       tags:
       - Single Sends
@@ -406,7 +406,7 @@ paths:
                         error_id:
                           type: string
     get:
-      operationId: GetMarketingSinglesendsId
+      operationId: GetSingleSend
       summary: Get Single Send by ID
       tags:
       - Single Sends
@@ -472,7 +472,7 @@ paths:
                         error_id:
                           type: string
     delete:
-      operationId: DeleteMarketingSinglesendsId
+      operationId: DeleteSingleSend
       summary: Delete Single Send by ID
       tags:
       - Single Sends
@@ -533,7 +533,7 @@ paths:
       schema:
         type: string
     put:
-      operationId: PutMarketingSinglesendsIdSchedule
+      operationId: ScheduleSingleSend
       summary: Schedule Single Send
       tags:
       - Single Sends
@@ -624,7 +624,7 @@ paths:
                         error_id:
                           type: string
     delete:
-      operationId: DeleteMarketingSinglesendsIdSchedule
+      operationId: DeleteScheduledSingleSend
       summary: Delete Single Send Schedule
       tags:
       - Single Sends
@@ -680,7 +680,7 @@ paths:
                           type: string
   /v3/marketing/singlesends/categories:
     get:
-      operationId: GetMarketingSinglesendsCategories
+      operationId: ListCategory
       summary: Get All Categories
       tags:
       - Single Sends
@@ -732,7 +732,7 @@ paths:
                           type: string
   /v3/marketing/singlesends/search:
     post:
-      operationId: PostMarketingSinglesendsSearch
+      operationId: SearchSingleSend
       summary: Get Single Sends Search
       tags:
       - Single Sends
@@ -1163,7 +1163,7 @@ components:
         winner_criteria:
           type: string
           description: How the winner will be decided
-          $ref: '#/components/schemas/Winner_criteria'
+          $ref: '#/components/schemas/WinnerCriteria'
         test_percentage:
           type: integer
           description: What percentage of your recipient will be included in your
@@ -1251,7 +1251,7 @@ components:
       enum:
       - subject
       - content
-    Winner_criteria:
+    WinnerCriteria:
       type: string
       enum:
       - open

@@ -32,7 +32,7 @@
   "paths": {
     "/v3/recipients/erasejob": {
       "post": {
-        "operationId": "PostRecipientsErasejob",
+        "operationId": "EraseRecipientEmailData",
         "summary": "Erase recipients' email data",
         "tags": [
           "Point Delete System"

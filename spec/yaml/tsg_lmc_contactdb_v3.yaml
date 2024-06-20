@@ -33,7 +33,7 @@ servers:
 paths:
   /v3/contactdb/custom_fields:
     post:
-      operationId: PostContactdbCustomFields
+      operationId: CreateCustomField
       summary: Create a Custom Field
       tags:
       - Custom Fields
@@ -86,7 +86,7 @@ paths:
                     - field: name
                       message: Returned if custom field name is not provided
     get:
-      operationId: GetContactdbCustomFields
+      operationId: ListCustomField
       summary: Retrieve all custom fields
       tags:
       - Custom Fields
@@ -151,7 +151,7 @@ paths:
       schema:
         type: integer
     get:
-      operationId: GetContactdbCustomFieldsCustomFieldId
+      operationId: GetCustomField
       summary: Retrieve a Custom Field
       tags:
       - Custom Fields
@@ -206,7 +206,7 @@ paths:
                     errors:
                     - message: Custom field ID does not exist
     delete:
-      operationId: DeleteContactdbCustomFieldsCustomFieldId
+      operationId: DeleteCustomField
       summary: Delete a Custom Field
       tags:
       - Custom Fields
@@ -261,7 +261,7 @@ paths:
                     - message: Custom field ID does not exist
   /v3/contactdb/lists:
     post:
-      operationId: PostContactdbLists
+      operationId: CreateContactDbList
       summary: Create a List
       tags:
       - Lists
@@ -324,7 +324,7 @@ paths:
                     - field: null
                       message: authorization required
     get:
-      operationId: GetContactdbLists
+      operationId: ListContactDbList
       summary: Retrieve all lists
       tags:
       - Lists
@@ -355,7 +355,7 @@ paths:
                       name: the jones
                       recipient_count: 1
     delete:
-      operationId: DeleteContactdbLists
+      operationId: DeleteContactDbLists
       summary: Delete Multiple lists
       tags:
       - Lists
@@ -413,7 +413,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetContactdbListsListId
+      operationId: GetContactDbList
       summary: Retrieve a single list
       tags:
       - Lists
@@ -474,7 +474,7 @@ paths:
                     - field: null
                       message: List ID does not exist
     patch:
-      operationId: PatchContactdbListsListId
+      operationId: UpdateContactDbList
       summary: Update a List
       tags:
       - Lists
@@ -548,7 +548,7 @@ paths:
                     errors:
                     - message: List ID does not exist
     delete:
-      operationId: DeleteContactdbListsListId
+      operationId: DeleteContactDbList
       summary: Delete a List
       tags:
       - Lists
@@ -618,7 +618,7 @@ paths:
       schema:
         type: integer
     get:
-      operationId: GetContactdbListsListIdRecipients
+      operationId: ListRecipientsFromContactDbList
       summary: Retrieve all recipients on a List
       tags:
       - Lists
@@ -725,7 +725,7 @@ paths:
                     - field: list_id
                       message: Returned if list_id is invalid
     post:
-      operationId: PostContactdblistsListIdRecipients
+      operationId: AddRecipientsToContactDbList
       summary: Add Multiple Recipients to a List
       tags:
       - Lists
@@ -812,7 +812,7 @@ paths:
       schema:
         type: string
     post:
-      operationId: PostContactdbListsListIdRecipientsRecipientId
+      operationId: AddRecipientToContactDbList
       summary: Add a Single Recipient to a List
       tags:
       - Lists
@@ -867,7 +867,7 @@ paths:
                     - field: recipient_id
                       message: Returned if recipient_id does not exist
     delete:
-      operationId: DeleteContactdbListsListIdRecipientsRecipientId
+      operationId: DeleteRecipientFromContactDbList
       summary: Delete a Single Recipient from a Single List
       tags:
       - Lists
@@ -938,7 +938,7 @@ paths:
                       message: Returned if recipient_id does not exist
   /v3/contactdb/recipients:
     post:
-      operationId: PostContactdbRecipients
+      operationId: AddRecipient
       summary: Add recipients
       tags:
       - Recipients
@@ -1031,7 +1031,7 @@ paths:
                     - field: null
                       message: authorization required
     patch:
-      operationId: PatchContactdbRecipients
+      operationId: UpdateRecipient
       summary: Update Recipient
       tags:
       - Recipients
@@ -1104,7 +1104,7 @@ paths:
                     - field: null
                       message: authorization required
     delete:
-      operationId: DeleteContactdbRecipients
+      operationId: DeleteRecipients
       summary: Delete Recipients
       tags:
       - Recipients
@@ -1156,7 +1156,7 @@ paths:
                     - field: null
                       message: authorization required
     get:
-      operationId: GetContactdbRecipients
+      operationId: ListRecipient
       summary: Retrieve recipients
       tags:
       - Recipients
@@ -1225,7 +1225,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetContactdbRecipientsRecipientId
+      operationId: GetRecipient
       summary: Retrieve a single recipient
       tags:
       - Recipients
@@ -1265,7 +1265,7 @@ paths:
               schema:
                 type: object
     delete:
-      operationId: DeleteContactdbRecipientsRecipientId
+      operationId: DeleteRecipient
       summary: Delete a Recipient
       tags:
       - Recipients
@@ -1329,7 +1329,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetContactdbRecipientsRecipientIdLists
+      operationId: GetRecipientList
       summary: Retrieve the lists that a recipient is on
       tags:
       - Recipients
@@ -1398,7 +1398,7 @@ paths:
                       message: recipient id not found
   /v3/contactdb/recipients/billable_count:
     get:
-      operationId: GetContactdbRecipientsBillableCount
+      operationId: GetBillable
       summary: Retrieve the count of billable recipients
       tags:
       - Recipients
@@ -1436,7 +1436,7 @@ paths:
                       message: authorization required
   /v3/contactdb/recipients/count:
     get:
-      operationId: GetContactdbRecipientsCount
+      operationId: ListRecipientCount
       summary: Retrieve a Count of Recipients
       tags:
       - Recipients
@@ -1469,7 +1469,7 @@ paths:
                       message: authorization required
   /v3/contactdb/recipients/search:
     get:
-      operationId: GetContactdbRecipientsSearch
+      operationId: ListSearchRecipient
       summary: Search recipients
       tags:
       - Recipients
@@ -1558,7 +1558,7 @@ paths:
                     - field: null
                       message: authorization required
     post:
-      operationId: PostContactdbRecipientsSearch
+      operationId: SearchRecipient
       summary: Search recipients
       tags:
       - Recipients
@@ -1709,7 +1709,7 @@ paths:
           description: ''
   /v3/contactdb/reserved_fields:
     get:
-      operationId: GetContactdbReservedFields
+      operationId: ListReservedField
       summary: Retrieve reserved fields
       tags:
       - Custom Fields
@@ -1774,7 +1774,7 @@ paths:
                       message: authorization required
   /v3/contactdb/segments:
     post:
-      operationId: PostContactdbSegments
+      operationId: CreateSegment
       summary: Create a Segment
       tags:
       - Segments
@@ -1880,7 +1880,7 @@ paths:
                     - field: null
                       message: authorization required
     get:
-      operationId: GetContactdbSegments
+      operationId: ListSegment
       summary: Retrieve all segments
       tags:
       - Segments
@@ -1940,7 +1940,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetContactdbSegmentsSegmentId
+      operationId: GetSegment
       summary: Retrieve a segment
       tags:
       - Segments
@@ -2008,7 +2008,7 @@ paths:
                     errors:
                     - message: segment_id not found
     patch:
-      operationId: PatchContactdbSegmentsSegmentId
+      operationId: UpdateSegment
       summary: Update a segment
       tags:
       - Segments
@@ -2117,7 +2117,7 @@ paths:
                     - field: null
                       message: authorization required
     delete:
-      operationId: DeleteContactdbSegmentsSegmentId
+      operationId: DeleteSegment
       summary: Delete a segment
       tags:
       - Segments
@@ -2191,7 +2191,7 @@ paths:
       schema:
         type: integer
     get:
-      operationId: GetContactdbSegmentsSegmentIdRecipients
+      operationId: ListRecipientForSegment
       summary: Retrieve recipients on a segment
       tags:
       - Segments
@@ -2266,7 +2266,7 @@ paths:
                 type: object
   /v3/contactdb/status:
     get:
-      operationId: GetContactdbStatus
+      operationId: ListStatus
       summary: Get Recipient Upload Status
       tags:
       - Recipients
@@ -2327,13 +2327,18 @@ components:
         type: text
     ContactdbCustomFieldId2xx:
       title: ContactDB Custom field schema with ID.
-      allOf:
-      - $ref: '#/components/schemas/ContactdbCustomField'
-      - type: object
-        properties:
-          id:
-            type: number
-            description: The ID of the custom field.
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the field
+        type:
+          type: string
+          description: The type of the field.
+          $ref: '#/components/schemas/Type'
+        id:
+          type: number
+          description: The ID of the custom field.
     ContactdbList2xx:
       title: ContactDB lists
       type: object
@@ -2358,14 +2363,22 @@ components:
         recipient_count: 0
     ContactdbCustomFieldIdValue:
       title: ContactDB Custom field schema.
-      allOf:
-      - $ref: '#/components/schemas/ContactdbCustomFieldId2xx'
-      - type: object
-        properties:
-          value:
-            description: The value of this recipient's custom field
-            nullable: true
-            type: string
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the field
+        type:
+          type: string
+          description: The type of the field.
+          $ref: '#/components/schemas/Type'
+        id:
+          type: number
+          description: The ID of the custom field.
+        value:
+          description: The value of this recipient's custom field
+          nullable: true
+          type: string
     ContactdbRecipient200:
       title: 'ContactDB: Recipient'
       type: object
@@ -2504,7 +2517,7 @@ components:
           $ref: '#/components/schemas/Operator'
         and_or:
           type: string
-          $ref: '#/components/schemas/And_or'
+          $ref: '#/components/schemas/AndOr'
       required:
       - field
       - value
@@ -2552,15 +2565,32 @@ components:
         recipient_count: 1234
     ContactdbSegmentsId200:
       title: 'ContactDB:: Segments with ID'
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: number
-            description: The ID of the segment.
-        required:
-        - id
-      - $ref: '#/components/schemas/ContactdbSegments'
+      type: object
+      properties:
+        id:
+          type: number
+          description: The ID of the segment.
+        name:
+          type: string
+          description: The name of this segment.
+        list_id:
+          type: integer
+          description: The list id from which to make this segment. Not including
+            this ID will mean your segment is created from the main contactdb rather
+            than a list.
+        conditions:
+          type: array
+          description: The conditions for a recipient to be included in this segment.
+          items:
+            $ref: '#/components/schemas/ContactdbSegmentsConditions'
+        recipient_count:
+          type: number
+          description: The count of recipients in this list. This is not included
+            on creation of segments.
+      required:
+      - id
+      - conditions
+      - name
     ErrorResponse:
       type: object
       properties:
@@ -2603,7 +2633,7 @@ components:
       - lt
       - gt
       - contains
-    And_or:
+    AndOr:
       type: string
       enum:
       - and

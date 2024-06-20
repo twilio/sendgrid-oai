@@ -31,7 +31,7 @@ servers:
 paths:
   /v3/alerts:
     post:
-      operationId: PostAlerts
+      operationId: CreateAlert
       summary: Create a new Alert
       tags:
       - Alerts
@@ -139,7 +139,7 @@ paths:
                   message:
                     type: string
     get:
-      operationId: GetAlerts
+      operationId: ListAlert
       summary: Retrieve all alerts
       tags:
       - Alerts
@@ -220,7 +220,7 @@ paths:
       schema:
         type: integer
     get:
-      operationId: GetAlertsAlertId
+      operationId: GetAlert
       summary: Retrieve a specific alert
       tags:
       - Alerts
@@ -278,7 +278,7 @@ paths:
                     type: stats_notification
                     updated_at: 1451520930
     delete:
-      operationId: DeleteAlertsAlertId
+      operationId: DeleteAlert
       summary: Delete an alert
       tags:
       - Alerts
@@ -294,7 +294,7 @@ paths:
                 type: object
                 properties: {}
     patch:
-      operationId: PatchAlertsAlertId
+      operationId: UpdateAlert
       summary: Update an alert
       tags:
       - Alerts

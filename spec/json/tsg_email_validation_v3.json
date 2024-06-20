@@ -32,7 +32,7 @@
   "paths": {
     "/v3/validations/email": {
       "post": {
-        "operationId": "PostValidationsEmail",
+        "operationId": "ValidateEmail",
         "summary": "Validate an email",
         "tags": [
           "Email Address Validation"
@@ -227,7 +227,7 @@
     },
     "/v3/validations/email/jobs": {
       "put": {
-        "operationId": "PutValidationsEmailJobs",
+        "operationId": "ListEmailJobForVerification",
         "summary": "Request a presigned URL and headers for Bulk Email Address Validation list upload.",
         "tags": [
           "Bulk Email Address Validation"
@@ -242,7 +242,7 @@
                   "file_type": {
                     "type": "string",
                     "description": "The format of the file you wish to upload.",
-                    "$ref": "#/components/schemas/File_type"
+                    "$ref": "#/components/schemas/FileType"
                   }
                 },
                 "required": [
@@ -407,7 +407,7 @@
         }
       ],
       "get": {
-        "operationId": "GetValidationsEmailJobsJobId",
+        "operationId": "GetEmailJobForVerification",
         "summary": "This request returns a single Bulk Email Validation Job.",
         "tags": [
           "Bulk Email Address Validation"
@@ -635,7 +635,7 @@
           "Invalid"
         ]
       },
-      "File_type": {
+      "FileType": {
         "type": "string",
         "enum": [
           "csv",

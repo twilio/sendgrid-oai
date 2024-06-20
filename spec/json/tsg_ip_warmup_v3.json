@@ -32,7 +32,7 @@
   "paths": {
     "/v3/ips/warmup": {
       "post": {
-        "operationId": "PostIpsWarmup",
+        "operationId": "WarmUpIp",
         "summary": "Start warming up an IP address",
         "tags": [
           "IP Warmup"
@@ -121,7 +121,7 @@
         }
       },
       "get": {
-        "operationId": "GetIpsWarmup",
+        "operationId": "ListWarmUpIp",
         "summary": "Retrieve all IPs currently in warmup",
         "tags": [
           "IP Warmup"
@@ -164,7 +164,7 @@
         }
       ],
       "get": {
-        "operationId": "GetIpsWarmupIpAddress",
+        "operationId": "GetWarmUpIp",
         "summary": "Retrieve the warmup status for a specific IP address",
         "tags": [
           "IP Warmup"
@@ -235,7 +235,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteIpsWarmupIpAddress",
+        "operationId": "StopIpWarmUp",
         "summary": "Stop warming up an IP address",
         "tags": [
           "IP Warmup"

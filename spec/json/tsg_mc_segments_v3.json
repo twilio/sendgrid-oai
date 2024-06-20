@@ -32,7 +32,7 @@
   "paths": {
     "/v3/marketing/segments": {
       "get": {
-        "operationId": "GetMarketingSegments",
+        "operationId": "ListSegment",
         "summary": "Get List of Segments",
         "tags": [
           "Segmenting Contacts"
@@ -45,7 +45,10 @@
             "description": "A list of segment IDs to retrieve. When this parameter is included, the `no_parent_list_ids` and `parent_list_ids` parameters are ignored and only segments with given IDs are returned.",
             "required": false,
             "schema": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
@@ -170,7 +173,7 @@
         }
       ],
       "get": {
-        "operationId": "GetMarketingSegmentsSegmentId",
+        "operationId": "GetSegment",
         "summary": "Get Segment by ID",
         "tags": [
           "Segmenting Contacts"
@@ -329,7 +332,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteMarketingSegmentsSegmentId",
+        "operationId": "DeleteSegment",
         "summary": "Delete Segment",
         "tags": [
           "Segmenting Contacts"
@@ -432,32 +435,6 @@
     "schemas": {
       "FullSegment": {
         "title": "full_segment",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/SegmentSummary"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "contacts_sample": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ContactResponse"
-                }
-              },
-              "query_json": {
-                "type": "object",
-                "description": "AST representation of the query DSL"
-              }
-            },
-            "required": [
-              "contacts_sample"
-            ]
-          },
-          {
-            "$ref": "#/components/schemas/SegmentWriteV2"
-          }
-        ],
         "example": {
           "id": "58567a46-305e-48d1-b4f8-a006c906920e",
           "contacts_count": 9266921,
@@ -466,8 +443,8 @@
           "updated_at": "4431-05-07T22:23:22.352Z",
           "contacts_sample": [
             {
-              "contact_id": "c1183ada-b784-49ac-9b1f-50e73578a6dc",
-              "primary_email": "ft88@d.izxx",
+              "id": "c1183ada-b784-49ac-9b1f-50e73578a6dc",
+              "email": "ft88@d.izxx",
               "external_id": "1234",
               "alternate_emails": [
                 "yKDUP11FDch@QoU.vwy",
@@ -493,7 +470,83 @@
           "query_dsl": "cillum eiusmod",
           "parent_list_id": "2357714d-3d82-4c80-826c-b44a4147f81c",
           "next_sample_update": ""
-        }
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "format": "uuid"
+          },
+          "contacts_count": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO8601 of created timestamp\n",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "Name of the segment."
+          },
+          "parent_list_id": {
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "format": "uuid",
+            "description": "The id of the list if this segment is a child of a list.  This implies the query `AND CONTAINS(list_ids, ${parent_list_id})`"
+          },
+          "sample_updated_at": {
+            "type": "string",
+            "description": "ISO8601 timestamp the sample was last updated",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "ISO8601 timestamp the object was last updated",
+            "format": "date-time"
+          },
+          "next_sample_update": {
+            "type": "string",
+            "description": "ISO8601 string that is equal to `sample_updated_at` plus an internally calculated offset that depends on how often contacts enter or exit segments as the scheduled pipeline updates the samples."
+          },
+          "contacts_sample": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactResponse"
+            }
+          },
+          "query_json": {
+            "type": "object",
+            "description": "AST representation of the query DSL"
+          },
+          "parent_list_ids": {
+            "type": "array",
+            "description": "The array of list ids to filter contacts on when building this segment. It allows only one such list id for now. We will support more in future",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "query_dsl": {
+            "type": "string",
+            "description": "SQL query which will filter contacts based on the conditions provided"
+          }
+        },
+        "required": [
+          "query_dsl",
+          "updated_at",
+          "sample_updated_at",
+          "contacts_count",
+          "id",
+          "contacts_sample",
+          "created_at",
+          "name"
+        ]
       },
       "SegmentSummary": {
         "title": "segment_summary",

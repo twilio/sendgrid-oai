@@ -27,7 +27,7 @@ servers:
 paths:
   /v3/marketing/test/send_email:
     post:
-      operationId: PostMarketingTestSendEmail
+      operationId: SendTestMarketingEmail
       summary: Send a Test Marketing Email
       tags:
       - Send Test Email

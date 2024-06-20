@@ -281,7 +281,7 @@
             "$ref": "#/components/responses/IpAddressManagement500"
           }
         },
-        "operationId": "GetSendIpsIps",
+        "operationId": "ListIp",
         "description": "This operation returns a list of all IP addresses associated with your account. A sample of IP details is returned with each IP, including which Pools the IP is associated with, whether the IP is set to warm up automatically, and when the IP was last updated.\n\n### Limitations\n\nThe `is_parent_assigned` parameter and `pool` parameter cannot be used at the same time. By definition, an IP cannot be assigned to a Pool if it is not first enabled. You can use either the `before_key` or `after_key` in combination with the `limit` parameter to iterate through paginated results but not both.",
         "parameters": [
           {
@@ -327,7 +327,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "PostSendIpsIps",
+        "operationId": "AddIp",
         "responses": {
           "201": {
             "description": "Created",
@@ -600,7 +600,7 @@
             "$ref": "#/components/responses/IpAddressManagement500"
           }
         },
-        "operationId": "GetSendIpsIpsIp",
+        "operationId": "GetIp",
         "description": "This operation returns details for a specified IP address. Details include whether the IP is assigned to a parent account, set to warm up automatically, which Pools the IP is associated with, when the IP was added and modified, whether the IP is leased, and whether the IP is enabled. Note that this operation will not return Subuser information associated with the IP. To retrieve Subuser information, use the \"Get a List of Subusers Assigned to an IP\" endpoint."
       },
       "parameters": [
@@ -613,7 +613,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "PatchSendIpsIpsIp",
+        "operationId": "UpdateIp",
         "responses": {
           "200": {
             "description": "OK",
@@ -815,7 +815,7 @@
             "$ref": "#/components/responses/IpAddressManagement500"
           }
         },
-        "operationId": "GetSendIpsIpsIpSubusers",
+        "operationId": "ListSubUserAssignedToIp",
         "description": "This operation returns a list of Subuser IDs that have been assigned the specified IP address. To retrieve more information about the returned Subusers, use the [Subusers API](https://docs.sendgrid.com/api-reference/subusers-api/list-all-subusers).\n\nYou can use the `after_key` and `limit` query parameters to iterate through paginated results. The maximum limit is 100, meaning you may retrieve up to 100 Subusers per request. If the `after_key` in the API response is not null, there are more Subusers assigned to the IP address than those returned in the request. You can repeat the request with the non-null `after_key` value and the same limit to retrieve the next group of Subusers.",
         "parameters": [
           {
@@ -844,7 +844,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "PostSendIpsIpsIpSubusers",
+        "operationId": "AddSubUsersToIp",
         "responses": {
           "200": {
             "description": "OK",
@@ -962,7 +962,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "PostSendIpsIpsIpSubusersBatchAdd",
+        "operationId": "DeleteSubUsersFromIp",
         "responses": {
           "204": {
             "description": "No Content"
@@ -1045,7 +1045,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "GetSendIpsIpsIpSubusersBatchDelete",
+        "operationId": "ListIpPool",
         "description": "This operation returns a list of your IP Pools and a sample of each Pools' associated IP addresses.\n\nA maximum of 10 IPs will be returned per IP Pool by default. To retrieve additional IP addresses associated with a Pool, use the \"Get IPs Assigned to an IP Pool\" operation. Each user may have a maximum of 100 IP Pools.",
         "parameters": [
           {
@@ -1230,7 +1230,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "PostSendIpsPools",
+        "operationId": "CreateIpPool",
         "responses": {
           "201": {
             "description": "Created",
@@ -1359,7 +1359,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "GetSendIpsPools",
+        "operationId": "GetIpPool",
         "parameters": [
           {
             "$ref": "#/components/parameters/IpAddressManagementIncludeRegion"
@@ -1460,7 +1460,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "PutSendIpsPoolsPoolId",
+        "operationId": "UpdateIpPool",
         "responses": {
           "200": {
             "description": "OK",
@@ -1562,7 +1562,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "DeleteSendIpsPoolsPoolId",
+        "operationId": "DeleteIpPool",
         "responses": {
           "204": {
             "description": "No Content"
@@ -1724,7 +1724,7 @@
             "$ref": "#/components/responses/IpAddressManagement500"
           }
         },
-        "operationId": "GetSendIpsPoolsPoolIdIps",
+        "operationId": "ListIpAssignedToIpPool",
         "description": "This operation returns the IP addresses that are assigned to the specified IP pool.",
         "parameters": [
           {
@@ -1755,7 +1755,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "PostSendIpsPoolsPoolIdIps",
+        "operationId": "AddIpsToIpPool",
         "responses": {
           "200": {
             "description": "OK",
@@ -1882,7 +1882,7 @@
         "tags": [
           "IP Address Management"
         ],
-        "operationId": "PostSendIpsPoolsPoolIdIpsBatchAdd",
+        "operationId": "DeleteIpsFromIpPool",
         "responses": {
           "204": {
             "description": "No Content"

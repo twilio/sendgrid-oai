@@ -37,7 +37,7 @@ servers:
 paths:
   /v3/marketing/field_definitions:
     post:
-      operationId: PostMarketingFieldDefinitions
+      operationId: CreateFieldDefinition
       summary: Create Custom Field Definition
       tags:
       - Custom Fields
@@ -73,7 +73,7 @@ paths:
                   maxLength: 100
                 field_type:
                   type: string
-                  $ref: '#/components/schemas/Field_type'
+                  $ref: '#/components/schemas/FieldType'
               required:
               - name
               - field_type
@@ -86,12 +86,23 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                - $ref: '#/components/schemas/CustomFieldDefinitionsResponse'
-                - type: object
-                  properties:
-                    _metadata:
-                      $ref: '#/components/schemas/Metadata'
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 100
+                  field_type:
+                    type: string
+                    $ref: '#/components/schemas/FieldType2'
+                  _metadata:
+                    $ref: '#/components/schemas/Metadata'
+                required:
+                - id
+                - field_type
+                - name
               examples:
                 response:
                   value:
@@ -115,7 +126,7 @@ paths:
                 required:
                 - errors
     get:
-      operationId: GetMarketingFieldDefinitions
+      operationId: ListFieldDefinition
       summary: Get All Field Definitions
       tags:
       - Custom Fields
@@ -244,7 +255,7 @@ paths:
       schema:
         type: string
     patch:
-      operationId: PatchMarketingFieldDefinitionsCustomFieldId
+      operationId: UpdateFieldDefinition
       summary: Update Custom Field Definition
       tags:
       - Custom Fields
@@ -272,12 +283,23 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                - $ref: '#/components/schemas/CustomFieldDefinitionsResponse'
-                - type: object
-                  properties:
-                    _metadata:
-                      $ref: '#/components/schemas/Metadata'
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 100
+                  field_type:
+                    type: string
+                    $ref: '#/components/schemas/FieldType2'
+                  _metadata:
+                    $ref: '#/components/schemas/Metadata'
+                required:
+                - id
+                - field_type
+                - name
               examples:
                 response:
                   value:
@@ -315,7 +337,7 @@ paths:
                 required:
                 - errors
     delete:
-      operationId: DeleteMarketingFieldDefinitionsCustomFieldId
+      operationId: DeleteFieldDefinition
       summary: Delete Custom Field Definition
       tags:
       - Custom Fields
@@ -354,7 +376,7 @@ components:
             maxLength: 100
           field_type:
             type: string
-            $ref: '#/components/schemas/Field_type1'
+            $ref: '#/components/schemas/FieldType1'
           read_only:
             type: boolean
             default: false
@@ -410,7 +432,7 @@ components:
           maxLength: 100
         field_type:
           type: string
-          $ref: '#/components/schemas/Field_type2'
+          $ref: '#/components/schemas/FieldType2'
       required:
       - id
       - name
@@ -419,19 +441,19 @@ components:
         id: a1_D
         name: custom_field_name
         field_type: Date
-    Field_type:
+    FieldType:
       type: string
       enum:
       - Text
       - Number
       - Date
-    Field_type1:
+    FieldType1:
       type: string
       enum:
       - Text
       - Number
       - Date
-    Field_type2:
+    FieldType2:
       type: string
       enum:
       - Text

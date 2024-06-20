@@ -32,7 +32,7 @@
   "paths": {
     "/v3/api_keys": {
       "post": {
-        "operationId": "PostApiKeys",
+        "operationId": "CreateApiKey",
         "summary": "Create API keys",
         "tags": [
           "API Keys"
@@ -136,7 +136,7 @@
         }
       },
       "get": {
-        "operationId": "GetApiKeys",
+        "operationId": "ListApiKey",
         "summary": "Retrieve all API Keys belonging to the authenticated user",
         "tags": [
           "API Keys"
@@ -217,7 +217,7 @@
         }
       ],
       "get": {
-        "operationId": "GetApiKeysApiKeyId",
+        "operationId": "GetApiKey",
         "summary": "Retrieve an existing API Key",
         "tags": [
           "API Keys"
@@ -281,7 +281,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchApiKeysApiKeyId",
+        "operationId": "UpdateApiKeyName",
         "summary": "Update API key name",
         "tags": [
           "API Keys"
@@ -350,7 +350,7 @@
         }
       },
       "put": {
-        "operationId": "PutApiKeysApiKeyId",
+        "operationId": "UpdateApiKey",
         "summary": "Update API key name and scopes",
         "tags": [
           "API Keys"
@@ -432,7 +432,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteApiKeysApiKeyId",
+        "operationId": "DeleteApiKey",
         "summary": "Delete API keys",
         "tags": [
           "API Keys"
@@ -488,23 +488,6 @@
       },
       "ApiKeyScopesResponse": {
         "title": "API Key Name, ID, and Scopes",
-        "allOf": [
-          {
-            "type": "object",
-            "properties": {
-              "scopes": {
-                "type": "array",
-                "description": "The permissions this API Key has access to.",
-                "items": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          {
-            "$ref": "#/components/schemas/ApiKeyResponse"
-          }
-        ],
         "example": {
           "api_key_id": "qfTQ6KG0QBiwWdJ0-pCLCA",
           "name": "Mail Send",
@@ -522,6 +505,24 @@
             "sender_verification_legacy",
             "2fa_required"
           ]
+        },
+        "type": "object",
+        "properties": {
+          "scopes": {
+            "type": "array",
+            "description": "The permissions this API Key has access to.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "api_key_id": {
+            "type": "string",
+            "description": "The ID of your API Key. "
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of your API Key."
+          }
         }
       },
       "ErrorResponse": {

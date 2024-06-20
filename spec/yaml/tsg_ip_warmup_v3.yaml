@@ -39,7 +39,7 @@ servers:
 paths:
   /v3/ips/warmup:
     post:
-      operationId: PostIpsWarmup
+      operationId: WarmUpIp
       summary: Start warming up an IP address
       tags:
       - IP Warmup
@@ -94,7 +94,7 @@ paths:
                     - field: null
                       message: resource not found
     get:
-      operationId: GetIpsWarmup
+      operationId: ListWarmUpIp
       summary: Retrieve all IPs currently in warmup
       tags:
       - IP Warmup
@@ -121,7 +121,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetIpsWarmupIpAddress
+      operationId: GetWarmUpIp
       summary: Retrieve the warmup status for a specific IP address
       tags:
       - IP Warmup
@@ -170,7 +170,7 @@ paths:
                     - field: null
                       message: resource not found
     delete:
-      operationId: DeleteIpsWarmupIpAddress
+      operationId: StopIpWarmUp
       summary: Stop warming up an IP address
       tags:
       - IP Warmup

@@ -32,7 +32,7 @@
   "paths": {
     "/v3/subusers": {
       "get": {
-        "operationId": "GetSubusers",
+        "operationId": "ListSubuser",
         "summary": "List all Subusers",
         "tags": [
           "Subusers"
@@ -135,7 +135,7 @@
         }
       },
       "post": {
-        "operationId": "PostSubusers",
+        "operationId": "CreateSubuser",
         "summary": "Create Subuser",
         "tags": [
           "Subusers"
@@ -322,7 +322,7 @@
         }
       ],
       "patch": {
-        "operationId": "PatchSubusersSubuserName",
+        "operationId": "UpdateSubuser",
         "summary": "Enable/disable a subuser",
         "tags": [
           "Subusers"
@@ -428,7 +428,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteSubusersSubuserName",
+        "operationId": "DeleteSubuser",
         "summary": "Delete a subuser",
         "tags": [
           "Subusers"
@@ -483,7 +483,7 @@
         }
       ],
       "patch": {
-        "operationId": "PatchSubusersSubuserNameWebsiteAccess",
+        "operationId": "UpdateSubuserWebsiteAccess",
         "summary": "Enable/Disable website access for a Subuser",
         "tags": [
           "Subuser Website Access"
@@ -529,7 +529,7 @@
         }
       ],
       "get": {
-        "operationId": "GetSubusersSubuserNameCredits",
+        "operationId": "GetSubuserCredit",
         "summary": "Get the Credits for a Subuser",
         "tags": [
           "Subusers"
@@ -582,7 +582,7 @@
         }
       },
       "put": {
-        "operationId": "PutSubusersSubuserNameCredits",
+        "operationId": "UpdateSubuserCredit",
         "summary": "Update the Credits for a Subuser",
         "tags": [
           "Subusers"
@@ -652,7 +652,7 @@
         }
       ],
       "patch": {
-        "operationId": "PatchSubusersSubuserNameCreditsRemaining",
+        "operationId": "UpdateSubuserRemainingCredit",
         "summary": "Update the remaining credits for a Subuser",
         "tags": [
           "Subusers"
@@ -734,7 +734,7 @@
         }
       ],
       "put": {
-        "operationId": "PutSubusersSubuserNameIps",
+        "operationId": "UpdateSubuserIp",
         "summary": "Update IPs assigned to a subuser",
         "tags": [
           "Subusers"
@@ -819,7 +819,7 @@
         }
       ],
       "get": {
-        "operationId": "GetSubusersSubuserNameStatsMonthly",
+        "operationId": "ListSubuserMonthlyStat",
         "summary": "Retrieve the monthly email statistics for a single subuser",
         "tags": [
           "Subuser Statistics"
@@ -926,7 +926,7 @@
     },
     "/v3/subusers/reputations": {
       "get": {
-        "operationId": "GetSubusersReputations",
+        "operationId": "ListReputation",
         "summary": "Retrieve Subuser Reputations",
         "tags": [
           "Subusers"
@@ -988,7 +988,7 @@
     },
     "/v3/subusers/stats": {
       "get": {
-        "operationId": "GetSubusersStats",
+        "operationId": "ListStat",
         "summary": "Retrieve email statistics for your subusers.",
         "tags": [
           "Subuser Statistics"
@@ -1346,7 +1346,7 @@
     },
     "/v3/subusers/stats/monthly": {
       "get": {
-        "operationId": "GetSubusersStatsMonthly",
+        "operationId": "ListMonthlyStat",
         "summary": "Retrieve monthly stats for all subusers",
         "tags": [
           "Subuser Statistics"
@@ -1487,7 +1487,7 @@
     },
     "/v3/subusers/stats/sums": {
       "get": {
-        "operationId": "GetSubusersStatsSums",
+        "operationId": "ListStatSum",
         "summary": "Retrieve the totals for each email statistic metric for all subusers.",
         "tags": [
           "Subuser Statistics"
@@ -1733,7 +1733,7 @@
             "type": "string",
             "nullable": true,
             "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`, otherwise `null`.",
-            "$ref": "#/components/schemas/Reset_frequency"
+            "$ref": "#/components/schemas/ResetFrequency"
           },
           "remain": {
             "type": "integer",
@@ -1781,7 +1781,7 @@
           "reset_frequency": {
             "type": "string",
             "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`. Do _not_ include `reset_frequency` if you choose a reset `type` value of `unlimited` or `nonrecurring`.",
-            "$ref": "#/components/schemas/Reset_frequency1"
+            "$ref": "#/components/schemas/ResetFrequency1"
           },
           "total": {
             "type": "integer",
@@ -2204,7 +2204,7 @@
           "nonrecurring"
         ]
       },
-      "Reset_frequency": {
+      "ResetFrequency": {
         "type": "string",
         "enum": [
           "monthly",
@@ -2220,7 +2220,7 @@
           "nonrecurring"
         ]
       },
-      "Reset_frequency1": {
+      "ResetFrequency1": {
         "type": "string",
         "enum": [
           "monthly",

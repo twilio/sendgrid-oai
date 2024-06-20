@@ -32,7 +32,7 @@
   "paths": {
     "/v3/alerts": {
       "post": {
-        "operationId": "PostAlerts",
+        "operationId": "CreateAlert",
         "summary": "Create a new Alert",
         "tags": [
           "Alerts"
@@ -164,7 +164,7 @@
         }
       },
       "get": {
-        "operationId": "GetAlerts",
+        "operationId": "ListAlert",
         "summary": "Retrieve all alerts",
         "tags": [
           "Alerts"
@@ -273,7 +273,7 @@
         }
       ],
       "get": {
-        "operationId": "GetAlertsAlertId",
+        "operationId": "GetAlert",
         "summary": "Retrieve a specific alert",
         "tags": [
           "Alerts"
@@ -348,7 +348,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteAlertsAlertId",
+        "operationId": "DeleteAlert",
         "summary": "Delete an alert",
         "tags": [
           "Alerts"
@@ -374,7 +374,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchAlertsAlertId",
+        "operationId": "UpdateAlert",
         "summary": "Update an alert",
         "tags": [
           "Alerts"

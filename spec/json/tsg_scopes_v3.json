@@ -32,7 +32,7 @@
   "paths": {
     "/v3/scopes": {
       "get": {
-        "operationId": "GetScopes",
+        "operationId": "ListScope",
         "summary": "Retrieve a list of scopes for which this user has access.",
         "tags": [
           "Scopes"
@@ -140,7 +140,7 @@
     },
     "/v3/scopes/requests": {
       "get": {
-        "operationId": "GetScopesRequests",
+        "operationId": "ListScopeRequest",
         "summary": "Retrieve access requests",
         "tags": [
           "Scopes"
@@ -239,7 +239,7 @@
         }
       ],
       "delete": {
-        "operationId": "DeleteScopesRequestsRequestId",
+        "operationId": "DenyScopeRequest",
         "summary": "Deny access request",
         "tags": [
           "Scopes"
@@ -306,7 +306,7 @@
         }
       ],
       "patch": {
-        "operationId": "PatchScopesRequestsApproveId",
+        "operationId": "ApproveScopeRequest",
         "summary": "Approve access request",
         "tags": [
           "Scopes"

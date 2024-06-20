@@ -31,7 +31,7 @@ servers:
 paths:
   /v3/subusers:
     get:
-      operationId: GetSubusers
+      operationId: ListSubuser
       summary: List all Subusers
       tags:
       - Subusers
@@ -113,7 +113,7 @@ paths:
                     - field: null
                       message: authorization required
     post:
-      operationId: PostSubusers
+      operationId: CreateSubuser
       summary: Create Subuser
       tags:
       - Subusers
@@ -233,7 +233,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/UserName'
     patch:
-      operationId: PatchSubusersSubuserName
+      operationId: UpdateSubuser
       summary: Enable/disable a subuser
       tags:
       - Subusers
@@ -294,7 +294,7 @@ paths:
                     errors:
                     - message: unable to enable user
     delete:
-      operationId: DeleteSubusersSubuserName
+      operationId: DeleteSubuser
       summary: Delete a subuser
       tags:
       - Subusers
@@ -330,7 +330,7 @@ paths:
       schema:
         type: string
     patch:
-      operationId: PatchSubusersSubuserNameWebsiteAccess
+      operationId: UpdateSubuserWebsiteAccess
       summary: Enable/Disable website access for a Subuser
       tags:
       - Subuser Website Access
@@ -360,7 +360,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/UserName'
     get:
-      operationId: GetSubusersSubuserNameCredits
+      operationId: GetSubuserCredit
       summary: Get the Credits for a Subuser
       tags:
       - Subusers
@@ -394,7 +394,7 @@ paths:
                     - field: null
                       message: No user found
     put:
-      operationId: PutSubusersSubuserNameCredits
+      operationId: UpdateSubuserCredit
       summary: Update the Credits for a Subuser
       tags:
       - Subusers
@@ -437,7 +437,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/UserName'
     patch:
-      operationId: PatchSubusersSubuserNameCreditsRemaining
+      operationId: UpdateSubuserRemainingCredit
       summary: Update the remaining credits for a Subuser
       tags:
       - Subusers
@@ -491,7 +491,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/UserName'
     put:
-      operationId: PutSubusersSubuserNameIps
+      operationId: UpdateSubuserIp
       summary: Update IPs assigned to a subuser
       tags:
       - Subusers
@@ -547,7 +547,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/UserName'
     get:
-      operationId: GetSubusersSubuserNameStatsMonthly
+      operationId: ListSubuserMonthlyStat
       summary: Retrieve the monthly email statistics for a single subuser
       tags:
       - Subuser Statistics
@@ -634,7 +634,7 @@ paths:
                       type: subuser
   /v3/subusers/reputations:
     get:
-      operationId: GetSubusersReputations
+      operationId: ListReputation
       summary: Retrieve Subuser Reputations
       tags:
       - Subusers
@@ -679,7 +679,7 @@ paths:
                     reputation: 95.2
   /v3/subusers/stats:
     get:
-      operationId: GetSubusersStats
+      operationId: ListStat
       summary: Retrieve email statistics for your subusers.
       tags:
       - Subuser Statistics
@@ -954,7 +954,7 @@ paths:
                         unsubscribes: 0
   /v3/subusers/stats/monthly:
     get:
-      operationId: GetSubusersStatsMonthly
+      operationId: ListMonthlyStat
       summary: Retrieve monthly stats for all subusers
       tags:
       - Subuser Statistics
@@ -1069,7 +1069,7 @@ paths:
                       type: subuser
   /v3/subusers/stats/sums:
     get:
-      operationId: GetSubusersStatsSums
+      operationId: ListStatSum
       summary: Retrieve the totals for each email statistic metric for all subusers.
       tags:
       - Subuser Statistics
@@ -1266,7 +1266,7 @@ components:
           nullable: true
           description: The frequency with which a Subuser's credits are reset if `type`
             is set to `recurring`, otherwise `null`.
-          $ref: '#/components/schemas/Reset_frequency'
+          $ref: '#/components/schemas/ResetFrequency'
         remain:
           type: integer
           nullable: true
@@ -1315,7 +1315,7 @@ components:
           description: The frequency with which a Subuser's credits are reset if `type`
             is set to `recurring`. Do _not_ include `reset_frequency` if you choose
             a reset `type` value of `unlimited` or `nonrecurring`.
-          $ref: '#/components/schemas/Reset_frequency1'
+          $ref: '#/components/schemas/ResetFrequency1'
         total:
           type: integer
           description: Total number of credits to which the Subuser is to be reset.
@@ -1667,7 +1667,7 @@ components:
       - unlimited
       - recurring
       - nonrecurring
-    Reset_frequency:
+    ResetFrequency:
       type: string
       enum:
       - monthly
@@ -1679,7 +1679,7 @@ components:
       - unlimited
       - recurring
       - nonrecurring
-    Reset_frequency1:
+    ResetFrequency1:
       type: string
       enum:
       - monthly

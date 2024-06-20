@@ -33,7 +33,7 @@ servers:
 paths:
   /v3/marketing/contacts:
     put:
-      operationId: PutMarketingContacts
+      operationId: UpdateContact
       summary: Add or Update a Contact
       tags:
       - Contacts
@@ -120,7 +120,7 @@ paths:
         '500':
           $ref: '#/components/responses/MarketingContacts500'
     delete:
-      operationId: DeleteMarketingContacts
+      operationId: DeleteContact
       summary: Delete Contacts
       tags:
       - Contacts
@@ -180,7 +180,7 @@ paths:
         '500':
           $ref: '#/components/responses/MarketingContacts500'
     get:
-      operationId: GetMarketingContacts
+      operationId: ListContact
       summary: Get Sample Contacts
       tags:
       - Contacts
@@ -236,7 +236,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetMarketingContactsId
+      operationId: GetContact
       summary: Get a Contact by ID
       tags:
       - Contacts
@@ -261,7 +261,7 @@ paths:
           $ref: '#/components/responses/MarketingContacts500'
   /v3/marketing/contacts/batch:
     post:
-      operationId: PostMarketingContactsBatch
+      operationId: ListBatchedContact
       summary: Get Batched Contacts by IDs
       tags:
       - Contacts
@@ -323,7 +323,7 @@ paths:
           $ref: '#/components/responses/MarketingContacts500'
   /v3/marketing/contacts/{contact_id}/identifiers:
     delete:
-      operationId: DeleteMarketingContactsContactIdIdentifiers
+      operationId: DeleteContactIdentifier
       summary: Delete a Contact Identifier
       tags:
       - Contacts
@@ -408,7 +408,7 @@ paths:
           $ref: '#/components/responses/MarketingContacts500'
   /v3/marketing/contacts/count:
     get:
-      operationId: GetMarketingContactsCount
+      operationId: ListContactCount
       summary: Get Total Contact Count
       tags:
       - Contacts
@@ -461,7 +461,7 @@ paths:
           $ref: '#/components/responses/MarketingContacts500'
   /v3/marketing/contacts/exports:
     post:
-      operationId: PostMarketingContactsExports
+      operationId: ExportContact
       summary: Export Contacts
       tags:
       - Contacts
@@ -516,7 +516,7 @@ paths:
                   type: string
                   description: File type for export file. Choose from `json` or `csv`.
                   default: csv
-                  $ref: '#/components/schemas/File_type'
+                  $ref: '#/components/schemas/FileType'
                 max_file_size:
                   description: The maximum size of an export file in MB. Note that
                     when this option is specified, multiple output files may be returned
@@ -558,7 +558,7 @@ paths:
         '500':
           $ref: '#/components/responses/MarketingContacts500'
     get:
-      operationId: GetMarketingContactsExports
+      operationId: ListExportContact
       summary: Get All Existing Exports
       tags:
       - Contacts
@@ -689,7 +689,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetMarketingContactsExportsId
+      operationId: GetExportContact
       summary: Export Contacts Status
       tags:
       - Contacts
@@ -728,7 +728,7 @@ paths:
           $ref: '#/components/responses/MarketingContacts500'
   /v3/marketing/contacts/imports:
     put:
-      operationId: PutMarketingContactsImports
+      operationId: ImportContact
       summary: Import Contacts
       tags:
       - Contacts
@@ -792,7 +792,7 @@ paths:
                 file_type:
                   type: string
                   description: Upload file type.
-                  $ref: '#/components/schemas/File_type1'
+                  $ref: '#/components/schemas/FileType1'
                 field_mappings:
                   type: array
                   description: Import file header to reserved/custom field mapping.
@@ -874,7 +874,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetMarketingContactsImportsId
+      operationId: GetImportContact
       summary: Import Contacts Status
       tags:
       - Contacts
@@ -916,7 +916,7 @@ paths:
           $ref: '#/components/responses/MarketingContacts500'
   /v3/marketing/contacts/search:
     post:
-      operationId: PostMarketingContactsSearch
+      operationId: SearchContact
       summary: Search Contacts
       tags:
       - Contacts
@@ -1014,7 +1014,7 @@ paths:
                           type: string
   /v3/marketing/contacts/search/emails:
     post:
-      operationId: PostMarketingContactsSearchEmails
+      operationId: ListContactByEmail
       summary: Get Contacts by Emails
       tags:
       - Contacts
@@ -1249,7 +1249,7 @@ paths:
         type: string
         $ref: '#/components/schemas/Schema'
     post:
-      operationId: PostMarketingContactsSearchIdentifiersIdentifierType
+      operationId: GetContactByIdentifiers
       summary: Get Contacts by Identifiers
       tags:
       - Contacts
@@ -1698,12 +1698,12 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
-    File_type:
+    FileType:
       type: string
       enum:
       - csv
       - json
-    File_type1:
+    FileType1:
       type: string
       enum:
       - csv

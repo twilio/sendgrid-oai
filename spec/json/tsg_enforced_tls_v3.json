@@ -32,7 +32,7 @@
   "paths": {
     "/v3/user/settings/enforced_tls": {
       "get": {
-        "operationId": "GetUserSettingsEnforcedTls",
+        "operationId": "ListEnforcedTlsSetting",
         "summary": "Retrieve current Enforced TLS settings.",
         "tags": [
           "Enforced TLS"
@@ -77,7 +77,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchUserSettingsEnforcedTls",
+        "operationId": "UpdateEnforcedTlsSetting",
         "summary": "Update Enforced TLS settings",
         "tags": [
           "Enforced TLS"

@@ -25,7 +25,7 @@ servers:
 paths:
   /v3/partner_settings:
     get:
-      operationId: GetPartnerSettings
+      operationId: ListPartnerSetting
       summary: Returns a list of all partner settings.
       tags:
       - Partner Settings

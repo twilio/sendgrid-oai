@@ -31,7 +31,7 @@ servers:
 paths:
   /v3/whitelabel/links:
     post:
-      operationId: PostWhitelabelLinks
+      operationId: CreateBrandedLink
       summary: Create a branded link
       tags:
       - Link Branding
@@ -108,7 +108,7 @@ paths:
                         host: 7.example.com
                         data: sendgrid.net
     get:
-      operationId: GetWhitelabelLinks
+      operationId: ListBrandedLink
       summary: Retrieve all branded links
       tags:
       - Link Branding
@@ -183,7 +183,7 @@ paths:
       schema:
         type: integer
     get:
-      operationId: GetWhitelabelLinksId
+      operationId: GetBrandedLink
       summary: Retrieve a branded link
       tags:
       - Link Branding
@@ -225,7 +225,7 @@ paths:
                         host: 7.example.com
                         data: sendgrid.net
     patch:
-      operationId: PatchWhitelabelLinksId
+      operationId: UpdateBrandedLink
       summary: Update a branded link
       tags:
       - Link Branding
@@ -281,7 +281,7 @@ paths:
                         host: 7.example.com
                         data: sendgrid.net
     delete:
-      operationId: DeleteWhitelabelLinksId
+      operationId: DeleteBrandedLink
       summary: Delete a branded link
       tags:
       - Link Branding
@@ -314,7 +314,7 @@ paths:
       schema:
         type: integer
     post:
-      operationId: PostWhitelabelLinksIdValidate
+      operationId: ValidateBrandedLink
       summary: Validate a branded link
       tags:
       - Link Branding
@@ -433,7 +433,7 @@ paths:
       schema:
         type: integer
     post:
-      operationId: PostWhitelabelLinksLinkIdSubuser
+      operationId: AssociateBrandedLinkWithSubuser
       summary: Associate a branded link with a subuser
       tags:
       - Link Branding
@@ -490,7 +490,7 @@ paths:
                         data: sendgrid.net
   /v3/whitelabel/links/default:
     get:
-      operationId: GetWhitelabelLinksDefault
+      operationId: ListDefaultBrandedLink
       summary: Retrieve the default branded link
       tags:
       - Link Branding
@@ -552,7 +552,7 @@ paths:
                         data: sendgrid.net
   /v3/whitelabel/links/subuser:
     get:
-      operationId: GetWhitelabelLinksSubuser
+      operationId: ListSubuserBrandedLink
       summary: Retrieve a subuser's branded link
       tags:
       - Link Branding
@@ -604,7 +604,7 @@ paths:
                         host: 7.example.com
                         data: sendgrid.net
     delete:
-      operationId: DeleteWhitelabelLinksSubuser
+      operationId: DisassociateBrandedLinkFromSubuser
       summary: Disassociate a branded link from a subuser
       tags:
       - Link Branding

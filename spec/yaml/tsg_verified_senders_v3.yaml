@@ -36,7 +36,7 @@ servers:
 paths:
   /v3/verified_senders:
     post:
-      operationId: PostVerifiedSenders
+      operationId: CreateVerifiedSender
       summary: Create Verified Sender Request
       tags:
       - Sender Verification
@@ -113,7 +113,7 @@ paths:
         '500':
           $ref: '#/components/responses/VerifiedSenders500'
     get:
-      operationId: GetVerifiedSenders
+      operationId: ListVerifiedSender
       summary: Get All Verified Senders
       tags:
       - Sender Verification
@@ -217,7 +217,7 @@ paths:
       schema:
         type: string
     patch:
-      operationId: PatchVerifiedSendersId
+      operationId: UpdateVerifiedSender
       summary: Edit Verified Sender
       tags:
       - Sender Verification
@@ -331,7 +331,7 @@ paths:
         '500':
           $ref: '#/components/responses/VerifiedSenders500'
     delete:
-      operationId: DeleteVerifiedSendersId
+      operationId: DeleteVerifiedSender
       summary: Delete Verified Sender
       tags:
       - Sender Verification
@@ -397,7 +397,7 @@ paths:
           $ref: '#/components/responses/VerifiedSenders500'
   /v3/verified_senders/domains:
     get:
-      operationId: GetVerifiedSendersDomains
+      operationId: ListVerifiedSenderDomain
       summary: Domain Warn List
       tags:
       - Sender Verification
@@ -456,7 +456,7 @@ paths:
       schema:
         type: string
     post:
-      operationId: PostVerifiedSendersResendId
+      operationId: ResendVerifiedSender
       summary: Resend Verified Sender Request
       tags:
       - Sender Verification
@@ -529,7 +529,7 @@ paths:
           $ref: '#/components/responses/VerifiedSenders500'
   /v3/verified_senders/steps_completed:
     get:
-      operationId: GetVerifiedSendersStepsCompleted
+      operationId: ListVerifiedSenderStepsCompleted
       summary: Completed Steps
       tags:
       - Sender Verification
@@ -577,7 +577,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetVerifiedSendersVerifyToken
+      operationId: VerifySenderToken
       summary: Verify Sender Request
       tags:
       - Sender Verification

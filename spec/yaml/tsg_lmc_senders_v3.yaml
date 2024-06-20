@@ -31,7 +31,7 @@ servers:
 paths:
   /v3/senders:
     post:
-      operationId: PostSenders
+      operationId: CreateSender
       summary: Create a Sender Identity
       tags:
       - Sender Identities
@@ -45,23 +45,6 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-              - $ref: '#/components/schemas/SenderIdRequest'
-              - type: object
-                properties:
-                  from:
-                    type: object
-                    required:
-                    - email
-                  reply_to:
-                    type: object
-                    required:
-                    - email
-                required:
-                - nickname
-                - address
-                - city
-                - country
               example:
                 nickname: My Sender ID
                 from:
@@ -76,6 +59,42 @@ paths:
                 state: Colorado
                 zip: '80202'
                 country: United States
+              type: object
+              properties:
+                nickname:
+                  type: string
+                  description: A nickname for the sender identity. Not used for sending.
+                from:
+                  type: object
+                  required:
+                  - email
+                reply_to:
+                  type: object
+                  required:
+                  - email
+                address:
+                  type: string
+                  description: The physical address of the sender identity.
+                address_2:
+                  type: string
+                  description: Additional sender identity address information.
+                city:
+                  type: string
+                  description: The city of the sender identity.
+                state:
+                  type: string
+                  description: The state of the sender identity.
+                zip:
+                  type: string
+                  description: The zipcode of the sender identity.
+                country:
+                  type: string
+                  description: The country of the sender identity.
+              required:
+              - country
+              - city
+              - nickname
+              - address
       responses:
         '201':
           description: ''
@@ -150,7 +169,7 @@ paths:
                     - message: country is required.
                       field: country
     get:
-      operationId: GetSenders
+      operationId: ListSender
       summary: Get all Sender Identities
       tags:
       - Sender Identities
@@ -201,7 +220,7 @@ paths:
       schema:
         type: integer
     get:
-      operationId: GetSendersSenderId
+      operationId: GetSender
       summary: View a Sender Identity
       tags:
       - Sender Identities
@@ -259,7 +278,7 @@ paths:
                     - message: resource not found
                       field: id
     patch:
-      operationId: PatchSendersSenderId
+      operationId: UpdateSender
       summary: Update a Sender Identity
       tags:
       - Sender Identities
@@ -394,7 +413,7 @@ paths:
                     - message: resource not found
                       field: id
     delete:
-      operationId: DeleteSendersSenderId
+      operationId: DeleteSender
       summary: Delete a Sender Identity
       tags:
       - Sender Identities
@@ -463,7 +482,7 @@ paths:
       schema:
         type: integer
     post:
-      operationId: PostSendersSenderIdResendVerification
+      operationId: ResetSenderVerification
       summary: Resend Sender Identity Verification
       tags:
       - Sender Identities
@@ -588,34 +607,6 @@ components:
         country: United States
     SenderId:
       title: Sender ID
-      allOf:
-      - $ref: '#/components/schemas/SenderIdRequest'
-      - type: object
-        properties:
-          id:
-            type: integer
-            description: The unique identifier of the sender identity.
-          verified:
-            type: boolean
-            description: If the sender identity is verified or not. Only verified
-              sender identities can be used to send email.
-          updated_at:
-            type: integer
-            description: The time the sender identity was last updated.
-          created_at:
-            type: integer
-            description: The time the sender identity was created.
-          locked:
-            type: boolean
-            description: True when the sender id is associated to a campaign in the
-              Draft, Scheduled, or In Progress status. You cannot update or delete
-              a locked sender identity.
-      - type: object
-        required:
-        - nickname
-        - address
-        - city
-        - country
       example:
         id: 1
         nickname: My Sender ID
@@ -635,6 +626,73 @@ components:
         updated_at: 1449872165
         created_at: 1449872165
         locked: false
+      type: object
+      properties:
+        nickname:
+          type: string
+          description: A nickname for the sender identity. Not used for sending.
+        from:
+          type: object
+          properties:
+            email:
+              type: string
+              description: The email address from which your recipient will receive
+                emails.
+            name:
+              type: string
+              description: The name appended to the from email field. Typically your
+                name or company name.
+        reply_to:
+          type: object
+          properties:
+            email:
+              type: string
+              description: The email address to which your recipient will reply.
+            name:
+              type: string
+              description: The name appended to the reply to email field. Typically
+                your name or company name.
+        address:
+          type: string
+          description: The physical address of the sender identity.
+        address_2:
+          type: string
+          description: Additional sender identity address information.
+        city:
+          type: string
+          description: The city of the sender identity.
+        state:
+          type: string
+          description: The state of the sender identity.
+        zip:
+          type: string
+          description: The zipcode of the sender identity.
+        country:
+          type: string
+          description: The country of the sender identity.
+        id:
+          type: integer
+          description: The unique identifier of the sender identity.
+        verified:
+          type: boolean
+          description: If the sender identity is verified or not. Only verified sender
+            identities can be used to send email.
+        updated_at:
+          type: integer
+          description: The time the sender identity was last updated.
+        created_at:
+          type: integer
+          description: The time the sender identity was created.
+        locked:
+          type: boolean
+          description: True when the sender id is associated to a campaign in the
+            Draft, Scheduled, or In Progress status. You cannot update or delete a
+            locked sender identity.
+      required:
+      - country
+      - city
+      - nickname
+      - address
   responses: {}
   parameters:
     OnBehalfOf:

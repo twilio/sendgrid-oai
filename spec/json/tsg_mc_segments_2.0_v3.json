@@ -32,7 +32,7 @@
   "paths": {
     "/v3/marketing/segments/2.0": {
       "post": {
-        "operationId": "PostMarketingSegments2",
+        "operationId": "CreateSegment",
         "summary": "Create Segment",
         "tags": [
           "Segmenting Contacts V2"
@@ -81,7 +81,7 @@
         }
       },
       "get": {
-        "operationId": "GetMarketingSegments2",
+        "operationId": "ListSegment",
         "summary": "Get List of Segments",
         "tags": [
           "Segmenting Contacts V2"
@@ -94,7 +94,10 @@
             "description": "A list of segment IDs to retrieve. When this parameter is included, the `no_parent_list_ids` and `parent_list_ids` parameters are ignored and only segments with given IDs are returned.",
             "required": false,
             "schema": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
@@ -166,7 +169,7 @@
         }
       ],
       "patch": {
-        "operationId": "PatchMarketingSegments2SegmentId",
+        "operationId": "UpdateSegment",
         "summary": "Update Segment",
         "tags": [
           "Segmenting Contacts V2"
@@ -218,7 +221,7 @@
         }
       },
       "get": {
-        "operationId": "GetMarketingSegments2SegmentId",
+        "operationId": "GetSegment",
         "summary": "Get Segment by ID",
         "tags": [
           "Segmenting Contacts V2"
@@ -268,7 +271,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteMarketingSegments2SegmentId",
+        "operationId": "DeleteSegment",
         "summary": "Delete segment",
         "tags": [
           "Segmenting Contacts V2"
@@ -306,7 +309,7 @@
     },
     "/v3/marketing/segments/2.0/refresh/{segment_id}": {
       "post": {
-        "operationId": "PostMarketingSegments2RefreshSegmentId",
+        "operationId": "RefreshSegment",
         "summary": "Manually refresh a segment",
         "description": "Manually refresh a segment by segment ID.",
         "tags": [

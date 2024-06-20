@@ -32,7 +32,7 @@
   "paths": {
     "/v3/ips": {
       "post": {
-        "operationId": "PostIps",
+        "operationId": "AddIp",
         "summary": "Add IPs",
         "tags": [
           "IP Addresses"
@@ -176,7 +176,7 @@
         }
       },
       "get": {
-        "operationId": "GetIps",
+        "operationId": "ListIp",
         "summary": "Retrieve all IP addresses",
         "tags": [
           "IP Addresses"
@@ -341,7 +341,7 @@
         }
       ],
       "get": {
-        "operationId": "GetIpsIpAddress",
+        "operationId": "GetIp",
         "summary": "Retrieve all IP pools an IP address belongs to",
         "tags": [
           "IP Addresses"
@@ -427,7 +427,7 @@
     },
     "/v3/ips/assigned": {
       "get": {
-        "operationId": "GetIpsAssigned",
+        "operationId": "ListAssignedIp",
         "summary": "Retrieve all assigned IPs",
         "tags": [
           "IP Addresses"
@@ -494,7 +494,7 @@
     },
     "/v3/ips/pools": {
       "post": {
-        "operationId": "PostIpsPools",
+        "operationId": "CreateIpPool",
         "summary": "Create an IP pool",
         "tags": [
           "IP Pools"
@@ -543,7 +543,7 @@
         }
       },
       "get": {
-        "operationId": "GetIpsPools",
+        "operationId": "ListIpPool",
         "summary": "Retrieve all IP pools",
         "tags": [
           "IP Pools"
@@ -591,7 +591,7 @@
         }
       ],
       "get": {
-        "operationId": "GetIpsPoolsPoolName",
+        "operationId": "GetIpPool",
         "summary": "Retrieve all the IPs in a specified pool",
         "tags": [
           "IP Pools"
@@ -677,7 +677,7 @@
         }
       },
       "put": {
-        "operationId": "PutIpsPoolsPoolName",
+        "operationId": "UpdateIpPool",
         "summary": "Rename an IP pool",
         "tags": [
           "IP Pools"
@@ -763,7 +763,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteIpsPoolsPoolName",
+        "operationId": "DeleteIpPool",
         "summary": "Delete an IP pool",
         "tags": [
           "IP Pools"
@@ -819,7 +819,7 @@
         }
       ],
       "post": {
-        "operationId": "PostIpsPoolsPoolNameIps",
+        "operationId": "AddIpToIpPool",
         "summary": "Add an IP address to a pool",
         "tags": [
           "IP Pools"
@@ -959,7 +959,7 @@
         }
       ],
       "delete": {
-        "operationId": "DeleteIpsPoolsPoolNameIpsIp",
+        "operationId": "DeleteIpFromIpPool",
         "summary": "Remove an IP address from a pool",
         "tags": [
           "IP Pools"
@@ -1004,7 +1004,7 @@
     },
     "/v3/ips/remaining": {
       "get": {
-        "operationId": "GetIpsRemaining",
+        "operationId": "ListRemainingIpCount",
         "summary": "Get remaining IPs count",
         "tags": [
           "IP Addresses"

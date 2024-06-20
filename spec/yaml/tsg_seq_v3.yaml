@@ -33,7 +33,7 @@ paths:
       summary: Get Engagement Quality Scores
       tags:
       - Engagement Quality
-      operationId: GetEngagementQualityScores
+      operationId: ListEngagementQualityScore
       description: '**This operation allows you to retrieve your SendGrid Engagement
         Quality (SEQ) scores for a specified date range**.
 
@@ -98,7 +98,7 @@ paths:
       summary: Get Subusers' Engagement Quality Scores
       tags:
       - Engagement Quality
-      operationId: GetEnagementQualitySubusersScores
+      operationId: ListSubuserEngagementQualityScore
       description: '**This operation allows you to retrieve SendGrid Engagement Quality
         (SEQ) scores for your Subusers or customer accounts for a specific date.**
 

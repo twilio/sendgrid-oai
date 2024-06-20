@@ -40,7 +40,7 @@ servers:
 paths:
   /v3/access_settings/activity:
     get:
-      operationId: GetAccessSettingsActivity
+      operationId: ListAccessActivity
       summary: Retrieve all recent access attempts
       tags:
       - IP Access Management
@@ -128,7 +128,7 @@ paths:
           $ref: '#/components/responses/IpAccessManagement500'
   /v3/access_settings/whitelist:
     post:
-      operationId: PostAccessSettingsWhitelist
+      operationId: AddIpToAllowList
       summary: Add one or more IPs to the allow list
       tags:
       - IP Access Management
@@ -197,7 +197,7 @@ paths:
         '500':
           $ref: '#/components/responses/IpAccessManagement500'
     get:
-      operationId: GetAccessSettingsWhitelist
+      operationId: ListAllowedIp
       summary: Retrieve a list of currently allowed IPs
       tags:
       - IP Access Management
@@ -242,7 +242,7 @@ paths:
         '500':
           $ref: '#/components/responses/IpAccessManagement500'
     delete:
-      operationId: DeleteAccessSettingsWhitelist
+      operationId: DeleteAllowedIps
       summary: Remove one or more IPs from the allow list
       tags:
       - IP Access Management
@@ -304,7 +304,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetAccessSettingsWhitelistRuleId
+      operationId: GetAllowedIp
       summary: Retrieve a specific allowed IP
       tags:
       - IP Access Management
@@ -333,7 +333,7 @@ paths:
                       created_at: 1441824715
                       updated_at: 1441824715
     delete:
-      operationId: DeleteAccessSettingsWhitelistRuleId
+      operationId: DeleteAllowedIp
       summary: Remove a specific IP from the allowed list
       tags:
       - IP Access Management

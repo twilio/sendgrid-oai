@@ -242,7 +242,7 @@ paths:
         required: false
         schema:
           type: string
-          $ref: '#/components/schemas/Schema'
+          $ref: '#/components/schemas/AggregatedBy'
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
         '200':
@@ -363,7 +363,7 @@ paths:
         schema:
           type: string
           default: desc
-          $ref: '#/components/schemas/Schema1'
+          $ref: '#/components/schemas/SortByDirection'
       - name: start_date
         in: query
         description: The starting date of the statistics to retrieve. Must follow
@@ -399,7 +399,7 @@ paths:
         required: false
         schema:
           type: string
-          $ref: '#/components/schemas/Schema2'
+          $ref: '#/components/schemas/AggregatedBy1'
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
         '200':
@@ -584,7 +584,7 @@ paths:
       required: true
       schema:
         type: string
-        $ref: '#/components/schemas/Schema3'
+        $ref: '#/components/schemas/ClientType'
     get:
       operationId: GetClientStat
       summary: Retrieve stats by a specific client type.
@@ -961,7 +961,7 @@ paths:
           supported for US and CA.
         schema:
           type: string
-          $ref: '#/components/schemas/Schema4'
+          $ref: '#/components/schemas/Country'
       - $ref: '#/components/parameters/OnBehalfOf'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset'
@@ -2319,42 +2319,42 @@ components:
         unsubscribes:
           type: integer
           description: The number of recipients who unsubscribed from your emails.
-    Schema:
+    AggregatedBy:
       type: string
       enum:
       - day
       - week
       - month
-    Schema1:
+    SortByDirection:
       type: string
       enum:
       - desc
       - asc
-    Schema2:
+    AggregatedBy1:
       type: string
       enum:
       - day
       - week
       - month
-    Schema3:
+    ClientType:
       type: string
       enum:
       - phone
       - tablet
       - webmail
       - desktop
-    Schema4:
+    Country:
       type: string
       enum:
       - US
       - CA
-    Schema5:
+    AggregatedBy2:
       type: string
       enum:
       - day
       - week
       - month
-    Schema6:
+    AggregatedBy3:
       type: string
       enum:
       - day
@@ -2401,7 +2401,7 @@ components:
       required: false
       schema:
         type: string
-        $ref: '#/components/schemas/Schema5'
+        $ref: '#/components/schemas/AggregatedBy2'
     StatsAdvancedQueryStringsLimitOffsetLimit:
       name: limit
       in: query
@@ -2423,7 +2423,7 @@ components:
       required: false
       schema:
         type: string
-        $ref: '#/components/schemas/Schema6'
+        $ref: '#/components/schemas/AggregatedBy3'
     StatsAdvancedQueryStringsLimitOffsetStartDate:
       name: start_date
       in: query

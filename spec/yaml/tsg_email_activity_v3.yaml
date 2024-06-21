@@ -337,16 +337,16 @@ paths:
                     description: Whether or not the outbound IP is dedicated vs shared
                     $ref: '#/components/schemas/OutboundIpType'
                 required:
-                - api_key_id
-                - categories
-                - outbound_ip
-                - outbound_ip_type
-                - unique_args
                 - template_id
-                - events
-                - teammate
+                - api_key_id
+                - outbound_ip_type
                 - originating_ip
+                - categories
+                - teammate
+                - events
+                - outbound_ip
                 - asm_group_id
+                - unique_args
                 example:
                   from_email: test@test.com
                   msg_id: in aliquip id aliqua

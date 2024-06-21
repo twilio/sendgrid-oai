@@ -1081,7 +1081,7 @@ paths:
         required: false
         schema:
           type: string
-          $ref: '#/components/schemas/Schema'
+          $ref: '#/components/schemas/AggregatedBy'
       - name: start_date
         in: query
         description: The starting date of the statistics you want to retrieve. Must
@@ -1944,7 +1944,7 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
-    Schema:
+    AggregatedBy:
       type: string
       enum:
       - day

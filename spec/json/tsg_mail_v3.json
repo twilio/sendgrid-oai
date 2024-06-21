@@ -231,7 +231,7 @@
           }
         }
       },
-      "Schema": {
+      "ContentEncoding": {
         "type": "string",
         "enum": [
           "gzip"
@@ -573,7 +573,7 @@
         "required": false,
         "schema": {
           "type": "string",
-          "$ref": "#/components/schemas/Schema"
+          "$ref": "#/components/schemas/ContentEncoding"
         }
       }
     },

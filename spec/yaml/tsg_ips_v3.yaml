@@ -176,7 +176,7 @@ paths:
         description: The direction to sort the results.
         schema:
           type: string
-          $ref: '#/components/schemas/Schema'
+          $ref: '#/components/schemas/SortByDirection'
       responses:
         '200':
           description: ''
@@ -809,7 +809,7 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
-    Schema:
+    SortByDirection:
       type: string
       enum:
       - desc

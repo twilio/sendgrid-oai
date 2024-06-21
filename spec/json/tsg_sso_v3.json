@@ -1463,12 +1463,12 @@
           }
         },
         "required": [
-          "signout_url",
           "enabled",
-          "signin_url",
-          "entity_id",
+          "name",
           "last_updated",
-          "name"
+          "entity_id",
+          "signout_url",
+          "signin_url"
         ]
       },
       "PostPatchIntegrationRequest": {
@@ -1735,9 +1735,9 @@
           }
         },
         "required": [
+          "email",
           "last_name",
-          "first_name",
-          "email"
+          "first_name"
         ]
       },
       "PatchSsoTeammatesRequest": {

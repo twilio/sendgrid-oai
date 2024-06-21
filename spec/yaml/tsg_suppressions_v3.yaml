@@ -892,7 +892,7 @@ paths:
         schema:
           default: application/json
           type: string
-          $ref: '#/components/schemas/Schema'
+          $ref: '#/components/schemas/Accept'
       - name: start_date
         in: query
         description: The start of the time range, in YYYY-MM-DD format, when a bounce
@@ -971,7 +971,7 @@ paths:
         schema:
           type: string
           default: application/json
-          $ref: '#/components/schemas/Schema1'
+          $ref: '#/components/schemas/Accept1'
       - name: classification
         in: path
         description: 'The classification you want to filter by. Possible values are:
@@ -979,7 +979,7 @@ paths:
           `Reputation`, `Technical Failure`, `Unclassified`.'
         schema:
           type: string
-          $ref: '#/components/schemas/Schema2'
+          $ref: '#/components/schemas/Classification1'
         required: true
       - name: start_date
         in: query
@@ -1695,7 +1695,7 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
-    Schema:
+    Accept:
       type: string
       enum:
       - application/json
@@ -1710,12 +1710,12 @@ components:
       - Reputation
       - Technical Failure
       - Unclassified
-    Schema1:
+    Accept1:
       type: string
       enum:
       - application/json
       - text/csv
-    Schema2:
+    Classification1:
       type: string
       enum:
       - Content

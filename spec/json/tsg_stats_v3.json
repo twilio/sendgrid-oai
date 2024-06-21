@@ -316,7 +316,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "$ref": "#/components/schemas/Schema"
+              "$ref": "#/components/schemas/AggregatedBy"
             }
           },
           {
@@ -471,7 +471,7 @@
             "schema": {
               "type": "string",
               "default": "desc",
-              "$ref": "#/components/schemas/Schema1"
+              "$ref": "#/components/schemas/SortByDirection"
             }
           },
           {
@@ -519,7 +519,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "$ref": "#/components/schemas/Schema2"
+              "$ref": "#/components/schemas/AggregatedBy1"
             }
           },
           {
@@ -765,7 +765,7 @@
           "required": true,
           "schema": {
             "type": "string",
-            "$ref": "#/components/schemas/Schema3"
+            "$ref": "#/components/schemas/ClientType"
           }
         }
       ],
@@ -1360,7 +1360,7 @@
             "description": "The country you would like to see statistics for. Currently only supported for US and CA.",
             "schema": {
               "type": "string",
-              "$ref": "#/components/schemas/Schema4"
+              "$ref": "#/components/schemas/Country"
             }
           },
           {
@@ -3273,7 +3273,7 @@
           }
         }
       },
-      "Schema": {
+      "AggregatedBy": {
         "type": "string",
         "enum": [
           "day",
@@ -3281,14 +3281,14 @@
           "month"
         ]
       },
-      "Schema1": {
+      "SortByDirection": {
         "type": "string",
         "enum": [
           "desc",
           "asc"
         ]
       },
-      "Schema2": {
+      "AggregatedBy1": {
         "type": "string",
         "enum": [
           "day",
@@ -3296,7 +3296,7 @@
           "month"
         ]
       },
-      "Schema3": {
+      "ClientType": {
         "type": "string",
         "enum": [
           "phone",
@@ -3305,14 +3305,14 @@
           "desktop"
         ]
       },
-      "Schema4": {
+      "Country": {
         "type": "string",
         "enum": [
           "US",
           "CA"
         ]
       },
-      "Schema5": {
+      "AggregatedBy2": {
         "type": "string",
         "enum": [
           "day",
@@ -3320,7 +3320,7 @@
           "month"
         ]
       },
-      "Schema6": {
+      "AggregatedBy3": {
         "type": "string",
         "enum": [
           "day",
@@ -3367,7 +3367,7 @@
         "required": false,
         "schema": {
           "type": "string",
-          "$ref": "#/components/schemas/Schema5"
+          "$ref": "#/components/schemas/AggregatedBy2"
         }
       },
       "StatsAdvancedQueryStringsLimitOffsetLimit": {
@@ -3395,7 +3395,7 @@
         "required": false,
         "schema": {
           "type": "string",
-          "$ref": "#/components/schemas/Schema6"
+          "$ref": "#/components/schemas/AggregatedBy3"
         }
       },
       "StatsAdvancedQueryStringsLimitOffsetStartDate": {

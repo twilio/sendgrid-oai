@@ -1247,7 +1247,7 @@ paths:
       description: The type of identifier to search for.
       schema:
         type: string
-        $ref: '#/components/schemas/Schema'
+        $ref: '#/components/schemas/IdentifierType'
     post:
       operationId: GetContactByIdentifiers
       summary: Get Contacts by Identifiers
@@ -1707,7 +1707,7 @@ components:
       type: string
       enum:
       - csv
-    Schema:
+    IdentifierType:
       type: string
       enum:
       - email

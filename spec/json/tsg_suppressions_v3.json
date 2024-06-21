@@ -1206,7 +1206,7 @@
             "schema": {
               "default": "application/json",
               "type": "string",
-              "$ref": "#/components/schemas/Schema"
+              "$ref": "#/components/schemas/Accept"
             }
           },
           {
@@ -1332,7 +1332,7 @@
             "schema": {
               "type": "string",
               "default": "application/json",
-              "$ref": "#/components/schemas/Schema1"
+              "$ref": "#/components/schemas/Accept1"
             }
           },
           {
@@ -1341,7 +1341,7 @@
             "description": "The classification you want to filter by. Possible values are: `Content`, `Frequency or Volume Too High`, `Invalid Address`, `Mailbox Unavailable`, `Reputation`, `Technical Failure`, `Unclassified`.",
             "schema": {
               "type": "string",
-              "$ref": "#/components/schemas/Schema2"
+              "$ref": "#/components/schemas/Classification1"
             },
             "required": true
           },
@@ -2317,7 +2317,7 @@
           }
         }
       },
-      "Schema": {
+      "Accept": {
         "type": "string",
         "enum": [
           "application/json",
@@ -2336,14 +2336,14 @@
           "Unclassified"
         ]
       },
-      "Schema1": {
+      "Accept1": {
         "type": "string",
         "enum": [
           "application/json",
           "text/csv"
         ]
       },
-      "Schema2": {
+      "Classification1": {
         "type": "string",
         "enum": [
           "Content",

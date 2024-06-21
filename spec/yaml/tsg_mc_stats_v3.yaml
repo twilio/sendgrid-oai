@@ -689,7 +689,7 @@ components:
       type: string
       enum:
       - step_id
-    Schema:
+    AggregatedBy:
       type: string
       enum:
       - day
@@ -704,7 +704,7 @@ components:
       enum:
       - ab_variation
       - ab_phase
-    Schema1:
+    AbPhaseId:
       type: string
       enum:
       - test
@@ -768,7 +768,7 @@ components:
       schema:
         type: string
         default: total
-        $ref: '#/components/schemas/Schema'
+        $ref: '#/components/schemas/AggregatedBy'
     StartDateBaseProps:
       name: start_date
       in: query
@@ -831,7 +831,7 @@ components:
       in: query
       schema:
         type: string
-        $ref: '#/components/schemas/Schema1'
+        $ref: '#/components/schemas/AbPhaseId'
   examples: {}
   requestBodies: {}
   headers: {}

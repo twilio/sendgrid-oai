@@ -66,8 +66,8 @@
                       }
                     },
                     "required": [
-                      "name",
-                      "email"
+                      "email",
+                      "name"
                     ]
                   },
                   "reply_to": {
@@ -114,10 +114,10 @@
                 "required": [
                   "from",
                   "city",
-                  "country",
-                  "address",
                   "nickname",
-                  "reply_to"
+                  "address",
+                  "reply_to",
+                  "country"
                 ]
               }
             }
@@ -350,8 +350,8 @@
               }
             },
             "required": [
-              "name",
-              "email"
+              "email",
+              "name"
             ]
           },
           "reply_to": {
@@ -412,17 +412,17 @@
           }
         },
         "required": [
-          "updated_at",
           "from",
-          "city",
-          "id",
-          "country",
-          "address",
-          "nickname",
           "verified",
+          "city",
+          "locked",
+          "nickname",
+          "address",
           "created_at",
           "reply_to",
-          "locked"
+          "updated_at",
+          "id",
+          "country"
         ]
       },
       "SenderRequest": {

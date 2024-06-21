@@ -850,7 +850,7 @@
           "step_id"
         ]
       },
-      "Schema": {
+      "AggregatedBy": {
         "type": "string",
         "enum": [
           "day",
@@ -871,7 +871,7 @@
           "ab_phase"
         ]
       },
-      "Schema1": {
+      "AbPhaseId": {
         "type": "string",
         "enum": [
           "test",
@@ -947,7 +947,7 @@
         "schema": {
           "type": "string",
           "default": "total",
-          "$ref": "#/components/schemas/Schema"
+          "$ref": "#/components/schemas/AggregatedBy"
         }
       },
       "StartDateBaseProps": {
@@ -1020,7 +1020,7 @@
         "in": "query",
         "schema": {
           "type": "string",
-          "$ref": "#/components/schemas/Schema1"
+          "$ref": "#/components/schemas/AbPhaseId"
         }
       }
     },

@@ -226,7 +226,7 @@
             "description": "The direction to sort the results.",
             "schema": {
               "type": "string",
-              "$ref": "#/components/schemas/Schema"
+              "$ref": "#/components/schemas/SortByDirection"
             }
           }
         ],
@@ -1113,7 +1113,7 @@
           }
         }
       },
-      "Schema": {
+      "SortByDirection": {
         "type": "string",
         "enum": [
           "desc",

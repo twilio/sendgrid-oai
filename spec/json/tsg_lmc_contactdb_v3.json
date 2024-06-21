@@ -923,7 +923,7 @@
             "description": "Adds the ability to delete all contacts on the list in addition to deleting the list.",
             "schema": {
               "type": "boolean",
-              "$ref": "#/components/schemas/Schema"
+              "$ref": "#/components/schemas/DeleteContacts"
             }
           },
           {
@@ -4033,9 +4033,9 @@
           }
         },
         "required": [
-          "name",
+          "id",
           "conditions",
-          "id"
+          "name"
         ]
       },
       "ErrorResponse": {
@@ -4068,7 +4068,7 @@
           }
         }
       },
-      "Schema": {
+      "DeleteContacts": {
         "type": "boolean",
         "enum": [
           true,

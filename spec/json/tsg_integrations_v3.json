@@ -32,7 +32,7 @@
         "tags": [
           "External Integration Endpoints"
         ],
-        "summary": "Get All Integrations",
+        "summary": "ListIntegration",
         "description": "This endpoint returns all the Integrations for the user making this call.",
         "operationId": "GetIntegrationsByUser",
         "responses": {
@@ -114,7 +114,7 @@
         "tags": [
           "External Integration Endpoints"
         ],
-        "summary": "Create an Integration",
+        "summary": "CreateIntegration",
         "description": "This endpoint creates an Integration for email event forwarding. Each Integration has a maximum number of allowed Integration instances per user. For example, users can create up to 10 Segment Integrations.",
         "operationId": "AddIntegration",
         "requestBody": {
@@ -231,7 +231,7 @@
         "tags": [
           "External Integration Endpoints"
         ],
-        "summary": "Bulk Delete Integrations",
+        "summary": "DeleteBulkIntegration",
         "description": "This endpoint deletes Integrations.",
         "operationId": "DeleteIntegration",
         "parameters": [
@@ -328,7 +328,7 @@
         "tags": [
           "External Integration Endpoints"
         ],
-        "summary": "Get an Integration by ID",
+        "summary": "GetIntegration",
         "description": "This endpoint returns the data for a specific Integration.",
         "operationId": "FindIntegrationById",
         "parameters": [
@@ -426,7 +426,7 @@
         "tags": [
           "External Integration Endpoints"
         ],
-        "summary": "Update an Integration",
+        "summary": "UpdateIntegration",
         "description": "This endpoint updates an existing Integration.",
         "operationId": "UpdateIntegration",
         "parameters": [
@@ -616,7 +616,7 @@
               "destination_region": {
                 "description": "The workspace region where the Segment Source write key lives.",
                 "type": "string",
-                "$ref": "#/components/schemas/Destination_region"
+                "$ref": "#/components/schemas/DestinationRegion"
               }
             }
           },
@@ -674,7 +674,7 @@
               "destination_region": {
                 "description": "The workspace region where the Segment Source write key lives.",
                 "type": "string",
-                "$ref": "#/components/schemas/Destination_region1"
+                "$ref": "#/components/schemas/DestinationRegion1"
               }
             }
           },
@@ -725,7 +725,7 @@
               "destination_region": {
                 "description": "The workspace region where the Segment Source write key lives.",
                 "type": "string",
-                "$ref": "#/components/schemas/Destination_region2"
+                "$ref": "#/components/schemas/DestinationRegion2"
               }
             }
           },
@@ -825,7 +825,7 @@
           "machine_opened"
         ]
       },
-      "Destination_region": {
+      "DestinationRegion": {
         "type": "string",
         "enum": [
           "EU",
@@ -855,7 +855,7 @@
           "machine_opened"
         ]
       },
-      "Destination_region1": {
+      "DestinationRegion1": {
         "type": "string",
         "enum": [
           "EU",
@@ -879,7 +879,7 @@
           "machine_opened"
         ]
       },
-      "Destination_region2": {
+      "DestinationRegion2": {
         "type": "string",
         "enum": [
           "EU",

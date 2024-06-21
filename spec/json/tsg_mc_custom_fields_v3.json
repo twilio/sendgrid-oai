@@ -91,9 +91,9 @@
                     }
                   },
                   "required": [
+                    "id",
                     "field_type",
-                    "name",
-                    "id"
+                    "name"
                   ]
                 },
                 "examples": {
@@ -393,9 +393,9 @@
                     }
                   },
                   "required": [
+                    "id",
                     "field_type",
-                    "name",
-                    "id"
+                    "name"
                   ]
                 },
                 "examples": {

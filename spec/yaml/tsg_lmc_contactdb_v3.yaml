@@ -561,7 +561,7 @@ paths:
           to deleting the list.
         schema:
           type: boolean
-          $ref: '#/components/schemas/Schema'
+          $ref: '#/components/schemas/DeleteContacts'
       - $ref: '#/components/parameters/OnBehalfOf'
       requestBody:
         $ref: '#/components/requestBodies/DeleteContactdbListsListId'
@@ -2588,9 +2588,9 @@ components:
           description: The count of recipients in this list. This is not included
             on creation of segments.
       required:
-      - id
-      - conditions
       - name
+      - conditions
+      - id
     ErrorResponse:
       type: object
       properties:
@@ -2614,7 +2614,7 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
-    Schema:
+    DeleteContacts:
       type: boolean
       enum:
       - true

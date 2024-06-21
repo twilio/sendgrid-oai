@@ -112,7 +112,7 @@
             "schema": {
               "type": "string",
               "default": "legacy",
-              "$ref": "#/components/schemas/Schema"
+              "$ref": "#/components/schemas/Generations"
             }
           },
           {
@@ -977,7 +977,7 @@
           "dynamic"
         ]
       },
-      "Schema": {
+      "Generations": {
         "type": "string",
         "enum": [
           "legacy",

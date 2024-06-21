@@ -1324,12 +1324,12 @@ components:
             a SAML assertion. This is the same URL as the Single Sign-On URL when
             using SendGrid.
       required:
+      - entity_id
+      - last_updated
       - name
+      - signout_url
       - enabled
       - signin_url
-      - last_updated
-      - signout_url
-      - entity_id
     PostPatchIntegrationRequest:
       title: Create Integration Request
       type: object
@@ -1617,9 +1617,9 @@ components:
             - id
             - permission_type
       required:
-      - email
       - last_name
       - first_name
+      - email
     PatchSsoTeammatesRequest:
       title: Single Sign-On Teammate Update Request Body
       summary: Single Sign-on Teammate Request Body for update, PATCH, Teammate operations.

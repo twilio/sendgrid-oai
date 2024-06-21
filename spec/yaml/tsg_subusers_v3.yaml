@@ -70,7 +70,7 @@ paths:
         schema:
           type: string
           default: all
-          $ref: '#/components/schemas/Schema'
+          $ref: '#/components/schemas/Region'
       - name: include_region
         in: query
         description: Optional flag to include the regions of the Subusers in the response.
@@ -147,7 +147,7 @@ paths:
                     be `global` or `eu`. (Regional email is in Public Beta and requires
                     SendGrid Pro plan or above.).
                   default: global
-                  $ref: '#/components/schemas/Region'
+                  $ref: '#/components/schemas/Region1'
                 include_region:
                   type: boolean
                   description: A flag that determines if the Subuser's region should
@@ -584,7 +584,7 @@ paths:
         schema:
           type: string
           default: desc
-          $ref: '#/components/schemas/Schema1'
+          $ref: '#/components/schemas/SortByDirection'
       - name: limit
         in: query
         description: Optional field to limit the number of results returned.
@@ -709,7 +709,7 @@ paths:
         required: false
         schema:
           type: string
-          $ref: '#/components/schemas/Schema2'
+          $ref: '#/components/schemas/AggregatedBy'
       - name: subusers
         in: query
         description: The subuser you want to retrieve statistics for. You may include
@@ -990,7 +990,7 @@ paths:
         schema:
           type: string
           default: delivered
-          $ref: '#/components/schemas/Schema3'
+          $ref: '#/components/schemas/SortByMetric'
       - name: sort_by_direction
         in: query
         description: The direction you want to sort.
@@ -998,7 +998,7 @@ paths:
         schema:
           type: string
           default: desc
-          $ref: '#/components/schemas/Schema4'
+          $ref: '#/components/schemas/SortByDirection1'
       - name: limit
         in: query
         description: Optional field to limit the number of results returned.
@@ -1083,7 +1083,7 @@ paths:
         schema:
           type: string
           default: desc
-          $ref: '#/components/schemas/Schema5'
+          $ref: '#/components/schemas/SortByDirection2'
       - name: start_date
         in: query
         description: The starting date of the statistics to retrieve. Must follow
@@ -1200,7 +1200,7 @@ components:
           description: The region this Subuser is assigned to. This property is returned
             only if the `include_region` parameter was included and set to `true`
             in the API request.
-          $ref: '#/components/schemas/Region1'
+          $ref: '#/components/schemas/Region2'
       required:
       - disabled
       - id
@@ -1236,7 +1236,7 @@ components:
             only if the `include_region` parameter is included and set to `true` in
             the API request.
           default: global
-          $ref: '#/components/schemas/Region2'
+          $ref: '#/components/schemas/Region3'
       required:
       - username
       - user_id
@@ -1607,29 +1607,29 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
-    Schema:
+    Region:
       type: string
       enum:
       - all
       - global
       - eu
-    Region:
+    Region1:
       type: string
       enum:
       - global
       - eu
-    Schema1:
+    SortByDirection:
       type: string
       enum:
       - desc
       - asc
-    Schema2:
+    AggregatedBy:
       type: string
       enum:
       - day
       - week
       - month
-    Schema3:
+    SortByMetric:
       type: string
       enum:
       - blocks
@@ -1641,22 +1641,22 @@ components:
       - unique_clicks
       - unique_opens
       - unsubscribes
-    Schema4:
+    SortByDirection1:
       type: string
       enum:
       - desc
       - asc
-    Schema5:
+    SortByDirection2:
       type: string
       enum:
       - desc
       - asc
-    Region1:
+    Region2:
       type: string
       enum:
       - global
       - eu
-    Region2:
+    Region3:
       type: string
       enum:
       - global

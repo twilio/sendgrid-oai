@@ -1110,18 +1110,18 @@ paths:
                               type: string
                               description: The DNS record.
                   required:
+                  - custom_spf
                   - id
                   - automatic_security
-                  - dns
-                  - domain
-                  - default
                   - ips
-                  - subdomain
-                  - valid
+                  - dns
                   - user_id
-                  - legacy
-                  - custom_spf
+                  - default
+                  - valid
                   - username
+                  - domain
+                  - subdomain
+                  - legacy
               examples:
                 response:
                   value:
@@ -1636,18 +1636,18 @@ components:
                   description: A Unix epoch timestamp representing the last time of
                     a validation attempt.
               required:
+              - custom_spf
               - id
               - automatic_security
-              - dns
-              - domain
-              - default
               - ips
-              - subdomain
-              - valid
+              - dns
               - user_id
-              - legacy
-              - custom_spf
+              - default
+              - valid
               - username
+              - domain
+              - subdomain
+              - legacy
             example:
             - id: 1
               user_id: 7

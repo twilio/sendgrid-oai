@@ -206,7 +206,7 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
-    Schema:
+    ContentEncoding:
       type: string
       enum:
       - gzip
@@ -409,7 +409,7 @@ components:
       required: false
       schema:
         type: string
-        $ref: '#/components/schemas/Schema'
+        $ref: '#/components/schemas/ContentEncoding'
   examples:
     MailBatch2xx:
       summary: A mail batch ID.

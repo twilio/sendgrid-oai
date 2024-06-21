@@ -2059,7 +2059,7 @@
           "us"
         ]
       },
-      "Schema": {
+      "Region7": {
         "type": "string",
         "enum": [
           "all",
@@ -2281,7 +2281,7 @@
         "description": "Allowed values are `all`, `eu`, and `us`. If you provide a specific region, results will include all pools that have at least one IP in the filtered region. If `all`, pools with at least one IP (regardless of region) will be returned. If the `region` filter is not provided, the query returns all pools, including empty ones. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
         "schema": {
           "type": "string",
-          "$ref": "#/components/schemas/Schema"
+          "$ref": "#/components/schemas/Region7"
         }
       },
       "IpAddressManagementIncludeRegion": {

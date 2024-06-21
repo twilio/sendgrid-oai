@@ -1500,7 +1500,7 @@
           "description": "The type of identifier to search for.",
           "schema": {
             "type": "string",
-            "$ref": "#/components/schemas/Schema"
+            "$ref": "#/components/schemas/IdentifierType"
           }
         }
       ],
@@ -2081,7 +2081,7 @@
           "csv"
         ]
       },
-      "Schema": {
+      "IdentifierType": {
         "type": "string",
         "enum": [
           "email",

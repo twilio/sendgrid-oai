@@ -1557,7 +1557,7 @@ components:
       enum:
       - eu
       - us
-    Schema:
+    Region7:
       type: string
       enum:
       - all
@@ -1738,7 +1738,7 @@ components:
         Pro plan or above.)
       schema:
         type: string
-        $ref: '#/components/schemas/Schema'
+        $ref: '#/components/schemas/Region7'
     IpAddressManagementIncludeRegion:
       name: include_region
       in: query

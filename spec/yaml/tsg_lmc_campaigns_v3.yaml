@@ -1147,8 +1147,8 @@ components:
         id:
           type: integer
       required:
-      - title
       - status
+      - title
     ErrorResponse:
       type: object
       properties:

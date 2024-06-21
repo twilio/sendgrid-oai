@@ -338,15 +338,15 @@ paths:
                     $ref: '#/components/schemas/OutboundIpType'
                 required:
                 - api_key_id
-                - categories
-                - outbound_ip
-                - outbound_ip_type
-                - unique_args
-                - template_id
                 - events
+                - outbound_ip_type
+                - template_id
                 - teammate
-                - originating_ip
                 - asm_group_id
+                - originating_ip
+                - outbound_ip
+                - categories
+                - unique_args
                 example:
                   from_email: test@test.com
                   msg_id: in aliquip id aliqua

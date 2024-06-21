@@ -98,7 +98,7 @@ paths:
         schema:
           type: string
           default: legacy
-          $ref: '#/components/schemas/Schema'
+          $ref: '#/components/schemas/Generations'
       - name: page_size
         in: query
         description: The number of templates to be returned in each page of results
@@ -491,9 +491,9 @@ components:
         warning:
           $ref: '#/components/schemas/TransactionalTemplateWarning'
       required:
-      - id
-      - 'updated_at '
       - name
+      - 'updated_at '
+      - id
       - generation
     TransactionalTemplateVersionOutput:
       title: 'Transactional Templates: Version Output'
@@ -551,8 +551,8 @@ components:
           type: string
           description: A Thumbnail preview of the template's html content.
       required:
-      - subject
       - name
+      - subject
     TransactionalTemplateVersionCreate:
       title: 'Transactional Templates: Version Create'
       type: object
@@ -723,7 +723,7 @@ components:
       enum:
       - legacy
       - dynamic
-    Schema:
+    Generations:
       type: string
       enum:
       - legacy

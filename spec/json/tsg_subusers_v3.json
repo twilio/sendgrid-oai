@@ -62,7 +62,7 @@
             "schema": {
               "type": "string",
               "default": "all",
-              "$ref": "#/components/schemas/Schema"
+              "$ref": "#/components/schemas/Region"
             }
           },
           {
@@ -172,7 +172,7 @@
                     "type": "string",
                     "description": "The region this Subuser should be assigned to. Can be `global` or `eu`. (Regional email is in Public Beta and requires SendGrid Pro plan or above.).",
                     "default": "global",
-                    "$ref": "#/components/schemas/Region"
+                    "$ref": "#/components/schemas/Region1"
                   },
                   "include_region": {
                     "type": "boolean",
@@ -853,7 +853,7 @@
             "schema": {
               "type": "string",
               "default": "desc",
-              "$ref": "#/components/schemas/Schema1"
+              "$ref": "#/components/schemas/SortByDirection"
             }
           },
           {
@@ -1020,7 +1020,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "$ref": "#/components/schemas/Schema2"
+              "$ref": "#/components/schemas/AggregatedBy"
             }
           },
           {
@@ -1379,7 +1379,7 @@
             "schema": {
               "type": "string",
               "default": "delivered",
-              "$ref": "#/components/schemas/Schema3"
+              "$ref": "#/components/schemas/SortByMetric"
             }
           },
           {
@@ -1390,7 +1390,7 @@
             "schema": {
               "type": "string",
               "default": "desc",
-              "$ref": "#/components/schemas/Schema4"
+              "$ref": "#/components/schemas/SortByDirection1"
             }
           },
           {
@@ -1502,7 +1502,7 @@
             "schema": {
               "type": "string",
               "default": "desc",
-              "$ref": "#/components/schemas/Schema5"
+              "$ref": "#/components/schemas/SortByDirection2"
             }
           },
           {
@@ -1657,7 +1657,7 @@
           "region": {
             "type": "string",
             "description": "The region this Subuser is assigned to. This property is returned only if the `include_region` parameter was included and set to `true` in the API request.",
-            "$ref": "#/components/schemas/Region1"
+            "$ref": "#/components/schemas/Region2"
           }
         },
         "required": [
@@ -1702,7 +1702,7 @@
             "type": "string",
             "description": "The region this Subuser is assigned to. The property is returned only if the `include_region` parameter is included and set to `true` in the API request.",
             "default": "global",
-            "$ref": "#/components/schemas/Region2"
+            "$ref": "#/components/schemas/Region3"
           }
         },
         "required": [
@@ -2124,7 +2124,7 @@
           }
         }
       },
-      "Schema": {
+      "Region": {
         "type": "string",
         "enum": [
           "all",
@@ -2132,21 +2132,21 @@
           "eu"
         ]
       },
-      "Region": {
+      "Region1": {
         "type": "string",
         "enum": [
           "global",
           "eu"
         ]
       },
-      "Schema1": {
+      "SortByDirection": {
         "type": "string",
         "enum": [
           "desc",
           "asc"
         ]
       },
-      "Schema2": {
+      "AggregatedBy": {
         "type": "string",
         "enum": [
           "day",
@@ -2154,7 +2154,7 @@
           "month"
         ]
       },
-      "Schema3": {
+      "SortByMetric": {
         "type": "string",
         "enum": [
           "blocks",
@@ -2168,28 +2168,28 @@
           "unsubscribes"
         ]
       },
-      "Schema4": {
+      "SortByDirection1": {
         "type": "string",
         "enum": [
           "desc",
           "asc"
         ]
       },
-      "Schema5": {
+      "SortByDirection2": {
         "type": "string",
         "enum": [
           "desc",
           "asc"
         ]
       },
-      "Region1": {
+      "Region2": {
         "type": "string",
         "enum": [
           "global",
           "eu"
         ]
       },
-      "Region2": {
+      "Region3": {
         "type": "string",
         "enum": [
           "global",

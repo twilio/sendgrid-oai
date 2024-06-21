@@ -100,9 +100,9 @@ paths:
                   _metadata:
                     $ref: '#/components/schemas/Metadata'
                 required:
-                - id
-                - field_type
                 - name
+                - field_type
+                - id
               examples:
                 response:
                   value:
@@ -297,9 +297,9 @@ paths:
                   _metadata:
                     $ref: '#/components/schemas/Metadata'
                 required:
-                - id
-                - field_type
                 - name
+                - field_type
+                - id
               examples:
                 response:
                   value:

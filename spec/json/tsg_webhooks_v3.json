@@ -1137,7 +1137,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "$ref": "#/components/schemas/Schema"
+              "$ref": "#/components/schemas/AggregatedBy"
             }
           },
           {
@@ -2105,7 +2105,7 @@
           }
         }
       },
-      "Schema": {
+      "AggregatedBy": {
         "type": "string",
         "enum": [
           "day",

@@ -491,10 +491,10 @@ components:
         warning:
           $ref: '#/components/schemas/TransactionalTemplateWarning'
       required:
+      - generation
       - name
       - 'updated_at '
       - id
-      - generation
     TransactionalTemplateVersionOutput:
       title: 'Transactional Templates: Version Output'
       type: object

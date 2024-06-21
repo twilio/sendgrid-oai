@@ -421,13 +421,13 @@ components:
           description: SQL query which will filter contacts based on the conditions
             provided
       required:
-      - created_at
-      - query_dsl
-      - id
       - name
+      - id
+      - query_dsl
+      - created_at
       - contacts_count
-      - contacts_sample
       - sample_updated_at
+      - contacts_sample
       - updated_at
     SegmentSummary:
       title: segment_summary

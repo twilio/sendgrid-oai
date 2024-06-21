@@ -1463,11 +1463,11 @@
           }
         },
         "required": [
-          "last_updated",
           "enabled",
+          "name",
+          "last_updated",
           "entity_id",
           "signout_url",
-          "name",
           "signin_url"
         ]
       },
@@ -1736,8 +1736,8 @@
         },
         "required": [
           "email",
-          "first_name",
-          "last_name"
+          "last_name",
+          "first_name"
         ]
       },
       "PatchSsoTeammatesRequest": {

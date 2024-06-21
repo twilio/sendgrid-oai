@@ -4033,9 +4033,9 @@
           }
         },
         "required": [
+          "id",
           "conditions",
-          "name",
-          "id"
+          "name"
         ]
       },
       "ErrorResponse": {

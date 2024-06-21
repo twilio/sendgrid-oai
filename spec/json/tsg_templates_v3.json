@@ -695,10 +695,10 @@
           }
         },
         "required": [
+          "id",
           "generation",
           "updated_at ",
-          "name",
-          "id"
+          "name"
         ]
       },
       "TransactionalTemplateVersionOutput": {

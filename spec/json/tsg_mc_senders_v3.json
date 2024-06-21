@@ -112,12 +112,12 @@
                   }
                 },
                 "required": [
-                  "reply_to",
                   "from",
-                  "address",
+                  "city",
                   "nickname",
-                  "country",
-                  "city"
+                  "address",
+                  "reply_to",
+                  "country"
                 ]
               }
             }
@@ -412,17 +412,17 @@
           }
         },
         "required": [
-          "id",
-          "locked",
-          "reply_to",
-          "verified",
           "from",
-          "created_at",
-          "address",
+          "verified",
+          "city",
+          "locked",
           "nickname",
+          "address",
+          "created_at",
+          "reply_to",
           "updated_at",
-          "country",
-          "city"
+          "id",
+          "country"
         ]
       },
       "SenderRequest": {

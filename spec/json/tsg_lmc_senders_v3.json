@@ -108,8 +108,8 @@
                   }
                 },
                 "required": [
-                  "nickname",
                   "country",
+                  "nickname",
                   "address",
                   "city"
                 ]
@@ -1017,8 +1017,8 @@
           }
         },
         "required": [
-          "nickname",
           "country",
+          "nickname",
           "address",
           "city"
         ]

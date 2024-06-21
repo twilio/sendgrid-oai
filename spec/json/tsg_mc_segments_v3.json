@@ -538,14 +538,14 @@
           }
         },
         "required": [
-          "id",
-          "query_dsl",
-          "contacts_count",
-          "created_at",
           "name",
-          "updated_at",
+          "created_at",
+          "query_dsl",
+          "sample_updated_at",
+          "id",
+          "contacts_count",
           "contacts_sample",
-          "sample_updated_at"
+          "updated_at"
         ]
       },
       "SegmentSummary": {

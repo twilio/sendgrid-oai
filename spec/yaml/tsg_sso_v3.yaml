@@ -1325,11 +1325,11 @@ components:
             using SendGrid.
       required:
       - entity_id
-      - last_updated
       - name
+      - signin_url
+      - last_updated
       - signout_url
       - enabled
-      - signin_url
     PostPatchIntegrationRequest:
       title: Create Integration Request
       type: object

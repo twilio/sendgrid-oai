@@ -21,13 +21,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: account_provisioning
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/partners/accounts:
     get:
-      operationId: GetParenterAccounts
+      operationId: ListAccount
       summary: Get all accounts
       tags:
       - Account
@@ -72,7 +74,7 @@ paths:
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
     post:
-      operationId: PostPartnerAccounts
+      operationId: CreateAccount
       summary: Create an account
       description: Creates a new account, with specified offering, under the organization.
       parameters:
@@ -125,7 +127,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
     delete:
-      operationId: DeletePartnerAcounts
+      operationId: DeleteAccount
       summary: Delete an account
       description: Delete a specific account under your organization by account ID.
       tags:
@@ -145,7 +147,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
     get:
-      operationId: GetPartnerAccountsAccountIdOfferings
+      operationId: ListAccountOffering
       summary: Get account offerings
       description: Retrieves offering information about the specified account.
       tags:
@@ -166,7 +168,7 @@ paths:
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
     put:
-      operationId: PutPartnerAccountsAccountIdOfferings
+      operationId: UpdateAccountOffering
       summary: Update account offerings
       description: Changes a package offering for the specified account. Please note
         that an account can have only one package offering. Also associates one or
@@ -211,7 +213,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
     post:
-      operationId: PostPartnerAccountsAccountIdSso
+      operationId: AuthenticateAccount
       summary: Authenticate an account with single sign on
       description: Authenticates and logs in a user to Twilio Sendgrid as a specific
         admin identity configured for SSO by partner. Any additional teammates or
@@ -231,7 +233,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
     get:
-      operationId: GetPartnerAccountsAccountIdState
+      operationId: GetAccountState
       summary: Get an account's state
       description: Retrieve the state of the specified account.
       tags:
@@ -252,7 +254,7 @@ paths:
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
     put:
-      operationId: PutPartnerAccountsAccountIdState
+      operationId: UpdateAccountState
       summary: Update an account's state
       description: Update the state of the specified account.
       tags:
@@ -274,7 +276,7 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
   /v3/partners/offerings:
     get:
-      operationId: GetPartnerOfferings
+      operationId: ListOffering
       summary: Get all available offerings
       tags:
       - Offering
@@ -418,14 +420,9 @@ components:
       properties:
         state:
           type: string
-          enum:
-          - activated
-          - deactivated
-          - suspended
-          - banned
-          - indeterminate
           description: The state of the account (e.g., `activated`, `deactivated`,
             `suspended`, `banned`, or `indeterminate`)
+          $ref: '#/components/schemas/State'
       required:
       - state
       example:
@@ -436,10 +433,8 @@ components:
       properties:
         state:
           type: string
-          enum:
-          - activated
-          - deactivated
           description: The state of the account (e.g., `activated`, `deactivated`)
+          $ref: '#/components/schemas/State1'
       required:
       - state
       example:
@@ -457,10 +452,8 @@ components:
           description: Name of the offering
         type:
           type: string
-          enum:
-          - package
-          - addon
           description: Defines the type of offering (e.g., package or addon).
+          $ref: '#/components/schemas/Type'
         quantity:
           type: integer
           format: int64
@@ -490,6 +483,24 @@ components:
       - message
       - field
       - error_id
+    State:
+      type: string
+      enum:
+      - activated
+      - deactivated
+      - suspended
+      - banned
+      - indeterminate
+    State1:
+      type: string
+      enum:
+      - activated
+      - deactivated
+    Type:
+      type: string
+      enum:
+      - package
+      - addon
   responses:
     AccountProvisioningErrorResponse400:
       description: The request was formatted incorrectly or missing required parameters.

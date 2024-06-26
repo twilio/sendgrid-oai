@@ -17,13 +17,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: partner
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/partner_settings:
     get:
-      operationId: GetPartnerSettings
+      operationId: ListPartnerSetting
       summary: Returns a list of all partner settings.
       tags:
       - Partner Settings

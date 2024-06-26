@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "subusers"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/subusers": {
       "get": {
-        "operationId": "GetSubusers",
+        "operationId": "ListSubuser",
         "summary": "List all Subusers",
         "tags": [
           "Subusers"
@@ -58,12 +61,8 @@
             "description": "Filter for Subusers in this region. If not provided, all Subusers will be returned. All users can also be explicitly requested by using the filter `all`. Users who are not pinned to a region will be displayed as `global`. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
             "schema": {
               "type": "string",
-              "enum": [
-                "all",
-                "global",
-                "eu"
-              ],
-              "default": "all"
+              "default": "all",
+              "$ref": "#/components/schemas/Region"
             }
           },
           {
@@ -136,7 +135,7 @@
         }
       },
       "post": {
-        "operationId": "PostSubusers",
+        "operationId": "CreateSubuser",
         "summary": "Create Subuser",
         "tags": [
           "Subusers"
@@ -172,11 +171,8 @@
                   "region": {
                     "type": "string",
                     "description": "The region this Subuser should be assigned to. Can be `global` or `eu`. (Regional email is in Public Beta and requires SendGrid Pro plan or above.).",
-                    "enum": [
-                      "global",
-                      "eu"
-                    ],
-                    "default": "global"
+                    "default": "global",
+                    "$ref": "#/components/schemas/Region1"
                   },
                   "include_region": {
                     "type": "boolean",
@@ -326,7 +322,7 @@
         }
       ],
       "patch": {
-        "operationId": "PatchSubusersSubuserName",
+        "operationId": "UpdateSubuser",
         "summary": "Enable/disable a subuser",
         "tags": [
           "Subusers"
@@ -340,7 +336,7 @@
                 "properties": {
                   "disabled": {
                     "type": "boolean",
-                    "description": "Whether or not this subuser is disabled. True means disabled, False means enabled."
+                    "description": "Whether or not this subuser is disabled. `true` means disabled, `false` means enabled."
                   }
                 },
                 "example": {
@@ -432,7 +428,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteSubusersSubuserName",
+        "operationId": "DeleteSubuser",
         "summary": "Delete a subuser",
         "tags": [
           "Subusers"
@@ -475,6 +471,57 @@
         }
       }
     },
+    "/v3/subusers/{subuser_name}/website_access": {
+      "parameters": [
+        {
+          "name": "subuser_name",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "patch": {
+        "operationId": "UpdateSubuserWebsiteAccess",
+        "summary": "Enable/Disable website access for a Subuser",
+        "tags": [
+          "Subuser Website Access"
+        ],
+        "description": "Enable/Disable website access for a Subuser, while still preserving email send functionality.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "disabled": {
+                    "type": "boolean",
+                    "description": "Whether or not to disable website access to the Subuser. `true` means disabled, `false` means enabled."
+                  }
+                },
+                "example": {
+                  "disabled": true
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v3/subusers/{subuser_name}/credits": {
       "parameters": [
         {
@@ -482,7 +529,7 @@
         }
       ],
       "get": {
-        "operationId": "GetSubusersSubuserNameCredits",
+        "operationId": "GetSubuserCredit",
         "summary": "Get the Credits for a Subuser",
         "tags": [
           "Subusers"
@@ -535,7 +582,7 @@
         }
       },
       "put": {
-        "operationId": "PutSubusersSubuserNameCredits",
+        "operationId": "UpdateSubuserCredit",
         "summary": "Update the Credits for a Subuser",
         "tags": [
           "Subusers"
@@ -605,7 +652,7 @@
         }
       ],
       "patch": {
-        "operationId": "PatchSubusersSubuserNameCreditsRemaining",
+        "operationId": "UpdateSubuserRemainingCredit",
         "summary": "Update the remaining credits for a Subuser",
         "tags": [
           "Subusers"
@@ -687,7 +734,7 @@
         }
       ],
       "put": {
-        "operationId": "PutSubusersSubuserNameIps",
+        "operationId": "UpdateSubuserIp",
         "summary": "Update IPs assigned to a subuser",
         "tags": [
           "Subusers"
@@ -772,7 +819,7 @@
         }
       ],
       "get": {
-        "operationId": "GetSubusersSubuserNameStatsMonthly",
+        "operationId": "ListSubuserMonthlyStat",
         "summary": "Retrieve the monthly email statistics for a single subuser",
         "tags": [
           "Subuser Statistics"
@@ -805,11 +852,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "desc",
-                "asc"
-              ],
-              "default": "desc"
+              "default": "desc",
+              "$ref": "#/components/schemas/SortByDirection"
             }
           },
           {
@@ -882,7 +926,7 @@
     },
     "/v3/subusers/reputations": {
       "get": {
-        "operationId": "GetSubusersReputations",
+        "operationId": "ListReputation",
         "summary": "Retrieve Subuser Reputations",
         "tags": [
           "Subusers"
@@ -944,7 +988,7 @@
     },
     "/v3/subusers/stats": {
       "get": {
-        "operationId": "GetSubusersStats",
+        "operationId": "ListStat",
         "summary": "Retrieve email statistics for your subusers.",
         "tags": [
           "Subuser Statistics"
@@ -976,11 +1020,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "day",
-                "week",
-                "month"
-              ]
+              "$ref": "#/components/schemas/AggregatedBy"
             }
           },
           {
@@ -1306,7 +1346,7 @@
     },
     "/v3/subusers/stats/monthly": {
       "get": {
-        "operationId": "GetSubusersStatsMonthly",
+        "operationId": "ListMonthlyStat",
         "summary": "Retrieve monthly stats for all subusers",
         "tags": [
           "Subuser Statistics"
@@ -1338,18 +1378,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "blocks",
-                "bounces",
-                "clicks",
-                "delivered",
-                "opens",
-                "requests",
-                "unique_clicks",
-                "unique_opens",
-                "unsubscribes"
-              ],
-              "default": "delivered"
+              "default": "delivered",
+              "$ref": "#/components/schemas/SortByMetric"
             }
           },
           {
@@ -1359,11 +1389,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "desc",
-                "asc"
-              ],
-              "default": "desc"
+              "default": "desc",
+              "$ref": "#/components/schemas/SortByDirection1"
             }
           },
           {
@@ -1460,7 +1487,7 @@
     },
     "/v3/subusers/stats/sums": {
       "get": {
-        "operationId": "GetSubusersStatsSums",
+        "operationId": "ListStatSum",
         "summary": "Retrieve the totals for each email statistic metric for all subusers.",
         "tags": [
           "Subuser Statistics"
@@ -1474,11 +1501,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "desc",
-                "asc"
-              ],
-              "default": "desc"
+              "default": "desc",
+              "$ref": "#/components/schemas/SortByDirection2"
             }
           },
           {
@@ -1633,10 +1657,7 @@
           "region": {
             "type": "string",
             "description": "The region this Subuser is assigned to. This property is returned only if the `include_region` parameter was included and set to `true` in the API request.",
-            "enum": [
-              "global",
-              "eu"
-            ]
+            "$ref": "#/components/schemas/Region2"
           }
         },
         "required": [
@@ -1680,11 +1701,8 @@
           "region": {
             "type": "string",
             "description": "The region this Subuser is assigned to. The property is returned only if the `include_region` parameter is included and set to `true` in the API request.",
-            "enum": [
-              "global",
-              "eu"
-            ],
-            "default": "global"
+            "default": "global",
+            "$ref": "#/components/schemas/Region3"
           }
         },
         "required": [
@@ -1708,22 +1726,14 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "unlimited",
-              "recurring",
-              "nonrecurring"
-            ],
-            "description": "Type determines how credits are reset for a Subuser. `unlimited` indicates that there is no limit to the Subuser's credits. `recurring` indicates that the credits for the Subuser are reset according to the frequency determined by `reset_frequency`. `nonrecurring` indicates that there is no recurring schedule to reset credits and resets must be done on an ad hoc basis."
+            "description": "Type determines how credits are reset for a Subuser. `unlimited` indicates that there is no limit to the Subuser's credits. `recurring` indicates that the credits for the Subuser are reset according to the frequency determined by `reset_frequency`. `nonrecurring` indicates that there is no recurring schedule to reset credits and resets must be done on an ad hoc basis.",
+            "$ref": "#/components/schemas/Type"
           },
           "reset_frequency": {
             "type": "string",
             "nullable": true,
-            "enum": [
-              "monthly",
-              "weekly",
-              "daily"
-            ],
-            "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`, otherwise `null`."
+            "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`, otherwise `null`.",
+            "$ref": "#/components/schemas/ResetFrequency"
           },
           "remain": {
             "type": "integer",
@@ -1765,21 +1775,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "unlimited",
-              "recurring",
-              "nonrecurring"
-            ],
-            "description": "Type determines how credits are reset for a Subuser. `unlimited` indicates that there is no limit to the Subuser's credits. `recurring` indicates that the credits for the Subuser are reset according to the frequency determined by `reset_frequency`. `nonrecurring` indicates that there is no recurring schedule to reset credits and resets must be done on an ad hoc basis."
+            "description": "Type determines how credits are reset for a Subuser. `unlimited` indicates that there is no limit to the Subuser's credits. `recurring` indicates that the credits for the Subuser are reset according to the frequency determined by `reset_frequency`. `nonrecurring` indicates that there is no recurring schedule to reset credits and resets must be done on an ad hoc basis.",
+            "$ref": "#/components/schemas/Type1"
           },
           "reset_frequency": {
             "type": "string",
-            "enum": [
-              "monthly",
-              "weekly",
-              "daily"
-            ],
-            "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`. Do _not_ include `reset_frequency` if you choose a reset `type` value of `unlimited` or `nonrecurring`."
+            "description": "The frequency with which a Subuser's credits are reset if `type` is set to `recurring`. Do _not_ include `reset_frequency` if you choose a reset `type` value of `unlimited` or `nonrecurring`.",
+            "$ref": "#/components/schemas/ResetFrequency1"
           },
           "total": {
             "type": "integer",
@@ -2121,6 +2123,110 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "Region": {
+        "type": "string",
+        "enum": [
+          "all",
+          "global",
+          "eu"
+        ]
+      },
+      "Region1": {
+        "type": "string",
+        "enum": [
+          "global",
+          "eu"
+        ]
+      },
+      "SortByDirection": {
+        "type": "string",
+        "enum": [
+          "desc",
+          "asc"
+        ]
+      },
+      "AggregatedBy": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
+        ]
+      },
+      "SortByMetric": {
+        "type": "string",
+        "enum": [
+          "blocks",
+          "bounces",
+          "clicks",
+          "delivered",
+          "opens",
+          "requests",
+          "unique_clicks",
+          "unique_opens",
+          "unsubscribes"
+        ]
+      },
+      "SortByDirection1": {
+        "type": "string",
+        "enum": [
+          "desc",
+          "asc"
+        ]
+      },
+      "SortByDirection2": {
+        "type": "string",
+        "enum": [
+          "desc",
+          "asc"
+        ]
+      },
+      "Region2": {
+        "type": "string",
+        "enum": [
+          "global",
+          "eu"
+        ]
+      },
+      "Region3": {
+        "type": "string",
+        "enum": [
+          "global",
+          "eu"
+        ]
+      },
+      "Type": {
+        "type": "string",
+        "enum": [
+          "unlimited",
+          "recurring",
+          "nonrecurring"
+        ]
+      },
+      "ResetFrequency": {
+        "type": "string",
+        "enum": [
+          "monthly",
+          "weekly",
+          "daily"
+        ]
+      },
+      "Type1": {
+        "type": "string",
+        "enum": [
+          "unlimited",
+          "recurring",
+          "nonrecurring"
+        ]
+      },
+      "ResetFrequency1": {
+        "type": "string",
+        "enum": [
+          "monthly",
+          "weekly",
+          "daily"
+        ]
       }
     },
     "responses": {},

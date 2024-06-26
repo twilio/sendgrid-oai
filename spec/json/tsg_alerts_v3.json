@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "alerts"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/alerts": {
       "post": {
-        "operationId": "PostAlerts",
+        "operationId": "CreateAlert",
         "summary": "Create a new Alert",
         "tags": [
           "Alerts"
@@ -49,10 +52,7 @@
                   "type": {
                     "type": "string",
                     "description": "The type of alert you want to create. Can be either usage_limit or stats_notification.\nExample: usage_limit",
-                    "enum": [
-                      "stats_notification",
-                      "usage_limit"
-                    ]
+                    "$ref": "#/components/schemas/Type"
                   },
                   "email_to": {
                     "type": "string",
@@ -164,7 +164,7 @@
         }
       },
       "get": {
-        "operationId": "GetAlerts",
+        "operationId": "ListAlert",
         "summary": "Retrieve all alerts",
         "tags": [
           "Alerts"
@@ -205,10 +205,7 @@
                       "type": {
                         "type": "string",
                         "description": "The type of alert.",
-                        "enum": [
-                          "usage_limit",
-                          "stats_notification"
-                        ]
+                        "$ref": "#/components/schemas/Type1"
                       },
                       "updated_at": {
                         "type": "integer",
@@ -276,7 +273,7 @@
         }
       ],
       "get": {
-        "operationId": "GetAlertsAlertId",
+        "operationId": "GetAlert",
         "summary": "Retrieve a specific alert",
         "tags": [
           "Alerts"
@@ -314,10 +311,7 @@
                     "type": {
                       "type": "string",
                       "description": "The type of alert.",
-                      "enum": [
-                        "usage_alert",
-                        "stats_notification"
-                      ]
+                      "$ref": "#/components/schemas/Type2"
                     },
                     "updated_at": {
                       "type": "integer",
@@ -354,7 +348,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteAlertsAlertId",
+        "operationId": "DeleteAlert",
         "summary": "Delete an alert",
         "tags": [
           "Alerts"
@@ -380,7 +374,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchAlertsAlertId",
+        "operationId": "UpdateAlert",
         "summary": "Update an alert",
         "tags": [
           "Alerts"
@@ -444,10 +438,7 @@
                     "type": {
                       "type": "string",
                       "description": "The type of alert.",
-                      "enum": [
-                        "usage_alert",
-                        "stats_notification"
-                      ]
+                      "$ref": "#/components/schemas/Type3"
                     },
                     "updated_at": {
                       "type": "integer",
@@ -486,7 +477,36 @@
     }
   },
   "components": {
-    "schemas": {},
+    "schemas": {
+      "Type": {
+        "type": "string",
+        "enum": [
+          "stats_notification",
+          "usage_limit"
+        ]
+      },
+      "Type1": {
+        "type": "string",
+        "enum": [
+          "usage_limit",
+          "stats_notification"
+        ]
+      },
+      "Type2": {
+        "type": "string",
+        "enum": [
+          "usage_alert",
+          "stats_notification"
+        ]
+      },
+      "Type3": {
+        "type": "string",
+        "enum": [
+          "usage_alert",
+          "stats_notification"
+        ]
+      }
+    },
     "responses": {},
     "parameters": {
       "OnBehalfOf": {

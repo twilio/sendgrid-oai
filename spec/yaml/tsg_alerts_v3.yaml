@@ -23,13 +23,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: alerts
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/alerts:
     post:
-      operationId: PostAlerts
+      operationId: CreateAlert
       summary: Create a new Alert
       tags:
       - Alerts
@@ -48,9 +50,7 @@ paths:
                     usage_limit or stats_notification.
 
                     Example: usage_limit'
-                  enum:
-                  - stats_notification
-                  - usage_limit
+                  $ref: '#/components/schemas/Type'
                 email_to:
                   type: string
                   description: 'The email address the alert will be sent to.
@@ -139,7 +139,7 @@ paths:
                   message:
                     type: string
     get:
-      operationId: GetAlerts
+      operationId: ListAlert
       summary: Retrieve all alerts
       tags:
       - Alerts
@@ -175,9 +175,7 @@ paths:
                     type:
                       type: string
                       description: The type of alert.
-                      enum:
-                      - usage_limit
-                      - stats_notification
+                      $ref: '#/components/schemas/Type1'
                     updated_at:
                       type: integer
                       description: A Unix timestamp indicating when the alert was
@@ -222,7 +220,7 @@ paths:
       schema:
         type: integer
     get:
-      operationId: GetAlertsAlertId
+      operationId: GetAlert
       summary: Retrieve a specific alert
       tags:
       - Alerts
@@ -254,9 +252,7 @@ paths:
                   type:
                     type: string
                     description: The type of alert.
-                    enum:
-                    - usage_alert
-                    - stats_notification
+                    $ref: '#/components/schemas/Type2'
                   updated_at:
                     type: integer
                     description: A Unix timestamp indicating when the alert was last
@@ -282,7 +278,7 @@ paths:
                     type: stats_notification
                     updated_at: 1451520930
     delete:
-      operationId: DeleteAlertsAlertId
+      operationId: DeleteAlert
       summary: Delete an alert
       tags:
       - Alerts
@@ -298,7 +294,7 @@ paths:
                 type: object
                 properties: {}
     patch:
-      operationId: PatchAlertsAlertId
+      operationId: UpdateAlert
       summary: Update an alert
       tags:
       - Alerts
@@ -356,9 +352,7 @@ paths:
                   type:
                     type: string
                     description: The type of alert.
-                    enum:
-                    - usage_alert
-                    - stats_notification
+                    $ref: '#/components/schemas/Type3'
                   updated_at:
                     type: integer
                     description: A Unix timestamp indicating when the alert was last
@@ -384,7 +378,27 @@ paths:
                     type: stats_notification
                     updated_at: 1451522691
 components:
-  schemas: {}
+  schemas:
+    Type:
+      type: string
+      enum:
+      - stats_notification
+      - usage_limit
+    Type1:
+      type: string
+      enum:
+      - usage_limit
+      - stats_notification
+    Type2:
+      type: string
+      enum:
+      - usage_alert
+      - stats_notification
+    Type3:
+      type: string
+      enum:
+      - usage_alert
+      - stats_notification
   responses: {}
   parameters:
     OnBehalfOf:

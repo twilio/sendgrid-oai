@@ -40,13 +40,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: scheduled_sends
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/user/scheduled_sends:
     post:
-      operationId: PostUserScheduledSends
+      operationId: CreateScheduledSend
       summary: Cancel or pause a scheduled send
       tags:
       - Scheduled Sends
@@ -87,9 +89,7 @@ paths:
                   description: The status of the send you would like to implement.
                     This can be pause or cancel. To delete a pause or cancel status
                     see DELETE /v3/user/scheduled_sends/{batch_id}
-                  enum:
-                  - pause
-                  - cancel
+                  $ref: '#/components/schemas/Status'
               required:
               - batch_id
               - status
@@ -114,7 +114,7 @@ paths:
         '500':
           $ref: '#/components/responses/ScheduledSends500'
     get:
-      operationId: GetUserScheduledSends
+      operationId: ListScheduledSend
       summary: Retrieve all scheduled sends
       tags:
       - Scheduled Sends
@@ -164,7 +164,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetUserScheduledSendsBatchId
+      operationId: GetScheduledSend
       summary: Retrieve scheduled send
       tags:
       - Scheduled Sends
@@ -200,7 +200,7 @@ paths:
         '500':
           $ref: '#/components/responses/ScheduledSends500'
     patch:
-      operationId: PatchUserScheduledSendsBatchId
+      operationId: UpdateScheduledSend
       summary: Update a scheduled send
       tags:
       - Scheduled Sends
@@ -223,9 +223,7 @@ paths:
                 status:
                   type: string
                   description: The status you would like the scheduled send to have.
-                  enum:
-                  - cancel
-                  - pause
+                  $ref: '#/components/schemas/Status1'
               required:
               - status
               example:
@@ -248,7 +246,7 @@ paths:
         '500':
           $ref: '#/components/responses/ScheduledSends500'
     delete:
-      operationId: DeleteUserScheduledSendsBatchId
+      operationId: DeleteScheduledSend
       summary: Delete a cancellation or pause from a scheduled send
       tags:
       - Scheduled Sends
@@ -277,22 +275,21 @@ components:
   schemas:
     ScheduledSendStatus:
       title: User Scheduled Send status
-      allOf:
-      - $ref: '#/components/schemas/MailBatchId'
-      - type: object
-        description: The status of the scheduled send.
-        properties:
-          status:
-            type: string
-            description: The status of the scheduled send.
-            enum:
-            - cancel
-            - pause
-        required:
-        - status
       example:
         batch_id: HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi
         status: pause
+      type: object
+      properties:
+        batch_id:
+          type: string
+          pattern: ^[a-zA-Z0-9\-\_]
+        status:
+          type: string
+          description: The status of the scheduled send.
+          $ref: '#/components/schemas/Status2'
+      required:
+      - batch_id
+      - status
     MailBatchId:
       title: Mail Batch ID
       type: object
@@ -327,6 +324,21 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+    Status:
+      type: string
+      enum:
+      - pause
+      - cancel
+    Status1:
+      type: string
+      enum:
+      - cancel
+      - pause
+    Status2:
+      type: string
+      enum:
+      - cancel
+      - pause
   responses:
     ScheduledSends400:
       description: ''

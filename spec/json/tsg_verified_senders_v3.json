@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "verified_senders"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/verified_senders": {
       "post": {
-        "operationId": "PostVerifiedSenders",
+        "operationId": "CreateVerifiedSender",
         "summary": "Create Verified Sender Request",
         "tags": [
           "Sender Verification"
@@ -120,7 +123,7 @@
         }
       },
       "get": {
-        "operationId": "GetVerifiedSenders",
+        "operationId": "ListVerifiedSender",
         "summary": "Get All Verified Senders",
         "tags": [
           "Sender Verification"
@@ -238,7 +241,7 @@
         }
       ],
       "patch": {
-        "operationId": "PatchVerifiedSendersId",
+        "operationId": "UpdateVerifiedSender",
         "summary": "Edit Verified Sender",
         "tags": [
           "Sender Verification"
@@ -389,7 +392,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteVerifiedSendersId",
+        "operationId": "DeleteVerifiedSender",
         "summary": "Delete Verified Sender",
         "tags": [
           "Sender Verification"
@@ -480,7 +483,7 @@
     },
     "/v3/verified_senders/domains": {
       "get": {
-        "operationId": "GetVerifiedSendersDomains",
+        "operationId": "ListVerifiedSenderDomain",
         "summary": "Domain Warn List",
         "tags": [
           "Sender Verification"
@@ -564,7 +567,7 @@
         }
       ],
       "post": {
-        "operationId": "PostVerifiedSendersResendId",
+        "operationId": "ResendVerifiedSender",
         "summary": "Resend Verified Sender Request",
         "tags": [
           "Sender Verification"
@@ -661,7 +664,7 @@
     },
     "/v3/verified_senders/steps_completed": {
       "get": {
-        "operationId": "GetVerifiedSendersStepsCompleted",
+        "operationId": "ListVerifiedSenderStepsCompleted",
         "summary": "Completed Steps",
         "tags": [
           "Sender Verification"
@@ -728,7 +731,7 @@
         }
       ],
       "get": {
-        "operationId": "GetVerifiedSendersVerifyToken",
+        "operationId": "VerifySenderToken",
         "summary": "Verify Sender Request",
         "tags": [
           "Sender Verification"

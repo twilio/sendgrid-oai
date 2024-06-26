@@ -23,13 +23,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: api_keys
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/api_keys:
     post:
-      operationId: PostApiKeys
+      operationId: CreateApiKey
       summary: Create API keys
       tags:
       - API Keys
@@ -119,7 +121,7 @@ paths:
         '500':
           $ref: '#/components/responses/GlobalError500'
     get:
-      operationId: GetApiKeys
+      operationId: ListApiKey
       summary: Retrieve all API Keys belonging to the authenticated user
       tags:
       - API Keys
@@ -182,7 +184,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetApiKeysApiKeyId
+      operationId: GetApiKey
       summary: Retrieve an existing API Key
       tags:
       - API Keys
@@ -230,7 +232,7 @@ paths:
         '500':
           $ref: '#/components/responses/GlobalError500'
     patch:
-      operationId: PatchApiKeysApiKeyId
+      operationId: UpdateApiKeyName
       summary: Update API key name
       tags:
       - API Keys
@@ -279,7 +281,7 @@ paths:
         '500':
           $ref: '#/components/responses/GlobalError500'
     put:
-      operationId: PutApiKeysApiKeyId
+      operationId: UpdateApiKey
       summary: Update API key name and scopes
       tags:
       - API Keys
@@ -347,7 +349,7 @@ paths:
         '500':
           $ref: '#/components/responses/GlobalError500'
     delete:
-      operationId: DeleteApiKeysApiKeyId
+      operationId: DeleteApiKey
       summary: Delete API keys
       tags:
       - API Keys
@@ -389,15 +391,6 @@ components:
         name: Mail Send
     ApiKeyScopesResponse:
       title: API Key Name, ID, and Scopes
-      allOf:
-      - type: object
-        properties:
-          scopes:
-            type: array
-            description: The permissions this API Key has access to.
-            items:
-              type: string
-      - $ref: '#/components/schemas/ApiKeyResponse'
       example:
         api_key_id: qfTQ6KG0QBiwWdJ0-pCLCA
         name: Mail Send
@@ -414,6 +407,19 @@ components:
         - sender_verification_eligible
         - sender_verification_legacy
         - 2fa_required
+      type: object
+      properties:
+        scopes:
+          type: array
+          description: The permissions this API Key has access to.
+          items:
+            type: string
+        api_key_id:
+          type: string
+          description: 'The ID of your API Key. '
+        name:
+          type: string
+          description: The name of your API Key.
     ErrorResponse:
       type: object
       properties:

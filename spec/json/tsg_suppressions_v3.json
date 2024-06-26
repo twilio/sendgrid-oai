@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "suppressions"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/asm/groups": {
       "post": {
-        "operationId": "PostAsmGroups",
+        "operationId": "CreatAsmGroup",
         "summary": "Create a new suppression group",
         "tags": [
           "Unsubscribe Groups"
@@ -97,7 +100,7 @@
         }
       },
       "get": {
-        "operationId": "GetAsmGroups",
+        "operationId": "ListAsmGroup",
         "summary": "Retrieve all suppression groups associated with the user.",
         "tags": [
           "Unsubscribe Groups"
@@ -168,7 +171,7 @@
         }
       ],
       "get": {
-        "operationId": "GetAsmGroupsGroupId",
+        "operationId": "GetAsmGroup",
         "summary": "Get information on a single suppression group.",
         "tags": [
           "Unsubscribe Groups"
@@ -185,30 +188,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/SuppressionGroupRequestBaseProps"
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "The name of your suppression group. Required when creating a group.",
+                      "maxLength": 30
                     },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "description": "The ID of the suppression group."
-                        },
-                        "unsubscribes": {
-                          "type": "integer",
-                          "description": "The number of unsubscribes, or suppressions, in this group."
-                        },
-                        "last_email_sent_at": {
-                          "nullable": true,
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "id"
-                      ]
+                    "description": {
+                      "type": "string",
+                      "description": "A brief description of your suppression group. Required when creating a group.",
+                      "maxLength": 100
+                    },
+                    "is_default": {
+                      "type": "boolean",
+                      "description": "Indicates if you would like this to be your default suppression group."
+                    },
+                    "id": {
+                      "type": "integer",
+                      "description": "The ID of the suppression group."
+                    },
+                    "unsubscribes": {
+                      "type": "integer",
+                      "description": "The number of unsubscribes, or suppressions, in this group."
+                    },
+                    "last_email_sent_at": {
+                      "nullable": true,
+                      "type": "string"
                     }
+                  },
+                  "required": [
+                    "id"
                   ]
                 },
                 "examples": {
@@ -229,7 +239,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchAsmGroupsGroupId",
+        "operationId": "UpdateAsmGroup",
         "summary": "Update a suppression group.",
         "tags": [
           "Unsubscribe Groups"
@@ -244,15 +254,27 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SuppressionGroupRequestBaseProps"
-                  }
-                ],
                 "example": {
                   "id": 103,
                   "name": "Item Suggestions",
                   "description": "Suggestions for items our users might like."
+                },
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of your suppression group. Required when creating a group.",
+                    "maxLength": 30
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "A brief description of your suppression group. Required when creating a group.",
+                    "maxLength": 100
+                  },
+                  "is_default": {
+                    "type": "boolean",
+                    "description": "Indicates if you would like this to be your default suppression group."
+                  }
                 }
               }
             }
@@ -281,7 +303,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteAsmGroupsGroupId",
+        "operationId": "DeleteAsmGroup",
         "summary": "Delete a Suppression Group",
         "tags": [
           "Unsubscribe Groups"
@@ -319,7 +341,7 @@
         }
       ],
       "post": {
-        "operationId": "PostAsmGroupsGroupIdSuppressions",
+        "operationId": "AddSuppressionToAsmGroup",
         "summary": "Add suppressions to a suppression group",
         "tags": [
           "Suppressions"
@@ -367,7 +389,7 @@
         }
       },
       "get": {
-        "operationId": "GetAsmGroupsGroupIdSuppressions",
+        "operationId": "ListSuppressionFromAsmGroup",
         "summary": "Retrieve all suppressions for a suppression group",
         "tags": [
           "Suppressions"
@@ -427,7 +449,7 @@
         }
       ],
       "delete": {
-        "operationId": "DeleteAsmGroupsGroupIdSuppressionsEmail",
+        "operationId": "DeleteSuppressionFromAsmGroup",
         "summary": "Delete a suppression from a suppression group",
         "tags": [
           "Suppressions"
@@ -465,7 +487,7 @@
         }
       ],
       "post": {
-        "operationId": "PostAsmGroupsGroupIdSuppressionsSearch",
+        "operationId": "SearchSuppressionFromAsmGroup",
         "summary": "Search for suppressions within a group",
         "tags": [
           "Suppressions"
@@ -508,7 +530,7 @@
     },
     "/v3/asm/suppressions": {
       "get": {
-        "operationId": "GetAsmSuppressions",
+        "operationId": "ListAsmSuppression",
         "summary": "Retrieve all suppressions",
         "tags": [
           "Suppressions"
@@ -597,7 +619,7 @@
         }
       ],
       "get": {
-        "operationId": "GetAsmSuppressionsEmail",
+        "operationId": "GetAsmSuppression",
         "summary": "Retrieve all suppression groups for an email address",
         "tags": [
           "Suppressions"
@@ -694,7 +716,7 @@
     },
     "/v3/suppression/blocks": {
       "get": {
-        "operationId": "GetSuppressionBlocks",
+        "operationId": "ListSuppressionBlock",
         "summary": "Retrieve all blocks",
         "tags": [
           "Blocks"
@@ -831,7 +853,7 @@
         }
       ],
       "get": {
-        "operationId": "GetSuppressionBlocksEmail",
+        "operationId": "GetSuppressionBlock",
         "summary": "Retrieve a specific block",
         "tags": [
           "Blocks"
@@ -868,7 +890,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteSuppressionBlocksEmail",
+        "operationId": "DeleteSuppressionBlock",
         "summary": "Delete a specific block",
         "tags": [
           "Blocks"
@@ -896,7 +918,7 @@
     },
     "/v3/suppression/bounces": {
       "get": {
-        "operationId": "GetSuppressionBounces",
+        "operationId": "ListSuppressionBounces",
         "summary": "Retrieve all bounces",
         "tags": [
           "Bounces"
@@ -1060,7 +1082,7 @@
     },
     "/v3/suppression/bounces/{email}": {
       "get": {
-        "operationId": "GetSuppressionBouncesEmail",
+        "operationId": "GetSuppressionBounces",
         "summary": "Retrieve a Bounce",
         "tags": [
           "Bounces"
@@ -1110,7 +1132,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteSuppressionBouncesEmail",
+        "operationId": "DeleteSuppressionBounce",
         "summary": "Delete a bounce",
         "tags": [
           "Bounces"
@@ -1169,7 +1191,7 @@
     },
     "/v3/suppression/bounces/classifications": {
       "get": {
-        "operationId": "GetSuppressionBouncesClassifications",
+        "operationId": "ListSuppressionBouncesClassifications",
         "summary": "Retrieve bounce classification totals",
         "tags": [
           "Bounces"
@@ -1184,10 +1206,7 @@
             "schema": {
               "default": "application/json",
               "type": "string",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ]
+              "$ref": "#/components/schemas/Accept"
             }
           },
           {
@@ -1233,15 +1252,7 @@
                               "properties": {
                                 "classification": {
                                   "type": "string",
-                                  "enum": [
-                                    "Content",
-                                    "Frequency or Volume Too High",
-                                    "Invalid Address",
-                                    "Mailbox Unavailable",
-                                    "Reputation",
-                                    "Technical Failure",
-                                    "Unclassified"
-                                  ]
+                                  "$ref": "#/components/schemas/Classification"
                                 },
                                 "count": {
                                   "type": "integer"
@@ -1306,7 +1317,7 @@
     },
     "/v3/suppression/bounces/classifications/{classification}": {
       "get": {
-        "operationId": "GetSuppressionsBouncesClassificationsClassification",
+        "operationId": "GetSuppressionBouncesClassifications",
         "summary": "Retrieve bounce classification over time by domain stats",
         "tags": [
           "Bounces"
@@ -1321,10 +1332,7 @@
             "schema": {
               "type": "string",
               "default": "application/json",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ]
+              "$ref": "#/components/schemas/Accept1"
             }
           },
           {
@@ -1333,15 +1341,7 @@
             "description": "The classification you want to filter by. Possible values are: `Content`, `Frequency or Volume Too High`, `Invalid Address`, `Mailbox Unavailable`, `Reputation`, `Technical Failure`, `Unclassified`.",
             "schema": {
               "type": "string",
-              "enum": [
-                "Content",
-                "Frequency or Volume Too High",
-                "Invalid Address",
-                "Mailbox Unavailable",
-                "Reputation",
-                "Technical Failure",
-                "Unclassified"
-              ]
+              "$ref": "#/components/schemas/Classification1"
             },
             "required": true
           },
@@ -1442,7 +1442,7 @@
     },
     "/v3/asm/suppressions/global": {
       "post": {
-        "operationId": "PostAsmSuppressionsGlobal",
+        "operationId": "CreateGlobalSuppression",
         "summary": "Add recipient addresses to the global suppression group.",
         "tags": [
           "Global Suppressions"
@@ -1506,7 +1506,7 @@
         }
       ],
       "get": {
-        "operationId": "GetAsmSuppressionsGlobalEmail",
+        "operationId": "GetGlobalSuppression",
         "summary": "Retrieve a Global Suppression",
         "tags": [
           "Global Suppressions"
@@ -1549,7 +1549,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteAsmSuppressionsGlobalEmail",
+        "operationId": "DeleteGlobalSuppression",
         "summary": "Delete a Global Suppression",
         "tags": [
           "Global Suppressions"
@@ -1576,7 +1576,7 @@
     },
     "/v3/suppression/invalid_emails": {
       "get": {
-        "operationId": "GetSuppressionInvalidEmails",
+        "operationId": "ListInvalidEmail",
         "summary": "Retrieve all invalid emails",
         "tags": [
           "Invalid Emails"
@@ -1651,7 +1651,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteSuppressionInvalidEmails",
+        "operationId": "DeleteInvalidEmails",
         "summary": "Delete invalid emails",
         "tags": [
           "Invalid Emails"
@@ -1720,7 +1720,7 @@
         }
       ],
       "get": {
-        "operationId": "GetSuppressionInvalidEmailsEmail",
+        "operationId": "GetInvalidEmail",
         "summary": "Retrieve a specific invalid email",
         "tags": [
           "Invalid Emails"
@@ -1762,7 +1762,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteSuppressionInvalidEmailsEmail",
+        "operationId": "DeleteInvalidEmail",
         "summary": "Delete a specific invalid email",
         "tags": [
           "Invalid Emails"
@@ -1790,7 +1790,7 @@
     },
     "/v3/suppression/spam_reports": {
       "get": {
-        "operationId": "GetSuppressionSpamReports",
+        "operationId": "ListSpamReport",
         "summary": "Retrieve all spam reports",
         "tags": [
           "Spam Reports"
@@ -1856,7 +1856,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteSuppressionSpamReports",
+        "operationId": "DeleteSpamReports",
         "summary": "Delete spam reports",
         "tags": [
           "Spam Reports"
@@ -1925,7 +1925,7 @@
         }
       ],
       "get": {
-        "operationId": "GetSuppressionSpamReportsEmail",
+        "operationId": "GetSpamReport",
         "summary": "Retrieve a specific spam report",
         "tags": [
           "Spam Reports"
@@ -1961,7 +1961,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteSuppressionSpamReportsEmail",
+        "operationId": "DeleteSpamReport",
         "summary": "Delete a specific spam report",
         "tags": [
           "Spam Reports"
@@ -1989,7 +1989,7 @@
     },
     "/v3/suppression/unsubscribes": {
       "get": {
-        "operationId": "GetSuppressionUnsubscribes",
+        "operationId": "ListGlobalSuppression",
         "summary": "Retrieve all global suppressions",
         "tags": [
           "Global Suppressions"
@@ -2316,6 +2316,44 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "Accept": {
+        "type": "string",
+        "enum": [
+          "application/json",
+          "text/csv"
+        ]
+      },
+      "Classification": {
+        "type": "string",
+        "enum": [
+          "Content",
+          "Frequency or Volume Too High",
+          "Invalid Address",
+          "Mailbox Unavailable",
+          "Reputation",
+          "Technical Failure",
+          "Unclassified"
+        ]
+      },
+      "Accept1": {
+        "type": "string",
+        "enum": [
+          "application/json",
+          "text/csv"
+        ]
+      },
+      "Classification1": {
+        "type": "string",
+        "enum": [
+          "Content",
+          "Frequency or Volume Too High",
+          "Invalid Address",
+          "Mailbox Unavailable",
+          "Reputation",
+          "Technical Failure",
+          "Unclassified"
+        ]
       }
     },
     "responses": {},

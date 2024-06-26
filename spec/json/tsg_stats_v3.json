@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "stats"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/browsers/stats": {
       "get": {
-        "operationId": "GetBrowsersStats",
+        "operationId": "ListBrowserStat",
         "summary": "Retrieve email statistics by browser.",
         "tags": [
           "Stats"
@@ -156,7 +159,7 @@
     },
     "/v3/categories": {
       "get": {
-        "operationId": "GetCategories",
+        "operationId": "ListCategory",
         "summary": "Retrieve all categories",
         "tags": [
           "Categories"
@@ -272,7 +275,7 @@
     },
     "/v3/categories/stats": {
       "get": {
-        "operationId": "GetCategoriesStats",
+        "operationId": "ListCategoryStat",
         "summary": "Retrieve Email Statistics for Categories",
         "tags": [
           "Categories"
@@ -313,11 +316,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "day",
-                "week",
-                "month"
-              ]
+              "$ref": "#/components/schemas/AggregatedBy"
             }
           },
           {
@@ -447,7 +446,7 @@
     },
     "/v3/categories/stats/sums": {
       "get": {
-        "operationId": "GetCategoriesStatsSums",
+        "operationId": "ListCategoryStatSum",
         "summary": "Retrieve sums of email stats for each category.",
         "tags": [
           "Categories"
@@ -471,11 +470,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "desc",
-                "asc"
-              ],
-              "default": "desc"
+              "default": "desc",
+              "$ref": "#/components/schemas/SortByDirection"
             }
           },
           {
@@ -523,11 +519,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "day",
-                "week",
-                "month"
-              ]
+              "$ref": "#/components/schemas/AggregatedBy1"
             }
           },
           {
@@ -669,7 +661,7 @@
     },
     "/v3/clients/stats": {
       "get": {
-        "operationId": "GetClientsStats",
+        "operationId": "ListClientStat",
         "summary": "Retrieve email statistics by client type.",
         "tags": [
           "Stats"
@@ -773,17 +765,12 @@
           "required": true,
           "schema": {
             "type": "string",
-            "enum": [
-              "phone",
-              "tablet",
-              "webmail",
-              "desktop"
-            ]
+            "$ref": "#/components/schemas/ClientType"
           }
         }
       ],
       "get": {
-        "operationId": "GetClientsClientTypeStats",
+        "operationId": "GetClientStat",
         "summary": "Retrieve stats by a specific client type.",
         "tags": [
           "Stats"
@@ -880,7 +867,7 @@
     },
     "/v3/devices/stats": {
       "get": {
-        "operationId": "GetDevicesStats",
+        "operationId": "ListDeviceStat",
         "summary": "Retrieve email statistics by device type.",
         "tags": [
           "Stats"
@@ -1360,7 +1347,7 @@
     },
     "/v3/geo/stats": {
       "get": {
-        "operationId": "GetGeoStats",
+        "operationId": "ListGeoStat",
         "summary": "Retrieve email statistics by country and state/province.",
         "tags": [
           "Stats"
@@ -1373,10 +1360,7 @@
             "description": "The country you would like to see statistics for. Currently only supported for US and CA.",
             "schema": {
               "type": "string",
-              "enum": [
-                "US",
-                "CA"
-              ]
+              "$ref": "#/components/schemas/Country"
             }
           },
           {
@@ -1914,7 +1898,7 @@
     },
     "/v3/mailbox_providers/stats": {
       "get": {
-        "operationId": "GetMailboxProvidersStats",
+        "operationId": "ListMailboxProviderStat",
         "summary": "Retrieve email statistics by mailbox provider.",
         "tags": [
           "Stats"
@@ -2710,7 +2694,7 @@
     },
     "/v3/stats": {
       "get": {
-        "operationId": "GetStats",
+        "operationId": "ListStat",
         "summary": "Retrieve global email statistics",
         "tags": [
           "Stats"
@@ -2992,49 +2976,41 @@
       "AdvancedStatsMailboxProvider": {
         "title": "Stats: Advanced Stats for Mailbox Provider",
         "description": "The individual events and their stats.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AdvancedStatsClicksOpens"
+        "type": "object",
+        "properties": {
+          "blocks": {
+            "type": "integer",
+            "description": "The number of emails that were not allowed to be delivered by ISPs."
           },
-          {
-            "type": "object",
-            "description": "The individual events and their stats.",
-            "properties": {
-              "blocks": {
-                "type": "integer",
-                "description": "The number of emails that were not allowed to be delivered by ISPs."
-              },
-              "bounces": {
-                "type": "integer",
-                "description": "The number of emails that bounced instead of being delivered."
-              },
-              "deferred": {
-                "type": "integer",
-                "description": "The number of emails that temporarily could not be delivered."
-              },
-              "delivered": {
-                "type": "integer",
-                "description": "The number of emails SendGrid was able to confirm were actually delivered to a recipient."
-              },
-              "drops": {
-                "type": "integer",
-                "description": "The number of emails that were not delivered due to the recipient email address being on a suppression list."
-              },
-              "requests": {
-                "type": "integer",
-                "description": "The number of emails that were requested to be delivered."
-              },
-              "processed": {
-                "type": "integer",
-                "description": "Requests from your website, application, or mail client via SMTP Relay or the Web API that SendGrid processed."
-              },
-              "spam_reports": {
-                "type": "integer",
-                "description": "The number of recipients who marked your email as spam."
-              }
-            }
+          "bounces": {
+            "type": "integer",
+            "description": "The number of emails that bounced instead of being delivered."
+          },
+          "deferred": {
+            "type": "integer",
+            "description": "The number of emails that temporarily could not be delivered."
+          },
+          "delivered": {
+            "type": "integer",
+            "description": "The number of emails SendGrid was able to confirm were actually delivered to a recipient."
+          },
+          "drops": {
+            "type": "integer",
+            "description": "The number of emails that were not delivered due to the recipient email address being on a suppression list."
+          },
+          "requests": {
+            "type": "integer",
+            "description": "The number of emails that were requested to be delivered."
+          },
+          "processed": {
+            "type": "integer",
+            "description": "Requests from your website, application, or mail client via SMTP Relay or the Web API that SendGrid processed."
+          },
+          "spam_reports": {
+            "type": "integer",
+            "description": "The number of recipients who marked your email as spam."
           }
-        ]
+        }
       },
       "CategoryStats": {
         "title": "Stats: Category Stats",
@@ -3207,74 +3183,149 @@
       "AdvancedStatsClicksOpens": {
         "title": "Stats: Advanced Stats with Clicks and Opens",
         "description": "The individual events and their stats.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AdvancedStatsClicks"
+        "type": "object",
+        "properties": {
+          "clicks": {
+            "type": "integer",
+            "description": "The number of links that were clicked in your emails."
           },
-          {
-            "$ref": "#/components/schemas/AdvancedStatsOpens"
+          "unique_clicks": {
+            "type": "integer",
+            "description": "The number of unique recipients who clicked links in your emails."
+          },
+          "opens": {
+            "type": "integer",
+            "description": "The total number of times your emails were opened by recipients."
+          },
+          "unique_opens": {
+            "type": "integer",
+            "description": "The number of unique recipients who opened your emails."
           }
-        ]
+        }
       },
       "StatsAdvancedGlobalStats": {
         "title": "Stats: Advanced Global Stats",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AdvancedStatsClicksOpens"
+        "type": "object",
+        "properties": {
+          "clicks": {
+            "type": "integer",
+            "description": "The number of links that were clicked in your emails."
           },
-          {
-            "type": "object",
-            "properties": {
-              "blocks": {
-                "type": "integer",
-                "description": "The number of emails that were not allowed to be delivered by ISPs."
-              },
-              "bounce_drops": {
-                "type": "integer",
-                "description": "The number of emails that were dropped because of a bounce."
-              },
-              "bounces": {
-                "type": "integer",
-                "description": "The number of emails that bounced instead of being delivered."
-              },
-              "deferred": {
-                "type": "integer",
-                "description": "The number of emails that temporarily could not be delivered. "
-              },
-              "delivered": {
-                "type": "integer",
-                "description": "The number of emails SendGrid was able to confirm were actually delivered to a recipient."
-              },
-              "invalid_emails": {
-                "type": "integer",
-                "description": "The number of recipients who had malformed email addresses or whose mail provider reported the address as invalid."
-              },
-              "processed": {
-                "type": "integer",
-                "description": "Requests from your website, application, or mail client via SMTP Relay or the API that SendGrid processed."
-              },
-              "requests": {
-                "type": "integer",
-                "description": "The number of emails that were requested to be delivered."
-              },
-              "spam_report_drops": {
-                "type": "integer",
-                "description": "The number of emails that were dropped due to a recipient previously marking your emails as spam."
-              },
-              "spam_reports": {
-                "type": "integer",
-                "description": "The number of recipients who marked your email as spam."
-              },
-              "unsubscribe_drops": {
-                "type": "integer",
-                "description": "The number of emails dropped due to a recipient unsubscribing from your emails."
-              },
-              "unsubscribes": {
-                "type": "integer",
-                "description": "The number of recipients who unsubscribed from your emails."
-              }
-            }
+          "unique_clicks": {
+            "type": "integer",
+            "description": "The number of unique recipients who clicked links in your emails."
+          },
+          "opens": {
+            "type": "integer",
+            "description": "The total number of times your emails were opened by recipients."
+          },
+          "unique_opens": {
+            "type": "integer",
+            "description": "The number of unique recipients who opened your emails."
+          },
+          "blocks": {
+            "type": "integer",
+            "description": "The number of emails that were not allowed to be delivered by ISPs."
+          },
+          "bounce_drops": {
+            "type": "integer",
+            "description": "The number of emails that were dropped because of a bounce."
+          },
+          "bounces": {
+            "type": "integer",
+            "description": "The number of emails that bounced instead of being delivered."
+          },
+          "deferred": {
+            "type": "integer",
+            "description": "The number of emails that temporarily could not be delivered. "
+          },
+          "delivered": {
+            "type": "integer",
+            "description": "The number of emails SendGrid was able to confirm were actually delivered to a recipient."
+          },
+          "invalid_emails": {
+            "type": "integer",
+            "description": "The number of recipients who had malformed email addresses or whose mail provider reported the address as invalid."
+          },
+          "processed": {
+            "type": "integer",
+            "description": "Requests from your website, application, or mail client via SMTP Relay or the API that SendGrid processed."
+          },
+          "requests": {
+            "type": "integer",
+            "description": "The number of emails that were requested to be delivered."
+          },
+          "spam_report_drops": {
+            "type": "integer",
+            "description": "The number of emails that were dropped due to a recipient previously marking your emails as spam."
+          },
+          "spam_reports": {
+            "type": "integer",
+            "description": "The number of recipients who marked your email as spam."
+          },
+          "unsubscribe_drops": {
+            "type": "integer",
+            "description": "The number of emails dropped due to a recipient unsubscribing from your emails."
+          },
+          "unsubscribes": {
+            "type": "integer",
+            "description": "The number of recipients who unsubscribed from your emails."
           }
+        }
+      },
+      "AggregatedBy": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
+        ]
+      },
+      "SortByDirection": {
+        "type": "string",
+        "enum": [
+          "desc",
+          "asc"
+        ]
+      },
+      "AggregatedBy1": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
+        ]
+      },
+      "ClientType": {
+        "type": "string",
+        "enum": [
+          "phone",
+          "tablet",
+          "webmail",
+          "desktop"
+        ]
+      },
+      "Country": {
+        "type": "string",
+        "enum": [
+          "US",
+          "CA"
+        ]
+      },
+      "AggregatedBy2": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
+        ]
+      },
+      "AggregatedBy3": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month"
         ]
       }
     },
@@ -3316,11 +3367,7 @@
         "required": false,
         "schema": {
           "type": "string",
-          "enum": [
-            "day",
-            "week",
-            "month"
-          ]
+          "$ref": "#/components/schemas/AggregatedBy2"
         }
       },
       "StatsAdvancedQueryStringsLimitOffsetLimit": {
@@ -3348,11 +3395,7 @@
         "required": false,
         "schema": {
           "type": "string",
-          "enum": [
-            "day",
-            "week",
-            "month"
-          ]
+          "$ref": "#/components/schemas/AggregatedBy3"
         }
       },
       "StatsAdvancedQueryStringsLimitOffsetStartDate": {

@@ -22,6 +22,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: seq
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -31,7 +33,7 @@ paths:
       summary: Get Engagement Quality Scores
       tags:
       - Engagement Quality
-      operationId: GetEngagementQualityScores
+      operationId: ListEngagementQualityScore
       description: '**This operation allows you to retrieve your SendGrid Engagement
         Quality (SEQ) scores for a specified date range**.
 
@@ -96,7 +98,7 @@ paths:
       summary: Get Subusers' Engagement Quality Scores
       tags:
       - Engagement Quality
-      operationId: GetEnagementQualitySubusersScores
+      operationId: ListSubuserEngagementQualityScore
       description: '**This operation allows you to retrieve SendGrid Engagement Quality
         (SEQ) scores for your Subusers or customer accounts for a specific date.**
 

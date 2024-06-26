@@ -19,13 +19,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: tracking_settings
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/tracking_settings:
     get:
-      operationId: GetTrackingSettings
+      operationId: ListTrackingSetting
       summary: Retrieve Tracking Settings
       tags:
       - Tracking
@@ -71,7 +73,7 @@ paths:
                       enabled: true
   /v3/tracking_settings/click:
     get:
-      operationId: GetTrackingSettingsClick
+      operationId: ListClickTrackingSetting
       summary: Retrieve Click Track Settings
       tags:
       - Tracking
@@ -97,7 +99,7 @@ paths:
                     enable_text: false
                     enabled: true
     patch:
-      operationId: PatchTrackingSettingsClick
+      operationId: UpdateClickTrackingSetting
       summary: Update Click Tracking Settings
       tags:
       - Tracking
@@ -135,7 +137,7 @@ paths:
                     enabled: true
   /v3/tracking_settings/google_analytics:
     get:
-      operationId: GetTrackingSettingsGoogleAnalytics
+      operationId: ListGoogleAnalyticsTrackingSetting
       summary: Retrieve Google Analytics Settings
       tags:
       - Tracking
@@ -165,7 +167,7 @@ paths:
                     utm_source: ''
                     utm_term: ''
     patch:
-      operationId: PatchTrackingSettingsGoogleAnalytics
+      operationId: UpdateGoogleAnalyticsTrackingSetting
       summary: Update Google Analytics Settings
       tags:
       - Tracking
@@ -201,7 +203,7 @@ paths:
                     utm_term: ''
   /v3/tracking_settings/open:
     get:
-      operationId: GetTrackingSettingsOpen
+      operationId: ListOpenTrackingSetting
       summary: Get Open Tracking Settings
       tags:
       - Tracking
@@ -232,7 +234,7 @@ paths:
                   value:
                     enabled: true
     patch:
-      operationId: PatchTrackingSettingsOpen
+      operationId: UpdateOpenTrackingSetting
       summary: Update Open Tracking Settings
       tags:
       - Tracking
@@ -275,7 +277,7 @@ paths:
                     enabled: true
   /v3/tracking_settings/subscription:
     get:
-      operationId: GetTrackingSettingsSubscription
+      operationId: ListSubscriptionTrackingSetting
       summary: Retrieve Subscription Tracking Settings
       tags:
       - Tracking
@@ -310,7 +312,7 @@ paths:
                     replace: thetag
                     url: http://mydomain.com/parse
     patch:
-      operationId: PatchTrackingSettingsSubscription
+      operationId: UpdateSubscriptionTrackingSetting
       summary: Update Subscription Tracking Settings
       tags:
       - Tracking

@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "templates"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/templates": {
       "post": {
-        "operationId": "PostTemplates",
+        "operationId": "CreateTemplate",
         "summary": "Create a transactional template.",
         "tags": [
           "Templates"
@@ -54,11 +57,8 @@
                   "generation": {
                     "type": "string",
                     "description": "Defines whether the template supports dynamic replacement.",
-                    "enum": [
-                      "legacy",
-                      "dynamic"
-                    ],
-                    "default": "legacy"
+                    "default": "legacy",
+                    "$ref": "#/components/schemas/Generation"
                   }
                 },
                 "required": [
@@ -97,7 +97,7 @@
         }
       },
       "get": {
-        "operationId": "GetTemplates",
+        "operationId": "ListTemplate",
         "summary": "Retrieve paged transactional templates.",
         "tags": [
           "Templates"
@@ -111,12 +111,8 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "legacy",
-                "dynamic",
-                "legacy,dynamic"
-              ],
-              "default": "legacy"
+              "default": "legacy",
+              "$ref": "#/components/schemas/Generations"
             }
           },
           {
@@ -229,7 +225,7 @@
         }
       ],
       "post": {
-        "operationId": "PostTemplatesTemplateId",
+        "operationId": "DuplicateTemplate",
         "summary": "Duplicate a transactional template.",
         "tags": [
           "Templates"
@@ -284,7 +280,7 @@
         }
       },
       "get": {
-        "operationId": "GetTemplatesTemplateId",
+        "operationId": "GetTemplate",
         "summary": "Retrieve a single transactional template.",
         "tags": [
           "Templates"
@@ -320,7 +316,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchTemplatesTemplateId",
+        "operationId": "UpdateTemplate",
         "summary": "Edit a transactional template.",
         "tags": [
           "Templates"
@@ -375,7 +371,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteTemplatesTemplateId",
+        "operationId": "DeleteTemplate",
         "summary": "Delete a template.",
         "tags": [
           "Templates"
@@ -413,7 +409,7 @@
         }
       ],
       "post": {
-        "operationId": "PostTemplatesTemplateIdVersions",
+        "operationId": "CreateTemplateVersion",
         "summary": "Create a new transactional template version.",
         "tags": [
           "Templates Versions"
@@ -481,7 +477,7 @@
         }
       ],
       "get": {
-        "operationId": "GetTemplatesTemplateIdVersionsVersionId",
+        "operationId": "GetTemplateVersion",
         "summary": "Retrieve a specific transactional template version.",
         "tags": [
           "Templates Versions"
@@ -522,7 +518,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchTemplatesTemplateIdVersionsVersionId",
+        "operationId": "UpdateTemplateVersion",
         "summary": "Edit a transactional template version.",
         "tags": [
           "Templates Versions"
@@ -566,7 +562,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteTemplatesTemplateIdVersionsVersionId",
+        "operationId": "DeleteTemplateVersion",
         "summary": "Delete a transactional template version.",
         "tags": [
           "Templates Versions"
@@ -608,7 +604,7 @@
         }
       ],
       "post": {
-        "operationId": "PostTemplatesTemplateIdVersionsVersionIdActivate",
+        "operationId": "ActivateTemplateVersion",
         "summary": "Activate a transactional template version.",
         "tags": [
           "Templates Versions"
@@ -654,19 +650,6 @@
     "schemas": {
       "TransactionalTemplate": {
         "title": "Transactional Templates: Template",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TransactionalTemplatesTemplateLean"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "warning": {
-                "$ref": "#/components/schemas/TransactionalTemplateWarning"
-              }
-            }
-          }
-        ],
         "example": {
           "id": "33feeff2-5069-43fe-8853-428651e5be79",
           "name": "example_name",
@@ -675,28 +658,117 @@
             "message": "Sample warning message"
           },
           "generation": "legacy"
-        }
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the transactional template.",
+            "minLength": 36,
+            "maxLength": 36,
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name for the transactional template.",
+            "maxLength": 100
+          },
+          "generation": {
+            "type": "string",
+            "description": "Defines the generation of the template.",
+            "$ref": "#/components/schemas/Generation1"
+          },
+          "updated_at ": {
+            "type": "string",
+            "description": "The date and time that this transactional template version was updated.",
+            "pattern": "^(\\d{4}-\\d{2}-\\d{2}) ((\\d{2}):(\\d{2}):(\\d{2}))$"
+          },
+          "versions": {
+            "type": "array",
+            "description": "The different versions of this transactional template.",
+            "items": {
+              "$ref": "#/components/schemas/TransactionalTemplatesVersionOutputLean"
+            }
+          },
+          "warning": {
+            "$ref": "#/components/schemas/TransactionalTemplateWarning"
+          }
+        },
+        "required": [
+          "id",
+          "generation",
+          "updated_at ",
+          "name"
+        ]
       },
       "TransactionalTemplateVersionOutput": {
         "title": "Transactional Templates: Version Output",
-        "allOf": [
-          {
-            "type": "object",
-            "properties": {
-              "warnings": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/TransactionalTemplateWarning"
-                }
-              }
+        "type": "object",
+        "properties": {
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransactionalTemplateWarning"
             }
           },
-          {
-            "$ref": "#/components/schemas/TransactionalTemplateVersionCreate"
+          "active": {
+            "type": "integer",
+            "description": "Set the version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
+            "$ref": "#/components/schemas/Active1"
           },
-          {
-            "$ref": "#/components/schemas/TransactionalTemplatesVersionOutputLean"
+          "name": {
+            "type": "string",
+            "description": "Name of the transactional template version.",
+            "maxLength": 100
+          },
+          "html_content": {
+            "type": "string",
+            "description": "The HTML content of the Design."
+          },
+          "plain_content": {
+            "type": "string",
+            "description": "Plain text content of the Design."
+          },
+          "generate_plain_content": {
+            "type": "boolean",
+            "description": "If true, plain_content is always generated from html_content. If false, plain_content is not altered.",
+            "default": true
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject of the new transactional template version.",
+            "maxLength": 255
+          },
+          "editor": {
+            "type": "string",
+            "description": "The editor used in the UI.",
+            "$ref": "#/components/schemas/Editor1"
+          },
+          "test_data": {
+            "type": "string",
+            "description": "For dynamic templates only, the mock json data that will be used for template preview and test sends."
+          },
+          "id": {
+            "type": "string",
+            "description": "ID of the transactional template version.",
+            "format": "uuid"
+          },
+          "template_id": {
+            "type": "string",
+            "description": "ID of the transactional template."
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "The date and time that this transactional template version was updated."
+          },
+          "thumbnail_url": {
+            "type": "string",
+            "description": "A Thumbnail preview of the template's html content."
           }
+        },
+        "required": [
+          "subject",
+          "name"
         ]
       },
       "TransactionalTemplateVersionCreate": {
@@ -706,10 +778,7 @@
           "active": {
             "type": "integer",
             "description": "Set the version as the active version associated with the template (0 is inactive, 1 is active). Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
-            "enum": [
-              0,
-              1
-            ]
+            "$ref": "#/components/schemas/Active"
           },
           "name": {
             "type": "string",
@@ -739,11 +808,8 @@
           },
           "editor": {
             "type": "string",
-            "enum": [
-              "code",
-              "design"
-            ],
-            "description": "The editor used in the UI."
+            "description": "The editor used in the UI.",
+            "$ref": "#/components/schemas/Editor"
           },
           "test_data": {
             "type": "string",
@@ -781,10 +847,7 @@
           "active": {
             "type": "integer",
             "description": "Set the version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
-            "enum": [
-              0,
-              1
-            ]
+            "$ref": "#/components/schemas/Active1"
           },
           "name": {
             "type": "string",
@@ -815,11 +878,8 @@
           },
           "editor": {
             "type": "string",
-            "enum": [
-              "code",
-              "design"
-            ],
-            "description": "The editor used in the UI."
+            "description": "The editor used in the UI.",
+            "$ref": "#/components/schemas/Editor1"
           },
           "thumbnail_url": {
             "type": "string",
@@ -846,10 +906,7 @@
           "generation": {
             "type": "string",
             "description": "Defines the generation of the template.",
-            "enum": [
-              "legacy",
-              "dynamic"
-            ]
+            "$ref": "#/components/schemas/Generation1"
           },
           "updated_at ": {
             "type": "string",
@@ -912,6 +969,56 @@
             "minimum": 0
           }
         }
+      },
+      "Generation": {
+        "type": "string",
+        "enum": [
+          "legacy",
+          "dynamic"
+        ]
+      },
+      "Generations": {
+        "type": "string",
+        "enum": [
+          "legacy",
+          "dynamic",
+          "legacy,dynamic"
+        ]
+      },
+      "Active": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "Editor": {
+        "type": "string",
+        "enum": [
+          "code",
+          "design"
+        ]
+      },
+      "Active1": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "Editor1": {
+        "type": "string",
+        "enum": [
+          "code",
+          "design"
+        ]
+      },
+      "Generation1": {
+        "type": "string",
+        "enum": [
+          "legacy",
+          "dynamic"
+        ]
       }
     },
     "responses": {},

@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "scopes"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/scopes": {
       "get": {
-        "operationId": "GetScopes",
+        "operationId": "ListScope",
         "summary": "Retrieve a list of scopes for which this user has access.",
         "tags": [
           "Scopes"
@@ -137,7 +140,7 @@
     },
     "/v3/scopes/requests": {
       "get": {
-        "operationId": "GetScopesRequests",
+        "operationId": "ListScopeRequest",
         "summary": "Retrieve access requests",
         "tags": [
           "Scopes"
@@ -236,7 +239,7 @@
         }
       ],
       "delete": {
-        "operationId": "DeleteScopesRequestsRequestId",
+        "operationId": "DenyScopeRequest",
         "summary": "Deny access request",
         "tags": [
           "Scopes"
@@ -303,7 +306,7 @@
         }
       ],
       "patch": {
-        "operationId": "PatchScopesRequestsApproveId",
+        "operationId": "ApproveScopeRequest",
         "summary": "Approve access request",
         "tags": [
           "Scopes"

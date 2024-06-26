@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "user"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/user/account": {
       "get": {
-        "operationId": "GetUserAccount",
+        "operationId": "ListAccount",
         "summary": "Get a user's account information.",
         "tags": [
           "Users API"
@@ -52,10 +55,7 @@
                     "type": {
                       "type": "string",
                       "description": "The type of account for this user.",
-                      "enum": [
-                        "free",
-                        "paid"
-                      ]
+                      "$ref": "#/components/schemas/Type"
                     },
                     "reputation": {
                       "type": "number",
@@ -83,7 +83,7 @@
     },
     "/v3/user/credits": {
       "get": {
-        "operationId": "GetUserCredits",
+        "operationId": "ListCredit",
         "summary": "Retrieve your credit balance",
         "tags": [
           "Users API"
@@ -162,7 +162,7 @@
     },
     "/v3/user/email": {
       "get": {
-        "operationId": "GetUserEmail",
+        "operationId": "ListEmail",
         "summary": "Retrieve your account email address",
         "tags": [
           "Users API"
@@ -204,7 +204,7 @@
         }
       },
       "put": {
-        "operationId": "PutUserEmail",
+        "operationId": "UpdateEmail",
         "summary": "Update your account email address",
         "tags": [
           "Users API"
@@ -266,7 +266,7 @@
     },
     "/v3/user/password": {
       "put": {
-        "operationId": "PutUserPassword",
+        "operationId": "UpdatePassword",
         "summary": "Update your password",
         "tags": [
           "Users API"
@@ -321,7 +321,7 @@
     },
     "/v3/user/profile": {
       "get": {
-        "operationId": "GetUserProfile",
+        "operationId": "ListProfile",
         "summary": "Get a user's profile",
         "description": "**This endpoint allows you to retrieve your current profile details.**",
         "tags": [
@@ -422,7 +422,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchUserProfile",
+        "operationId": "UpdateProfile",
         "summary": "Update a user's profile",
         "tags": [
           "Users API"
@@ -497,7 +497,7 @@
     },
     "/v3/user/username": {
       "get": {
-        "operationId": "GetUserUsername",
+        "operationId": "ListUsername",
         "summary": "Retrieve your username",
         "tags": [
           "Users API"
@@ -544,7 +544,7 @@
         }
       },
       "put": {
-        "operationId": "PputUserUsername",
+        "operationId": "UpdateUsername",
         "summary": "Update your username",
         "tags": [
           "Users API"
@@ -698,6 +698,13 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "Type": {
+        "type": "string",
+        "enum": [
+          "free",
+          "paid"
+        ]
       }
     },
     "responses": {},

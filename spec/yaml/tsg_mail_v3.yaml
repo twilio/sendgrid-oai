@@ -19,6 +19,8 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: mail
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
@@ -48,7 +50,7 @@ paths:
         for more information about pausing and cancelling a mail send.
 
         '
-      operationId: PostMailBatch
+      operationId: CreateMailBatch
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
@@ -85,7 +87,7 @@ paths:
         A batch ID does not need to be assigned to a send to be considered valid.
         A successful response means only that the batch ID has been created, but it
         does not indicate that the ID has been assigned to a send.'
-      operationId: GetMailBatchId
+      operationId: GetMailBatch
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
       responses:
@@ -118,7 +120,7 @@ paths:
         and helper libraries to get you working with this endpoint even faster.
 
         '
-      operationId: PostMailSend
+      operationId: SendMail
       parameters:
       - $ref: '#/components/parameters/MailBodyCompression'
       requestBody:
@@ -204,6 +206,15 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+    ContentEncoding:
+      type: string
+      enum:
+      - gzip
+    Disposition:
+      type: string
+      enum:
+      - inline
+      - attachment
   responses:
     PostMailSend400:
       description: Mail Send bad response.
@@ -398,8 +409,7 @@ components:
       required: false
       schema:
         type: string
-        enum:
-        - gzip
+        $ref: '#/components/schemas/ContentEncoding'
   examples:
     MailBatch2xx:
       summary: A mail batch ID.
@@ -585,9 +595,7 @@ components:
                         within the message while `attachment` results in the attached
                         file requiring some action to be taken before it is displayed
                         such as opening or downloading the file.
-                      enum:
-                      - inline
-                      - attachment
+                      $ref: '#/components/schemas/Disposition'
                     content_id:
                       type: string
                       description: The attachment's content ID. The `content_id` is

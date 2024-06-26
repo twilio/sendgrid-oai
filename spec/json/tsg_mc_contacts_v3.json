@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "mc_contacts"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/marketing/contacts": {
       "put": {
-        "operationId": "PutMarketingContacts",
+        "operationId": "UpdateContact",
         "summary": "Add or Update a Contact",
         "tags": [
           "Contacts"
@@ -51,7 +54,7 @@
                   },
                   "contacts": {
                     "type": "array",
-                    "description": "One or more contacts objects that you intend to upsert. Each contact needs to include at least one of `email`, `phone_number`, `external_id`, or `anonymous_id` as an identifier.",
+                    "description": "One or more contacts objects that you intend to upsert. Each contact needs to include at least one of `email`, `phone_number_id`, `external_id`, or `anonymous_id` as an identifier.",
                     "minItems": 1,
                     "maxItems": 30000,
                     "items": {
@@ -116,7 +119,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteMarketingContacts",
+        "operationId": "DeleteContact",
         "summary": "Delete Contacts",
         "tags": [
           "Contacts"
@@ -199,7 +202,7 @@
         }
       },
       "get": {
-        "operationId": "GetMarketingContacts",
+        "operationId": "ListContact",
         "summary": "Get Sample Contacts",
         "tags": [
           "Contacts"
@@ -282,7 +285,7 @@
         }
       ],
       "get": {
-        "operationId": "GetMarketingContactsId",
+        "operationId": "GetContact",
         "summary": "Get a Contact by ID",
         "tags": [
           "Contacts"
@@ -316,7 +319,7 @@
     },
     "/v3/marketing/contacts/batch": {
       "post": {
-        "operationId": "PostMarketingContactsBatch",
+        "operationId": "ListBatchedContact",
         "summary": "Get Batched Contacts by IDs",
         "tags": [
           "Contacts"
@@ -393,7 +396,7 @@
     },
     "/v3/marketing/contacts/{contact_id}/identifiers": {
       "delete": {
-        "operationId": "DeleteMarketingContactsContactIdIdentifiers",
+        "operationId": "DeleteContactIdentifier",
         "summary": "Delete a Contact Identifier",
         "tags": [
           "Contacts"
@@ -496,7 +499,7 @@
     },
     "/v3/marketing/contacts/count": {
       "get": {
-        "operationId": "GetMarketingContactsCount",
+        "operationId": "ListContactCount",
         "summary": "Get Total Contact Count",
         "tags": [
           "Contacts"
@@ -560,7 +563,7 @@
     },
     "/v3/marketing/contacts/exports": {
       "post": {
-        "operationId": "PostMarketingContactsExports",
+        "operationId": "ExportContact",
         "summary": "Export Contacts",
         "tags": [
           "Contacts"
@@ -597,12 +600,9 @@
                   },
                   "file_type": {
                     "type": "string",
-                    "enum": [
-                      "csv",
-                      "json"
-                    ],
                     "description": "File type for export file. Choose from `json` or `csv`.",
-                    "default": "csv"
+                    "default": "csv",
+                    "$ref": "#/components/schemas/FileType"
                   },
                   "max_file_size": {
                     "description": "The maximum size of an export file in MB. Note that when this option is specified, multiple output files may be returned from the export.",
@@ -670,7 +670,7 @@
         }
       },
       "get": {
-        "operationId": "GetMarketingContactsExports",
+        "operationId": "ListExportContact",
         "summary": "Get All Existing Exports",
         "tags": [
           "Contacts"
@@ -849,7 +849,7 @@
         }
       ],
       "get": {
-        "operationId": "GetMarketingContactsExportsId",
+        "operationId": "GetExportContact",
         "summary": "Export Contacts Status",
         "tags": [
           "Contacts"
@@ -901,7 +901,7 @@
     },
     "/v3/marketing/contacts/imports": {
       "put": {
-        "operationId": "PutMarketingContactsImports",
+        "operationId": "ImportContact",
         "summary": "Import Contacts",
         "tags": [
           "Contacts"
@@ -922,10 +922,8 @@
                   },
                   "file_type": {
                     "type": "string",
-                    "enum": [
-                      "csv"
-                    ],
-                    "description": "Upload file type."
+                    "description": "Upload file type.",
+                    "$ref": "#/components/schemas/FileType1"
                   },
                   "field_mappings": {
                     "type": "array",
@@ -933,14 +931,8 @@
                     "uniqueItems": false,
                     "minItems": 1,
                     "items": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "nullable": true
-                        }
-                      ]
+                      "type": "string",
+                      "nullable": true
                     }
                   }
                 },
@@ -1061,7 +1053,7 @@
         }
       ],
       "get": {
-        "operationId": "GetMarketingContactsImportsId",
+        "operationId": "GetImportContact",
         "summary": "Import Contacts Status",
         "tags": [
           "Contacts"
@@ -1110,7 +1102,7 @@
     },
     "/v3/marketing/contacts/search": {
       "post": {
-        "operationId": "PostMarketingContactsSearch",
+        "operationId": "SearchContact",
         "summary": "Search Contacts",
         "tags": [
           "Contacts"
@@ -1232,7 +1224,7 @@
     },
     "/v3/marketing/contacts/search/emails": {
       "post": {
-        "operationId": "PostMarketingContactsSearchEmails",
+        "operationId": "ListContactByEmail",
         "summary": "Get Contacts by Emails",
         "tags": [
           "Contacts"
@@ -1508,17 +1500,12 @@
           "description": "The type of identifier to search for.",
           "schema": {
             "type": "string",
-            "enum": [
-              "email",
-              "phone_number_id",
-              "external_id",
-              "anonymous_id"
-            ]
+            "$ref": "#/components/schemas/IdentifierType"
           }
         }
       ],
       "post": {
-        "operationId": "PostMarketingContactsSearchIdentifiersIdentifierType",
+        "operationId": "GetContactByIdentifiers",
         "summary": "Get Contacts by Identifiers",
         "tags": [
           "Contacts"
@@ -1763,12 +1750,8 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "pending",
-              "ready",
-              "failure"
-            ],
-            "description": "The export job's status. Allowed values: `pending`, `ready`, or `failure`."
+            "description": "The export job's status. Allowed values: `pending`, `ready`, or `failure`.",
+            "$ref": "#/components/schemas/Status"
           },
           "created_at": {
             "type": "string",
@@ -2084,6 +2067,36 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "FileType": {
+        "type": "string",
+        "enum": [
+          "csv",
+          "json"
+        ]
+      },
+      "FileType1": {
+        "type": "string",
+        "enum": [
+          "csv"
+        ]
+      },
+      "IdentifierType": {
+        "type": "string",
+        "enum": [
+          "email",
+          "phone_number_id",
+          "external_id",
+          "anonymous_id"
+        ]
+      },
+      "Status": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "ready",
+          "failure"
+        ]
       }
     },
     "responses": {

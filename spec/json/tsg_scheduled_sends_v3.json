@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "scheduled_sends"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/user/scheduled_sends": {
       "post": {
-        "operationId": "PostUserScheduledSends",
+        "operationId": "CreateScheduledSend",
         "summary": "Cancel or pause a scheduled send",
         "tags": [
           "Scheduled Sends"
@@ -56,10 +59,7 @@
                     "type": "string",
                     "default": "pause",
                     "description": "The status of the send you would like to implement. This can be pause or cancel. To delete a pause or cancel status see DELETE /v3/user/scheduled_sends/{batch_id}",
-                    "enum": [
-                      "pause",
-                      "cancel"
-                    ]
+                    "$ref": "#/components/schemas/Status"
                   }
                 },
                 "required": [
@@ -103,7 +103,7 @@
         }
       },
       "get": {
-        "operationId": "GetUserScheduledSends",
+        "operationId": "ListScheduledSend",
         "summary": "Retrieve all scheduled sends",
         "tags": [
           "Scheduled Sends"
@@ -172,7 +172,7 @@
         }
       ],
       "get": {
-        "operationId": "GetUserScheduledSendsBatchId",
+        "operationId": "GetScheduledSend",
         "summary": "Retrieve scheduled send",
         "tags": [
           "Scheduled Sends"
@@ -230,7 +230,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchUserScheduledSendsBatchId",
+        "operationId": "UpdateScheduledSend",
         "summary": "Update a scheduled send",
         "tags": [
           "Scheduled Sends"
@@ -250,10 +250,7 @@
                   "status": {
                     "type": "string",
                     "description": "The status you would like the scheduled send to have.",
-                    "enum": [
-                      "cancel",
-                      "pause"
-                    ]
+                    "$ref": "#/components/schemas/Status1"
                   }
                 },
                 "required": [
@@ -295,7 +292,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteUserScheduledSendsBatchId",
+        "operationId": "DeleteScheduledSend",
         "summary": "Delete a cancellation or pause from a scheduled send",
         "tags": [
           "Scheduled Sends"
@@ -333,32 +330,26 @@
     "schemas": {
       "ScheduledSendStatus": {
         "title": "User Scheduled Send status",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/MailBatchId"
-          },
-          {
-            "type": "object",
-            "description": "The status of the scheduled send.",
-            "properties": {
-              "status": {
-                "type": "string",
-                "description": "The status of the scheduled send.",
-                "enum": [
-                  "cancel",
-                  "pause"
-                ]
-              }
-            },
-            "required": [
-              "status"
-            ]
-          }
-        ],
         "example": {
           "batch_id": "HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi",
           "status": "pause"
-        }
+        },
+        "type": "object",
+        "properties": {
+          "batch_id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-\\_]"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the scheduled send.",
+            "$ref": "#/components/schemas/Status2"
+          }
+        },
+        "required": [
+          "status",
+          "batch_id"
+        ]
       },
       "MailBatchId": {
         "title": "Mail Batch ID",
@@ -405,6 +396,27 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "Status": {
+        "type": "string",
+        "enum": [
+          "pause",
+          "cancel"
+        ]
+      },
+      "Status1": {
+        "type": "string",
+        "enum": [
+          "cancel",
+          "pause"
+        ]
+      },
+      "Status2": {
+        "type": "string",
+        "enum": [
+          "cancel",
+          "pause"
+        ]
       }
     },
     "responses": {

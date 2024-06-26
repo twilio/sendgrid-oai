@@ -45,13 +45,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: mc_segments_2
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/marketing/segments/2.0:
     post:
-      operationId: PostMarketingSegments2
+      operationId: CreateSegment
       summary: Create Segment
       tags:
       - Segmenting Contacts V2
@@ -83,7 +85,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorsSegmentV2'
     get:
-      operationId: GetMarketingSegments2
+      operationId: ListSegment
       summary: Get List of Segments
       tags:
       - Segmenting Contacts V2
@@ -118,6 +120,8 @@ paths:
         required: false
         schema:
           type: array
+          items:
+            type: string
       - name: parent_list_ids
         in: query
         description: A comma separated list up to 50 in size, to filter segments on.  Only
@@ -165,7 +169,7 @@ paths:
       schema:
         type: string
     patch:
-      operationId: PatchMarketingSegments2SegmentId
+      operationId: UpdateSegment
       summary: Update Segment
       tags:
       - Segmenting Contacts V2
@@ -198,7 +202,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorsSegmentV2'
     get:
-      operationId: GetMarketingSegments2SegmentId
+      operationId: GetSegment
       summary: Get Segment by ID
       tags:
       - Segmenting Contacts V2
@@ -230,7 +234,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorsSegmentV2'
     delete:
-      operationId: DeleteMarketingSegments2SegmentId
+      operationId: DeleteSegment
       summary: Delete segment
       tags:
       - Segmenting Contacts V2
@@ -254,7 +258,7 @@ paths:
                 $ref: '#/components/schemas/ErrorsSegmentV2'
   /v3/marketing/segments/2.0/refresh/{segment_id}:
     post:
-      operationId: PostMarketingSegments2RefreshSegmentId
+      operationId: RefreshSegment
       summary: Manually refresh a segment
       description: Manually refresh a segment by segment ID.
       tags:

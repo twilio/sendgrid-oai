@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "mc_stats"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/marketing/stats/automations": {
       "get": {
-        "operationId": "GetMarketingStatsAutomations",
+        "operationId": "ListAutomationStat",
         "summary": "Get All Automation Stats",
         "tags": [
           "Stats"
@@ -95,7 +98,7 @@
         }
       ],
       "get": {
-        "operationId": "GetMarketingStatsAutomationsId",
+        "operationId": "GetAutomationStat",
         "summary": "Get Automation Stats by ID",
         "tags": [
           "Stats"
@@ -161,7 +164,7 @@
         }
       ],
       "get": {
-        "operationId": "GetMarketingStatsAutomationsIdLinks",
+        "operationId": "ListClickTrackingStat",
         "summary": "Get Automation Click Tracking Stats by ID",
         "tags": [
           "Stats"
@@ -210,7 +213,7 @@
     },
     "/v3/marketing/stats/automations/export": {
       "get": {
-        "operationId": "GetMarketingStatsAutomationsExport",
+        "operationId": "ExportAutomationStat",
         "summary": "Export Single Send Stats",
         "tags": [
           "Stats"
@@ -262,7 +265,7 @@
     },
     "/v3/marketing/stats/singlesends": {
       "get": {
-        "operationId": "GetMarketingStatsSinglesends",
+        "operationId": "ListSingleSendStat",
         "summary": "Get All Single Sends Stats",
         "tags": [
           "Stats"
@@ -321,7 +324,7 @@
         }
       ],
       "get": {
-        "operationId": "GetMarketingStatsSinglesendsId",
+        "operationId": "GetSingleSendStat",
         "summary": "Get Single Send Stats by ID",
         "tags": [
           "Stats"
@@ -383,7 +386,7 @@
         }
       ],
       "get": {
-        "operationId": "GetMarketingStatsSinglesendsIdLinks",
+        "operationId": "ListSingleSendTrackingStat",
         "summary": "Get Single Send Click Tracking Stats by ID",
         "tags": [
           "Stats"
@@ -435,7 +438,7 @@
     },
     "/v3/marketing/stats/singlesends/export": {
       "get": {
-        "operationId": "GetMarketingStatsSinglesendsExport",
+        "operationId": "ExportSingleSendStat",
         "summary": "Export Single Send Stats",
         "tags": [
           "Stats"
@@ -606,11 +609,7 @@
                   "type": "string",
                   "default": "all",
                   "description": "This is the A/B phase of the Single Send stat returned. If the `group_by` parameter doesn't include `ab_phase` in the request, then the value is \"all\".",
-                  "enum": [
-                    "send",
-                    "test",
-                    "all"
-                  ]
+                  "$ref": "#/components/schemas/AbPhase"
                 },
                 "aggregation": {
                   "type": "string",
@@ -665,11 +664,7 @@
                 "ab_phase": {
                   "type": "string",
                   "description": "This is the A/B phase of the Single Send stat returned. If the `ab_phase` query parameter was not provided, it will return `\"all\"`.",
-                  "enum": [
-                    "send",
-                    "test",
-                    "all"
-                  ]
+                  "$ref": "#/components/schemas/AbPhase1"
                 },
                 "clicks": {
                   "type": "integer",
@@ -832,6 +827,56 @@
             "description": "When applicable, this property value will be an error ID."
           }
         }
+      },
+      "AbPhase": {
+        "type": "string",
+        "enum": [
+          "send",
+          "test",
+          "all"
+        ]
+      },
+      "AbPhase1": {
+        "type": "string",
+        "enum": [
+          "send",
+          "test",
+          "all"
+        ]
+      },
+      "Items": {
+        "type": "string",
+        "enum": [
+          "step_id"
+        ]
+      },
+      "AggregatedBy": {
+        "type": "string",
+        "enum": [
+          "day",
+          "total"
+        ]
+      },
+      "Items1": {
+        "type": "string",
+        "enum": [
+          "ab_variation",
+          "ab_phase"
+        ]
+      },
+      "Items2": {
+        "type": "string",
+        "enum": [
+          "ab_variation",
+          "ab_phase"
+        ]
+      },
+      "AbPhaseId": {
+        "type": "string",
+        "enum": [
+          "test",
+          "send"
+        ]
       }
     },
     "responses": {
@@ -876,9 +921,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "step_id"
-            ]
+            "$ref": "#/components/schemas/Items"
           }
         }
       },
@@ -903,11 +946,8 @@
         "description": "Dictates how the stats are time-sliced. Currently, `\"total\"` and `\"day\"` are supported.",
         "schema": {
           "type": "string",
-          "enum": [
-            "day",
-            "total"
-          ],
-          "default": "total"
+          "default": "total",
+          "$ref": "#/components/schemas/AggregatedBy"
         }
       },
       "StartDateBaseProps": {
@@ -949,10 +989,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "ab_variation",
-              "ab_phase"
-            ]
+            "$ref": "#/components/schemas/Items1"
           }
         }
       },
@@ -966,10 +1003,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "ab_variation",
-              "ab_phase"
-            ]
+            "$ref": "#/components/schemas/Items2"
           }
         }
       },
@@ -986,10 +1020,7 @@
         "in": "query",
         "schema": {
           "type": "string",
-          "enum": [
-            "test",
-            "send"
-          ]
+          "$ref": "#/components/schemas/AbPhaseId"
         }
       }
     },

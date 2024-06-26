@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "ip_access_management"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/access_settings/activity": {
       "get": {
-        "operationId": "GetAccessSettingsActivity",
+        "operationId": "ListAccessActivity",
         "summary": "Retrieve all recent access attempts",
         "tags": [
           "IP Access Management"
@@ -147,7 +150,7 @@
     },
     "/v3/access_settings/whitelist": {
       "post": {
-        "operationId": "PostAccessSettingsWhitelist",
+        "operationId": "AddIpToAllowList",
         "summary": "Add one or more IPs to the allow list",
         "tags": [
           "IP Access Management"
@@ -253,7 +256,7 @@
         }
       },
       "get": {
-        "operationId": "GetAccessSettingsWhitelist",
+        "operationId": "ListAllowedIp",
         "summary": "Retrieve a list of currently allowed IPs",
         "tags": [
           "IP Access Management"
@@ -316,7 +319,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteAccessSettingsWhitelist",
+        "operationId": "DeleteAllowedIps",
         "summary": "Remove one or more IPs from the allow list",
         "tags": [
           "IP Access Management"
@@ -392,7 +395,7 @@
         }
       ],
       "get": {
-        "operationId": "GetAccessSettingsWhitelistRuleId",
+        "operationId": "GetAllowedIp",
         "summary": "Retrieve a specific allowed IP",
         "tags": [
           "IP Access Management"
@@ -431,7 +434,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteAccessSettingsWhitelistRuleId",
+        "operationId": "DeleteAllowedIp",
         "summary": "Remove a specific IP from the allowed list",
         "tags": [
           "IP Access Management"

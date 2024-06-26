@@ -22,13 +22,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: teammates
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/teammates:
     post:
-      operationId: PostTeammates
+      operationId: InviteTeammate
       summary: Invite teammate
       tags:
       - Teammates
@@ -124,7 +126,7 @@ paths:
                         field:
                           type: string
     get:
-      operationId: GetTeammates
+      operationId: ListTeammate
       summary: Retrieve all teammates
       tags:
       - Teammates
@@ -179,10 +181,7 @@ paths:
                           type: string
                           description: 'Indicate the type of user: owner user, teammate
                             admin user, or normal teammate'
-                          enum:
-                          - admin
-                          - owner
-                          - teammate
+                          $ref: '#/components/schemas/UserType'
                         is_admin:
                           type: boolean
                           description: Set to true if teammate has admin privileges
@@ -291,7 +290,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetTeammatesTeammateNameSubuserAccess
+      operationId: ListSubuserByTemplate
       summary: Get Teammate Subuser Access
       tags:
       - Teammates
@@ -351,9 +350,7 @@ paths:
                             or `restricted`. When is property is set to `restricted`,
                             the Teammate has only the permissions assigned in the
                             `scopes` property.
-                          enum:
-                          - admin
-                          - restricted
+                          $ref: '#/components/schemas/PermissionType'
                         scopes:
                           type: array
                           description: The permissions or scopes that the Teammate
@@ -505,7 +502,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetTeammatesUsername
+      operationId: GetTeammate
       summary: Retrieve specific teammate
       tags:
       - Teammates
@@ -545,10 +542,7 @@ paths:
                     type: string
                     description: 'Indicate the type of user: account owner, teammate
                       admin user, or normal teammate'
-                    enum:
-                    - admin
-                    - owner
-                    - teammate
+                    $ref: '#/components/schemas/UserType1'
                   is_admin:
                     type: boolean
                     description: Set to true if teammate has admin privileges
@@ -599,7 +593,7 @@ paths:
                     country: USA
                     zip: '12345'
     patch:
-      operationId: PatchTeammatesUsername
+      operationId: UpdateTeammate
       summary: Update teammate's permissions
       tags:
       - Teammates
@@ -664,10 +658,7 @@ paths:
                     type: string
                     description: 'Indicate the type of user: owner user, teammate
                       admin user, or normal teammate'
-                    enum:
-                    - admin
-                    - owner
-                    - teammate
+                    $ref: '#/components/schemas/UserType2'
                   is_admin:
                     type: boolean
                     description: Set to true if teammate has admin priveleges
@@ -761,7 +752,7 @@ paths:
                     - message: username not found
                       field: username
     delete:
-      operationId: DeleteTeammatesUsername
+      operationId: DeleteTeammate
       summary: Delete teammate
       tags:
       - Teammates
@@ -798,7 +789,7 @@ paths:
                       field: username
   /v3/teammates/pending:
     get:
-      operationId: GetTeammatesPending
+      operationId: ListPendingTeammate
       summary: Retrieve all pending teammates
       tags:
       - Teammates
@@ -869,7 +860,7 @@ paths:
       schema:
         type: string
     delete:
-      operationId: DeleteTeammatesPendingToken
+      operationId: DeletePendingTeammate
       summary: Delete pending teammate
       tags:
       - Teammates
@@ -904,7 +895,7 @@ paths:
       schema:
         type: string
     post:
-      operationId: PostTeammatesPendingTokenResend
+      operationId: ResendTeammateInvite
       summary: Resend teammate invite
       tags:
       - Teammates
@@ -970,7 +961,30 @@ paths:
                     - message: invalid pending key
                       field: pending_key
 components:
-  schemas: {}
+  schemas:
+    UserType:
+      type: string
+      enum:
+      - admin
+      - owner
+      - teammate
+    PermissionType:
+      type: string
+      enum:
+      - admin
+      - restricted
+    UserType1:
+      type: string
+      enum:
+      - admin
+      - owner
+      - teammate
+    UserType2:
+      type: string
+      enum:
+      - admin
+      - owner
+      - teammate
   responses: {}
   parameters:
     OnBehalfOf:

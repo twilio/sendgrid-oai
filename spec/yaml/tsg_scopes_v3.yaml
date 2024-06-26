@@ -17,13 +17,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: scopes
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/scopes:
     get:
-      operationId: GetScopes
+      operationId: ListScope
       summary: Retrieve a list of scopes for which this user has access.
       tags:
       - Scopes
@@ -112,7 +114,7 @@ paths:
           $ref: '#/components/responses/GetScopes500'
   /v3/scopes/requests:
     get:
-      operationId: GetScopesRequests
+      operationId: ListScopeRequest
       summary: Retrieve access requests
       tags:
       - Scopes
@@ -188,7 +190,7 @@ paths:
       schema:
         type: string
     delete:
-      operationId: DeleteScopesRequestsRequestId
+      operationId: DenyScopeRequest
       summary: Deny access request
       tags:
       - Scopes
@@ -232,7 +234,7 @@ paths:
       schema:
         type: string
     patch:
-      operationId: PatchScopesRequestsApproveId
+      operationId: ApproveScopeRequest
       summary: Approve access request
       tags:
       - Scopes

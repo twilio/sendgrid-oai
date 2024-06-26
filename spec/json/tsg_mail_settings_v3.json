@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "mail_settings"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/mail_settings": {
       "get": {
-        "operationId": "GetMailSettings",
+        "operationId": "ListMailSetting",
         "summary": "Retrieve all mail settings",
         "tags": [
           "Mail Settings"
@@ -180,7 +183,7 @@
     },
     "/v3/mail_settings/address_whitelist": {
       "patch": {
-        "operationId": "PatchMailSettingsAddressWhitelist",
+        "operationId": "UpdateAddressWhitelist",
         "summary": "Update address whitelist mail settings",
         "tags": [
           "Mail Settings"
@@ -259,7 +262,7 @@
         }
       },
       "get": {
-        "operationId": "GetMailSettingsAddressWhitelist",
+        "operationId": "ListAddressWhitelist",
         "summary": "Retrieve address whitelist mail settings",
         "tags": [
           "Mail Settings"
@@ -312,7 +315,7 @@
     },
     "/v3/mail_settings/bounce_purge": {
       "patch": {
-        "operationId": "PatchMailSettingsBouncePurge",
+        "operationId": "UpdateBouncePurge",
         "summary": "Update bounce purge mail settings",
         "tags": [
           "Mail Settings"
@@ -370,7 +373,7 @@
         }
       },
       "get": {
-        "operationId": "GetMailSettingsBouncePurge",
+        "operationId": "ListBouncePurge",
         "summary": "Retrieve bounce purge mail settings",
         "tags": [
           "Mail Settings"
@@ -421,7 +424,7 @@
     },
     "/v3/mail_settings/footer": {
       "patch": {
-        "operationId": "PatchMailSettingsFooter",
+        "operationId": "UpdateFooter",
         "summary": "Update footer mail settings",
         "tags": [
           "Mail Settings"
@@ -479,7 +482,7 @@
         }
       },
       "get": {
-        "operationId": "GetMailSettingsFooter",
+        "operationId": "ListFooter",
         "summary": "Retrieve footer mail settings",
         "tags": [
           "Mail Settings"
@@ -530,7 +533,7 @@
     },
     "/v3/mail_settings/forward_bounce": {
       "patch": {
-        "operationId": "PatchMailSettingsForwardBounce",
+        "operationId": "UpdateForwardBounce",
         "summary": "Update forward bounce mail settings",
         "tags": [
           "Mail Settings"
@@ -587,7 +590,7 @@
         }
       },
       "get": {
-        "operationId": "GetMailSettingsForwardBounce",
+        "operationId": "ListForwardBounce",
         "summary": "Retrieve forward bounce mail settings",
         "tags": [
           "Mail Settings"
@@ -637,7 +640,7 @@
     },
     "/v3/mail_settings/forward_spam": {
       "patch": {
-        "operationId": "PatchMailSettingsForwardSpam",
+        "operationId": "UpdateForwardSpam",
         "summary": "Update forward spam mail settings",
         "tags": [
           "Mail Settings"
@@ -694,7 +697,7 @@
         }
       },
       "get": {
-        "operationId": "GetMailSettingsForwardSpam",
+        "operationId": "ListForwardSpam",
         "summary": "Retrieve forward spam mail settings",
         "tags": [
           "Mail Settings"
@@ -744,7 +747,7 @@
     },
     "/v3/mail_settings/template": {
       "patch": {
-        "operationId": "PatchMailSettingsTemplate",
+        "operationId": "UpdateTemplate",
         "summary": "Update template mail settings",
         "tags": [
           "Mail Settings"
@@ -829,7 +832,7 @@
         }
       },
       "get": {
-        "operationId": "GetMailSettingsTemplate",
+        "operationId": "ListTemplate",
         "summary": "Retrieve legacy template mail settings",
         "tags": [
           "Mail Settings"

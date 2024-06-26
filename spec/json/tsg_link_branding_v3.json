@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "link_branding"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/whitelabel/links": {
       "post": {
-        "operationId": "PostWhitelabelLinks",
+        "operationId": "CreateBrandedLink",
         "summary": "Create a branded link",
         "tags": [
           "Link Branding"
@@ -57,19 +60,13 @@
                   "default": {
                     "type": "boolean",
                     "description": "Indicates if you want to use this link branding as the default or fallback. When setting a new default, the existing default link branding will have its default status removed automatically.",
-                    "enum": [
-                      true,
-                      false
-                    ]
+                    "$ref": "#/components/schemas/Default"
                   },
                   "region": {
                     "type": "string",
                     "default": "us",
                     "description": "The region of the IP address. Can be `eu` or `us`. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
-                    "enum": [
-                      "eu",
-                      "us"
-                    ]
+                    "$ref": "#/components/schemas/Region"
                   }
                 },
                 "required": [
@@ -126,7 +123,7 @@
         }
       },
       "get": {
-        "operationId": "GetWhitelabelLinks",
+        "operationId": "ListBrandedLink",
         "summary": "Retrieve all branded links",
         "tags": [
           "Link Branding"
@@ -229,7 +226,7 @@
         }
       ],
       "get": {
-        "operationId": "GetWhitelabelLinksId",
+        "operationId": "GetBrandedLink",
         "summary": "Retrieve a branded link",
         "tags": [
           "Link Branding"
@@ -282,7 +279,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchWhitelabelLinksId",
+        "operationId": "UpdateBrandedLink",
         "summary": "Update a branded link",
         "tags": [
           "Link Branding"
@@ -302,10 +299,7 @@
                   "default": {
                     "type": "boolean",
                     "description": "Indicates if the branded link is set as the default. When setting a new default, the existing default link branding will have its default status removed automatically.",
-                    "enum": [
-                      true,
-                      false
-                    ]
+                    "$ref": "#/components/schemas/Default1"
                   }
                 },
                 "example": {
@@ -357,7 +351,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteWhitelabelLinksId",
+        "operationId": "DeleteBrandedLink",
         "summary": "Delete a branded link",
         "tags": [
           "Link Branding"
@@ -395,7 +389,7 @@
         }
       ],
       "post": {
-        "operationId": "PostWhitelabelLinksIdValidate",
+        "operationId": "ValidateBrandedLink",
         "summary": "Validate a branded link",
         "tags": [
           "Link Branding"
@@ -421,10 +415,7 @@
                     "valid": {
                       "type": "boolean",
                       "description": "Indicates if the link branding is valid.",
-                      "enum": [
-                        true,
-                        false
-                      ]
+                      "$ref": "#/components/schemas/Valid"
                     },
                     "validation_results": {
                       "type": "object",
@@ -444,10 +435,7 @@
                             "valid": {
                               "type": "boolean",
                               "description": "Indicates if this DNS record is valid.",
-                              "enum": [
-                                true,
-                                false
-                              ]
+                              "$ref": "#/components/schemas/Valid1"
                             },
                             "reason": {
                               "type": "string",
@@ -463,10 +451,7 @@
                             "valid": {
                               "type": "boolean",
                               "description": "Indicates if the DNS record is valid.",
-                              "enum": [
-                                true,
-                                false
-                              ]
+                              "$ref": "#/components/schemas/Valid2"
                             },
                             "reason": {
                               "type": "string",
@@ -567,7 +552,7 @@
         }
       ],
       "post": {
-        "operationId": "PostWhitelabelLinksLinkIdSubuser",
+        "operationId": "AssociateBrandedLinkWithSubuser",
         "summary": "Associate a branded link with a subuser",
         "tags": [
           "Link Branding"
@@ -635,7 +620,7 @@
     },
     "/v3/whitelabel/links/default": {
       "get": {
-        "operationId": "GetWhitelabelLinksDefault",
+        "operationId": "ListDefaultBrandedLink",
         "summary": "Retrieve the default branded link",
         "tags": [
           "Link Branding"
@@ -698,7 +683,7 @@
     },
     "/v3/whitelabel/links/subuser": {
       "get": {
-        "operationId": "GetWhitelabelLinksSubuser",
+        "operationId": "ListSubuserBrandedLink",
         "summary": "Retrieve a subuser's branded link",
         "tags": [
           "Link Branding"
@@ -757,7 +742,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteWhitelabelLinksSubuser",
+        "operationId": "DisassociateBrandedLinkFromSubuser",
         "summary": "Disassociate a branded link from a subuser",
         "tags": [
           "Link Branding"
@@ -818,26 +803,17 @@
           "default": {
             "type": "boolean",
             "description": "Indicates if this is the default link branding.",
-            "enum": [
-              true,
-              false
-            ]
+            "$ref": "#/components/schemas/Default2"
           },
           "valid": {
             "type": "boolean",
             "description": "Indicates if this link branding is valid.",
-            "enum": [
-              true,
-              false
-            ]
+            "$ref": "#/components/schemas/Valid3"
           },
           "legacy": {
             "type": "boolean",
             "description": "Indicates if this link branding was created using the legacy whitelabel tool. If it is a legacy whitelabel, it will still function, but you'll need to create new link branding if you need to update it.",
-            "enum": [
-              true,
-              false
-            ]
+            "$ref": "#/components/schemas/Legacy"
           },
           "dns": {
             "type": "object",
@@ -859,19 +835,12 @@
                   "valid": {
                     "type": "boolean",
                     "description": "Indicates if the DNS record is valid.",
-                    "enum": [
-                      true,
-                      false
-                    ]
+                    "$ref": "#/components/schemas/Valid4"
                   },
                   "type": {
                     "type": "string",
                     "description": "The type of DNS record that was generated.",
-                    "enum": [
-                      "cname",
-                      "txt",
-                      "mx"
-                    ]
+                    "$ref": "#/components/schemas/Type"
                   },
                   "host": {
                     "type": "string",
@@ -890,19 +859,12 @@
                   "valid": {
                     "type": "boolean",
                     "description": "Indicates if the DNS record is valid.",
-                    "enum": [
-                      true,
-                      false
-                    ]
+                    "$ref": "#/components/schemas/Valid5"
                   },
                   "type": {
                     "type": "string",
                     "description": "The type of DNS record generated.",
-                    "enum": [
-                      "cname",
-                      "txt",
-                      "mx"
-                    ]
+                    "$ref": "#/components/schemas/Type1"
                   },
                   "host": {
                     "type": "string",
@@ -931,6 +893,99 @@
           "valid",
           "legacy",
           "dns"
+        ]
+      },
+      "Default": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Region": {
+        "type": "string",
+        "enum": [
+          "eu",
+          "us"
+        ]
+      },
+      "Default1": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Valid": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Valid1": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Valid2": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Default2": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Valid3": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Legacy": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Valid4": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Type": {
+        "type": "string",
+        "enum": [
+          "cname",
+          "txt",
+          "mx"
+        ]
+      },
+      "Valid5": {
+        "type": "boolean",
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "Type1": {
+        "type": "string",
+        "enum": [
+          "cname",
+          "txt",
+          "mx"
         ]
       }
     },

@@ -36,13 +36,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: suppressions
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/asm/groups:
     post:
-      operationId: PostAsmGroups
+      operationId: CreatAsmGroup
       summary: Create a new suppression group
       tags:
       - Unsubscribe Groups
@@ -90,7 +92,7 @@ paths:
                     description: Suggestions for products our users might like.
                     is_default: false
     get:
-      operationId: GetAsmGroups
+      operationId: ListAsmGroup
       summary: Retrieve all suppression groups associated with the user.
       tags:
       - Unsubscribe Groups
@@ -141,7 +143,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetAsmGroupsGroupId
+      operationId: GetAsmGroup
       summary: Get information on a single suppression group.
       tags:
       - Unsubscribe Groups
@@ -154,22 +156,34 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                - $ref: '#/components/schemas/SuppressionGroupRequestBaseProps'
-                - type: object
-                  properties:
-                    id:
-                      type: integer
-                      description: The ID of the suppression group.
-                    unsubscribes:
-                      type: integer
-                      description: The number of unsubscribes, or suppressions, in
-                        this group.
-                    last_email_sent_at:
-                      nullable: true
-                      type: string
-                  required:
-                  - id
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of your suppression group. Required when
+                      creating a group.
+                    maxLength: 30
+                  description:
+                    type: string
+                    description: A brief description of your suppression group. Required
+                      when creating a group.
+                    maxLength: 100
+                  is_default:
+                    type: boolean
+                    description: Indicates if you would like this to be your default
+                      suppression group.
+                  id:
+                    type: integer
+                    description: The ID of the suppression group.
+                  unsubscribes:
+                    type: integer
+                    description: The number of unsubscribes, or suppressions, in this
+                      group.
+                  last_email_sent_at:
+                    nullable: true
+                    type: string
+                required:
+                - id
               examples:
                 response:
                   value:
@@ -180,7 +194,7 @@ paths:
                     name: Newsletters
                     unsubscribes: 400
     patch:
-      operationId: PatchAsmGroupsGroupId
+      operationId: UpdateAsmGroup
       summary: Update a suppression group.
       tags:
       - Unsubscribe Groups
@@ -191,12 +205,26 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-              - $ref: '#/components/schemas/SuppressionGroupRequestBaseProps'
               example:
                 id: 103
                 name: Item Suggestions
                 description: Suggestions for items our users might like.
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of your suppression group. Required when creating
+                    a group.
+                  maxLength: 30
+                description:
+                  type: string
+                  description: A brief description of your suppression group. Required
+                    when creating a group.
+                  maxLength: 100
+                is_default:
+                  type: boolean
+                  description: Indicates if you would like this to be your default
+                    suppression group.
       responses:
         '201':
           description: ''
@@ -211,7 +239,7 @@ paths:
                     name: Item Suggestions
                     description: Suggestions for items our users might like.
     delete:
-      operationId: DeleteAsmGroupsGroupId
+      operationId: DeleteAsmGroup
       summary: Delete a Suppression Group
       tags:
       - Unsubscribe Groups
@@ -248,7 +276,7 @@ paths:
       schema:
         type: string
     post:
-      operationId: PostAsmGroupsGroupIdSuppressions
+      operationId: AddSuppressionToAsmGroup
       summary: Add suppressions to a suppression group
       tags:
       - Suppressions
@@ -284,7 +312,7 @@ paths:
                     - test1@example.com
                     - test2@example.com
     get:
-      operationId: GetAsmGroupsGroupIdSuppressions
+      operationId: ListSuppressionFromAsmGroup
       summary: Retrieve all suppressions for a suppression group
       tags:
       - Suppressions
@@ -326,7 +354,7 @@ paths:
       schema:
         type: string
     delete:
-      operationId: DeleteAsmGroupsGroupIdSuppressionsEmail
+      operationId: DeleteSuppressionFromAsmGroup
       summary: Delete a suppression from a suppression group
       tags:
       - Suppressions
@@ -358,7 +386,7 @@ paths:
       schema:
         type: string
     post:
-      operationId: PostAsmGroupsGroupIdSuppressionsSearch
+      operationId: SearchSuppressionFromAsmGroup
       summary: Search for suppressions within a group
       tags:
       - Suppressions
@@ -391,7 +419,7 @@ paths:
                   - exists2@example.com
   /v3/asm/suppressions:
     get:
-      operationId: GetAsmSuppressions
+      operationId: ListAsmSuppression
       summary: Retrieve all suppressions
       tags:
       - Suppressions
@@ -452,7 +480,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetAsmSuppressionsEmail
+      operationId: GetAsmSuppression
       summary: Retrieve all suppression groups for an email address
       tags:
       - Suppressions
@@ -520,7 +548,7 @@ paths:
                       suppressed: false
   /v3/suppression/blocks:
     get:
-      operationId: GetSuppressionBlocks
+      operationId: ListSuppressionBlock
       summary: Retrieve all blocks
       tags:
       - Blocks
@@ -618,7 +646,7 @@ paths:
         type: string
         format: email
     get:
-      operationId: GetSuppressionBlocksEmail
+      operationId: GetSuppressionBlock
       summary: Retrieve a specific block
       tags:
       - Blocks
@@ -642,7 +670,7 @@ paths:
                       no route to host'
                     status: 4.0.0
     delete:
-      operationId: DeleteSuppressionBlocksEmail
+      operationId: DeleteSuppressionBlock
       summary: Delete a specific block
       tags:
       - Blocks
@@ -660,7 +688,7 @@ paths:
                 properties: {}
   /v3/suppression/bounces:
     get:
-      operationId: GetSuppressionBounces
+      operationId: ListSuppressionBounces
       summary: Retrieve all bounces
       tags:
       - Bounces
@@ -777,7 +805,7 @@ paths:
                       message: authorization required
   /v3/suppression/bounces/{email}:
     get:
-      operationId: GetSuppressionBouncesEmail
+      operationId: GetSuppressionBounces
       summary: Retrieve a Bounce
       tags:
       - Bounces
@@ -812,7 +840,7 @@ paths:
                       o186si2389584ioe.63 - gsmtp '
                     status: 5.1.1
     delete:
-      operationId: DeleteSuppressionBouncesEmail
+      operationId: DeleteSuppressionBounce
       summary: Delete a bounce
       tags:
       - Bounces
@@ -848,7 +876,7 @@ paths:
                       message: authorization required
   /v3/suppression/bounces/classifications:
     get:
-      operationId: GetSuppressionBouncesClassifications
+      operationId: ListSuppressionBouncesClassifications
       summary: Retrieve bounce classification totals
       tags:
       - Bounces
@@ -864,9 +892,7 @@ paths:
         schema:
           default: application/json
           type: string
-          enum:
-          - application/json
-          - text/csv
+          $ref: '#/components/schemas/Accept'
       - name: start_date
         in: query
         description: The start of the time range, in YYYY-MM-DD format, when a bounce
@@ -902,14 +928,7 @@ paths:
                             properties:
                               classification:
                                 type: string
-                                enum:
-                                - Content
-                                - Frequency or Volume Too High
-                                - Invalid Address
-                                - Mailbox Unavailable
-                                - Reputation
-                                - Technical Failure
-                                - Unclassified
+                                $ref: '#/components/schemas/Classification'
                               count:
                                 type: integer
               examples:
@@ -936,7 +955,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
   /v3/suppression/bounces/classifications/{classification}:
     get:
-      operationId: GetSuppressionsBouncesClassificationsClassification
+      operationId: GetSuppressionBouncesClassifications
       summary: Retrieve bounce classification over time by domain stats
       tags:
       - Bounces
@@ -952,9 +971,7 @@ paths:
         schema:
           type: string
           default: application/json
-          enum:
-          - application/json
-          - text/csv
+          $ref: '#/components/schemas/Accept1'
       - name: classification
         in: path
         description: 'The classification you want to filter by. Possible values are:
@@ -962,14 +979,7 @@ paths:
           `Reputation`, `Technical Failure`, `Unclassified`.'
         schema:
           type: string
-          enum:
-          - Content
-          - Frequency or Volume Too High
-          - Invalid Address
-          - Mailbox Unavailable
-          - Reputation
-          - Technical Failure
-          - Unclassified
+          $ref: '#/components/schemas/Classification1'
         required: true
       - name: start_date
         in: query
@@ -1026,7 +1036,7 @@ paths:
                         count: 4
   /v3/asm/suppressions/global:
     post:
-      operationId: PostAsmSuppressionsGlobal
+      operationId: CreateGlobalSuppression
       summary: Add recipient addresses to the global suppression group.
       tags:
       - Global Suppressions
@@ -1069,7 +1079,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetAsmSuppressionsGlobalEmail
+      operationId: GetGlobalSuppression
       summary: Retrieve a Global Suppression
       tags:
       - Global Suppressions
@@ -1106,7 +1116,7 @@ paths:
                   value:
                     recipient_email: test@example.com
     delete:
-      operationId: DeleteAsmSuppressionsGlobalEmail
+      operationId: DeleteGlobalSuppression
       summary: Delete a Global Suppression
       tags:
       - Global Suppressions
@@ -1131,7 +1141,7 @@ paths:
                 type: object
   /v3/suppression/invalid_emails:
     get:
-      operationId: GetSuppressionInvalidEmails
+      operationId: ListInvalidEmail
       summary: Retrieve all invalid emails
       tags:
       - Invalid Emails
@@ -1186,7 +1196,7 @@ paths:
                     email: user2@example.com
                     reason: Mail domain mentioned in email address is unknown
     delete:
-      operationId: DeleteSuppressionInvalidEmails
+      operationId: DeleteInvalidEmails
       summary: Delete invalid emails
       tags:
       - Invalid Emails
@@ -1238,7 +1248,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetSuppressionInvalidEmailsEmail
+      operationId: GetInvalidEmail
       summary: Retrieve a specific invalid email
       tags:
       - Invalid Emails
@@ -1265,7 +1275,7 @@ paths:
                     email: test1@example.com
                     reason: Mail domain mentioned in email address is unknown
     delete:
-      operationId: DeleteSuppressionInvalidEmailsEmail
+      operationId: DeleteInvalidEmail
       summary: Delete a specific invalid email
       tags:
       - Invalid Emails
@@ -1283,7 +1293,7 @@ paths:
                 properties: {}
   /v3/suppression/spam_reports:
     get:
-      operationId: GetSuppressionSpamReports
+      operationId: ListSpamReport
       summary: Retrieve all spam reports
       tags:
       - Spam Reports
@@ -1329,7 +1339,7 @@ paths:
                     email: user2@example.com
                     ip: 10.63.202.100
     delete:
-      operationId: DeleteSuppressionSpamReports
+      operationId: DeleteSpamReports
       summary: Delete spam reports
       tags:
       - Spam Reports
@@ -1384,7 +1394,7 @@ paths:
         type: string
         format: email
     get:
-      operationId: GetSuppressionSpamReportsEmail
+      operationId: GetSpamReport
       summary: Retrieve a specific spam report
       tags:
       - Spam Reports
@@ -1406,7 +1416,7 @@ paths:
                     email: test1@example.com
                     ip: 10.89.32.5
     delete:
-      operationId: DeleteSuppressionSpamReportsEmail
+      operationId: DeleteSpamReport
       summary: Delete a specific spam report
       tags:
       - Spam Reports
@@ -1432,7 +1442,7 @@ paths:
                 properties: {}
   /v3/suppression/unsubscribes:
     get:
-      operationId: GetSuppressionUnsubscribes
+      operationId: ListGlobalSuppression
       summary: Retrieve all global suppressions
       tags:
       - Global Suppressions
@@ -1685,6 +1695,36 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+    Accept:
+      type: string
+      enum:
+      - application/json
+      - text/csv
+    Classification:
+      type: string
+      enum:
+      - Content
+      - Frequency or Volume Too High
+      - Invalid Address
+      - Mailbox Unavailable
+      - Reputation
+      - Technical Failure
+      - Unclassified
+    Accept1:
+      type: string
+      enum:
+      - application/json
+      - text/csv
+    Classification1:
+      type: string
+      enum:
+      - Content
+      - Frequency or Volume Too High
+      - Invalid Address
+      - Mailbox Unavailable
+      - Reputation
+      - Technical Failure
+      - Unclassified
   responses: {}
   parameters:
     EmailPartialMatch:

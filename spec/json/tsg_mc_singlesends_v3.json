@@ -18,7 +18,10 @@
       "name": "MIT",
       "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "mc_singlesends"
+    }
   },
   "servers": [
     {
@@ -29,7 +32,7 @@
   "paths": {
     "/v3/marketing/singlesends": {
       "post": {
-        "operationId": "PostMarketingSinglesends",
+        "operationId": "CreateSingleSend",
         "summary": "Create Single Send",
         "tags": [
           "Single Sends"
@@ -139,7 +142,7 @@
         }
       },
       "get": {
-        "operationId": "GetMarketingSinglesends",
+        "operationId": "ListSingleSend",
         "summary": "Get All Single Sends",
         "tags": [
           "Single Sends"
@@ -215,7 +218,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteMarketingSinglesends",
+        "operationId": "DeleteSingleSends",
         "summary": "Bulk Delete Single Sends",
         "tags": [
           "Single Sends"
@@ -315,7 +318,7 @@
         }
       ],
       "post": {
-        "operationId": "PostMarketingSinglesendsId",
+        "operationId": "DuplicateSingleSend",
         "summary": "Duplicate Single Send",
         "tags": [
           "Single Sends"
@@ -410,7 +413,7 @@
         }
       },
       "patch": {
-        "operationId": "PatchMarketingSinglesendsId",
+        "operationId": "UpdateSingleSend",
         "summary": "Update Single Send",
         "tags": [
           "Single Sends"
@@ -520,7 +523,7 @@
         }
       },
       "get": {
-        "operationId": "GetMarketingSinglesendsId",
+        "operationId": "GetSingleSend",
         "summary": "Get Single Send by ID",
         "tags": [
           "Single Sends"
@@ -615,7 +618,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteMarketingSinglesendsId",
+        "operationId": "DeleteSingleSend",
         "summary": "Delete Single Send by ID",
         "tags": [
           "Single Sends"
@@ -698,7 +701,7 @@
         }
       ],
       "put": {
-        "operationId": "PutMarketingSinglesendsIdSchedule",
+        "operationId": "ScheduleSingleSend",
         "summary": "Schedule Single Send",
         "tags": [
           "Single Sends"
@@ -741,9 +744,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "enum": [
-                        "scheduled"
-                      ]
+                      "$ref": "#/components/schemas/Status"
                     }
                   }
                 },
@@ -819,7 +820,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteMarketingSinglesendsIdSchedule",
+        "operationId": "DeleteScheduledSingleSend",
         "summary": "Delete Single Send Schedule",
         "tags": [
           "Single Sends"
@@ -899,7 +900,7 @@
     },
     "/v3/marketing/singlesends/categories": {
       "get": {
-        "operationId": "GetMarketingSinglesendsCategories",
+        "operationId": "ListCategory",
         "summary": "Get All Categories",
         "tags": [
           "Single Sends"
@@ -972,7 +973,7 @@
     },
     "/v3/marketing/singlesends/search": {
       "post": {
-        "operationId": "PostMarketingSinglesendsSearch",
+        "operationId": "SearchSingleSend",
         "summary": "Get Single Sends Search",
         "tags": [
           "Single Sends"
@@ -1103,11 +1104,7 @@
             "uniqueItems": true,
             "items": {
               "type": "string",
-              "enum": [
-                "draft",
-                "scheduled",
-                "triggered"
-              ]
+              "$ref": "#/components/schemas/Items"
             }
           },
           "categories": {
@@ -1199,12 +1196,9 @@
               },
               "editor": {
                 "type": "string",
-                "enum": [
-                  "code",
-                  "design"
-                ],
                 "description": "The editor \u2014 `\"design\"` or `\"code\"` \u2014 used to modify the Single Send's design in the Marketing Campaigns App.",
-                "default": "code"
+                "default": "code",
+                "$ref": "#/components/schemas/Editor"
               },
               "suppression_group_id": {
                 "description": "The ID of the Suppression Group to allow recipients to unsubscribe \u2014 you must provide this or the `custom_unsubscribe_url`.",
@@ -1245,11 +1239,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "draft",
-              "scheduled",
-              "triggered"
-            ]
+            "$ref": "#/components/schemas/Status1"
           }
         },
         "required": [
@@ -1274,11 +1264,7 @@
           "status": {
             "type": "string",
             "description": "The current status of the Single Send. The status may be `draft`, `scheduled`, or `triggered`.",
-            "enum": [
-              "draft",
-              "scheduled",
-              "triggered"
-            ]
+            "$ref": "#/components/schemas/Status2"
           },
           "categories": {
             "type": "array",
@@ -1359,12 +1345,9 @@
               },
               "editor": {
                 "type": "string",
-                "enum": [
-                  "code",
-                  "design"
-                ],
                 "description": "The editor, `design` or `code`, used to modify the Single Send's design in the Marketing Campaigns application user interface.",
-                "default": "code"
+                "default": "code",
+                "$ref": "#/components/schemas/Editor1"
               },
               "suppression_group_id": {
                 "description": "The ID of the Suppression Group to allow recipients to unsubscribe. You must provide a `suppression_group_id` or the `custom_unsubscribe_url` with your Single Send.",
@@ -1427,12 +1410,8 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "draft",
-              "scheduled",
-              "triggered"
-            ],
-            "description": "current status of the Single Send"
+            "description": "current status of the Single Send",
+            "$ref": "#/components/schemas/Status3"
           },
           "categories": {
             "type": "array",
@@ -1480,19 +1459,12 @@
           "type": {
             "type": "string",
             "description": "What differs between the A/B tests",
-            "enum": [
-              "subject",
-              "content"
-            ]
+            "$ref": "#/components/schemas/Type"
           },
           "winner_criteria": {
             "type": "string",
             "description": "How the winner will be decided",
-            "enum": [
-              "open",
-              "click",
-              "manual"
-            ]
+            "$ref": "#/components/schemas/WinnerCriteria"
           },
           "test_percentage": {
             "type": "integer",
@@ -1550,6 +1522,73 @@
             "minimum": 0
           }
         }
+      },
+      "Status": {
+        "type": "string",
+        "enum": [
+          "scheduled"
+        ]
+      },
+      "Items": {
+        "type": "string",
+        "enum": [
+          "draft",
+          "scheduled",
+          "triggered"
+        ]
+      },
+      "Editor": {
+        "type": "string",
+        "enum": [
+          "code",
+          "design"
+        ]
+      },
+      "Status1": {
+        "type": "string",
+        "enum": [
+          "draft",
+          "scheduled",
+          "triggered"
+        ]
+      },
+      "Status2": {
+        "type": "string",
+        "enum": [
+          "draft",
+          "scheduled",
+          "triggered"
+        ]
+      },
+      "Editor1": {
+        "type": "string",
+        "enum": [
+          "code",
+          "design"
+        ]
+      },
+      "Status3": {
+        "type": "string",
+        "enum": [
+          "draft",
+          "scheduled",
+          "triggered"
+        ]
+      },
+      "Type": {
+        "type": "string",
+        "enum": [
+          "subject",
+          "content"
+        ]
+      },
+      "WinnerCriteria": {
+        "type": "string",
+        "enum": [
+          "open",
+          "click",
+          "manual"
+        ]
       }
     },
     "responses": {},

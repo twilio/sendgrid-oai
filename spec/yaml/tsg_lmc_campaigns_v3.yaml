@@ -24,13 +24,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: lmc_campaigns
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/campaigns:
     post:
-      operationId: PostCampaigns
+      operationId: CreateCampaign
       summary: Create a Campaign
       tags:
       - Campaigns API
@@ -124,7 +126,7 @@ paths:
               schema:
                 type: object
     get:
-      operationId: GetCampaigns
+      operationId: ListCampaign
       summary: Retrieve all Campaigns
       tags:
       - Campaigns API
@@ -215,7 +217,7 @@ paths:
       schema:
         type: integer
     get:
-      operationId: GetCampaignsCampaignId
+      operationId: GetCampaign
       summary: Retrieve a single campaign
       tags:
       - Campaigns API
@@ -307,7 +309,7 @@ paths:
                     - field: null
                       message: not found
     delete:
-      operationId: DeleteCampaignsCampaignId
+      operationId: DeleteCampaign
       summary: Delete a Campaign
       tags:
       - Campaigns API
@@ -340,7 +342,7 @@ paths:
               schema:
                 type: object
     patch:
-      operationId: PatchCampaignsCampaignId
+      operationId: UpdateCampaign
       summary: Update a Campaign
       tags:
       - Campaigns API
@@ -500,7 +502,7 @@ paths:
       schema:
         type: integer
     post:
-      operationId: PostCampaignsCampaignIdSchedules
+      operationId: ScheduleCampaign
       summary: Schedule a Campaign
       tags:
       - Campaigns API
@@ -548,8 +550,7 @@ paths:
                   status:
                     type: string
                     description: The status of your campaign.
-                    enum:
-                    - Scheduled
+                    $ref: '#/components/schemas/Status'
                 required:
                 - id
                 - send_at
@@ -629,7 +630,7 @@ paths:
                     - field: null
                       message: not found
     patch:
-      operationId: PatchCampaignsCampaignIdSchedules
+      operationId: UpdateScheduledCampaign
       summary: Update a Scheduled Campaign
       tags:
       - Campaigns API
@@ -718,7 +719,7 @@ paths:
                     - field: null
                       message: not found
     get:
-      operationId: GetCampaignsCampaignIdSchedules
+      operationId: GetScheduledCampaign
       summary: View Scheduled Time of a Campaign
       tags:
       - Campaigns API
@@ -757,7 +758,7 @@ paths:
                     - field: null
                       message: not found
     delete:
-      operationId: DeleteCampaignsCampaignIdSchedules
+      operationId: UnScheduleCampaign
       summary: Unschedule a Scheduled Campaign
       tags:
       - Campaigns API
@@ -816,7 +817,7 @@ paths:
       schema:
         type: integer
     post:
-      operationId: PostCampaignsCampaignIdSchedulesNow
+      operationId: SendCampaign
       summary: Send a Campaign
       tags:
       - Campaigns API
@@ -923,7 +924,7 @@ paths:
       schema:
         type: integer
     post:
-      operationId: PostCampaignsCampaignIdSchedulesTest
+      operationId: SendTestCampaign
       summary: Send a Test Campaign
       tags:
       - Campaigns API
@@ -1053,10 +1054,8 @@ components:
           type: string
         editor:
           type: string
-          enum:
-          - code
-          - design
           description: The editor used in the UI.
+          $ref: '#/components/schemas/Editor'
       required:
       - title
       example:
@@ -1080,17 +1079,76 @@ components:
         status: Draft
     Campaigns2xx:
       title: Campaigns Response
-      allOf:
-      - $ref: '#/components/schemas/PostCampaignsRequest'
-      - type: object
-        properties:
-          status:
-            type: string
-            description: The status of your campaign.
-          id:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The display title of your campaign. This will be viewable by
+            you in the Marketing Campaigns UI.
+        subject:
+          description: The subject of your campaign that your recipients will see.
+          nullable: true
+          type: string
+        sender_id:
+          description: The ID of the "sender" identity that you have created. Your
+            recipients will see this as the "from" on your marketing emails.
+          nullable: true
+          type: integer
+        list_ids:
+          description: The IDs of the lists you are sending this campaign to. You
+            can have both segment IDs and list IDs
+          items:
             type: integer
-        required:
-        - status
+          nullable: true
+          type: array
+        segment_ids:
+          description: The segment IDs that you are sending this list to. You can
+            have both segment IDs and list IDs. Segments are limited to 10 segment
+            IDs.
+          items:
+            type: integer
+          nullable: true
+          type: array
+        categories:
+          description: The categories you would like associated to this campaign.
+          items:
+            type: string
+          nullable: true
+          type: array
+        suppression_group_id:
+          description: The suppression group that this marketing email belongs to,
+            allowing recipients to opt-out of emails of this type.
+          nullable: true
+          type: integer
+        custom_unsubscribe_url:
+          description: This is the url of the custom unsubscribe page that you provide
+            for customers to unsubscribe from your suppression groups.
+          nullable: true
+          type: string
+        ip_pool:
+          description: The pool of IPs that you would like to send this email from.
+          nullable: true
+          type: string
+        html_content:
+          description: The HTML of your marketing email.
+          nullable: true
+          type: string
+        plain_content:
+          description: The plain text content of your emails.
+          nullable: true
+          type: string
+        editor:
+          type: string
+          description: The editor used in the UI.
+          $ref: '#/components/schemas/Editor'
+        status:
+          type: string
+          description: The status of your campaign.
+        id:
+          type: integer
+      required:
+      - status
+      - title
     ErrorResponse:
       type: object
       properties:
@@ -1114,6 +1172,15 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+    Status:
+      type: string
+      enum:
+      - Scheduled
+    Editor:
+      type: string
+      enum:
+      - code
+      - design
   responses: {}
   parameters:
     OnBehalfOf:

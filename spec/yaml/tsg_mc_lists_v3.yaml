@@ -24,13 +24,15 @@ info:
     name: MIT
     url: https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE
   version: 1.0.0
+  x-sendgrid:
+    libraryPackage: mc_lists
 servers:
 - url: https://api.sendgrid.com
   description: The Twilio SendGrid v3 API
 paths:
   /v3/marketing/lists:
     post:
-      operationId: PostMarketingLists
+      operationId: CreateMarketingList
       summary: Create List
       tags:
       - Lists
@@ -84,7 +86,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Error'
     get:
-      operationId: GetMarketingLists
+      operationId: ListMarketingList
       summary: Get All Lists
       tags:
       - Lists
@@ -139,7 +141,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetMarketingListsId
+      operationId: GetMarketingList
       summary: Get a List by ID
       tags:
       - Lists
@@ -164,12 +166,23 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                - $ref: '#/components/schemas/List'
-                - type: object
-                  properties:
-                    contact_sample:
-                      $ref: '#/components/schemas/ContactDetails'
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The generated ID for your list.
+                    minLength: 36
+                    maxLength: 36
+                  name:
+                    type: string
+                    description: The name you gave your list.
+                  contact_count:
+                    type: integer
+                    description: The number of contacts currently stored on the list.
+                  _metadata:
+                    $ref: '#/components/schemas/SelfMetadata'
+                  contact_sample:
+                    $ref: '#/components/schemas/ContactDetails'
               examples:
                 response:
                   value:
@@ -193,7 +206,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Error'
     patch:
-      operationId: PatchMarketingListsId
+      operationId: UpdateMarketingList
       summary: Update List
       tags:
       - Lists
@@ -242,7 +255,7 @@ paths:
               schema:
                 type: object
     delete:
-      operationId: DeleteMarketingListsId
+      operationId: DeleteMarketingList
       summary: Delete a list
       tags:
       - Lists
@@ -305,7 +318,7 @@ paths:
       schema:
         type: string
     delete:
-      operationId: DeleteMarketingListsIdContacts
+      operationId: DeleteContact
       summary: Remove Contacts from a List
       tags:
       - Lists
@@ -355,7 +368,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetMarketingListsIdContactsCount
+      operationId: ListContactCount
       summary: Get List Contact Count
       tags:
       - Lists

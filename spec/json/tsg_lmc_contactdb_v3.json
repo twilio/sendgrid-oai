@@ -670,10 +670,10 @@
         }
       }
     },
-    "/v3/contactdb/lists/{list_id}": {
+    "/v3/contactdb/lists/{lists_id}": {
       "parameters": [
         {
-          "name": "list_id",
+          "name": "lists_id",
           "in": "path",
           "required": true,
           "schema": {
@@ -922,7 +922,7 @@
             "in": "query",
             "description": "Adds the ability to delete all contacts on the list in addition to deleting the list.",
             "schema": {
-              "type": "boolean",
+              "type": "string",
               "$ref": "#/components/schemas/DeleteContacts"
             }
           },
@@ -1016,10 +1016,10 @@
         }
       }
     },
-    "/v3/contactdb/lists/{list_id}/recipients": {
+    "/v3/contactdb/lists/{lists_id}/recipients": {
       "parameters": [
         {
-          "name": "list_id",
+          "name": "lists_id",
           "in": "path",
           "description": "The id of the list of recipients you want to retrieve.",
           "required": true,
@@ -1323,10 +1323,10 @@
         }
       }
     },
-    "/v3/contactdb/lists/{list_id}/recipients/{recipient_id}": {
+    "/v3/contactdb/lists/{lists_id}/recipients/{recipients_id}": {
       "parameters": [
         {
-          "name": "list_id",
+          "name": "lists_id",
           "in": "path",
           "description": "The ID of the list that you want to add the recipient to.",
           "required": true,
@@ -1335,7 +1335,7 @@
           }
         },
         {
-          "name": "recipient_id",
+          "name": "recipients_id",
           "in": "path",
           "description": "The ID of the recipient you are adding to the list.",
           "required": true,
@@ -3060,10 +3060,10 @@
         }
       }
     },
-    "/v3/contactdb/segments/{segment_id}": {
+    "/v3/contactdb/segments/{segments_id}": {
       "parameters": [
         {
-          "name": "segment_id",
+          "name": "segments_id",
           "in": "path",
           "required": true,
           "schema": {
@@ -3639,9 +3639,6 @@
                             "type": "string",
                             "default": "",
                             "description": "Valid values for the ID \"worker_delay\" are \"OK\" or \"Delayed\". Valid values for the ID \"worker_delay_seconds\" is the time of delay to upload."
-                          },
-                          "": {
-                            "type": "string"
                           }
                         }
                       }
@@ -4033,8 +4030,8 @@
           }
         },
         "required": [
-          "id",
           "conditions",
+          "id",
           "name"
         ]
       },
@@ -4069,7 +4066,7 @@
         }
       },
       "DeleteContacts": {
-        "type": "boolean",
+        "type": "string",
         "enum": [
           true,
           false

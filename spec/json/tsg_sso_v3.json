@@ -1464,11 +1464,11 @@
         },
         "required": [
           "enabled",
-          "name",
           "last_updated",
-          "entity_id",
+          "signin_url",
           "signout_url",
-          "signin_url"
+          "name",
+          "entity_id"
         ]
       },
       "PostPatchIntegrationRequest": {

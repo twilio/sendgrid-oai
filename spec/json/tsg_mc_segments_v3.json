@@ -538,14 +538,14 @@
           }
         },
         "required": [
-          "name",
-          "created_at",
-          "query_dsl",
-          "sample_updated_at",
           "id",
+          "query_dsl",
+          "updated_at",
           "contacts_count",
+          "sample_updated_at",
+          "created_at",
           "contacts_sample",
-          "updated_at"
+          "name"
         ]
       },
       "SegmentSummary": {
@@ -706,9 +706,6 @@
               "custom_field_name2": {
                 "type": "string",
                 "minLength": 0
-              },
-              "": {
-                "type": "string"
               }
             }
           },

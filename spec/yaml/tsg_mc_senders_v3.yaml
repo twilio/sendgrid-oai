@@ -63,8 +63,8 @@ paths:
                       description: The name appended to the from email field. Typically
                         your name or company name.
                   required:
-                  - name
                   - email
+                  - name
                 reply_to:
                   type: object
                   properties:
@@ -97,12 +97,12 @@ paths:
                   type: string
                   description: The country of the Sender.
               required:
+              - from
+              - reply_to
               - address
               - city
               - nickname
-              - reply_to
               - country
-              - from
       responses:
         '201':
           description: ''
@@ -267,8 +267,8 @@ components:
               description: The name appended to the from email field. Typically your
                 name or company name.
           required:
-          - name
           - email
+          - name
         reply_to:
           type: object
           properties:
@@ -315,17 +315,17 @@ components:
           type: integer
           description: The time the Sender was created.
       required:
-      - address
-      - locked
       - id
-      - city
-      - created_at
-      - verified
-      - nickname
-      - reply_to
-      - country
       - from
+      - reply_to
+      - address
+      - verified
       - updated_at
+      - city
+      - nickname
+      - created_at
+      - locked
+      - country
     SenderRequest:
       title: Sender Request
       type: object

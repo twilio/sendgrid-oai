@@ -288,8 +288,8 @@ components:
           description: The status of the scheduled send.
           $ref: '#/components/schemas/Status2'
       required:
-      - batch_id
       - status
+      - batch_id
     MailBatchId:
       title: Mail Batch ID
       type: object

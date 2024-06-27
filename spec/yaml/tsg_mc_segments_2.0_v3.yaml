@@ -645,8 +645,6 @@ components:
             custom_field_name2:
               type: string
               minLength: 0
-            ? ''
-            : type: string
         segment_ids:
           type: array
           uniqueItems: true

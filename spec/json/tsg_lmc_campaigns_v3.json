@@ -1687,8 +1687,8 @@
           }
         },
         "required": [
-          "title",
-          "status"
+          "status",
+          "title"
         ]
       },
       "ErrorResponse": {

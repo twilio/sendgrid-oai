@@ -86,7 +86,7 @@
                       "id": "733ba07f-ead1-41fc-933a-3976baa23716",
                       "name": "example_name",
                       "generation": "legacy",
-                      "updated_at ": "2021-04-28 13:12:46",
+                      "updated_at": "2021-04-28 13:12:46",
                       "versions": []
                     }
                   }
@@ -167,7 +167,7 @@
                           "id": "fae7c985-eb92-4b47-9987-28ec29dbc698",
                           "name": "example_name",
                           "generation": "legacy",
-                          "updated_at ": "2020-11-12 12:00:09",
+                          "updated_at": "2020-11-12 12:00:09",
                           "versions": []
                         }
                       ],
@@ -193,9 +193,6 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "": {
-                            "type": "string"
-                          },
                           "message": {
                             "type": "string"
                           },
@@ -269,7 +266,7 @@
                       "id": "733ba07f-ead1-41fc-933a-3976baa23716",
                       "name": "example_name",
                       "generation": "dynamic",
-                      "updated_at ": "2020-12-12 58:26:65",
+                      "updated_at": "2020-12-12 58:26:65",
                       "versions": []
                     }
                   }
@@ -305,7 +302,7 @@
                       "id": "40da60e6-66f3-4223-9406-ba58b7f55a62",
                       "name": "Duis in dolor",
                       "generation": "legacy",
-                      "updated_at ": "2020-12-12 58:26:65",
+                      "updated_at": "2020-12-12 58:26:65",
                       "versions": []
                     }
                   }
@@ -360,7 +357,7 @@
                       "id": "733ba07f-ead1-41fc-933a-3976baa23716",
                       "name": "new_example_name",
                       "generation": "legacy",
-                      "updated_at ": "2021-04-28 13:12:46",
+                      "updated_at": "2021-04-28 13:12:46",
                       "versions": []
                     }
                   }
@@ -653,7 +650,7 @@
         "example": {
           "id": "33feeff2-5069-43fe-8853-428651e5be79",
           "name": "example_name",
-          "updated_at ": "2021-04-28 13:12:46",
+          "updated_at": "2021-04-28 13:12:46",
           "warning": {
             "message": "Sample warning message"
           },
@@ -678,7 +675,7 @@
             "description": "Defines the generation of the template.",
             "$ref": "#/components/schemas/Generation1"
           },
-          "updated_at ": {
+          "updated_at": {
             "type": "string",
             "description": "The date and time that this transactional template version was updated.",
             "pattern": "^(\\d{4}-\\d{2}-\\d{2}) ((\\d{2}):(\\d{2}):(\\d{2}))$"
@@ -695,9 +692,9 @@
           }
         },
         "required": [
-          "id",
           "generation",
-          "updated_at ",
+          "updated_at",
+          "id",
           "name"
         ]
       },
@@ -712,7 +709,7 @@
             }
           },
           "active": {
-            "type": "integer",
+            "type": "string",
             "description": "Set the version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
             "$ref": "#/components/schemas/Active1"
           },
@@ -776,7 +773,7 @@
         "type": "object",
         "properties": {
           "active": {
-            "type": "integer",
+            "type": "string",
             "description": "Set the version as the active version associated with the template (0 is inactive, 1 is active). Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
             "$ref": "#/components/schemas/Active"
           },
@@ -845,7 +842,7 @@
             "description": "ID of the transactional template."
           },
           "active": {
-            "type": "integer",
+            "type": "string",
             "description": "Set the version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
             "$ref": "#/components/schemas/Active1"
           },
@@ -908,7 +905,7 @@
             "description": "Defines the generation of the template.",
             "$ref": "#/components/schemas/Generation1"
           },
-          "updated_at ": {
+          "updated_at": {
             "type": "string",
             "description": "The date and time that this transactional template version was updated.",
             "pattern": "^(\\d{4}-\\d{2}-\\d{2}) ((\\d{2}):(\\d{2}):(\\d{2}))$"
@@ -925,13 +922,13 @@
           "id",
           "name",
           "generation",
-          "updated_at "
+          "updated_at"
         ],
         "example": {
           "id": "0c314114-a2b7-4523-8cbc-a293d7d19007",
           "name": "example_name",
           "generation": "legacy",
-          "updated_at ": "2021-04-28 13:12:46",
+          "updated_at": "2021-04-28 13:12:46",
           "versions": []
         }
       },
@@ -986,7 +983,7 @@
         ]
       },
       "Active": {
-        "type": "integer",
+        "type": "string",
         "enum": [
           0,
           1
@@ -1000,7 +997,7 @@
         ]
       },
       "Active1": {
-        "type": "integer",
+        "type": "string",
         "enum": [
           0,
           1

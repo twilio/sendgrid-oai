@@ -405,9 +405,9 @@ paths:
                     errors:
                     - field: null
                       message: authorization required
-  /v3/contactdb/lists/{list_id}:
+  /v3/contactdb/lists/{lists_id}:
     parameters:
-    - name: list_id
+    - name: lists_id
       in: path
       required: true
       schema:
@@ -560,7 +560,7 @@ paths:
         description: Adds the ability to delete all contacts on the list in addition
           to deleting the list.
         schema:
-          type: boolean
+          type: string
           $ref: '#/components/schemas/DeleteContacts'
       - $ref: '#/components/parameters/OnBehalfOf'
       requestBody:
@@ -609,9 +609,9 @@ paths:
                   value:
                     errors:
                     - message: 'List not found: 5'
-  /v3/contactdb/lists/{list_id}/recipients:
+  /v3/contactdb/lists/{lists_id}/recipients:
     parameters:
-    - name: list_id
+    - name: lists_id
       in: path
       description: The id of the list of recipients you want to retrieve.
       required: true
@@ -797,15 +797,15 @@ paths:
                       message: list_id does not exist
                     - field: recipient_id
                       message: recipient_id does not exist
-  /v3/contactdb/lists/{list_id}/recipients/{recipient_id}:
+  /v3/contactdb/lists/{lists_id}/recipients/{recipients_id}:
     parameters:
-    - name: list_id
+    - name: lists_id
       in: path
       description: The ID of the list that you want to add the recipient to.
       required: true
       schema:
         type: integer
-    - name: recipient_id
+    - name: recipients_id
       in: path
       description: The ID of the recipient you are adding to the list.
       required: true
@@ -1932,9 +1932,9 @@ paths:
                     errors:
                     - field: null
                       message: authorization required
-  /v3/contactdb/segments/{segment_id}:
+  /v3/contactdb/segments/{segments_id}:
     parameters:
-    - name: segment_id
+    - name: segments_id
       in: path
       required: true
       schema:
@@ -2299,8 +2299,6 @@ paths:
                           description: Valid values for the ID "worker_delay" are
                             "OK" or "Delayed". Valid values for the ID "worker_delay_seconds"
                             is the time of delay to upload.
-                        ? ''
-                        : type: string
               examples:
                 response:
                   value:
@@ -2589,8 +2587,8 @@ components:
             on creation of segments.
       required:
       - name
-      - conditions
       - id
+      - conditions
     ErrorResponse:
       type: object
       properties:
@@ -2615,7 +2613,7 @@ components:
           type: string
           description: When applicable, this property value will be an error ID.
     DeleteContacts:
-      type: boolean
+      type: string
       enum:
       - true
       - false

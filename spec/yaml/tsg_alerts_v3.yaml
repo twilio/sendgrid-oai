@@ -66,7 +66,7 @@ paths:
                     Example: daily'
                 percentage:
                   type: integer
-                  description: 'Required for usage_alert. When this usage threshold
+                  description: 'Required for usage_limit. When this usage threshold
                     is reached, the alert will be sent.
 
                     Example: 90'
@@ -132,12 +132,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  field:
-                    type: string
-                  message:
-                    type: string
+                $ref: '#/components/schemas/ErrorResponse'
     get:
       operationId: ListAlert
       summary: Retrieve all alerts
@@ -288,11 +283,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
     patch:
       operationId: UpdateAlert
       summary: Update an alert
@@ -379,6 +369,29 @@ paths:
                     updated_at: 1451522691
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: An error message.
+              field:
+                description: When applicable, this property value will be the field
+                  that generated the error.
+                nullable: true
+                type: string
+              help:
+                type: object
+                description: When applicable, this property value will be helper text
+                  or a link to documentation to help you troubleshoot the error.
+        id:
+          type: string
+          description: When applicable, this property value will be an error ID.
     Type:
       type: string
       enum:
@@ -392,12 +405,12 @@ components:
     Type2:
       type: string
       enum:
-      - usage_alert
+      - usage_limit
       - stats_notification
     Type3:
       type: string
       enum:
-      - usage_alert
+      - usage_limit
       - stats_notification
   responses: {}
   parameters:

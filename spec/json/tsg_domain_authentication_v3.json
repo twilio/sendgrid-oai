@@ -1346,18 +1346,18 @@
                       }
                     },
                     "required": [
-                      "user_id",
-                      "id",
-                      "automatic_security",
-                      "custom_spf",
-                      "default",
-                      "subdomain",
-                      "username",
-                      "valid",
-                      "legacy",
-                      "ips",
                       "domain",
-                      "dns"
+                      "legacy",
+                      "subdomain",
+                      "automatic_security",
+                      "ips",
+                      "id",
+                      "user_id",
+                      "default",
+                      "valid",
+                      "username",
+                      "dns",
+                      "custom_spf"
                     ]
                   }
                 },
@@ -2004,18 +2004,18 @@
                   }
                 },
                 "required": [
-                  "user_id",
-                  "id",
-                  "automatic_security",
-                  "custom_spf",
-                  "default",
-                  "subdomain",
-                  "username",
-                  "valid",
-                  "legacy",
-                  "ips",
                   "domain",
-                  "dns"
+                  "legacy",
+                  "subdomain",
+                  "automatic_security",
+                  "ips",
+                  "id",
+                  "user_id",
+                  "default",
+                  "valid",
+                  "username",
+                  "dns",
+                  "custom_spf"
                 ]
               },
               "example": [

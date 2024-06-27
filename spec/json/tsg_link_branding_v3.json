@@ -58,7 +58,7 @@
                     "description": "The subdomain to create the link branding for. Must be different from the subdomain you used for authenticating your domain."
                   },
                   "default": {
-                    "type": "string",
+                    "type": "boolean",
                     "description": "Indicates if you want to use this link branding as the default or fallback. When setting a new default, the existing default link branding will have its default status removed automatically.",
                     "$ref": "#/components/schemas/Default"
                   },
@@ -297,7 +297,7 @@
                 "type": "object",
                 "properties": {
                   "default": {
-                    "type": "string",
+                    "type": "boolean",
                     "description": "Indicates if the branded link is set as the default. When setting a new default, the existing default link branding will have its default status removed automatically.",
                     "$ref": "#/components/schemas/Default1"
                   }
@@ -413,7 +413,7 @@
                       "description": "The ID of the branded link."
                     },
                     "valid": {
-                      "type": "string",
+                      "type": "boolean",
                       "description": "Indicates if the link branding is valid.",
                       "$ref": "#/components/schemas/Valid"
                     },
@@ -433,7 +433,7 @@
                           ],
                           "properties": {
                             "valid": {
-                              "type": "string",
+                              "type": "boolean",
                               "description": "Indicates if this DNS record is valid.",
                               "$ref": "#/components/schemas/Valid1"
                             },
@@ -449,7 +449,7 @@
                           "description": "The DNS record created to verify the branded link.",
                           "properties": {
                             "valid": {
-                              "type": "string",
+                              "type": "boolean",
                               "description": "Indicates if the DNS record is valid.",
                               "$ref": "#/components/schemas/Valid2"
                             },
@@ -801,17 +801,17 @@
             "description": "The ID of the user that this link branding is associated with."
           },
           "default": {
-            "type": "string",
+            "type": "boolean",
             "description": "Indicates if this is the default link branding.",
             "$ref": "#/components/schemas/Default2"
           },
           "valid": {
-            "type": "string",
+            "type": "boolean",
             "description": "Indicates if this link branding is valid.",
             "$ref": "#/components/schemas/Valid3"
           },
           "legacy": {
-            "type": "string",
+            "type": "boolean",
             "description": "Indicates if this link branding was created using the legacy whitelabel tool. If it is a legacy whitelabel, it will still function, but you'll need to create new link branding if you need to update it.",
             "$ref": "#/components/schemas/Legacy"
           },
@@ -833,7 +833,7 @@
                 ],
                 "properties": {
                   "valid": {
-                    "type": "string",
+                    "type": "boolean",
                     "description": "Indicates if the DNS record is valid.",
                     "$ref": "#/components/schemas/Valid4"
                   },
@@ -857,7 +857,7 @@
                 "description": "The DNS record generated to verify who created the link branding.",
                 "properties": {
                   "valid": {
-                    "type": "string",
+                    "type": "boolean",
                     "description": "Indicates if the DNS record is valid.",
                     "$ref": "#/components/schemas/Valid5"
                   },
@@ -896,7 +896,7 @@
         ]
       },
       "Default": {
-        "type": "string",
+        "type": "boolean",
         "enum": [
           true,
           false
@@ -910,56 +910,56 @@
         ]
       },
       "Default1": {
-        "type": "string",
+        "type": "boolean",
         "enum": [
           true,
           false
         ]
       },
       "Valid": {
-        "type": "string",
+        "type": "boolean",
         "enum": [
           true,
           false
         ]
       },
       "Valid1": {
-        "type": "string",
+        "type": "boolean",
         "enum": [
           true,
           false
         ]
       },
       "Valid2": {
-        "type": "string",
+        "type": "boolean",
         "enum": [
           true,
           false
         ]
       },
       "Default2": {
-        "type": "string",
+        "type": "boolean",
         "enum": [
           true,
           false
         ]
       },
       "Valid3": {
-        "type": "string",
+        "type": "boolean",
         "enum": [
           true,
           false
         ]
       },
       "Legacy": {
-        "type": "string",
+        "type": "boolean",
         "enum": [
           true,
           false
         ]
       },
       "Valid4": {
-        "type": "string",
+        "type": "boolean",
         "enum": [
           true,
           false
@@ -974,7 +974,7 @@
         ]
       },
       "Valid5": {
-        "type": "string",
+        "type": "boolean",
         "enum": [
           true,
           false

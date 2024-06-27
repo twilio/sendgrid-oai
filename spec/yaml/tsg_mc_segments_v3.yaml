@@ -423,12 +423,12 @@ components:
       required:
       - id
       - query_dsl
-      - updated_at
+      - created_at
+      - contacts_count
       - contacts_sample
       - sample_updated_at
-      - created_at
+      - updated_at
       - name
-      - contacts_count
     SegmentSummary:
       title: segment_summary
       type: object

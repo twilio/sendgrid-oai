@@ -415,16 +415,16 @@
                     }
                   },
                   "required": [
-                    "events",
-                    "teammate",
-                    "unique_args",
-                    "outbound_ip_type",
+                    "asm_group_id",
                     "categories",
-                    "api_key_id",
                     "outbound_ip",
                     "template_id",
-                    "asm_group_id",
-                    "originating_ip"
+                    "unique_args",
+                    "events",
+                    "outbound_ip_type",
+                    "originating_ip",
+                    "teammate",
+                    "api_key_id"
                   ],
                   "example": {
                     "from_email": "test@test.com",

@@ -347,8 +347,8 @@
           }
         },
         "required": [
-          "status",
-          "batch_id"
+          "batch_id",
+          "status"
         ]
       },
       "MailBatchId": {

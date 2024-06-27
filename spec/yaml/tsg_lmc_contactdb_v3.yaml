@@ -405,9 +405,9 @@ paths:
                     errors:
                     - field: null
                       message: authorization required
-  /v3/contactdb/lists/{lists_id}:
+  /v3/contactdb/lists/{list_id}:
     parameters:
-    - name: lists_id
+    - name: list_id
       in: path
       required: true
       schema:
@@ -560,7 +560,7 @@ paths:
         description: Adds the ability to delete all contacts on the list in addition
           to deleting the list.
         schema:
-          type: string
+          type: boolean
           $ref: '#/components/schemas/DeleteContacts'
       - $ref: '#/components/parameters/OnBehalfOf'
       requestBody:
@@ -609,9 +609,9 @@ paths:
                   value:
                     errors:
                     - message: 'List not found: 5'
-  /v3/contactdb/lists/{lists_id}/recipients:
+  /v3/contactdb/lists/{list_id}/recipients:
     parameters:
-    - name: lists_id
+    - name: list_id
       in: path
       description: The id of the list of recipients you want to retrieve.
       required: true
@@ -797,15 +797,15 @@ paths:
                       message: list_id does not exist
                     - field: recipient_id
                       message: recipient_id does not exist
-  /v3/contactdb/lists/{lists_id}/recipients/{recipients_id}:
+  /v3/contactdb/lists/{list_id}/recipients/{recipient_id}:
     parameters:
-    - name: lists_id
+    - name: list_id
       in: path
       description: The ID of the list that you want to add the recipient to.
       required: true
       schema:
         type: integer
-    - name: recipients_id
+    - name: recipient_id
       in: path
       description: The ID of the recipient you are adding to the list.
       required: true
@@ -1932,9 +1932,9 @@ paths:
                     errors:
                     - field: null
                       message: authorization required
-  /v3/contactdb/segments/{segments_id}:
+  /v3/contactdb/segments/{segment_id}:
     parameters:
-    - name: segments_id
+    - name: segment_id
       in: path
       required: true
       schema:
@@ -2613,7 +2613,7 @@ components:
           type: string
           description: When applicable, this property value will be an error ID.
     DeleteContacts:
-      type: string
+      type: boolean
       enum:
       - true
       - false

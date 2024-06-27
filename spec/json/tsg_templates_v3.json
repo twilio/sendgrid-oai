@@ -692,10 +692,10 @@
           }
         },
         "required": [
-          "generation",
-          "updated_at",
           "id",
-          "name"
+          "updated_at",
+          "name",
+          "generation"
         ]
       },
       "TransactionalTemplateVersionOutput": {
@@ -709,7 +709,7 @@
             }
           },
           "active": {
-            "type": "string",
+            "type": "integer",
             "description": "Set the version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
             "$ref": "#/components/schemas/Active1"
           },
@@ -764,8 +764,8 @@
           }
         },
         "required": [
-          "subject",
-          "name"
+          "name",
+          "subject"
         ]
       },
       "TransactionalTemplateVersionCreate": {
@@ -773,7 +773,7 @@
         "type": "object",
         "properties": {
           "active": {
-            "type": "string",
+            "type": "integer",
             "description": "Set the version as the active version associated with the template (0 is inactive, 1 is active). Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
             "$ref": "#/components/schemas/Active"
           },
@@ -842,7 +842,7 @@
             "description": "ID of the transactional template."
           },
           "active": {
-            "type": "string",
+            "type": "integer",
             "description": "Set the version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
             "$ref": "#/components/schemas/Active1"
           },
@@ -983,7 +983,7 @@
         ]
       },
       "Active": {
-        "type": "string",
+        "type": "integer",
         "enum": [
           0,
           1
@@ -997,7 +997,7 @@
         ]
       },
       "Active1": {
-        "type": "string",
+        "type": "integer",
         "enum": [
           0,
           1

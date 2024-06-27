@@ -490,9 +490,9 @@ components:
           $ref: '#/components/schemas/TransactionalTemplateWarning'
       required:
       - name
-      - id
-      - generation
       - updated_at
+      - generation
+      - id
     TransactionalTemplateVersionOutput:
       title: 'Transactional Templates: Version Output'
       type: object
@@ -502,7 +502,7 @@ components:
           items:
             $ref: '#/components/schemas/TransactionalTemplateWarning'
         active:
-          type: string
+          type: integer
           description: Set the version as the active version associated with the template.
             Only one version of a template can be active. The first version created
             for a template will automatically be set to Active.
@@ -549,14 +549,14 @@ components:
           type: string
           description: A Thumbnail preview of the template's html content.
       required:
-      - name
       - subject
+      - name
     TransactionalTemplateVersionCreate:
       title: 'Transactional Templates: Version Create'
       type: object
       properties:
         active:
-          type: string
+          type: integer
           description: Set the version as the active version associated with the template
             (0 is inactive, 1 is active). Only one version of a template can be active.
             The first version created for a template will automatically be set to
@@ -617,7 +617,7 @@ components:
           type: string
           description: ID of the transactional template.
         active:
-          type: string
+          type: integer
           description: Set the version as the active version associated with the template.
             Only one version of a template can be active. The first version created
             for a template will automatically be set to Active.
@@ -728,7 +728,7 @@ components:
       - dynamic
       - legacy,dynamic
     Active:
-      type: string
+      type: integer
       enum:
       - 0
       - 1
@@ -738,7 +738,7 @@ components:
       - code
       - design
     Active1:
-      type: string
+      type: integer
       enum:
       - 0
       - 1

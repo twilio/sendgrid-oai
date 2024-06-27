@@ -97,12 +97,12 @@ paths:
                   type: string
                   description: The country of the Sender.
               required:
-              - from
-              - reply_to
+              - country
               - address
               - city
               - nickname
-              - country
+              - from
+              - reply_to
       responses:
         '201':
           description: ''
@@ -315,17 +315,17 @@ components:
           type: integer
           description: The time the Sender was created.
       required:
+      - country
       - id
-      - from
-      - reply_to
       - address
-      - verified
-      - updated_at
+      - locked
+      - created_at
       - city
       - nickname
-      - created_at
-      - locked
-      - country
+      - verified
+      - updated_at
+      - from
+      - reply_to
     SenderRequest:
       title: Sender Request
       type: object

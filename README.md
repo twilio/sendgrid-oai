@@ -2,7 +2,15 @@
 
 This repository contains [OpenAPI](https://www.openapis.org/) documents
 
+The SendGrid OAI specifications are automatically generated from the SendGrid OAS specifications using the `sendgrid-oas-transpiler`. 
+
+The `sendgrid-oai` is utilized to auto-generate SendGrid helper libraries through the `sendgrid-oai-generator`.
+
+Currently, only the `sendgrid-java` helper library is available for auto-generation. 
+The auto-generation of other helper libraries is under development.
+
 Files can be found in the json/ and yaml/ directories.
+
 
 ## What is OpenAPI?
 
@@ -13,3 +21,5 @@ From the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification):
 ## Project Status
 
 This project is currently in **Beta**. We expect the spec to be accurate, and it is currently in **active development**. If you've identified a mismatch between Sendgrid's API behavior and this specification, [please open an issue](https://github.com/twilio/sendgrid-oai/issues/new).
+
+

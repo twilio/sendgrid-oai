@@ -434,7 +434,7 @@
                 ],
                 "example": {
                   "identifier_type": "PHONENUMBERID",
-                  "identifier_value": "+15555555555"
+                  "identifier_value": "15555555555"
                 }
               }
             }

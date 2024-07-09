@@ -421,7 +421,8 @@
                 "properties": {
                   "identifier_type": {
                     "type": "string",
-                    "description": "A type of the following: EMAIL, PHONENUMBERID, EXTERNALID, or ANONYMOUSID."
+                    "description": "The type of identifier you are removing from the contact.",
+                    "$ref": "#/components/schemas/IdentifierType"
                   },
                   "identifier_value": {
                     "type": "string",
@@ -434,7 +435,7 @@
                 ],
                 "example": {
                   "identifier_type": "PHONENUMBERID",
-                  "identifier_value": "+15555555555"
+                  "identifier_value": "15555555555"
                 }
               }
             }
@@ -1497,7 +1498,7 @@
           "description": "The type of identifier to search for.",
           "schema": {
             "type": "string",
-            "$ref": "#/components/schemas/IdentifierType"
+            "$ref": "#/components/schemas/IdentifierType1"
           }
         }
       ],
@@ -2065,6 +2066,15 @@
           }
         }
       },
+      "IdentifierType": {
+        "type": "string",
+        "enum": [
+          "EMAIL",
+          "PHONENUMBERID",
+          "EXTERNALID",
+          "ANONYMOUSID"
+        ]
+      },
       "FileType": {
         "type": "string",
         "enum": [
@@ -2078,7 +2088,7 @@
           "csv"
         ]
       },
-      "IdentifierType": {
+      "IdentifierType1": {
         "type": "string",
         "enum": [
           "email",

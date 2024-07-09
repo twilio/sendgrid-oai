@@ -108,10 +108,10 @@
                   }
                 },
                 "required": [
-                  "nickname",
-                  "country",
+                  "address",
                   "city",
-                  "address"
+                  "country",
+                  "nickname"
                 ]
               }
             }
@@ -1017,10 +1017,10 @@
           }
         },
         "required": [
-          "nickname",
-          "country",
+          "address",
           "city",
-          "address"
+          "country",
+          "nickname"
         ]
       }
     },

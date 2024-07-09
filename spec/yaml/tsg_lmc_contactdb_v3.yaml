@@ -2586,9 +2586,9 @@ components:
           description: The count of recipients in this list. This is not included
             on creation of segments.
       required:
-      - name
-      - id
       - conditions
+      - id
+      - name
     ErrorResponse:
       type: object
       properties:

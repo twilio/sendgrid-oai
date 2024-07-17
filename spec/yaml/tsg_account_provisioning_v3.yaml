@@ -129,7 +129,11 @@ paths:
     delete:
       operationId: DeleteAccount
       summary: Delete an account
-      description: Delete a specific account under your organization by account ID.
+      description: "Delete a specific account under your organization by account ID.\
+        \ Note that this is an **irreversible** action that does the following:\n\n\
+        \ - Revokes API Keys and SSO so that the account user cannot log in or access\
+        \ SendGrid data.\n - Removes all offerings and configured SendGrid resources\
+        \ such as dedicated IPs.\n - Cancels billing effective immediately."
       tags:
       - Account
       responses:

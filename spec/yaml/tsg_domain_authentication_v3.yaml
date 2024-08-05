@@ -31,7 +31,9 @@ info:
     libraryPackage: domain_authentication
 servers:
 - url: https://api.sendgrid.com
-  description: The Twilio SendGrid v3 API
+  description: for global users and subusers
+- url: https://api.eu.sendgrid.com
+  description: for EU regional subusers
 paths:
   /v3/whitelabel/dns/email:
     post:
@@ -1110,18 +1112,18 @@ paths:
                               type: string
                               description: The DNS record.
                   required:
-                  - legacy
-                  - user_id
-                  - custom_spf
-                  - id
                   - automatic_security
-                  - valid
-                  - username
-                  - dns
-                  - subdomain
+                  - custom_spf
                   - default
+                  - dns
                   - domain
+                  - id
                   - ips
+                  - legacy
+                  - subdomain
+                  - user_id
+                  - username
+                  - valid
               examples:
                 response:
                   value:
@@ -1636,18 +1638,18 @@ components:
                   description: A Unix epoch timestamp representing the last time of
                     a validation attempt.
               required:
-              - legacy
-              - user_id
-              - custom_spf
-              - id
               - automatic_security
-              - valid
-              - username
-              - dns
-              - subdomain
+              - custom_spf
               - default
+              - dns
               - domain
+              - id
               - ips
+              - legacy
+              - subdomain
+              - user_id
+              - username
+              - valid
             example:
             - id: 1
               user_id: 7

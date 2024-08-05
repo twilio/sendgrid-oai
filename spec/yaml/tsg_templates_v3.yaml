@@ -37,7 +37,9 @@ info:
     libraryPackage: templates
 servers:
 - url: https://api.sendgrid.com
-  description: The Twilio SendGrid v3 API
+  description: for global users and subusers
+- url: https://api.eu.sendgrid.com
+  description: for EU regional subusers
 paths:
   /v3/templates:
     post:
@@ -489,10 +491,10 @@ components:
         warning:
           $ref: '#/components/schemas/TransactionalTemplateWarning'
       required:
-      - name
-      - updated_at
       - generation
       - id
+      - name
+      - updated_at
     TransactionalTemplateVersionOutput:
       title: 'Transactional Templates: Version Output'
       type: object
@@ -549,8 +551,8 @@ components:
           type: string
           description: A Thumbnail preview of the template's html content.
       required:
-      - subject
       - name
+      - subject
     TransactionalTemplateVersionCreate:
       title: 'Transactional Templates: Version Create'
       type: object

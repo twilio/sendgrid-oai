@@ -37,7 +37,9 @@ info:
     libraryPackage: sso
 servers:
 - url: https://api.sendgrid.com
-  description: The Twilio SendGrid v3 API
+  description: for global users and subusers
+- url: https://api.eu.sendgrid.com
+  description: for EU regional subusers
 paths:
   /v3/sso/certificates:
     post:
@@ -1324,11 +1326,11 @@ components:
             a SAML assertion. This is the same URL as the Single Sign-On URL when
             using SendGrid.
       required:
-      - last_updated
-      - signin_url
       - enabled
       - entity_id
+      - last_updated
       - name
+      - signin_url
       - signout_url
     PostPatchIntegrationRequest:
       title: Create Integration Request
@@ -1617,8 +1619,8 @@ components:
             - id
             - permission_type
       required:
-      - first_name
       - email
+      - first_name
       - last_name
     PatchSsoTeammatesRequest:
       title: Single Sign-On Teammate Update Request Body

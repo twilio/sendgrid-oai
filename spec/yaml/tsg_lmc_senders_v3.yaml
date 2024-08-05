@@ -91,8 +91,8 @@ paths:
                   type: string
                   description: The country of the sender identity.
               required:
-              - city
               - address
+              - city
               - country
               - nickname
       responses:
@@ -689,8 +689,8 @@ components:
             Draft, Scheduled, or In Progress status. You cannot update or delete a
             locked sender identity.
       required:
-      - city
       - address
+      - city
       - country
       - nickname
   responses: {}

@@ -44,7 +44,9 @@ info:
     libraryPackage: scheduled_sends
 servers:
 - url: https://api.sendgrid.com
-  description: The Twilio SendGrid v3 API
+  description: for global users and subusers
+- url: https://api.eu.sendgrid.com
+  description: for EU regional subusers
 paths:
   /v3/user/scheduled_sends:
     post:
@@ -288,8 +290,8 @@ components:
           description: The status of the scheduled send.
           $ref: '#/components/schemas/Status2'
       required:
-      - status
       - batch_id
+      - status
     MailBatchId:
       title: Mail Batch ID
       type: object

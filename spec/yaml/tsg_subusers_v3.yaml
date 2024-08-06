@@ -67,8 +67,7 @@ paths:
         description: Filter for Subusers in this region. If not provided, all Subusers
           will be returned. All users can also be explicitly requested by using the
           filter `all`. Users who are not pinned to a region will be displayed as
-          `global`. (Regional email is in Public Beta and requires SendGrid Pro plan
-          or above.)
+          `global`.
         schema:
           type: string
           default: all
@@ -76,8 +75,7 @@ paths:
       - name: include_region
         in: query
         description: Optional flag to include the regions of the Subusers in the response.
-          If not provided, the region will be omitted from the response. (Regional
-          email is in Public Beta and requires SendGrid Pro plan or above.)
+          If not provided, the region will be omitted from the response.
         schema:
           type: boolean
           default: false

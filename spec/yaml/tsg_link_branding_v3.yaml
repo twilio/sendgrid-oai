@@ -71,8 +71,6 @@ paths:
                   type: string
                   default: us
                   description: The region of the IP address. Can be `eu` or `us`.
-                    (Regional email is in Public Beta and requires SendGrid Pro plan
-                    or above.)
                   $ref: '#/components/schemas/Region'
               required:
               - domain

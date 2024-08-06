@@ -394,8 +394,7 @@ paths:
                   type: boolean
                   default: false
                   description: Boolean indicating whether or not to return the IP
-                    address's region information in the response. (Regional email
-                    is in Public Beta and requires SendGrid Pro plan or above.)
+                    address's region information in the response.
               required:
               - is_auto_warmup
               - is_parent_assigned
@@ -1736,8 +1735,7 @@ components:
         region, results will include all pools that have at least one IP in the filtered
         region. If `all`, pools with at least one IP (regardless of region) will be
         returned. If the `region` filter is not provided, the query returns all pools,
-        including empty ones. (Regional email is in Public Beta and requires SendGrid
-        Pro plan or above.)
+        including empty ones.
       schema:
         type: string
         $ref: '#/components/schemas/Region7'
@@ -1746,8 +1744,7 @@ components:
       in: query
       required: false
       description: Boolean indicating whether or not to return the IP Pool's region
-        information in the response. (Regional email is in Public Beta and requires
-        SendGrid Pro plan or above.)
+        information in the response.
       schema:
         type: boolean
         default: false

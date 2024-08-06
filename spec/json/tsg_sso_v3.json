@@ -26,7 +26,11 @@
   "servers": [
     {
       "url": "https://api.sendgrid.com",
-      "description": "The Twilio SendGrid v3 API"
+      "description": "for global users and subusers"
+    },
+    {
+      "url": "https://api.eu.sendgrid.com",
+      "description": "for EU regional subusers"
     }
   ],
   "paths": {
@@ -1463,12 +1467,12 @@
           }
         },
         "required": [
-          "signin_url",
-          "last_updated",
+          "enabled",
           "entity_id",
+          "last_updated",
           "name",
-          "signout_url",
-          "enabled"
+          "signin_url",
+          "signout_url"
         ]
       },
       "PostPatchIntegrationRequest": {
@@ -1735,9 +1739,9 @@
           }
         },
         "required": [
-          "last_name",
+          "email",
           "first_name",
-          "email"
+          "last_name"
         ]
       },
       "PatchSsoTeammatesRequest": {

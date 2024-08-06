@@ -26,7 +26,11 @@
   "servers": [
     {
       "url": "https://api.sendgrid.com",
-      "description": "The Twilio SendGrid v3 API"
+      "description": "for global users and subusers"
+    },
+    {
+      "url": "https://api.eu.sendgrid.com",
+      "description": "for EU regional subusers"
     }
   ],
   "paths": {

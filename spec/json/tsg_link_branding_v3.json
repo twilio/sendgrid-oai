@@ -26,7 +26,11 @@
   "servers": [
     {
       "url": "https://api.sendgrid.com",
-      "description": "The Twilio SendGrid v3 API"
+      "description": "for global users and subusers"
+    },
+    {
+      "url": "https://api.eu.sendgrid.com",
+      "description": "for EU regional subusers"
     }
   ],
   "paths": {
@@ -65,7 +69,7 @@
                   "region": {
                     "type": "string",
                     "default": "us",
-                    "description": "The region of the IP address. Can be `eu` or `us`. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
+                    "description": "The region of the IP address. Can be `eu` or `us`.",
                     "$ref": "#/components/schemas/Region"
                   }
                 },

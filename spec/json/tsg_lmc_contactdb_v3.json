@@ -677,7 +677,7 @@
           "in": "path",
           "required": true,
           "schema": {
-            "type": "string"
+            "type": "integer"
           }
         }
       ],
@@ -689,14 +689,6 @@
         ],
         "description": "**This endpoint allows you to retrieve a single recipient list.**",
         "parameters": [
-          {
-            "name": "list_id",
-            "in": "query",
-            "description": "The ID of the list to retrieve.",
-            "schema": {
-              "type": "integer"
-            }
-          },
           {
             "$ref": "#/components/parameters/OnBehalfOf"
           }
@@ -796,15 +788,6 @@
         ],
         "description": "**This endpoint allows you to update the name of one of your recipient lists.**",
         "parameters": [
-          {
-            "name": "list_id",
-            "in": "query",
-            "description": "The ID of the list you are updating.",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
           {
             "$ref": "#/components/parameters/OnBehalfOf"
           }
@@ -1050,15 +1033,6 @@
             "in": "query",
             "description": "Number of recipients to return at a time (must be a positive integer between 1 and 1000)",
             "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "list_id",
-            "in": "query",
-            "description": "The ID of the list whose recipients you are requesting.",
-            "required": true,
             "schema": {
               "type": "integer"
             }
@@ -1451,24 +1425,6 @@
         ],
         "description": "**This endpoint allows you to delete a single recipient from a list.**",
         "parameters": [
-          {
-            "name": "list_id",
-            "in": "query",
-            "description": "The ID of the list you are taking this recipient away from.",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "recipient_id",
-            "in": "query",
-            "description": "The ID of the recipient to take off the list.",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
           {
             "$ref": "#/components/parameters/OnBehalfOf"
           }
@@ -3067,7 +3023,7 @@
           "in": "path",
           "required": true,
           "schema": {
-            "type": "string"
+            "type": "integer"
           }
         }
       ],
@@ -3079,15 +3035,6 @@
         ],
         "description": "**This endpoint allows you to retrieve a single segment with the given ID.**",
         "parameters": [
-          {
-            "name": "segment_id",
-            "in": "query",
-            "description": "The ID of the segment you want to request.",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
           {
             "$ref": "#/components/parameters/OnBehalfOf"
           }
@@ -3195,14 +3142,6 @@
         ],
         "description": "**This endpoint allows you to update a segment.**",
         "parameters": [
-          {
-            "name": "segment_id",
-            "in": "query",
-            "description": "The ID of the segment you are updating.",
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "$ref": "#/components/parameters/OnBehalfOf"
           }

@@ -539,13 +539,13 @@
         },
         "required": [
           "contacts_count",
-          "id",
           "contacts_sample",
-          "updated_at",
           "created_at",
+          "id",
           "name",
           "query_dsl",
-          "sample_updated_at"
+          "sample_updated_at",
+          "updated_at"
         ]
       },
       "SegmentSummary": {

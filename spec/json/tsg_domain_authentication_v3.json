@@ -26,7 +26,11 @@
   "servers": [
     {
       "url": "https://api.sendgrid.com",
-      "description": "The Twilio SendGrid v3 API"
+      "description": "for global users and subusers"
+    },
+    {
+      "url": "https://api.eu.sendgrid.com",
+      "description": "for EU regional subusers"
     }
   ],
   "paths": {
@@ -1346,18 +1350,18 @@
                       }
                     },
                     "required": [
+                      "automatic_security",
+                      "custom_spf",
+                      "default",
+                      "dns",
                       "domain",
+                      "id",
+                      "ips",
                       "legacy",
                       "subdomain",
-                      "automatic_security",
-                      "ips",
-                      "id",
                       "user_id",
-                      "default",
-                      "valid",
                       "username",
-                      "dns",
-                      "custom_spf"
+                      "valid"
                     ]
                   }
                 },
@@ -2004,18 +2008,18 @@
                   }
                 },
                 "required": [
+                  "automatic_security",
+                  "custom_spf",
+                  "default",
+                  "dns",
                   "domain",
+                  "id",
+                  "ips",
                   "legacy",
                   "subdomain",
-                  "automatic_security",
-                  "ips",
-                  "id",
                   "user_id",
-                  "default",
-                  "valid",
                   "username",
-                  "dns",
-                  "custom_spf"
+                  "valid"
                 ]
               },
               "example": [

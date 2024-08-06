@@ -358,8 +358,8 @@ paths:
               properties:
                 identifier_type:
                   type: string
-                  description: 'A type of the following: EMAIL, PHONENUMBERID, EXTERNALID,
-                    or ANONYMOUSID.'
+                  description: The type of identifier you are removing from the contact.
+                  $ref: '#/components/schemas/IdentifierType'
                 identifier_value:
                   type: string
                   description: The value of the identifier you want to remove from
@@ -1245,7 +1245,7 @@ paths:
       description: The type of identifier to search for.
       schema:
         type: string
-        $ref: '#/components/schemas/IdentifierType'
+        $ref: '#/components/schemas/IdentifierType1'
     post:
       operationId: GetContactByIdentifiers
       summary: Get Contacts by Identifiers
@@ -1696,6 +1696,13 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+    IdentifierType:
+      type: string
+      enum:
+      - EMAIL
+      - PHONENUMBERID
+      - EXTERNALID
+      - ANONYMOUSID
     FileType:
       type: string
       enum:
@@ -1705,7 +1712,7 @@ components:
       type: string
       enum:
       - csv
-    IdentifierType:
+    IdentifierType1:
       type: string
       enum:
       - email

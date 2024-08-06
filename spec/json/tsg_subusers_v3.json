@@ -26,7 +26,11 @@
   "servers": [
     {
       "url": "https://api.sendgrid.com",
-      "description": "The Twilio SendGrid v3 API"
+      "description": "for global users and subusers"
+    },
+    {
+      "url": "https://api.eu.sendgrid.com",
+      "description": "for EU regional subusers"
     }
   ],
   "paths": {
@@ -58,7 +62,7 @@
           {
             "name": "region",
             "in": "query",
-            "description": "Filter for Subusers in this region. If not provided, all Subusers will be returned. All users can also be explicitly requested by using the filter `all`. Users who are not pinned to a region will be displayed as `global`. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
+            "description": "Filter for Subusers in this region. If not provided, all Subusers will be returned. All users can also be explicitly requested by using the filter `all`. Users who are not pinned to a region will be displayed as `global`.",
             "schema": {
               "type": "string",
               "default": "all",
@@ -68,7 +72,7 @@
           {
             "name": "include_region",
             "in": "query",
-            "description": "Optional flag to include the regions of the Subusers in the response. If not provided, the region will be omitted from the response. (Regional email is in Public Beta and requires SendGrid Pro plan or above.)",
+            "description": "Optional flag to include the regions of the Subusers in the response. If not provided, the region will be omitted from the response.",
             "schema": {
               "type": "boolean",
               "default": false

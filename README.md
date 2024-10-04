@@ -1,6 +1,6 @@
 # Sendgrid's OpenAPI Specification
 
-This repository contains [OpenAPI](https://www.openapis.org/) documents
+This repository contains [OpenAPI](https://www.openapis.org/) documents 
 
 The SendGrid OAI specifications are automatically generated from the SendGrid OAS specifications using the `sendgrid-oas-transpiler`. 
 

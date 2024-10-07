@@ -716,7 +716,8 @@ paths:
 
 
         Adds existing recipients to a list, passing in the recipient IDs to add. Recipient
-        IDs should be passed exactly as they are returned from recipient endpoints.'
+        IDs (base64-encoded email addresses) should be passed exactly as they are
+        returned from recipient endpoints.'
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
       requestBody:
@@ -725,10 +726,10 @@ paths:
             schema:
               type: array
               items:
-                type: integer
+                type: string
               example:
-              - 1
-              - 2
+              - ZW1haWwxQGV4YW1wbGUuY29t
+              - ZW1haWwyQHRlc3QubmV0
       responses:
         '201':
           description: ''

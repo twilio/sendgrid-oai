@@ -1520,28 +1520,7 @@
                     "type": "array",
                     "description": "One or more more identifier values to search for in your Marketing Campaigns contacts.",
                     "items": {
-                      "type": "object",
-                      "properties": {
-                        "email": {
-                          "type": "string",
-                          "maxLength": 100
-                        },
-                        "phone_number_id": {
-                          "type": "string",
-                          "description": "The contact's Phone Number ID. This is required to be a valid phone number.",
-                          "maxLength": 254
-                        },
-                        "external_id": {
-                          "type": "string",
-                          "description": "The contact's External ID.",
-                          "maxLength": 254
-                        },
-                        "anonymous_id": {
-                          "type": "string",
-                          "description": "The contact's Anonymous ID.",
-                          "maxLength": 254
-                        }
-                      }
+                      "type": "string"
                     }
                   }
                 },
@@ -1550,12 +1529,7 @@
                 ],
                 "example": {
                   "identifiers": [
-                    {
-                      "email": "contact@example.com"
-                    },
-                    {
-                      "phone_number_id": "23"
-                    }
+                    "contact@example.com"
                   ]
                 }
               }

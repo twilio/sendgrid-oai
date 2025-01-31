@@ -60,7 +60,7 @@ paths:
               example:
                 name: list-name
       responses:
-        '200':
+        '201':
           description: ''
           content:
             application/json:

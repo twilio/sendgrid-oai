@@ -141,7 +141,6 @@
                         "id": 1234,
                         "name": "Unsubscribe Group",
                         "description": "An Unsubscribe Group",
-                        "last_email_sent_at": null,
                         "is_default": true,
                         "unsubscribes": 1234
                       },
@@ -149,7 +148,6 @@
                         "id": 1234,
                         "name": "Unsubscribe Group",
                         "description": "An Unsubscribe Group",
-                        "last_email_sent_at": null,
                         "is_default": true,
                         "unsubscribes": 1234
                       }
@@ -215,10 +213,6 @@
                     "unsubscribes": {
                       "type": "integer",
                       "description": "The number of unsubscribes, or suppressions, in this group."
-                    },
-                    "last_email_sent_at": {
-                      "nullable": true,
-                      "type": "string"
                     }
                   },
                   "required": [
@@ -231,7 +225,6 @@
                       "description": "Our monthly newsletter.",
                       "id": 100,
                       "is_default": true,
-                      "last_email_sent_at": null,
                       "name": "Newsletters",
                       "unsubscribes": 400
                     }
@@ -2096,10 +2089,6 @@
             "description": "A description of the suppression group.",
             "maxLength": 100
           },
-          "last_email_sent_at": {
-            "type": "integer",
-            "nullable": true
-          },
           "is_default": {
             "type": "boolean",
             "default": false,
@@ -2319,6 +2308,14 @@
             "type": "string",
             "description": "When applicable, this property value will be an error ID."
           }
+        },
+        "example": {
+          "errors": [
+            {
+              "field": "field_name",
+              "message": "error message"
+            }
+          ]
         }
       },
       "Accept": {

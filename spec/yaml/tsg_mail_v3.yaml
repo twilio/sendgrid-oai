@@ -185,6 +185,8 @@ components:
         batch_id:
           type: string
           description: A mail batch ID.
+      example:
+        batch_id: HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi
     ErrorResponse:
       type: object
       properties:
@@ -208,6 +210,10 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+      example:
+        errors:
+        - field: field_name
+          message: error message
     ContentEncoding:
       type: string
       enum:

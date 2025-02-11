@@ -1,5 +1,14 @@
 sendgrid-oai changelog
 ====================
+[2025-02-11] Version 1.0.0-rc.2
+-------------------------------
+**Mc list**
+- Fix status code
+
+**Suppressions**
+- Remove `last_email_sent_at` from suppression groups
+
+
 [2024-10-07] Version 1.0.0-rc.1
 -------------------------------
 **Library - Chore**

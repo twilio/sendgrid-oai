@@ -1242,7 +1242,8 @@ paths:
     - name: identifier_type
       in: path
       required: true
-      description: The type of identifier to search for.
+      description: The type of identifier to search for. You can use only one type
+        of identifier per search.
       schema:
         type: string
         $ref: '#/components/schemas/IdentifierType1'
@@ -1251,33 +1252,33 @@ paths:
       summary: Get Contacts by Identifiers
       tags:
       - Contacts
-      description: '**This endpoint allows you to retrieve up to 100 contacts matching
-        the searched identifier values for one type of specified identifier.**
+      description: 'Use this endpoint to retrieve up to 100 contacts that match the
+        requested identifier values for a single identifier type.
 
 
         `identifier_type` must be a valid identifier type: `email`, `phone_number_id`,
         `external_id`, or `anonymous_id`.
 
 
-        This endpoint should be used in place of the [Search Contacts endpoint](https://www.twilio.com/docs/sendgrid/api-reference/contacts/search-contacts)
+        Use this endpoint instead of the [Search Contacts endpoint](https://www.twilio.com/docs/sendgrid/api-reference/contacts/search-contacts)
         when you can provide exact identifiers and do not need to include other [Segmentation
         Query Language (SGQL)](https://www.twilio.com/docs/sendgrid/for-developers/sending-email/segmentation-query-language/)
         filters when searching.
 
 
         This endpoint returns a `200` status code when any contacts match the identifiers
-        you supplied. When searching multiple identifiers in a single request, it
-        is possible that some will match a contact while others will not. When a partially
-        successful search like this is made, the matching contacts are returned in
-        an object and an error message is returned for the identifiers that are not
-        found.
+        you supplied. When searching multiple identifier values in a single request,
+        it is possible that some will match a contact while others will not. When
+        a partially successful search like this is made, the matching contacts are
+        returned in an object and an error message is returned for the identifier
+        values that are not found.
 
 
         This endpoint returns a `404` status code when no contacts are found for the
         provided identifiers.
 
 
-        A `400` status code is returned if any searched addresses are invalid.
+        This endpoint returns a `400` status code if any searched addresses are invalid.
 
 
         Twilio SendGrid recommends exporting your contacts regularly as a backup to
@@ -1293,8 +1294,8 @@ paths:
               properties:
                 identifiers:
                   type: array
-                  description: One or more more identifier values to search for in
-                    your Marketing Campaigns contacts.
+                  description: One or more more identifier values of the given identifier
+                    type to search for in your Marketing Campaigns contacts.
                   items:
                     type: string
               required:
@@ -1309,8 +1310,8 @@ paths:
             application/json:
               schema:
                 type: object
-                description: An object containing one or more of the identifiers matching
-                  the searched identifiers in your contacts.
+                description: An object containing the contacts that match the searched
+                  identifier values.
                 properties:
                   result:
                     type: object
@@ -1324,37 +1325,37 @@ paths:
                           $ref: '#/components/schemas/ContactDetails3'
                         error:
                           type: string
-              example:
-                result:
-                  jane_doe@example.com:
-                    contact:
-                      address_line_1: ''
-                      address_line_2: ''
-                      alternate_emails:
-                      - janedoe@example1.com
-                      city: ''
-                      country: ''
-                      email: jane_doe@example.com
-                      phone_number_id: '+14152279968'
-                      external_id: extid_1709597080488434000_1_1
-                      anonymous_id: anonid_1709597080488436000_1_1
-                      first_name: Jane
-                      id: asdf-Jkl-zxCvBNm
-                      last_name: Doe
-                      list_ids: []
-                      segment_ids: []
-                      postal_code: ''
-                      state_province_region: ''
-                      phone_number: ''
-                      whatsapp: ''
-                      line: ''
-                      facebook: ''
-                      unique_name: ''
-                      custom_fields: {}
-                      created_at: '2021-03-02T15:25:47Z'
-                      updated_at: '2021-03-30T15:26:16Z'
-                      _metadata:
-                        self: <metadata_url>
+                example:
+                  result:
+                    jane_doe@example.com:
+                      contact:
+                        address_line_1: ''
+                        address_line_2: ''
+                        alternate_emails:
+                        - janedoe@example1.com
+                        city: ''
+                        country: ''
+                        email: jane_doe@example.com
+                        phone_number_id: '+14152279968'
+                        external_id: extid_1709597080488434000_1_1
+                        anonymous_id: anonid_1709597080488436000_1_1
+                        first_name: Jane
+                        id: asdf-Jkl-zxCvBNm
+                        last_name: Doe
+                        list_ids: []
+                        segment_ids: []
+                        postal_code: ''
+                        state_province_region: ''
+                        phone_number: ''
+                        whatsapp: ''
+                        line: ''
+                        facebook: ''
+                        unique_name: ''
+                        custom_fields: {}
+                        created_at: '2021-03-02T15:25:47Z'
+                        updated_at: '2021-03-30T15:26:16Z'
+                        _metadata:
+                          self: <metadata_url>
         '400':
           description: ''
           content:
@@ -1551,6 +1552,9 @@ components:
           type: string
         parameter:
           type: string
+      example:
+        field: field_name
+        message: error message
       required:
       - message
     ContactRequest:
@@ -1678,6 +1682,10 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+      example:
+        errors:
+        - field: field_name
+          message: error message
     IdentifierType:
       type: string
       enum:

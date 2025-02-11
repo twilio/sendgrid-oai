@@ -67,23 +67,20 @@ paths:
                           description: Indicates if the IP address is set to automatically
                             [warmup](https://docs.sendgrid.com/ui/sending-email/warming-up-an-ip-address).
                         is_parent_assigned:
-                          type:
-                          - boolean
-                          - 'null'
+                          type: boolean
+                          nullable: true
                           description: Indicates if a parent on the account is able
                             to send email from the IP address. This parameter will
                             be returned only if the request was made by the parent
                             account.
                         updated_at:
-                          type:
-                          - integer
-                          - 'null'
+                          type: integer
+                          nullable: true
                           description: A timestamp indicating when the IP was last
                             updated.
                         is_enabled:
-                          type:
-                          - boolean
-                          - 'null'
+                          type: boolean
+                          nullable: true
                           description: Indicates if the IP address is billed and able
                             to send email. This parameter applies to non-Twilio SendGrid
                             APIs that been added to your Twilio SendGrid account.
@@ -113,9 +110,8 @@ paths:
                         type: object
                         properties:
                           after_key:
-                            type:
-                            - string
-                            - 'null'
+                            type: string
+                            nullable: true
                             description: Specifies which items to be returned by the
                               API. When the `after_key` is specified, the API will
                               return items beginning from the first item after the
@@ -124,9 +120,8 @@ paths:
                               `after_key` cannot be used in combination with the `before_key`
                               parameter.
                           before_key:
-                            type:
-                            - string
-                            - 'null'
+                            type: string
+                            nullable: true
                             description: Specifies which items to be returned by the
                               API. When the `before_key` is specified, the API will
                               return items beginning from the first item before the
@@ -448,14 +443,12 @@ paths:
                     description: A timestamp indicating when the IP address was added
                       to your account.
                   updated_at:
-                    type:
-                    - integer
-                    - 'null'
+                    type: integer
+                    nullable: true
                     description: A timestamp indicating when the IP was last updated.
                   is_enabled:
-                    type:
-                    - boolean
-                    - 'null'
+                    type: boolean
+                    nullable: true
                     description: Indicates if the IP address is billed and able to
                       send email. This parameter applies to non-Twilio SendGrid APIs
                       that been added to your Twilio SendGrid account. This parameter's
@@ -626,9 +619,8 @@ paths:
                           the endpoint.
                         properties:
                           after_key:
-                            type:
-                            - string
-                            - 'null'
+                            type: string
+                            nullable: true
                             description: Specifies which items to be returned by the
                               API. When the `after_key` is specified, the API will
                               return items beginning from the first item after the
@@ -891,9 +883,8 @@ paths:
                           the endpoint.
                         properties:
                           after_key:
-                            type:
-                            - string
-                            - 'null'
+                            type: string
+                            nullable: true
                             description: Specifies which items to be returned by the
                               API. When the `after_key` is specified, the API will
                               return items beginning from the first item after the
@@ -1286,9 +1277,8 @@ paths:
                           the endpoint.
                         properties:
                           after_key:
-                            type:
-                            - string
-                            - 'null'
+                            type: string
+                            nullable: true
                             description: Specifies which items to be returned by the
                               API. When the `after_key` is specified, the API will
                               return items beginning from the first item after the

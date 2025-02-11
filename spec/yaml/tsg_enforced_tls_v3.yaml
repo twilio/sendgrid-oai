@@ -150,6 +150,10 @@ components:
         id:
           type: string
           description: When applicable, this property value will be an error ID.
+      example:
+        errors:
+        - field: field_name
+          message: error message
     Version:
       type: number
       enum:

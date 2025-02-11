@@ -562,10 +562,10 @@
           "last": {
             "type": "string",
             "description": "The last item returned"
-          },
-          "example": {
-            "last": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
           }
+        },
+        "example": {
+          "last": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
         }
       },
       "AccountProvisioningProfile": {

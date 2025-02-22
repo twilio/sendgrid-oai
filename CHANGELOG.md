@@ -1,5 +1,11 @@
 sendgrid-oai changelog
 ====================
+[2025-02-22] Version 1.0.0-rc.3
+-------------------------------
+**Account provisioning**
+- Update status code for all endpoints within Acorn
+
+
 [2025-02-11] Version 1.0.0-rc.2
 -------------------------------
 **Mc list**

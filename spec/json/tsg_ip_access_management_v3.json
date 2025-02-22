@@ -361,15 +361,7 @@
         },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           },
           "401": {
             "$ref": "#/components/responses/IpAccessManagement401"
@@ -451,15 +443,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           }
         }
       }

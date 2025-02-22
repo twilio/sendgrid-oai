@@ -435,14 +435,7 @@
         "description": "**This endpoint allows you to delete a single design**.\n\nBe sure to check the ID of the design you intend to delete before making this request; deleting a design is a permanent action.",
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           },
           "400": {
             "description": "",

@@ -284,11 +284,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
         '401':
           $ref: '#/components/responses/IpAccessManagement401'
         '403':
@@ -351,11 +346,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
 components:
   schemas:
     IpAccessManagement2xx:

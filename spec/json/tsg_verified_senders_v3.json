@@ -404,14 +404,7 @@
         "description": "**This endpoint allows you to delete a Sender Identity**.\n\nPass the `id` assigned to a Sender Identity to this endpoint to delete the Sender Identity from your account.\n\nYou can retrieve the IDs associated with Sender Identities using the \"Get All Verified Senders\" endpoint.",
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           },
           "401": {
             "$ref": "#/components/responses/VerifiedSenders401"
@@ -579,14 +572,7 @@
         "description": "**This endpoint allows you to resend a verification email to a specified Sender Identity**.\n\nPassing the `id` assigned to a Sender Identity to this endpoint will resend a verification email to the `from_address` associated with the Sender Identity. This can be useful if someone loses their verification email or needs to have it resent for any other reason.\n\nYou can retrieve the IDs associated with Sender Identities by passing a \"Get All Verified Senders\" endpoint.",
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           },
           "400": {
             "description": "",

@@ -313,14 +313,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
@@ -823,15 +816,7 @@
         },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
@@ -900,15 +885,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
@@ -1152,14 +1129,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           },
           "401": {
             "description": "",
@@ -1559,14 +1529,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
@@ -1691,15 +1654,7 @@
         },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
@@ -1772,15 +1727,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
@@ -1895,15 +1842,7 @@
         },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
@@ -1971,15 +1910,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           }
         }
       }

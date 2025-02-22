@@ -8,7 +8,7 @@
   "info": {
     "title": "Twilio SendGrid Webhook Configuration API",
     "summary": "The Twilio SendGrid Webhooks API allows you to configure the Event and Parse Webhooks.",
-    "description": "The Twilio SendGrid Webhooks API allows you to configure the Event and Parse Webhooks.\n\nEmail is a data-rich channel, and implementing the Event Webhook will allow you to consume those data in nearly real time. This means you can actively monitor and participate in the health of your email program throughout the send cycle.\n\nThe Inbound Parse Webhook processes all incoming email for a domain or subdomain, parses the contents and attachments and then POSTs `multipart/form-data` to a URL that you choose.",
+    "description": "The Twilio SendGrid Webhooks API allows you to configure the Event and Parse Webhooks.\n\nEmail is a data-rich channel, and implementing the Event Webhook will allow you to consume those data in nearly real time. This means you can actively monitor and participate in the health of your email program throughout the send cycle.\n\nThe Inbound Parse Webhook processes all incoming email for a domain or subdomain, parses the contents and attachments and then POSTs `multipart/form-data` to a URL that you choose. ",
     "termsOfService": "https://www.twilio.com/legal/tos",
     "contact": {
       "name": "Twilio SendGrid Support",
@@ -1083,14 +1083,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           },
           "401": {
             "$ref": "#/components/responses/Webhook401"

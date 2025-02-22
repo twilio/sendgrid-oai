@@ -258,10 +258,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
   /v3/asm/groups/{group_id}/suppressions:
     parameters:
     - name: group_id
@@ -627,11 +623,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
   /v3/suppression/blocks/{email}:
     parameters:
     - name: email
@@ -677,11 +668,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
   /v3/suppression/bounces:
     get:
       operationId: ListSuppressionBounces
@@ -854,10 +840,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
         '401':
           description: ''
           content:
@@ -1131,10 +1113,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
   /v3/suppression/invalid_emails:
     get:
       operationId: ListInvalidEmail
@@ -1229,11 +1207,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
   /v3/suppression/invalid_emails/{email}:
     parameters:
     - name: email
@@ -1282,11 +1255,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
   /v3/suppression/spam_reports:
     get:
       operationId: ListSpamReport
@@ -1375,11 +1343,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
   /v3/suppression/spam_reports/{email}:
     parameters:
     - name: email
@@ -1431,11 +1394,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
   /v3/suppression/unsubscribes:
     get:
       operationId: ListGlobalSuppression

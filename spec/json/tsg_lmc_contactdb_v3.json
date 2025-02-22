@@ -614,14 +614,7 @@
         },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "nullable": true
-                }
-              }
-            }
+            "description": ""
           },
           "400": {
             "description": "All list ids are not valid",
@@ -913,9 +906,6 @@
             "$ref": "#/components/parameters/OnBehalfOf"
           }
         ],
-        "requestBody": {
-          "$ref": "#/components/requestBodies/DeleteContactdbListsListId"
-        },
         "responses": {
           "202": {
             "description": "",
@@ -1429,19 +1419,9 @@
             "$ref": "#/components/parameters/OnBehalfOf"
           }
         ],
-        "requestBody": {
-          "$ref": "#/components/requestBodies/DeleteContactdbListsListId"
-        },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "nullable": true
-                }
-              }
-            }
+            "description": ""
           },
           "400": {
             "description": "Input failed validation",
@@ -2029,14 +2009,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           },
           "400": {
             "description": "Returned if `recipient_id` is not valid",
@@ -3323,19 +3296,9 @@
             "$ref": "#/components/parameters/OnBehalfOf"
           }
         ],
-        "requestBody": {
-          "$ref": "#/components/requestBodies/DeleteContactdbListsListId"
-        },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "nullable": true
-                }
-              }
-            }
+            "description": ""
           },
           "400": {
             "description": "Either segment_id or delete_contacts is not valid",
@@ -4059,17 +4022,6 @@
       }
     },
     "examples": {},
-    "requestBodies": {
-      "DeleteContactdbListsListId": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "nullable": true
-            }
-          }
-        }
-      }
-    },
     "headers": {},
     "securitySchemes": {
       "BearerAuth": {

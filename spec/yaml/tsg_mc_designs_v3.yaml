@@ -963,10 +963,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
         '400':
           description: ''
           content:

@@ -775,14 +775,7 @@
         "description": "**This endpoint allows you to delete an IP pool.**",
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           },
           "404": {
             "description": "",
@@ -971,14 +964,7 @@
         "description": "**This endpoint allows you to remove an IP address from an IP pool.**",
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           },
           "404": {
             "description": "",

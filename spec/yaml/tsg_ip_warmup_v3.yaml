@@ -184,10 +184,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
         '404':
           description: ''
           content:

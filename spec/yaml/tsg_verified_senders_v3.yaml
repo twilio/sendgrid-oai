@@ -349,10 +349,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
         '401':
           $ref: '#/components/responses/VerifiedSenders401'
         '403':
@@ -477,10 +473,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
         '400':
           description: ''
           content:

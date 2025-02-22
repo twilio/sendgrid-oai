@@ -16,7 +16,7 @@ info:
 
     The Inbound Parse Webhook processes all incoming email for a domain or subdomain,
     parses the contents and attachments and then POSTs `multipart/form-data` to a
-    URL that you choose.'
+    URL that you choose. '
   termsOfService: https://www.twilio.com/legal/tos
   contact:
     name: Twilio SendGrid Support
@@ -1033,10 +1033,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
         '401':
           $ref: '#/components/responses/Webhook401'
         '403':

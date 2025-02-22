@@ -352,15 +352,7 @@
         },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           },
           "400": {
             "description": "",
@@ -440,15 +432,7 @@
         "description": "**This endpoint allows you to delete a subuser.**\n\nThis is a permanent action. Once deleted, a subuser cannot be retrieved.",
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           },
           "401": {
             "description": "",
@@ -513,15 +497,7 @@
         },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
+            "description": ""
           }
         }
       }

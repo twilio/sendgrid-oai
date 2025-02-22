@@ -276,10 +276,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
   /v3/templates/{template_id}/versions:
     parameters:
     - name: template_id

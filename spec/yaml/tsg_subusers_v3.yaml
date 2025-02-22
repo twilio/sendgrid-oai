@@ -253,11 +253,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
         '400':
           description: ''
           content:
@@ -305,11 +300,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
         '401':
           description: ''
           content:
@@ -351,11 +341,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
   /v3/subusers/{subuser_name}/credits:
     parameters:
     - $ref: '#/components/parameters/UserName'

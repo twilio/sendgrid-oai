@@ -377,10 +377,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                nullable: true
         '400':
           description: All list ids are not valid
           content:
@@ -552,8 +548,6 @@ paths:
           type: boolean
           $ref: '#/components/schemas/DeleteContacts'
       - $ref: '#/components/parameters/OnBehalfOf'
-      requestBody:
-        $ref: '#/components/requestBodies/DeleteContactdbListsListId'
       responses:
         '202':
           description: ''
@@ -859,15 +853,9 @@ paths:
         list.**'
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
-      requestBody:
-        $ref: '#/components/requestBodies/DeleteContactdbListsListId'
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                nullable: true
         '400':
           description: Input failed validation
           content:
@@ -1252,10 +1240,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
         '400':
           description: Returned if `recipient_id` is not valid
           content:
@@ -2096,15 +2080,9 @@ paths:
         schema:
           type: boolean
       - $ref: '#/components/parameters/OnBehalfOf'
-      requestBody:
-        $ref: '#/components/requestBodies/DeleteContactdbListsListId'
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                nullable: true
         '400':
           description: Either segment_id or delete_contacts is not valid
           content:
@@ -2620,12 +2598,6 @@ components:
       schema:
         type: string
   examples: {}
-  requestBodies:
-    DeleteContactdbListsListId:
-      content:
-        application/json:
-          schema:
-            nullable: true
   headers: {}
   securitySchemes:
     BearerAuth:

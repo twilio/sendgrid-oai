@@ -269,14 +269,7 @@
         },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "nullable": true
-                }
-              }
-            }
+            "description": ""
           },
           "400": {
             "$ref": "#/components/responses/ScheduledSends400"

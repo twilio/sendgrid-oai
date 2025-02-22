@@ -319,10 +319,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                nullable: true
         '401':
           description: ''
           content:
@@ -775,10 +771,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                nullable: true
         '403':
           description: The request was formatted incorrectly or missing required parameters.
           content:

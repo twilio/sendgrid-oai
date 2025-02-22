@@ -444,14 +444,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "nullable": true
-                }
-              }
-            }
+            "description": ""
           },
           "401": {
             "description": "",
@@ -1145,14 +1138,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "nullable": true
-                }
-              }
-            }
+            "description": ""
           },
           "403": {
             "description": "The request was formatted incorrectly or missing required parameters.",

@@ -75,6 +75,14 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
+        '500':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse500'
+        '502':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse502'
+        '503':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse503'
+        '504':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse504'
     post:
       operationId: CreateAccount
       summary: Create an account
@@ -125,6 +133,14 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse401'
         '403':
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
+        '500':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse500'
+        '502':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse502'
+        '503':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse503'
+        '504':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse504'
   /v3/partners/accounts/{accountID}:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
@@ -149,6 +165,14 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
+        '500':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse500'
+        '502':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse502'
+        '503':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse503'
+        '504':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse504'
   /v3/partners/accounts/{accountID}/offerings:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
@@ -173,6 +197,14 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
+        '500':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse500'
+        '502':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse502'
+        '503':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse503'
+        '504':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse504'
     put:
       operationId: UpdateAccountOffering
       summary: Update account offerings
@@ -215,6 +247,14 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse401'
         '403':
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
+        '500':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse500'
+        '502':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse502'
+        '503':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse503'
+        '504':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse504'
   /v3/partners/accounts/{accountID}/sso:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
@@ -235,6 +275,14 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
+        '500':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse500'
+        '502':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse502'
+        '503':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse503'
+        '504':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse504'
   /v3/partners/accounts/{accountID}/state:
     parameters:
     - $ref: '#/components/parameters/AccountProvisioningAccountId'
@@ -259,6 +307,14 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
+        '500':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse500'
+        '502':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse502'
+        '503':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse503'
+        '504':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse504'
     put:
       operationId: UpdateAccountState
       summary: Update an account's state
@@ -280,6 +336,14 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse401'
         '403':
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
+        '500':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse500'
+        '502':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse502'
+        '503':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse503'
+        '504':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse504'
   /v3/partners/offerings:
     get:
       operationId: ListOffering
@@ -302,6 +366,14 @@ paths:
           $ref: '#/components/responses/AccountProvisioningErrorResponse403'
         '404':
           $ref: '#/components/responses/AccountProvisioningErrorResponse404'
+        '500':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse500'
+        '502':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse502'
+        '503':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse503'
+        '504':
+          $ref: '#/components/responses/AccountProvisioningErrorResponse504'
 components:
   schemas:
     AccountProvisioningAccount:
@@ -586,6 +658,74 @@ components:
             - message: No such endpoint
               field: ''
               error_id: 10-40400
+    AccountProvisioningErrorResponse500:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            title: InternalServerError
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+            - message: Something went wrong
+              field: ''
+              error_id: 10-50000
+    AccountProvisioningErrorResponse502:
+      description: Bad Gateway
+      content:
+        application/json:
+          schema:
+            title: Bad Gateway
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+            - message: Bad Gateway
+              field: ''
+              error_id: 10-50200
+    AccountProvisioningErrorResponse503:
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            title: Service Unavailable
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+            - message: Service Unavailable
+              field: ''
+              error_id: 10-50300
+    AccountProvisioningErrorResponse504:
+      description: Endpoint request timed out
+      content:
+        application/json:
+          schema:
+            title: Endpoint request timed out
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+            - message: Endpoint request timed out
+              field: ''
+              error_id: 10-50400
   parameters:
     AccountProvisioningAccountId:
       name: accountID

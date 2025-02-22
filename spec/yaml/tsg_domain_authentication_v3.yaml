@@ -358,10 +358,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
   /v3/whitelabel/domains/{domain_id}/subuser:
     post:
       operationId: AssociateSubuserWithDomain
@@ -471,10 +467,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
   /v3/whitelabel/domains/{domain_id}/subuser:add:
     parameters:
     - name: domain_id
@@ -951,10 +943,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
   /v3/whitelabel/domains/subuser/all:
     get:
       operationId: ListAllAuthenticatedDomainWithUser

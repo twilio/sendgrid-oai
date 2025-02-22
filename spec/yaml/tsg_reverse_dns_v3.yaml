@@ -243,10 +243,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
   /v3/whitelabel/ips/{id}/validate:
     parameters:
     - name: id

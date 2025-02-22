@@ -247,14 +247,7 @@
         "description": "**This endpoint allows you to remove an IP address from warmup mode.**\n\nYour request will return a 204 status code if the specified IP was successfully removed from warmup mode. To retrieve details of the IP\u2019s warmup status *before* removing it from warmup mode, call the  \"Retrieve the warmpup status for a specific IP address\" endpoint.",
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": ""
           },
           "404": {
             "description": "",

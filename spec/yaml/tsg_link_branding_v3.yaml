@@ -301,10 +301,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
   /v3/whitelabel/links/{id}/validate:
     parameters:
     - name: id
@@ -633,10 +629,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
 components:
   schemas:
     LinkBranding200:

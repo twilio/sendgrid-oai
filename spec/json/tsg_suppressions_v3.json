@@ -452,14 +452,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "nullable": true
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
@@ -1020,14 +1013,7 @@
         },
         "responses": {
           "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "nullable": true
-                }
-              }
-            }
+            "description": ""
           },
           "401": {
             "description": "",

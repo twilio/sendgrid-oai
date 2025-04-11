@@ -645,10 +645,24 @@
           }
         },
         "required": [
-          "account_id"
+          "catalog"
         ],
         "example": {
-          "account_id": "sg2a2bcd3ef4ab5c67d8efab91c01de2fa"
+          "catalog": [
+            {
+              "offering": {
+                "name": "org.ei.free.v1",
+                "type": "package",
+                "quantity": 1
+              },
+              "entitlements": {
+                "email_sends_max_monthly": 10000,
+                "ip_count": 0,
+                "teammates_max_total": 0,
+                "users_max_total": 0
+              }
+            }
+          ]
         }
       },
       "AccountProvisioningOfferingList": {

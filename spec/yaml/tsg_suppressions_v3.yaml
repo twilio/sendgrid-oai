@@ -365,10 +365,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                nullable: true
   /v3/asm/groups/{group_id}/suppressions/search:
     parameters:
     - name: group_id
@@ -769,10 +765,6 @@ paths:
       responses:
         '204':
           description: ''
-          content:
-            application/json:
-              schema:
-                nullable: true
         '401':
           description: ''
           content:

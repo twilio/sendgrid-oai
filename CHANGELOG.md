@@ -1,5 +1,11 @@
 sendgrid-oai changelog
 ====================
+[2025-04-11] Version 1.0.0-rc.4
+-------------------------------
+**Account provisioning**
+- Fix response data for v3/partners/offerings
+
+
 [2025-02-22] Version 1.0.0-rc.3
 -------------------------------
 **Account provisioning**

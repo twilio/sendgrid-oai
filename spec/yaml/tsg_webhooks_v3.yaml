@@ -112,7 +112,7 @@ paths:
                   open: true
                   click: true
                   dropped: true
-                  friendly_name: Enagement Webhook
+                  friendly_name: Engagement Webhook
                   oauth_client_id: a835e7210bbb47edbfa71bdfc909b2d7
                   oauth_client_secret: 335a9b0c65324fd2a62e2953d4b158
                   oauth_token_url: https://oauthservice.example.com
@@ -133,7 +133,7 @@ paths:
                   open: true
                   click: true
                   dropped: true
-                  friendly_name: Enagement Webhook
+                  friendly_name: Engagement Webhook
       responses:
         '201':
           description: ''
@@ -158,7 +158,7 @@ paths:
                     open: true
                     click: true
                     dropped: true
-                    friendly_name: Enagement Webhook
+                    friendly_name: Engagement Webhook
                     oauth_client_id: a835e7210bbb47edbfa71bdfc909b2d7
                     oauth_token_url: https://oauthservice.example.com
                     id: 77d4a5da-7015-11ed-a1eb-0242ac120002

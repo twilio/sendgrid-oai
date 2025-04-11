@@ -941,7 +941,7 @@ paths:
               example:
                 to: your.email@example.com
       responses:
-        '204':
+        '201':
           description: ''
           content:
             application/json:

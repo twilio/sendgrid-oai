@@ -1416,7 +1416,7 @@
           }
         },
         "responses": {
-          "204": {
+          "201": {
             "description": "",
             "content": {
               "application/json": {

@@ -279,17 +279,16 @@ paths:
   /v3/mail_settings/bounce_purge:
     patch:
       operationId: UpdateBouncePurge
-      summary: Update bounce purge mail settings
+      summary: Update Bounce Purge Mail Settings
       tags:
       - Mail Settings
-      description: '**This endpoint allows you to update your current bounce and purge
-        settings.**
+      description: '**This endpoint allows you to update your current Bounce Purge
+        mail settings.**
 
 
-        The Bounce Perge setting allows you to set a schedule that Twilio SendGrid
-        will use to automatically delete contacts from your soft and hard bounce suppression
-        lists. The schedule is set in full days by assigning the number of days, an
-        integer, to the `soft_bounces` and/or `hard_bounces` fields.
+        The Bounce Purge mail metting allows you to configure the maximum age of contacts
+        in your hard and soft bounce suppressions lists. All contacts older than their
+        respective configured age are deleted.
 
 
         A hard bounce occurs when an email message has been returned to the sender
@@ -338,16 +337,16 @@ paths:
           $ref: '#/components/responses/MailSettingsError500'
     get:
       operationId: ListBouncePurge
-      summary: Retrieve bounce purge mail settings
+      summary: Retrieve Bounce Purge Mail Settings
       tags:
       - Mail Settings
-      description: '**This endpoint allows you to retrieve your current bounce and
-        purge settings.**
+      description: '**This endpoint allows you to retrieve your current Bounce Purge
+        mail settings.**
 
 
-        The Bounce Perge setting allows you to set a schedule that Twilio SendGrid
-        will use to automatically delete contacts from your soft and hard bounce suppression
-        lists.
+        The Bounce Purge mail setting allows you to configure the maximum age of contacts
+        in your hard and soft bounce suppressions lists. All contacts older than their
+        respective configured age are deleted.
 
 
         A hard bounce occurs when an email message has been returned to the sender
@@ -796,7 +795,7 @@ components:
       properties:
         enabled:
           type: boolean
-          description: Indicates if the bounce purge mail setting is enabled.
+          description: Indicates if the Bounce Purge mail setting is enabled.
         soft_bounces:
           description: The number of days after which SendGrid will purge all contacts
             from your soft bounces suppression lists.

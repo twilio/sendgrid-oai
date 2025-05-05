@@ -1,5 +1,11 @@
 sendgrid-oai changelog
 ====================
+[2025-05-05] Version 1.0.0-rc.5
+-------------------------------
+**Lmc contactdb v3**
+- Add 3 endpoints to legacy API
+
+
 [2025-04-11] Version 1.0.0-rc.4
 -------------------------------
 **Account provisioning**

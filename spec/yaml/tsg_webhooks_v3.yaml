@@ -1254,6 +1254,260 @@ paths:
                     stats:
                     - metrics:
                         received: 0
+  /v3/user/webhooks/security/policies:
+    post:
+      operationId: CreateSecurityPolicy
+      summary: Create a new webhook security policy
+      tags:
+      - Webhook Security
+      description: 'Create a new webhook security policy. Note: One of signature or
+        oauth must be given to have a valid security policy.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: User-defined policy name
+                oauth:
+                  type: object
+                  properties:
+                    client_id:
+                      type: string
+                    client_secret:
+                      type: string
+                    token_url:
+                      type: string
+                    scopes:
+                      type: array
+                      items:
+                        type: string
+                signature:
+                  type: object
+                  properties:
+                    enabled:
+                      type: boolean
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  policy:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      oauth:
+                        type: object
+                        properties:
+                          client_id:
+                            type: string
+                          token_url:
+                            type: string
+                          scopes:
+                            type: array
+                            items:
+                              type: string
+                      signature:
+                        type: object
+                        properties:
+                          public_key:
+                            type: string
+    get:
+      operationId: ListAllSecurityPolicies
+      summary: Retrieve all webhook security policies for your account
+      tags:
+      - Webhook Security
+      description: Returns a list of all webhook security policies configured for
+        your account, including their IDs, names, and security configurations.
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  policies:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        oauth:
+                          type: object
+                          properties:
+                            client_id:
+                              type: string
+                            token_url:
+                              type: string
+                            scopes:
+                              type: array
+                              items:
+                                type: string
+                        signature:
+                          type: object
+                          properties:
+                            public_key:
+                              type: string
+  /v3/user/webhooks/security/policies/{id}:
+    patch:
+      operationId: UpdateSecurityPolicy
+      summary: Update an existing webhook security policy
+      tags:
+      - Webhook Security
+      description: Update an existing webhook security policy with new configuration
+        values.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: User-defined policy name
+                oauth:
+                  type: object
+                  properties:
+                    client_id:
+                      type: string
+                    client_secret:
+                      type: string
+                    token_url:
+                      type: string
+                    scopes:
+                      type: array
+                      items:
+                        type: string
+                signature:
+                  type: object
+                  properties:
+                    enabled:
+                      type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  policy:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      oauth:
+                        type: object
+                        properties:
+                          client_id:
+                            type: string
+                          token_url:
+                            type: string
+                          scopes:
+                            type: array
+                            items:
+                              type: string
+    get:
+      operationId: GetSecurityPolicy
+      summary: Retrieve a specific webhook security policy
+      tags:
+      - Webhook Security
+      description: Retrieve the details of a specific webhook security policy by its
+        ID.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  policy:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      oauth:
+                        type: object
+                        properties:
+                          client_id:
+                            type: string
+                          token_url:
+                            type: string
+                          scopes:
+                            type: array
+                            items:
+                              type: string
+                      signature:
+                        type: object
+                        properties:
+                          public_key:
+                            type: string
+    delete:
+      operationId: DeleteSecurityPolicy
+      summary: Delete a specific webhook security policy
+      tags:
+      - Webhook Security
+      description: Permanently delete a webhook security policy by its ID.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: force
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  policy:
+                    type: string
+                    nullable: true
 components:
   schemas:
     EventWebhookRequest:
@@ -2043,6 +2297,8 @@ tags:
   description: Twilio SendGrid Event Webhook API
 - name: Parse Webhook
   description: Twilio SendGrid Parse Webhook API
+- name: Webhook Security
+  description: Twilio SendGrid Webhook Security API
 externalDocs:
   description: Twilio SendGrid's official developer documentation.
   url: https://www.twilio.com/docs/sendgrid

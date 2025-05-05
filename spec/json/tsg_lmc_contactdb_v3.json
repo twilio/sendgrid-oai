@@ -3568,6 +3568,340 @@
           }
         }
       }
+    },
+    "/v3/contactdb/exports": {
+      "post": {
+        "operationId": "ExportRecipient",
+        "summary": "Export Recipients",
+        "tags": [
+          "Recipients"
+        ],
+        "description": "**Use this endpoint to export lists or segments of recipients**.\n\nIf you would just like to have a link to the exported list sent to your email set the `notifications.email` option to `true` in the `POST` payload.\n\nIf you would like to download the list, take the `id` that is returned and use the \"Export Recipients Status\" endpoint to get the `urls`. Once you have the list of URLs, make a `GET` request to each URL provided to download your CSV file(s).\n\nYou specify the segments and or/recipient lists you wish to export by providing the relevant IDs in, respectively, the `segment_ids` and `list_ids` fields in the request body.\n\nThe lists will be provided in either JSON or CSV files. To specify which of these you would required, set the request body `file_type` field to `json` or `csv`.\n\nYou can also specify a maximum file size (in MB). If the export file is larger than this, it will be split into multiple files.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "list_ids": {
+                    "description": "IDs of the recipient lists you want to export.",
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "segment_ids": {
+                    "description": "IDs of the recipient segments you want to export.",
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "notifications": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "file_type": {
+                    "type": "string",
+                    "description": "File type for export file. Choose from `json` or `csv`.",
+                    "default": "csv",
+                    "$ref": "#/components/schemas/FileType"
+                  },
+                  "max_file_size": {
+                    "description": "The maximum size of an export file in MB. Note that when this option is specified, multiple output files may be returned from the export.",
+                    "default": 5000,
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_metadata": {
+                      "$ref": "#/components/schemas/Metadata"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "The ID of the export job."
+                    }
+                  },
+                  "required": [
+                    "_metadata"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RecipientsError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/MarketingRecipients401"
+          },
+          "403": {
+            "$ref": "#/components/responses/MarketingRecipients403"
+          },
+          "404": {
+            "$ref": "#/components/responses/MarketingRecipients404"
+          },
+          "500": {
+            "$ref": "#/components/responses/MarketingRecipients500"
+          }
+        }
+      },
+      "get": {
+        "operationId": "ListExportRecipient",
+        "summary": "Get All Existing Exports",
+        "tags": [
+          "Recipients"
+        ],
+        "description": "**Use this endpoint to retrieve details of all current exported jobs**.\n\nIt will return an array of objects, each of which records an export job in flight or recently completed. \n\nEach object's `export_type` field will tell you which kind of export it is and its `status` field will indicate what stage of processing it has reached. Exports which are `ready` will be accompanied by a `urls` field which lists the URLs of the export's downloadable files \u2014 there will be more than one if you specified a maximum file size in your initial export request.\n\nUse this endpoint if you have exports in flight but do not know their IDs, which are required for the \"Export Recipients Status\" endpoint.",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Export jobs ID."
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "Allowed values: `pending`, `ready`, or `failure`."
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "description": "This ISO8601 timestamp when the export was created."
+                          },
+                          "completed_at": {
+                            "type": "string",
+                            "description": "This ISO8601 timestamp when the export was completed."
+                          },
+                          "expires_at": {
+                            "type": "string",
+                            "description": "This ISO8601 timestamp when the export expires."
+                          },
+                          "urls": {
+                            "type": "array",
+                            "description": "One or more download URLs for the recipient file(s) if the status is `ready`.",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "user_id": {
+                            "type": "string",
+                            "description": "User ID."
+                          },
+                          "export_type": {
+                            "type": "string",
+                            "description": "Allowed types: `contacts_export`, `list_export`, or `segment_export`."
+                          },
+                          "segments": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "ID": {
+                                  "type": "integer"
+                                },
+                                "Name": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "lists": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "ID": {
+                                  "type": "integer"
+                                },
+                                "Name": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "_metadata": {
+                            "type": "object",
+                            "properties": {
+                              "prev": {
+                                "type": "string"
+                              },
+                              "self": {
+                                "type": "string"
+                              },
+                              "next": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "_metadata": {
+                      "type": "object",
+                      "properties": {
+                        "prev": {
+                          "type": "string"
+                        },
+                        "self": {
+                          "type": "string",
+                          "description": "Link to this page."
+                        },
+                        "next": {
+                          "type": "string",
+                          "description": "Link to next page."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string"
+                          },
+                          "error_id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/MarketingRecipients401"
+          },
+          "403": {
+            "$ref": "#/components/responses/MarketingRecipients403"
+          },
+          "404": {
+            "$ref": "#/components/responses/MarketingRecipients404"
+          },
+          "500": {
+            "$ref": "#/components/responses/MarketingRecipients500"
+          }
+        }
+      }
+    },
+    "/v3/contactdb/exports/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "GetExportRecipient",
+        "summary": "Export Recipients Status",
+        "tags": [
+          "Recipients"
+        ],
+        "description": "**This endpoint can be used to check the status of a recipient export job**. \n\nTo use this call, you will need the `id` from the \"Export Recipients\" call.\n\nIf you would like to download a list, take the `id` that is returned from the \"Export Recipients\" endpoint and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).\n\nTwilio SendGrid recommends exporting your recipients regularly as a backup to avoid issues or lost data.",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipientExport"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RecipientsError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/MarketingRecipients401"
+          },
+          "403": {
+            "$ref": "#/components/responses/MarketingRecipients403"
+          },
+          "404": {
+            "$ref": "#/components/responses/MarketingRecipients404"
+          },
+          "500": {
+            "$ref": "#/components/responses/MarketingRecipients500"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3975,11 +4309,123 @@
           ]
         }
       },
+      "RecipientExport": {
+        "title": "recipient-export",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "description": "The export job's status. Allowed values: `pending`, `ready`, or `failure`.",
+            "$ref": "#/components/schemas/Status"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The ISO8601 timestamp when the export was begun."
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "The ISO8601 timestamp when the export was updated."
+          },
+          "completed_at": {
+            "type": "string",
+            "description": "The ISO8601 timestamp when the export was completed."
+          },
+          "expires_at": {
+            "type": "string",
+            "description": "The ISO8601 timestamp when the exported file on S3 will expire."
+          },
+          "urls": {
+            "type": "array",
+            "description": "One or more download URLs for the recipient file if the status is `ready`.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "A human readable message if the status is `failure`."
+          },
+          "_metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
+          "recipient_count": {
+            "type": "integer",
+            "description": "The total number of exported recipients."
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "created_at",
+          "updated_at",
+          "expires_at"
+        ]
+      },
+      "RecipientsError": {
+        "title": "error",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "field": {
+            "type": "string"
+          },
+          "error_id": {
+            "type": "string"
+          },
+          "parameter": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "field": "field_name",
+          "message": "error message"
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "Metadata": {
+        "title": "metadata",
+        "type": "object",
+        "properties": {
+          "prev": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the previous page of results. If this field isn't present, you're at the start of the list."
+          },
+          "self": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the current page of results."
+          },
+          "next": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the next page of results. If this field isn't present, you're at the end of the list."
+          },
+          "count": {
+            "type": "number",
+            "description": "The number of items in the entire list, i.e., across all pages."
+          }
+        }
+      },
       "DeleteContacts": {
         "type": "boolean",
         "enum": [
           true,
           false
+        ]
+      },
+      "FileType": {
+        "type": "string",
+        "enum": [
+          "csv",
+          "json"
         ]
       },
       "Type": {
@@ -4007,9 +4453,71 @@
           "or",
           ""
         ]
+      },
+      "Status": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "ready",
+          "failure"
+        ]
       }
     },
-    "responses": {},
+    "responses": {
+      "MarketingRecipients401": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "MarketingRecipients403": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "MarketingRecipients404": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "MarketingRecipients500": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "parameters": {
       "OnBehalfOf": {
         "name": "on-behalf-of",

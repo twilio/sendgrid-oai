@@ -192,7 +192,7 @@
                   },
                   "subdomain": {
                     "type": "string",
-                    "description": "The subdomain to use for this authenticated domain."
+                    "description": "The subdomain or custom return-path to use for this authenticated domain."
                   },
                   "username": {
                     "type": "string",
@@ -1194,7 +1194,7 @@
                       },
                       "subdomain": {
                         "type": "string",
-                        "description": "The subdomain to use for this authenticated domain."
+                        "description": "The subdomain or custom return-path to use for this authenticated domain."
                       },
                       "domain": {
                         "type": "string",
@@ -1439,7 +1439,7 @@
           },
           "subdomain": {
             "type": "string",
-            "description": "The subdomain to use for this authenticated domain."
+            "description": "The subdomain or custom return-path to use for this authenticated domain."
           },
           "domain": {
             "type": "string",
@@ -1832,7 +1832,7 @@
                   },
                   "subdomain": {
                     "type": "string",
-                    "description": "The subdomain to use for this authenticated domain."
+                    "description": "The subdomain or custom return-path to use for this authenticated domain."
                   },
                   "domain": {
                     "type": "string",

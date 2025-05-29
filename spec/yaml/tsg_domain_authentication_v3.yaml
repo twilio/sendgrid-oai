@@ -180,7 +180,8 @@ paths:
                   description: Domain being authenticated.
                 subdomain:
                   type: string
-                  description: The subdomain to use for this authenticated domain.
+                  description: The subdomain or custom return-path to use for this
+                    authenticated domain.
                 username:
                   type: string
                   description: The username associated with this domain.
@@ -988,7 +989,8 @@ paths:
                         with.
                     subdomain:
                       type: string
-                      description: The subdomain to use for this authenticated domain.
+                      description: The subdomain or custom return-path to use for
+                        this authenticated domain.
                     domain:
                       type: string
                       description: The domain to be authenticated.
@@ -1183,7 +1185,8 @@ components:
           description: The ID of the user that this domain is associated with.
         subdomain:
           type: string
-          description: The subdomain to use for this authenticated domain.
+          description: The subdomain or custom return-path to use for this authenticated
+            domain.
         domain:
           type: string
           description: The domain to be authenticated.
@@ -1500,7 +1503,8 @@ components:
                   description: The ID of the user that this domain is associated with.
                 subdomain:
                   type: string
-                  description: The subdomain to use for this authenticated domain.
+                  description: The subdomain or custom return-path to use for this
+                    authenticated domain.
                 domain:
                   type: string
                   description: The domain to be authenticated.

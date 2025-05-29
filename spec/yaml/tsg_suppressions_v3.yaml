@@ -1698,8 +1698,9 @@ components:
         a call on behalf of a customer account, the property value should be "account-id"
         followed by the customer account''s ID (e.g., `on-behalf-of: account-id <account-id>`).
         When making a call on behalf of a Subuser, the property value should be the
-        Subuser''s username (e.g., `on-behalf-of: <subuser-username>`). See [**On
-        Behalf Of**](https://docs.sendgrid.com/api-reference/how-to-use-the-sendgrid-v3-api/on-behalf-of)
+        Subuser''s username (e.g., `on-behalf-of: <subuser-username>`). It is important
+        to use the Base URL that corresponds to the region of the account or Subuser
+        you specify in the `on-behalf-of` header. See [**On Behalf Of**](https://docs.sendgrid.com/api-reference/how-to-use-the-sendgrid-v3-api/on-behalf-of)
         for more information.'
       required: false
       schema:

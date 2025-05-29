@@ -1,5 +1,14 @@
 sendgrid-oai changelog
 ====================
+[2025-05-29] Version 1.0.0-rc.6
+-------------------------------
+**Domain authentication**
+- Add information about: Subdomain also refers to custom return path
+
+**Suppressions**
+- Update `on-behalf-of` header to mention using the appropriate URL for the region of the subuser
+
+
 [2025-05-05] Version 1.0.0-rc.5
 -------------------------------
 **Lmc contactdb v3**

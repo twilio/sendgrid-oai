@@ -605,20 +605,12 @@ paths:
                     format: uri
                     description: A signed link that will allow you to download the
                       CSV file requested by the Request a CSV endpoint.
-                  csv:
-                    type: string
-                    minLength: 5
-                    pattern: ^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$
-                    description: Returns the aws signed link to the csv file which
-                      mako UI should perform a get on to trigger the csv download
-                      for the user
                 required:
-                - csv
+                - presigned_url
               examples:
                 response:
                   value:
-                    presigned_url: https://example.com
-                    csv: https://s3-us-west-2.amazonaws.com/sendgrid-rts-development-queries/013c31af-7c9a-49e6-922c-d990f4aff151.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600&X-Amz-Credential=AKIAI4NOW7APZHRFYGWQ%2F20170728%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Date=20170728T223936Z&X-Amz-Signature=5c13ede58b211799ab1a556280bd316c404eac3aef1450c47906a077166c4ab4
+                    presigned_url: https://sendgrid-rts-development-csv-downloads.s3.us-west-2.amazonaws.com/e53668f0-bea0-40b1-92c0-fa5b2c7fae1f.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=redacted&X-Amz-Date=20250718T195335Z&X-Amz-Expires=300&X-Amz-Security-Token=redacted&X-Amz-SignedHeaders=host&X-Amz-Signature=redacted
         '404':
           description: ''
           content:

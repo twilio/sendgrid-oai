@@ -1,5 +1,11 @@
 sendgrid-oai changelog
 ====================
+[2025-08-18] Version 1.0.0-rc.7
+-------------------------------
+**Email activity**
+- Update the API specs for email activity DownloadCsv operation
+
+
 [2025-05-29] Version 1.0.0-rc.6
 -------------------------------
 **Domain authentication**

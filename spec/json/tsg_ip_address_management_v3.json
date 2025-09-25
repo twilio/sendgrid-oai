@@ -317,6 +317,12 @@
         ]
       },
       "post": {
+        "servers": [
+          {
+            "url": "https://api.sendgrid.com",
+            "description": "for global users"
+          }
+        ],
         "summary": "Add a Twilio SendGrid IP Address",
         "tags": [
           "IP Address Management"
@@ -599,6 +605,12 @@
         }
       ],
       "patch": {
+        "servers": [
+          {
+            "url": "https://api.sendgrid.com",
+            "description": "for global users"
+          }
+        ],
         "summary": "Update Details for an IP Address",
         "tags": [
           "IP Address Management"
@@ -716,6 +728,12 @@
         }
       ],
       "get": {
+        "servers": [
+          {
+            "url": "https://api.sendgrid.com",
+            "description": "for global users"
+          }
+        ],
         "summary": "Get a List of Subusers Assigned to an IP",
         "tags": [
           "IP Address Management"
@@ -828,6 +846,12 @@
         }
       ],
       "post": {
+        "servers": [
+          {
+            "url": "https://api.sendgrid.com",
+            "description": "for global users"
+          }
+        ],
         "summary": "Assign a Batch of Subusers to an IP",
         "tags": [
           "IP Address Management"
@@ -946,6 +970,12 @@
         }
       ],
       "post": {
+        "servers": [
+          {
+            "url": "https://api.sendgrid.com",
+            "description": "for global users"
+          }
+        ],
         "summary": "Delete a Batch of Subusers from an IP",
         "tags": [
           "IP Address Management"

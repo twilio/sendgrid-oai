@@ -283,6 +283,9 @@ paths:
       - $ref: '#/components/parameters/IpAddressManagementRegion'
       - $ref: '#/components/parameters/IpAddressManagementIncludeRegion'
     post:
+      servers:
+      - url: https://api.sendgrid.com
+        description: for global users
       summary: Add a Twilio SendGrid IP Address
       tags:
       - IP Address Management
@@ -504,6 +507,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/IpAddressManagementPathIp'
     patch:
+      servers:
+      - url: https://api.sendgrid.com
+        description: for global users
       summary: Update Details for an IP Address
       tags:
       - IP Address Management
@@ -593,6 +599,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/IpAddressManagementPathIp'
     get:
+      servers:
+      - url: https://api.sendgrid.com
+        description: for global users
       summary: Get a List of Subusers Assigned to an IP
       tags:
       - IP Address Management
@@ -686,6 +695,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/IpAddressManagementPathIp'
     post:
+      servers:
+      - url: https://api.sendgrid.com
+        description: for global users
       summary: Assign a Batch of Subusers to an IP
       tags:
       - IP Address Management
@@ -764,6 +776,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/IpAddressManagementPathIp'
     post:
+      servers:
+      - url: https://api.sendgrid.com
+        description: for global users
       summary: Delete a Batch of Subusers from an IP
       tags:
       - IP Address Management

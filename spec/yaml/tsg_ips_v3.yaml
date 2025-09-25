@@ -31,6 +31,9 @@ servers:
 paths:
   /v3/ips:
     post:
+      servers:
+      - url: https://api.sendgrid.com
+        description: for global users
       operationId: AddIp
       summary: Add IPs
       tags:
@@ -261,6 +264,9 @@ paths:
       schema:
         type: string
     get:
+      servers:
+      - url: https://api.sendgrid.com
+        description: for global users
       operationId: GetIp
       summary: Retrieve all IP pools an IP address belongs to
       tags:
@@ -334,6 +340,9 @@ paths:
                     start_date: null
                     whitelabeled: true
   /v3/ips/assigned:
+    servers:
+    - url: https://api.sendgrid.com
+      description: for global users
     get:
       operationId: ListAssignedIp
       summary: Retrieve all assigned IPs

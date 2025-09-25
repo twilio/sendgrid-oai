@@ -1,5 +1,17 @@
 sendgrid-oai changelog
 ====================
+[2025-09-25] Version 1.0.0-rc.8
+-------------------------------
+**Domain authentication**
+- Correct misspelling of validation_results
+
+**Ip address management v3**
+- Remove EU URL from endpoints only callable by parent users
+
+**Ips v3**
+- Remove mention of subusers from endpoint only called by parent users.
+
+
 [2025-08-18] Version 1.0.0-rc.7
 -------------------------------
 **Email activity**

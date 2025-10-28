@@ -39,8 +39,11 @@ paths:
         \ will run a search on the email addresses provided against the SendGrid system\
         \ to identify matches. SendGrid will then delete all personal data associated\
         \ with the matched users such as the recipients' names, email addresses, subject\
-        \ lines, categories, and IP addresses.\n\nAll email addresses are filtered\
-        \ for uniqueness and tested for structural validity\u2014any invalid addresses\
+        \ lines, categories, and IP addresses.\n\nThis endpoint is rate limited to\
+        \ 100 requests per minute. If more requests need to be made, consider using\
+        \ the batch option to include multiple email addresses in each request (up\
+        \ to 5,000 addresses per request).\n\nAll email addresses are filtered for\
+        \ uniqueness and tested for structural validity\u2014any invalid addresses\
         \ will be returned in an error response.\n\nPlease note that recipient data\
         \ is deleted for the account making the request only\u2014deletions do not\
         \ cascade from a parent account to its Subusers' recipients. To delete a Subuser's\

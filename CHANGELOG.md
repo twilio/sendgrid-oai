@@ -1,5 +1,12 @@
 sendgrid-oai changelog
 ====================
+[2025-10-28] Version 1.0.0-rc.9
+-------------------------------
+**Recipients data erasure**
+- Add rate limit documentation for the recipients' data erasure endpoint (100 requests per minute)
+- Add guidance to use batch processing for higher volume data erasure requests
+
+
 [2025-09-25] Version 1.0.0-rc.8
 -------------------------------
 **Domain authentication**

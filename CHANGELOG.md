@@ -1,5 +1,11 @@
 sendgrid-oai changelog
 ====================
+[2025-10-31] Version 1.0.0-rc.10
+--------------------------------
+**Logs**
+- Add Email Logs API
+
+
 [2025-10-28] Version 1.0.0-rc.9
 -------------------------------
 **Recipients data erasure**

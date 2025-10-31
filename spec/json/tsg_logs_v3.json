@@ -1,0 +1,1402 @@
+{
+  "openapi": "3.1.0",
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "info": {
+    "title": "Twilio SendGrid Email Logs API",
+    "summary": "API for retrieving email logs related to your email program.",
+    "description": "The Twilio SendGrid Email Logs API allows you to query all of your stored messages and individual messages. Once retrieved, you can inspect the data associated with your messages to better understand your mail send. For example, you may retrieve all bounced messages or all messages with the same subject line and search for commonalities among them.",
+    "termsOfService": "https://www.twilio.com/legal/tos",
+    "contact": {
+      "name": "Twilio SendGrid Support",
+      "url": "https://support.sendgrid.com/hc/en-us"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
+    },
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Email Logs",
+      "description": "Twilio SendGrid Email Logs API"
+    }
+  ],
+  "externalDocs": {
+    "description": "Twilio SendGrid's official developer documentation.",
+    "url": "https://www.twilio.com/docs/sendgrid"
+  },
+  "servers": [
+    {
+      "url": "https://api.sendgrid.com",
+      "description": "for global users and subusers"
+    },
+    {
+      "url": "https://api.eu.sendgrid.com",
+      "description": "for EU regional subusers"
+    }
+  ],
+  "paths": {
+    "/v3/logs/{sg_message_id}": {
+      "get": {
+        "operationId": "GetMessageById",
+        "summary": "Get all details for the specified message ID.",
+        "description": "Get all of the details about the specified message.",
+        "tags": [
+          "Email Logs"
+        ],
+        "parameters": [
+          {
+            "name": "sg_message_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the message you are requesting details for."
+          },
+          {
+            "name": "subuser",
+            "in": "query",
+            "description": "For requests authenticated as the parent account,\nthis argument must be passed if the desired message belongs to a subuser.\n",
+            "schema": {
+              "type": "string",
+              "format": "^\\d+$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detailed information for the specified message, including all events related to the message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailLogsGetMessageByIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden may be returned when trying to incorrectly access logs for another user.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Message not found. \nThe message may not exist, or it may be older than the data retention period.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests; capacity limit exceeded. The caller should reduce concurrent calls or back off exponentially.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/logs": {
+      "description": "This endpoint exposes a endpoint for retrieving multiple messages matching a given filter.\nWe take a POST method instead of a GET to ensure that private data does not get leaked or logged inadvertently\nby intermediate infrastructure.\n",
+      "post": {
+        "operationId": "ListMessagesByFilter",
+        "summary": "Search all messages using the provided query filters.",
+        "description": "List recent messages within Email Logs, or search for messages using a filter.\n",
+        "tags": [
+          "Email Logs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailLogsGetMessagesByFilterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A page of messages matching the filter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailLogsGetMessagesByFilterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests; capacity limit exceeded. The caller should reduce concurrent calls or back off exponentially.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EmailLogsMessageStatus": {
+        "type": "string",
+        "description": "A summary of the message status based on which events have occurred.\n\n| Event | Status |\n| -- | -- |\n| processed | processed |\n| drop, cancel_drop | dropped |\n| deferred | deferred |\n| bounce | bounced |\n| bounce(type=block) | blocked |\n| delivered, click, open | delivered |\n",
+        "enum": [
+          "processed",
+          "delivered",
+          "deferred",
+          "dropped",
+          "bounced",
+          "blocked"
+        ]
+      },
+      "EmailLogsGetMessagesByFilterRequest": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "**Allowed event fields and operators**\n\n| Field                    | Operators            |\n|------------------------- |----------------------|\n| sg_message_id            | `=`                  |\n| subject                  | `=`                  |\n| to_email                 | `=`                  |\n| status                   | `IN`                 |\n| reason                   | `=`                  |\n| categories               | `IN`                 |\n| sg_message_id_created_at | `>`, `<`, `>=`, `<=` |\n\n- multiple conditions can be combined with `AND`\n- nesting is not allowed\n- `IN` operator accepts a list of string values: `field IN ('value1', 'value2')`\n",
+            "example": "sg_message_id_created_at > TIMESTAMP \"2025-01-01T00:00:00Z\" AND sg_message_id_created_at < TIMESTAMP \"2025-02-01T00:00:00Z\" AND status IN ('delivered', 'processed') AND categories IN ('newsletter', 'marketing')"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of messages to return (1\u20131000).",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 10
+          },
+          "subusers": {
+            "description": "For requests authenticated as the parent account,\nthis argument must be passed if the desired messages belong to a subuser.\nYou can only call this endpoint for 1 subuser at a time.\n",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "^\\d+$"
+            },
+            "maxItems": 1,
+            "example": [
+              "20223230"
+            ]
+          }
+        }
+      },
+      "EmailLogsGetMessageByIdResponse": {
+        "description": "Detailed information for the specified message, including all events related to the message.",
+        "type": "object",
+        "properties": {
+          "from_email": {
+            "type": "string",
+            "description": "The 'From' email address used to deliver the message.\nThis may not be a valid email address.\n"
+          },
+          "sg_message_id": {
+            "type": "string",
+            "description": "A unique ID assigned to the message."
+          },
+          "subject": {
+            "type": "string",
+            "description": "The email's subject line."
+          },
+          "to_email": {
+            "type": "string",
+            "description": "The intended recipient's email address."
+          },
+          "status": {
+            "$ref": "#/components/schemas/EmailLogsMessageStatus"
+          },
+          "template_id": {
+            "type": "string",
+            "description": "The ID associated with a Twilio SendGrid email template used to format the message."
+          },
+          "asm_group_id": {
+            "type": "integer",
+            "description": "The unsubscribe group associated with this email."
+          },
+          "teammate": {
+            "type": "string",
+            "description": "Teammate's username.",
+            "pattern": "^$|^[A-Za-z0-9]+",
+            "maxLength": 64
+          },
+          "api_key_id": {
+            "type": "string",
+            "description": "The ID of the API Key used to authenticate the sending request for the message.",
+            "pattern": "^$|^[A-Za-z0-9_-]+",
+            "maxLength": 50
+          },
+          "events": {
+            "type": "array",
+            "description": "All events recorded for this message. Most recent events will be returned upto the maximum of 100 events.",
+            "items": {
+              "$ref": "#/components/schemas/EmailLogsEvent"
+            },
+            "maxItems": 100
+          },
+          "client_ip": {
+            "type": "string",
+            "description": "The IP address of the user who sent the message."
+          },
+          "category": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The categories associated with the message.",
+            "examples": {
+              "singleCategory": {
+                "value": [
+                  "category1"
+                ]
+              },
+              "multiCategory": {
+                "value": [
+                  "category1",
+                  "category2"
+                ]
+              }
+            }
+          },
+          "custom_args": {
+            "type": "object",
+            "description": "Custom key-value pairs associated with the message.",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "outbound_ip": {
+            "type": "string",
+            "description": "The IP address used to send to the remote Mail Transfer Agent."
+          },
+          "outbound_ip_type": {
+            "type": "string",
+            "description": "The type of outbound IP address used to send the message.",
+            "example": "dedicated"
+          },
+          "marketing_campaign_id": {
+            "type": "integer",
+            "description": "The ID of the marketing campaign associated with the message."
+          },
+          "marketing_campaign_name": {
+            "type": "string",
+            "description": "The name of the marketing campaign associated with the message."
+          },
+          "marketing_campaign_split_id": {
+            "type": "integer",
+            "description": "The ID of the split associated with the marketing campaign."
+          },
+          "marketing_campaign_version": {
+            "type": "string",
+            "description": "The version of the marketing campaign associated with the message."
+          }
+        },
+        "required": [
+          "api_key_id",
+          "events",
+          "from_email",
+          "sg_message_id",
+          "client_ip",
+          "status",
+          "subject",
+          "to_email"
+        ]
+      },
+      "EmailLogsGetMessagesByFilterResponse": {
+        "type": "object",
+        "required": [
+          "messages"
+        ],
+        "properties": {
+          "messages": {
+            "type": "array",
+            "description": "List of messages matching the filter query.\n",
+            "items": {
+              "$ref": "#/components/schemas/EmailLogsMessage"
+            }
+          }
+        }
+      },
+      "EmailLogsMessage": {
+        "description": "Summary information for a single message matching the filter.\n",
+        "type": "object",
+        "properties": {
+          "from_email": {
+            "type": "string",
+            "description": "Sender email address.\nThis may not always be a valid email address.\n"
+          },
+          "sg_message_id": {
+            "type": "string",
+            "description": "Unique message ID."
+          },
+          "subject": {
+            "type": "string",
+            "description": "Email subject line."
+          },
+          "to_email": {
+            "type": "string",
+            "description": "Recipient email address"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Textual description for drop, bounce, deferral, or delivery event\n"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EmailLogsMessageStatus"
+          },
+          "sg_message_id_created_at": {
+            "type": "string",
+            "format": "string",
+            "description": "Timestamp when message_id was created at (ISO 8601)."
+          }
+        },
+        "required": [
+          "from_email",
+          "sg_message_id",
+          "subject",
+          "to_email",
+          "status",
+          "sg_message_id_created_at"
+        ]
+      },
+      "EmailLogsEvent": {
+        "description": "The union of all possible event types for email logs.\n",
+        "type": "object",
+        "discriminator": {
+          "propertyName": "event",
+          "mapping": {
+            "bounce": "#/components/schemas/BounceEvent",
+            "cancel_drop": "#/components/schemas/DroppedEvent",
+            "click": "#/components/schemas/ClickEvent",
+            "deferred": "#/components/schemas/DeferredEvent",
+            "delivered": "#/components/schemas/DeliveredEvent",
+            "dropped": "#/components/schemas/DroppedEvent",
+            "open": "#/components/schemas/OpenEvent",
+            "processed": "#/components/schemas/ProcessedEvent",
+            "received": "#/components/schemas/ReceivedEvent",
+            "spamreport": "#/components/schemas/SpamReportEvent",
+            "group_unsubscribe": "#/components/schemas/GroupUnsubscribeEvent",
+            "group_resubscribe": "#/components/schemas/GroupResubscribeEvent",
+            "unsubscribe": "#/components/schemas/UnsubscribeEvent"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BounceEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ClickEvent"
+          },
+          {
+            "$ref": "#/components/schemas/DeferredEvent"
+          },
+          {
+            "$ref": "#/components/schemas/DeliveredEvent"
+          },
+          {
+            "$ref": "#/components/schemas/DroppedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/OpenEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ProcessedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ReceivedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/SpamReportEvent"
+          },
+          {
+            "$ref": "#/components/schemas/GroupUnsubscribeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/GroupResubscribeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/UnsubscribeEvent"
+          }
+        ]
+      },
+      "OutboundIpPoolMetadata": {
+        "description": "Outbound IP Pool metadata",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "IP Pool name",
+            "type": "string"
+          },
+          "id": {
+            "description": "IP Pool ID, as a numeric string",
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        }
+      },
+      "EmailCategories": {
+        "description": "Message categories",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "SmtpId": {
+        "description": "SMTP ID associated with the message",
+        "type": "string",
+        "example": "<14c5d75ce93.dfd.64b469@ismtpd-555>"
+      },
+      "IpAddress": {
+        "description": "IPv4 or IPv6 address",
+        "type": "string",
+        "example": "192.168.1.1"
+      },
+      "Url": {
+        "description": "Url associated with the event",
+        "type": "string",
+        "example": "http://example.com/some/path?query=param"
+      },
+      "UnixEpochSeconds": {
+        "description": "Unix timestamp",
+        "type": "integer",
+        "example": 1755187955
+      },
+      "SgEventId": {
+        "description": "SendGrid Event ID, a string that uniquely identifies the event",
+        "type": "string",
+        "example": "2M1MaNdWRNipzTpyUCWQ2g"
+      },
+      "SgMessageId": {
+        "description": "SendGrid Message ID, a string that uniquely identifies the message",
+        "type": "string",
+        "example": "Xj5LmNkWSOqRbdvOpR34BA.recvd-85abf8d92c-3qfgp-2-7890E356-43C.1"
+      },
+      "ReceivedMessageId": {
+        "description": "Received Message ID, a string that uniquely identifies the mail send request",
+        "type": "string",
+        "example": "Xj5LmNkWSOqRbdvOpR34BA"
+      },
+      "TlsEnabled": {
+        "description": "Indicates whether TLS was used (1). This field will only be present if TLS was used.",
+        "type": "integer",
+        "enum": [
+          1
+        ]
+      },
+      "BounceClassification": {
+        "type": "string",
+        "enum": [
+          "Content",
+          "Frequency or Volume Too High",
+          "Invalid Address",
+          "Mailbox Unavailable",
+          "Reputation",
+          "Technical",
+          "Unclassified"
+        ]
+      },
+      "SmtpResponse": {
+        "type": "string",
+        "description": "SMTP response code and message indicating the reason the delivery succeeded or failed",
+        "example": "250 2.0.0 OK  1755119505 e9e14a558f8cb-3e543d3ec1csi148151125cb.10 - gsmtp\n"
+      },
+      "SmtpStatus": {
+        "type": "string",
+        "description": "SMTP status code associated with the bounce",
+        "pattern": "^([245]\\.[01234567]\\.[01234567]|[1-5][0-9][0-9])$",
+        "example": "5.1.1"
+      },
+      "BounceType": {
+        "description": "The type of bounce that occurred.\n\n- `bounce` typically means that the message is permanently undeliverable (hard bounce).\n- `blocked` indicates that the message was temporarily undeliverable (soft bounce).\n",
+        "type": "string",
+        "enum": [
+          "bounce",
+          "blocked"
+        ]
+      },
+      "CertificateError": {
+        "type": "string",
+        "enum": [
+          "1"
+        ],
+        "description": "Indicates that there was a certificate error during the TLS handshake."
+      },
+      "AsmGroupId": {
+        "type": "integer",
+        "description": "The ID of the ASM (Advanced Suppression Manager) group associated with the message",
+        "example": 12345
+      },
+      "DropReason": {
+        "type": "string",
+        "description": "The general reason the email was dropped",
+        "example": "Bounced Address\n"
+      },
+      "HttpUserAgent": {
+        "description": "User agent of the request that triggered the event",
+        "type": "string",
+        "example": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      },
+      "EngagementUrlContentType": {
+        "description": "The content type of the email part that was interacted with.\nThis is derived from the prefix of the \"urlOffset\" in engagement events:\n\n```\nh|o|uh -> html\nut|t   -> text\num     -> header\na      -> amp\n```\n",
+        "type": "string",
+        "enum": [
+          "html",
+          "text",
+          "header",
+          "amp"
+        ]
+      },
+      "SgMachineOpen": {
+        "description": "Indicates whether the open was detected as being performed by a machine rather than a human.\nThe field is omitted if the value would be false.\n",
+        "type": "boolean",
+        "enum": [
+          true
+        ]
+      },
+      "EngagementUrlOffset": {
+        "description": "The offset index of the Url in the email content that was interacted with,\nand its content type.\n",
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/EngagementUrlContentType"
+          }
+        },
+        "example": {
+          "index": 0,
+          "type": "html"
+        }
+      },
+      "CustomArgs": {
+        "description": "Custom arguments provided with the mail send request.\nWe deviate here from the Event Webhook schema by NOT merging custom args into the top level of the object,\nin order to avoid collisions with system-defined fields.\nThese are known as Custom Args in [/v3/mail/send](https://www.twilio.com/docs/sendgrid/api-reference/mail-send/mail-send)\nbut [Unique Args](https://www.twilio.com/docs/sendgrid/for-developers/sending-email/unique-arguments) in SMTP and HTTP v2 mail send (/api/mail.send.json).\n",
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "example": {
+          "key1": "value1"
+        }
+      },
+      "CustomerTimezoneDate": {
+        "description": "A date in the format YYYY-MM-DD, after converting the timestamp to the customer's timezone.\n",
+        "type": "string",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+        "example": "2023-10-01"
+      },
+      "BounceEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "smtp-id": {
+            "$ref": "#/components/schemas/SmtpId"
+          },
+          "ip": {
+            "$ref": "#/components/schemas/IpAddress"
+          },
+          "tls": {
+            "$ref": "#/components/schemas/TlsEnabled"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "asm_group_id": {
+            "$ref": "#/components/schemas/AsmGroupId"
+          },
+          "bounce_classification": {
+            "$ref": "#/components/schemas/BounceClassification"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/SmtpResponse"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SmtpStatus"
+          },
+          "type": {
+            "$ref": "#/components/schemas/BounceType"
+          },
+          "cert_err": {
+            "$ref": "#/components/schemas/CertificateError"
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "event",
+          "email",
+          "sg_message_id",
+          "sg_event_id",
+          "timestamp",
+          "type"
+        ]
+      },
+      "ClickEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event1"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "url": {
+            "$ref": "#/components/schemas/Url"
+          },
+          "ip": {
+            "$ref": "#/components/schemas/IpAddress"
+          },
+          "useragent": {
+            "$ref": "#/components/schemas/HttpUserAgent"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "asm_group_id": {
+            "$ref": "#/components/schemas/AsmGroupId"
+          },
+          "url_offset": {
+            "$ref": "#/components/schemas/EngagementUrlOffset"
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "event",
+          "email",
+          "sg_message_id",
+          "sg_event_id",
+          "timestamp"
+        ]
+      },
+      "DeferredEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event2"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "smtp-id": {
+            "$ref": "#/components/schemas/SmtpId"
+          },
+          "response": {
+            "$ref": "#/components/schemas/SmtpResponse"
+          },
+          "attempt": {
+            "description": "The number of delivery attempts made for this email (zero-based counting).",
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          "ip": {
+            "$ref": "#/components/schemas/IpAddress"
+          },
+          "tls": {
+            "$ref": "#/components/schemas/TlsEnabled"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "asm_group_id": {
+            "$ref": "#/components/schemas/AsmGroupId"
+          },
+          "cert_err": {
+            "$ref": "#/components/schemas/CertificateError"
+          },
+          "domain": {
+            "description": "The domain part of the recipient's email address.",
+            "type": "string",
+            "pattern": "^.+\\..+$",
+            "example": "example.com"
+          },
+          "from": {
+            "type": "string",
+            "description": "The email address of the sender.\nThis may not always be a valid email address.\n"
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "event",
+          "email",
+          "sg_message_id",
+          "sg_event_id",
+          "smtp-id",
+          "timestamp",
+          "response",
+          "attempt"
+        ]
+      },
+      "DeliveredEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event3"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "smtp-id": {
+            "$ref": "#/components/schemas/SmtpId"
+          },
+          "ip": {
+            "$ref": "#/components/schemas/IpAddress"
+          },
+          "response": {
+            "$ref": "#/components/schemas/SmtpResponse"
+          },
+          "tls": {
+            "$ref": "#/components/schemas/TlsEnabled"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "asm_group_id": {
+            "$ref": "#/components/schemas/AsmGroupId"
+          },
+          "cert_err": {
+            "$ref": "#/components/schemas/CertificateError"
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "email",
+          "event",
+          "ip",
+          "response",
+          "smtp-id",
+          "sg_event_id",
+          "sg_message_id",
+          "timestamp"
+        ]
+      },
+      "DroppedEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event4"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address. \nThis field may be empty in some `drop` events.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "smtp-id": {
+            "$ref": "#/components/schemas/SmtpId"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/DropReason"
+          },
+          "pool": {
+            "$ref": "#/components/schemas/OutboundIpPoolMetadata"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "asm_group_id": {
+            "$ref": "#/components/schemas/AsmGroupId"
+          },
+          "message": {
+            "type": "string",
+            "description": "A detailed error message indicating why the email was dropped."
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "event",
+          "email",
+          "sg_message_id",
+          "sg_event_id",
+          "timestamp",
+          "smtp-id",
+          "reason"
+        ]
+      },
+      "OpenEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event5"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "url": {
+            "$ref": "#/components/schemas/Url"
+          },
+          "ip": {
+            "$ref": "#/components/schemas/IpAddress"
+          },
+          "useragent": {
+            "$ref": "#/components/schemas/HttpUserAgent"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "asm_group_id": {
+            "$ref": "#/components/schemas/AsmGroupId"
+          },
+          "sg_content_type": {
+            "$ref": "#/components/schemas/EngagementUrlContentType"
+          },
+          "sg_machine_open": {
+            "$ref": "#/components/schemas/SgMachineOpen"
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "event",
+          "email",
+          "sg_message_id",
+          "sg_event_id",
+          "timestamp"
+        ]
+      },
+      "ProcessedEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event6"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "smtp-id": {
+            "type": "string",
+            "example": "<14c5d75ce93.dfd.64b469@ismtpd-555>"
+          },
+          "send_at": {
+            "description": "The Unix timestamp in seconds of when the email is scheduled to be sent.",
+            "type": "integer",
+            "format": "int64"
+          },
+          "pool": {
+            "$ref": "#/components/schemas/OutboundIpPoolMetadata"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "asm_group_id": {
+            "$ref": "#/components/schemas/AsmGroupId"
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "email",
+          "event",
+          "sg_event_id",
+          "sg_message_id",
+          "smtp-id",
+          "timestamp"
+        ]
+      },
+      "ReceivedEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event7"
+          },
+          "recv_msgid": {
+            "$ref": "#/components/schemas/ReceivedMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "api_key_id": {
+            "type": "string",
+            "description": "The ID of the API Key used to authenticate the sending request for the message.",
+            "pattern": "^$|^[A-Za-z0-9_-]+$",
+            "maxLength": 50
+          },
+          "api_version": {
+            "type": "string"
+          },
+          "client_ip": {
+            "type": "string",
+            "description": "IPv4 or IPv6 address.",
+            "example": "192.168.1.1"
+          },
+          "protocol": {
+            "type": "string",
+            "example": "HTTP"
+          },
+          "recipient_count": {
+            "type": "integer",
+            "description": "Number of recipients."
+          },
+          "reseller_id": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer",
+            "description": "Size of the email in bytes."
+          },
+          "useragent": {
+            "$ref": "#/components/schemas/HttpUserAgent"
+          },
+          "v3_payload_details": {
+            "type": "object",
+            "description": "Key-value pairs associated with the payload.",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        },
+        "required": [
+          "client_ip",
+          "email",
+          "event",
+          "protocol",
+          "recipient_count",
+          "recv_msgid",
+          "sg_event_id",
+          "size",
+          "timestamp"
+        ]
+      },
+      "SpamReportEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event8"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "event",
+          "email",
+          "sg_message_id",
+          "sg_event_id",
+          "timestamp"
+        ]
+      },
+      "GroupUnsubscribeEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event9"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "ip": {
+            "$ref": "#/components/schemas/IpAddress"
+          },
+          "useragent": {
+            "$ref": "#/components/schemas/HttpUserAgent"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "asm_group_id": {
+            "$ref": "#/components/schemas/AsmGroupId"
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "event",
+          "email",
+          "sg_message_id",
+          "sg_event_id",
+          "timestamp"
+        ]
+      },
+      "GroupResubscribeEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event10"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "ip": {
+            "$ref": "#/components/schemas/IpAddress"
+          },
+          "useragent": {
+            "$ref": "#/components/schemas/HttpUserAgent"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "asm_group_id": {
+            "$ref": "#/components/schemas/AsmGroupId"
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "event",
+          "email",
+          "sg_message_id",
+          "sg_event_id",
+          "timestamp"
+        ]
+      },
+      "UnsubscribeEvent": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "$ref": "#/components/schemas/Event11"
+          },
+          "email": {
+            "type": "string",
+            "description": "Recipient email address.\n"
+          },
+          "sg_message_id": {
+            "$ref": "#/components/schemas/SgMessageId"
+          },
+          "sg_event_id": {
+            "$ref": "#/components/schemas/SgEventId"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixEpochSeconds"
+          },
+          "ip": {
+            "$ref": "#/components/schemas/IpAddress"
+          },
+          "useragent": {
+            "$ref": "#/components/schemas/HttpUserAgent"
+          },
+          "reseller_id": {
+            "type": "string"
+          },
+          "category": {
+            "$ref": "#/components/schemas/EmailCategories"
+          },
+          "date": {
+            "$ref": "#/components/schemas/CustomerTimezoneDate"
+          },
+          "custom_args": {
+            "$ref": "#/components/schemas/CustomArgs"
+          }
+        },
+        "required": [
+          "date",
+          "email",
+          "event",
+          "sg_event_id",
+          "sg_message_id",
+          "timestamp"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "description": "Standard SendGrid error response."
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message."
+          },
+          "field": {
+            "type": "string",
+            "description": "(Optional) The field that caused the error."
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "Event": {
+        "type": "string",
+        "enum": [
+          "bounce"
+        ]
+      },
+      "Event1": {
+        "type": "string",
+        "enum": [
+          "click"
+        ]
+      },
+      "Event2": {
+        "type": "string",
+        "enum": [
+          "deferred"
+        ]
+      },
+      "Event3": {
+        "type": "string",
+        "enum": [
+          "delivered"
+        ]
+      },
+      "Event4": {
+        "type": "string",
+        "enum": [
+          "dropped",
+          "cancel_drop"
+        ]
+      },
+      "Event5": {
+        "type": "string",
+        "enum": [
+          "open"
+        ]
+      },
+      "Event6": {
+        "type": "string",
+        "enum": [
+          "processed"
+        ]
+      },
+      "Event7": {
+        "type": "string",
+        "enum": [
+          "received"
+        ]
+      },
+      "Event8": {
+        "type": "string",
+        "enum": [
+          "spamreport"
+        ]
+      },
+      "Event9": {
+        "type": "string",
+        "enum": [
+          "group_unsubscribe"
+        ]
+      },
+      "Event10": {
+        "type": "string",
+        "enum": [
+          "group_resubscribe"
+        ]
+      },
+      "Event11": {
+        "type": "string",
+        "enum": [
+          "unsubscribe"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Twilio SendGrid requires you to authenticate with its APIs using an API key. The API key must be sent as a bearer token in the Authorization header."
+      }
+    }
+  }
+}

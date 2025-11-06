@@ -202,7 +202,12 @@ paths:
       summary: Filter messages by message ID
       tags:
       - Email Activity
-      description: Get all of the details about the specified message.
+      description: 'Get all of the details about the specified message.
+
+
+        For Regional (EU) subusers, no data will be generated for this service.
+
+        '
       responses:
         '200':
           description: ''

@@ -155,24 +155,20 @@ components:
   schemas:
     EmailLogsMessageStatus:
       type: string
-      description: 'A summary of the message status based on which events have occurred.
+      description: '**A summary of the message status based on which events have occurred.**
 
 
-        | Event | Status |
+        - processed: `processed`
 
-        | -- | -- |
+        - dropped: `drop`, `cancel_drop`
 
-        | processed | processed |
+        - deferred: `deferred`
 
-        | drop, cancel_drop | dropped |
+        - bounced: `bounce`
 
-        | deferred | deferred |
+        - blocked: `bounce` (type=`block`)
 
-        | bounce | bounced |
-
-        | bounce(type=block) | blocked |
-
-        | delivered, click, open | delivered |
+        - delivered: `delivered`, `click`, `open`
 
         '
       enum:
@@ -190,23 +186,22 @@ components:
           description: '**Allowed event fields and operators**
 
 
-            | Field                    | Operators            |
+            - sg_message_id: `=`
 
-            |------------------------- |----------------------|
+            - subject: `=`
 
-            | sg_message_id            | `=`                  |
+            - to_email: `=`
 
-            | subject                  | `=`                  |
+            - status: `IN`
 
-            | to_email                 | `=`                  |
+            - reason: `=`
 
-            | status                   | `IN`                 |
+            - categories: `IN`
 
-            | reason                   | `=`                  |
+            - sg_message_id_created_at: `>`, `<`, `>=`, `<=`
 
-            | categories               | `IN`                 |
 
-            | sg_message_id_created_at | `>`, `<`, `>=`, `<=` |
+            **Notes:**
 
 
             - multiple conditions can be combined with `AND`
@@ -613,6 +608,7 @@ components:
       pattern: ^\d{4}-\d{2}-\d{2}$
       example: '2023-10-01'
     BounceEvent:
+      title: bounce
       type: object
       properties:
         event:
@@ -659,6 +655,7 @@ components:
       - timestamp
       - type
     ClickEvent:
+      title: click
       type: object
       properties:
         event:
@@ -696,6 +693,7 @@ components:
       - sg_event_id
       - timestamp
     DeferredEvent:
+      title: deferred
       type: object
       properties:
         event:
@@ -755,6 +753,7 @@ components:
       - response
       - attempt
     DeliveredEvent:
+      title: delivered
       type: object
       properties:
         event:
@@ -797,6 +796,7 @@ components:
       - sg_message_id
       - timestamp
     DroppedEvent:
+      title: dropped
       type: object
       properties:
         event:
@@ -836,6 +836,7 @@ components:
       - smtp-id
       - reason
     OpenEvent:
+      title: open
       type: object
       properties:
         event:
@@ -875,6 +876,7 @@ components:
       - sg_event_id
       - timestamp
     ProcessedEvent:
+      title: processed
       type: object
       properties:
         event:
@@ -915,6 +917,7 @@ components:
       - smtp-id
       - timestamp
     ReceivedEvent:
+      title: received
       type: object
       properties:
         event:
@@ -968,6 +971,7 @@ components:
       - size
       - timestamp
     SpamReportEvent:
+      title: spamreport
       type: object
       properties:
         event:
@@ -995,6 +999,7 @@ components:
       - sg_event_id
       - timestamp
     GroupUnsubscribeEvent:
+      title: group_unsubscribe
       type: object
       properties:
         event:
@@ -1028,6 +1033,7 @@ components:
       - sg_event_id
       - timestamp
     GroupResubscribeEvent:
+      title: group_resubscribe
       type: object
       properties:
         event:
@@ -1061,6 +1067,7 @@ components:
       - sg_event_id
       - timestamp
     UnsubscribeEvent:
+      title: unsubscribe
       type: object
       properties:
         event:

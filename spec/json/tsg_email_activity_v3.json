@@ -265,7 +265,7 @@
         "tags": [
           "Email Activity"
         ],
-        "description": "Get all of the details about the specified message.",
+        "description": "Get all of the details about the specified message.\n\nFor Regional (EU) subusers, no data will be generated for this service.\n",
         "responses": {
           "200": {
             "description": "",

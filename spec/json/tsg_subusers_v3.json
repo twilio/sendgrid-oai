@@ -804,7 +804,7 @@
         "tags": [
           "Subuser Statistics"
         ],
-        "description": "**This endpoint allows you to retrive the monthly email statistics for a specific subuser.**\n\nWhen using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:\n`bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.",
+        "description": "**This endpoint allows you to retrive the monthly email statistics for a specific subuser.**\n\nWhen using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:\n`bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.\n",
         "parameters": [
           {
             "name": "date",
@@ -911,7 +911,7 @@
         "tags": [
           "Subusers"
         ],
-        "description": "**This endpoint allows you to request the reputations for your subusers.**\n\nSubuser sender reputations give a good idea how well a sender is doing with regards to how recipients and recipient servers react to the mail that is being received. When a bounce, spam report, or other negative action happens on a sent email, it will affect your sender rating.",
+        "description": "**This endpoint allows you to request the reputations for your subusers.**\n\nSubuser sender reputations give a good idea how well a sender is doing with regards to how recipients and recipient servers react to the mail that is being received. When a bounce, spam report, or other negative action happens on a sent email, it will affect your sender rating.  For Regional (EU) subusers, subuser reputation scores will not calculate accurately due to restrictions in place to maintain data residency.",
         "parameters": [
           {
             "name": "usernames",

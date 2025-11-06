@@ -940,6 +940,9 @@ paths:
                         unique_opens: 0
   /v3/geo/stats:
     get:
+      servers:
+      - url: https://api.sendgrid.com
+        description: for global users
       operationId: ListGeoStat
       summary: Retrieve email statistics by country and state/province.
       tags:
@@ -950,6 +953,9 @@ paths:
 
         **We only store up to 7 days of email activity in our database.** By default,
         500 items will be returned per request via the Advanced Stats API endpoints.
+
+
+        For Regional (EU) subusers, this service is not available due to PII restrictions.
 
 
         Advanced Stats provide a more in-depth view of your email statistics and the

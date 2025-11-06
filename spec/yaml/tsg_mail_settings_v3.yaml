@@ -157,6 +157,10 @@ paths:
         whitelist settings.**
 
 
+        For Regional Subusers - Utilizing this feature for Regional (EU) subusers
+        will cause customer personal information to be stored outside of the EU.
+
+
         You can select whether or not this setting should be enabled by assigning
         the `enabled` field a `true` or `false` value.
 
@@ -242,6 +246,10 @@ paths:
 
         The Address Whitelist setting allows you to specify email addresses or domains
         for which mail should never be suppressed.
+
+
+        For Regional Subusers - Utilizing this feature for Regional (EU) subusers
+        will cause customer personal information to be stored outside of the EU.
 
 
         For example, if you own the domain `example.com`, and one or more of your

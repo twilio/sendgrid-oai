@@ -211,7 +211,7 @@
     "schemas": {
       "EmailLogsMessageStatus": {
         "type": "string",
-        "description": "A summary of the message status based on which events have occurred.\n\n| Event | Status |\n| -- | -- |\n| processed | processed |\n| drop, cancel_drop | dropped |\n| deferred | deferred |\n| bounce | bounced |\n| bounce(type=block) | blocked |\n| delivered, click, open | delivered |\n",
+        "description": "**A summary of the message status based on which events have occurred.**\n\n- processed: `processed`\n- dropped: `drop`, `cancel_drop`\n- deferred: `deferred`\n- bounced: `bounce`\n- blocked: `bounce` (type=`block`)\n- delivered: `delivered`, `click`, `open`\n",
         "enum": [
           "processed",
           "delivered",
@@ -226,7 +226,7 @@
         "properties": {
           "query": {
             "type": "string",
-            "description": "**Allowed event fields and operators**\n\n| Field                    | Operators            |\n|------------------------- |----------------------|\n| sg_message_id            | `=`                  |\n| subject                  | `=`                  |\n| to_email                 | `=`                  |\n| status                   | `IN`                 |\n| reason                   | `=`                  |\n| categories               | `IN`                 |\n| sg_message_id_created_at | `>`, `<`, `>=`, `<=` |\n\n- multiple conditions can be combined with `AND`\n- nesting is not allowed\n- `IN` operator accepts a list of string values: `field IN ('value1', 'value2')`\n",
+            "description": "**Allowed event fields and operators**\n\n- sg_message_id: `=`\n- subject: `=`\n- to_email: `=`\n- status: `IN`\n- reason: `=`\n- categories: `IN`\n- sg_message_id_created_at: `>`, `<`, `>=`, `<=`\n\n**Notes:**\n\n- multiple conditions can be combined with `AND`\n- nesting is not allowed\n- `IN` operator accepts a list of string values: `field IN ('value1', 'value2')`\n",
             "example": "sg_message_id_created_at > TIMESTAMP \"2025-01-01T00:00:00Z\" AND sg_message_id_created_at < TIMESTAMP \"2025-02-01T00:00:00Z\" AND status IN ('delivered', 'processed') AND categories IN ('newsletter', 'marketing')"
           },
           "limit": {
@@ -653,6 +653,7 @@
         "example": "2023-10-01"
       },
       "BounceEvent": {
+        "title": "bounce",
         "type": "object",
         "properties": {
           "event": {
@@ -716,6 +717,7 @@
         ]
       },
       "ClickEvent": {
+        "title": "click",
         "type": "object",
         "properties": {
           "event": {
@@ -766,6 +768,7 @@
         ]
       },
       "DeferredEvent": {
+        "title": "deferred",
         "type": "object",
         "properties": {
           "event": {
@@ -837,6 +840,7 @@
         ]
       },
       "DeliveredEvent": {
+        "title": "delivered",
         "type": "object",
         "properties": {
           "event": {
@@ -893,6 +897,7 @@
         ]
       },
       "DroppedEvent": {
+        "title": "dropped",
         "type": "object",
         "properties": {
           "event": {
@@ -946,6 +951,7 @@
         ]
       },
       "OpenEvent": {
+        "title": "open",
         "type": "object",
         "properties": {
           "event": {
@@ -999,6 +1005,7 @@
         ]
       },
       "ProcessedEvent": {
+        "title": "processed",
         "type": "object",
         "properties": {
           "event": {
@@ -1050,6 +1057,7 @@
         ]
       },
       "ReceivedEvent": {
+        "title": "received",
         "type": "object",
         "properties": {
           "event": {
@@ -1119,6 +1127,7 @@
         ]
       },
       "SpamReportEvent": {
+        "title": "spamreport",
         "type": "object",
         "properties": {
           "event": {
@@ -1154,6 +1163,7 @@
         ]
       },
       "GroupUnsubscribeEvent": {
+        "title": "group_unsubscribe",
         "type": "object",
         "properties": {
           "event": {
@@ -1198,6 +1208,7 @@
         ]
       },
       "GroupResubscribeEvent": {
+        "title": "group_resubscribe",
         "type": "object",
         "properties": {
           "event": {
@@ -1242,6 +1253,7 @@
         ]
       },
       "UnsubscribeEvent": {
+        "title": "unsubscribe",
         "type": "object",
         "properties": {
           "event": {

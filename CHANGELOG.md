@@ -1,5 +1,26 @@
 sendgrid-oai changelog
 ====================
+[2025-11-06] Version 1.0.0-rc.11
+--------------------------------
+**Email activity**
+- Add notice that Email Activity is unavailable for EU subusers
+
+**Logs**
+- Fix formatting issues
+
+**Mail settings v3**
+- certain mail settings allow specific email addresses to always bypass suppressions.  This is stored in the US, so we need a warning for regional customers.
+
+**Mc designs v3**
+- the templates used in MC design are available to EU customers, but are stored in the US.  This notifies customers of this risk.
+
+**Stats v3**
+- A stat endpoint used by the parent to query the subusers will not work for regional.  This is reflected in the API docs.
+
+**Subusers v3**
+- SEQ scores will currently not work correctly for EU subusers.  This notification is in the docs.
+
+
 [2025-10-31] Version 1.0.0-rc.10
 --------------------------------
 **Logs**

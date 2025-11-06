@@ -544,7 +544,9 @@ paths:
         can not sort by the following metrics:
 
         `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`,
-        `spam_reports`, or `unsubscribe_drops`.'
+        `spam_reports`, or `unsubscribe_drops`.
+
+        '
       parameters:
       - name: date
         in: query
@@ -630,7 +632,9 @@ paths:
         Subuser sender reputations give a good idea how well a sender is doing with
         regards to how recipients and recipient servers react to the mail that is
         being received. When a bounce, spam report, or other negative action happens
-        on a sent email, it will affect your sender rating.'
+        on a sent email, it will affect your sender rating.  For Regional (EU) subusers,
+        subuser reputation scores will not calculate accurately due to restrictions
+        in place to maintain data residency.'
       parameters:
       - name: usernames
         in: query

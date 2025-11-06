@@ -1351,12 +1351,18 @@
     },
     "/v3/geo/stats": {
       "get": {
+        "servers": [
+          {
+            "url": "https://api.sendgrid.com",
+            "description": "for global users"
+          }
+        ],
         "operationId": "ListGeoStat",
         "summary": "Retrieve email statistics by country and state/province.",
         "tags": [
           "Stats"
         ],
-        "description": "**This endpoint allows you to retrieve your email statistics segmented by country and state/province.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [User Guide](https://wwww.twilio.com/docs/sendgrid/ui/analytics-and-reporting/stats-overview).",
+        "description": "**This endpoint allows you to retrieve your email statistics segmented by country and state/province.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\nFor Regional (EU) subusers, this service is not available due to PII restrictions.\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [User Guide](https://wwww.twilio.com/docs/sendgrid/ui/analytics-and-reporting/stats-overview).",
         "parameters": [
           {
             "name": "country",

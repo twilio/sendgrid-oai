@@ -904,7 +904,7 @@ components:
                   filename: index.html
                   type: text/html
                   disposition: attachment
-                tempalte_id: d-123abc456def789hij0klm123nop456qrs789tuv0xyz
+                template_id: d-123abc456def789hij0klm123nop456qrs789tuv0xyz
                 categories:
                 - cake
                 - pie

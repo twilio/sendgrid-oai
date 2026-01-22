@@ -1,0 +1,655 @@
+{
+  "openapi": "3.1.0",
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "info": {
+    "title": "Twilio SendGrid IP Provisioning API",
+    "summary": "The Twilio SendGrid IP Provisioning API provides a platform for Twilio SendGrid resellers to manage their customer accounts' IPs.",
+    "description": "The Twilio SendGrid IP Provisioning API provides a platform for Twilio SendGrid resellers to manage their customer accounts' IPs. This API is for companies that have a formal reseller partnership with Twilio SendGrid.\n\nYou can access Twilio SendGrid sub-account functionality without becoming a reseller. If you require sub-account functionality, see the Twilio [SendGrid Subusers](https://docs.sendgrid.com/ui/account-and-settings/subusers) feature, which is available with [Pro and Premier plans](https://sendgrid.com/pricing/).",
+    "termsOfService": "https://www.twilio.com/legal/tos",
+    "contact": {
+      "name": "Twilio SendGrid Support",
+      "url": "https://support.sendgrid.com/hc/en-us"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://code.hq.twilio.com/twilio/sendgrid-oas/blob/main/LICENSE"
+    },
+    "version": "1.0.0",
+    "x-sendgrid": {
+      "libraryPackage": "ip_provisioning"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.sendgrid.com",
+      "description": "for global users and subusers"
+    },
+    {
+      "url": "https://api.eu.sendgrid.com",
+      "description": "for EU regional subusers"
+    }
+  ],
+  "paths": {
+    "/v3/partners/accounts/{accountID}/ips": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/IpProvisioningAccountId"
+        }
+      ],
+      "get": {
+        "operationId": "ListAccountIps",
+        "summary": "List Account IPs",
+        "tags": [
+          "IP Provisioning"
+        ],
+        "description": "Retrieves a paginated list of IPs associated with the specified account, ordered by most recently added IP.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items to return",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5000,
+              "default": 10
+            },
+            "required": false,
+            "example": 2
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The last item successfully retrieved",
+            "schema": {
+              "type": "string",
+              "format": "ipv4"
+            },
+            "required": false,
+            "example": "192.0.0.1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "AccountIPsResponse",
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ip": {
+                            "type": "string",
+                            "description": "IP address",
+                            "format": "ipv4"
+                          },
+                          "region": {
+                            "type": "string",
+                            "description": "Region associated with the IP",
+                            "$ref": "#/components/schemas/Region"
+                          }
+                        },
+                        "required": [
+                          "ip",
+                          "region"
+                        ]
+                      }
+                    },
+                    "pages": {
+                      "$ref": "#/components/schemas/IpProvisioningPagination"
+                    }
+                  },
+                  "required": [
+                    "result",
+                    "pages"
+                  ]
+                },
+                "example": {
+                  "result": [
+                    {
+                      "ip": "174.0.2.1",
+                      "region": "us"
+                    },
+                    {
+                      "ip": "192.0.0.1",
+                      "region": "eu"
+                    }
+                  ],
+                  "pages": {
+                    "last": "192.0.0.1"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse400"
+          },
+          "401": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse401"
+          },
+          "403": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse403"
+          },
+          "404": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse404"
+          },
+          "500": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse500"
+          },
+          "502": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse502"
+          },
+          "503": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse503"
+          },
+          "504": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse504"
+          }
+        }
+      },
+      "post": {
+        "operationId": "AddAccountIps",
+        "summary": "Add Account IPs",
+        "description": "Adds IP(s) to the specified account.",
+        "tags": [
+          "IP Provisioning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "AddAccountIPsRequest",
+                "type": "object",
+                "description": "Request to add IP addresses to an account. Maximum of 10 IPs per request, all from the same region.",
+                "properties": {
+                  "count": {
+                    "type": "integer",
+                    "format": "int64",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "description": "Number of IPs to add (maximum 10 per request)"
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "The region where the IPs should be provisioned (all IPs in a single request must be from the same region)",
+                    "$ref": "#/components/schemas/Region1"
+                  }
+                },
+                "required": [
+                  "count",
+                  "region"
+                ]
+              },
+              "example": {
+                "count": 2,
+                "region": "us"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "AddAccountIPsResponse",
+                  "type": "object",
+                  "properties": {
+                    "ips": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "IP address that was added",
+                        "format": "ipv4"
+                      }
+                    },
+                    "region": {
+                      "type": "string",
+                      "description": "The region where the IP addresses are located",
+                      "$ref": "#/components/schemas/Region2"
+                    }
+                  },
+                  "required": [
+                    "ips",
+                    "region"
+                  ]
+                },
+                "example": {
+                  "ips": [
+                    "192.168.1.1",
+                    "192.168.1.2"
+                  ],
+                  "region": "us"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse400"
+          },
+          "401": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse401"
+          },
+          "403": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse403"
+          },
+          "404": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse404"
+          },
+          "500": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse500"
+          },
+          "502": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse502"
+          },
+          "503": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse503"
+          },
+          "504": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse504"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RemoveAccountIps",
+        "summary": "Remove Account IPs",
+        "description": "Removes IP(s) from the specified account.",
+        "tags": [
+          "IP Provisioning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "RemoveAccountIPsRequest",
+                "type": "object",
+                "properties": {
+                  "ips": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 10,
+                    "items": {
+                      "type": "string",
+                      "format": "ipv4"
+                    },
+                    "description": "List of specific IP addresses to remove (maximum 10 per request)"
+                  }
+                },
+                "required": [
+                  "ips"
+                ]
+              },
+              "example": {
+                "ips": [
+                  "174.0.0.3",
+                  "192.0.0.1"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse400"
+          },
+          "401": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse401"
+          },
+          "403": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse403"
+          },
+          "404": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse404"
+          },
+          "500": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse500"
+          },
+          "502": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse502"
+          },
+          "503": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse503"
+          },
+          "504": {
+            "$ref": "#/components/responses/IpProvisioningErrorResponse504"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorResponse": {
+        "title": "Error",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "The message representing the error from the API"
+          },
+          "field": {
+            "type": "string",
+            "description": "The field associated with the error"
+          },
+          "error_id": {
+            "type": "string",
+            "description": "ID representing the error as a unique number"
+          }
+        },
+        "required": [
+          "message",
+          "field",
+          "error_id"
+        ]
+      },
+      "IpProvisioningPagination": {
+        "title": "Pagination",
+        "type": "object",
+        "properties": {
+          "last": {
+            "type": "string",
+            "description": "The last item returned"
+          }
+        },
+        "example": {
+          "last": "192.0.0.1"
+        }
+      },
+      "Region": {
+        "type": "string",
+        "enum": [
+          "eu",
+          "us"
+        ]
+      },
+      "Region1": {
+        "type": "string",
+        "enum": [
+          "eu",
+          "us"
+        ]
+      },
+      "Region2": {
+        "type": "string",
+        "enum": [
+          "eu",
+          "us"
+        ]
+      }
+    },
+    "responses": {
+      "IpProvisioningErrorResponse400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Bad Request",
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
+            "example": {
+              "errors": [
+                {
+                  "message": "Field must be a valid IP address",
+                  "field": "ip",
+                  "error_id": "10-40002"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "IpProvisioningErrorResponse401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Unauthorized",
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
+            "example": {
+              "errors": [
+                {
+                  "message": "Failed to authenticate user",
+                  "field": "",
+                  "error_id": "10-40100"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "IpProvisioningErrorResponse403": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Forbidden",
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
+            "example": {
+              "errors": [
+                {
+                  "message": "The authenticated user is not authorized to perform this request",
+                  "field": "",
+                  "error_id": "10-40300"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "IpProvisioningErrorResponse404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Not Found",
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
+            "example": {
+              "errors": [
+                {
+                  "message": "Account not found",
+                  "field": "",
+                  "error_id": "10-40400"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "IpProvisioningErrorResponse500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Internal Server Error",
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
+            "example": {
+              "errors": [
+                {
+                  "message": "Something went wrong",
+                  "field": "",
+                  "error_id": "10-50000"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "IpProvisioningErrorResponse502": {
+        "description": "Bad Gateway",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Bad Gateway",
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
+            "example": {
+              "errors": [
+                {
+                  "message": "Bad Gateway",
+                  "field": "",
+                  "error_id": "10-50200"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "IpProvisioningErrorResponse503": {
+        "description": "Service Unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Service Unavailable",
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
+            "example": {
+              "errors": [
+                {
+                  "message": "Service Unavailable",
+                  "field": "",
+                  "error_id": "10-50300"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "IpProvisioningErrorResponse504": {
+        "description": "Endpoint request timed out",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Endpoint request timed out",
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
+            "example": {
+              "errors": [
+                {
+                  "message": "Endpoint request timed out",
+                  "field": "",
+                  "error_id": "10-50400"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "IpProvisioningAccountId": {
+        "name": "accountID",
+        "in": "path",
+        "description": "Twilio SendGrid account ID",
+        "schema": {
+          "type": "string"
+        },
+        "required": true,
+        "example": "sg1a2bcd3ef4ab5c67d8efab91c01de2fa"
+      }
+    },
+    "examples": {},
+    "requestBodies": {},
+    "headers": {},
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Twilio SendGrid requires you to authenticate with its APIs using an API key. The API key must be sent as a bearer token in the Authorization header."
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "IP Provisioning",
+      "description": "Twilio SendGrid IP Provisioning API operations."
+    }
+  ],
+  "externalDocs": {
+    "description": "Twilio SendGrid's official developer documentation.",
+    "url": "https://www.twilio.com/docs/sendgrid"
+  }
+}

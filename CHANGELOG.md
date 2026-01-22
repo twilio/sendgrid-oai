@@ -1,5 +1,11 @@
 sendgrid-oai changelog
 ====================
+[2026-01-22] Version 1.0.0-rc.12
+--------------------------------
+**Ip provisioning**
+- Add IP Provisioning API specification
+
+
 [2025-11-06] Version 1.0.0-rc.11
 --------------------------------
 **Email activity**

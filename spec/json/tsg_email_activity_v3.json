@@ -42,7 +42,7 @@
           {
             "name": "query",
             "in": "query",
-            "description": "Use the query syntax  to filter your email activity.",
+            "description": "Use the query syntax to filter your email activity. Combine up to 160 filter conditions per request.",
             "required": true,
             "schema": {
               "type": "string"

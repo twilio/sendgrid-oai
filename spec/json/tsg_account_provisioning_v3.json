@@ -272,7 +272,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AccountProvisioningOfferingList"
+                  "$ref": "#/components/schemas/AccountProvisioningAssignedOfferingList"
                 }
               }
             }
@@ -677,6 +677,18 @@
           }
         }
       },
+      "AccountProvisioningAssignedOfferingList": {
+        "title": "AssignedOfferingList",
+        "type": "object",
+        "properties": {
+          "offerings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountProvisioningAssignedOfferingV1"
+            }
+          }
+        }
+      },
       "AccountProvisioningPagination": {
         "title": "Pagination",
         "type": "object",
@@ -796,6 +808,48 @@
           "quantity": 1
         }
       },
+      "AccountProvisioningAssignedOfferingV1": {
+        "title": "AssignedOffering",
+        "type": "object",
+        "description": "An offering assigned to an account, including optional start and end dates indicating when the offering was activated and when it expires.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the offering"
+          },
+          "type": {
+            "type": "string",
+            "description": "Defines the type of offering (e.g., package or addon).",
+            "$ref": "#/components/schemas/Type1"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Quantity of the specified addon. If offering type is `package`, quantity must be 1."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp indicating when the offering was activated on the account. Format is [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339)."
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp indicating when the offering expires. Format is [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339). Absent if the offering has no expiry."
+          }
+        },
+        "required": [
+          "name",
+          "type"
+        ],
+        "example": {
+          "name": "org.ei.free.v1",
+          "type": "package",
+          "quantity": 1,
+          "start_date": "2024-01-02T15:04:05Z",
+          "end_date": "2025-01-02T15:04:05Z"
+        }
+      },
       "ErrorResponse": {
         "title": "Error",
         "type": "object",
@@ -837,6 +891,13 @@
         ]
       },
       "Type": {
+        "type": "string",
+        "enum": [
+          "package",
+          "addon"
+        ]
+      },
+      "Type1": {
         "type": "string",
         "enum": [
           "package",

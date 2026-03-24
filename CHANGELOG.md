@@ -1,5 +1,14 @@
 sendgrid-oai changelog
 ====================
+[2026-03-24] Version 1.0.0-rc.13
+--------------------------------
+**Email activity**
+- Add maximum filter conditions per request
+
+**Logs**
+- Add maximum filter conditions per request
+
+
 [2026-01-22] Version 1.0.0-rc.12
 --------------------------------
 **Ip provisioning**

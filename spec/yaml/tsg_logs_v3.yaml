@@ -204,7 +204,7 @@ components:
             **Notes:**
 
 
-            - multiple conditions can be combined with `AND`
+            - multiple conditions (up to 160) can be combined with `AND`
 
             - nesting is not allowed
 

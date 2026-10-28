@@ -8,7 +8,7 @@
   "info": {
     "title": "Twilio SendGrid Statistics API",
     "summary": "The Twilio SendGrid Statistics API allows you to retrieve the various statistics related to your email program.",
-    "description": "The Twilio SendGrid Statistics API allows you to retrieve the various statistics related to your email program.\n\nTracking your emails is an important part of being a good sender and learning about how your users interact with your email. This includes everything from clicks and opens to looking at which browsers and mailbox providers your customers use.\n\nSendGrid has broken up statistics in specific ways so that you can get at-a-glance data, as well as the details of how your email is being used.\n\nCategory statistics are available for the previous thirteen months only.\n\nSee [**Statistics Overview**](https://docs.sendgrid.com/ui/analytics-and-reporting/stats-overview) for more information.",
+    "description": "The Twilio SendGrid Statistics API allows you to retrieve the various statistics related to your email program.\nTracking your emails is an important part of being a good sender and learning about how your users interact with your email. This includes everything from clicks and opens to looking at which browsers and mailbox providers your customers use.\nSendGrid has broken up statistics in specific ways so that you can get at-a-glance data, as well as the details of how your email is being used.\nCategory statistics are available for the previous thirteen months only.\nTo learn more, see [**Statistics Overview**](https://www.twilio.com/docs/sendgrid/ui/analytics-and-reporting/stats-overview).",
     "termsOfService": "https://www.twilio.com/legal/tos",
     "contact": {
       "name": "Twilio SendGrid Support",
@@ -41,7 +41,7 @@
         "tags": [
           "Stats"
         ],
-        "description": "**This endpoint allows you to retrieve your email statistics segmented by browser type.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/).",
+        "description": "**This endpoint allows you to retrieve your email statistics segmented by browser type.**\nBy default, 500 items will be returned per request via the Advanced Stats API endpoints.\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/).",
         "parameters": [
           {
             "name": "browsers",
@@ -53,12 +53,6 @@
           },
           {
             "$ref": "#/components/parameters/OnBehalfOf"
-          },
-          {
-            "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit"
-          },
-          {
-            "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset"
           },
           {
             "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetAggregatedBy"
@@ -670,7 +664,7 @@
         "tags": [
           "Stats"
         ],
-        "description": "**This endpoint allows you to retrieve your email statistics segmented by client type.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/).",
+        "description": "**This endpoint allows you to retrieve your email statistics segmented by client type.**\n\nBy default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/).",
         "parameters": [
           {
             "$ref": "#/components/parameters/OnBehalfOf"
@@ -779,7 +773,7 @@
         "tags": [
           "Stats"
         ],
-        "description": "**This endpoint allows you to retrieve your email statistics segmented by a specific client type.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\n### Available Client Types\n- phone\n- tablet\n- webmail\n- desktop\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/).",
+        "description": "**This endpoint allows you to retrieve your email statistics segmented by a specific client type.**\n\nBy default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\n### Available Client Types\n- phone\n- tablet\n- webmail\n- desktop\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/).",
         "parameters": [
           {
             "$ref": "#/components/parameters/OnBehalfOf"
@@ -880,12 +874,6 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/OnBehalfOf"
-          },
-          {
-            "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit"
-          },
-          {
-            "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset"
           },
           {
             "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetAggregatedBy"
@@ -1362,7 +1350,7 @@
         "tags": [
           "Stats"
         ],
-        "description": "**This endpoint allows you to retrieve your email statistics segmented by country and state/province.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\nFor Regional (EU) subusers, this service is not available due to PII restrictions.\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [User Guide](https://wwww.twilio.com/docs/sendgrid/ui/analytics-and-reporting/stats-overview).",
+        "description": "**This endpoint allows you to retrieve your email statistics segmented by country and state/province.**\nBy default, 500 items will be returned per request via the Advanced Stats API endpoints.\nFor Regional (EU) subusers, this service is not available due to PII restrictions.\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [User Guide](https://wwww.twilio.com/docs/sendgrid/ui/analytics-and-reporting/stats-overview).",
         "parameters": [
           {
             "name": "country",
@@ -1375,12 +1363,6 @@
           },
           {
             "$ref": "#/components/parameters/OnBehalfOf"
-          },
-          {
-            "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit"
-          },
-          {
-            "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset"
           },
           {
             "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetAggregatedBy"
@@ -1913,7 +1895,7 @@
         "tags": [
           "Stats"
         ],
-        "description": "**This endpoint allows you to retrieve your email statistics segmented by recipient mailbox provider.**\n\n**We only store up to 7 days of email activity in our database.** By default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/).",
+        "description": "**This endpoint allows you to retrieve your email statistics segmented by recipient mailbox provider.**\n\nBy default, 500 items will be returned per request via the Advanced Stats API endpoints.\n\nAdvanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/).",
         "parameters": [
           {
             "name": "mailbox_providers",
@@ -1925,12 +1907,6 @@
           },
           {
             "$ref": "#/components/parameters/OnBehalfOf"
-          },
-          {
-            "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit"
-          },
-          {
-            "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset"
           },
           {
             "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetAggregatedBy"
@@ -2713,12 +2689,6 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/OnBehalfOf"
-          },
-          {
-            "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit"
-          },
-          {
-            "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset"
           },
           {
             "$ref": "#/components/parameters/StatsAdvancedQueryStringsLimitOffsetAggregatedBy"

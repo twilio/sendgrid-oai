@@ -8,21 +8,16 @@ info:
   description: 'The Twilio SendGrid Statistics API allows you to retrieve the various
     statistics related to your email program.
 
-
     Tracking your emails is an important part of being a good sender and learning
     about how your users interact with your email. This includes everything from clicks
     and opens to looking at which browsers and mailbox providers your customers use.
 
-
     SendGrid has broken up statistics in specific ways so that you can get at-a-glance
     data, as well as the details of how your email is being used.
 
-
     Category statistics are available for the previous thirteen months only.
 
-
-    See [**Statistics Overview**](https://docs.sendgrid.com/ui/analytics-and-reporting/stats-overview)
-    for more information.'
+    To learn more, see [**Statistics Overview**](https://www.twilio.com/docs/sendgrid/ui/analytics-and-reporting/stats-overview).'
   termsOfService: https://www.twilio.com/legal/tos
   contact:
     name: Twilio SendGrid Support
@@ -48,10 +43,8 @@ paths:
       description: '**This endpoint allows you to retrieve your email statistics segmented
         by browser type.**
 
-
-        **We only store up to 7 days of email activity in our database.** By default,
-        500 items will be returned per request via the Advanced Stats API endpoints.
-
+        By default, 500 items will be returned per request via the Advanced Stats
+        API endpoints.
 
         Advanced Stats provide a more in-depth view of your email statistics and the
         actions taken by your recipients. You can segment these statistics by geographic
@@ -65,8 +58,6 @@ paths:
         schema:
           type: string
       - $ref: '#/components/parameters/OnBehalfOf'
-      - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit'
-      - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetAggregatedBy'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetStartDate'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetEndDate'
@@ -520,8 +511,8 @@ paths:
         by client type.**
 
 
-        **We only store up to 7 days of email activity in our database.** By default,
-        500 items will be returned per request via the Advanced Stats API endpoints.
+        By default, 500 items will be returned per request via the Advanced Stats
+        API endpoints.
 
 
         Advanced Stats provide a more in-depth view of your email statistics and the
@@ -596,8 +587,8 @@ paths:
         by a specific client type.**
 
 
-        **We only store up to 7 days of email activity in our database.** By default,
-        500 items will be returned per request via the Advanced Stats API endpoints.
+        By default, 500 items will be returned per request via the Advanced Stats
+        API endpoints.
 
 
         ### Available Client Types
@@ -686,8 +677,6 @@ paths:
         \ see our [Statistics Overview](https://sendgrid.com/docs/ui/analytics-and-reporting/stats-overview/)."
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
-      - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit'
-      - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetAggregatedBy'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetStartDate'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetEndDate'
@@ -950,13 +939,10 @@ paths:
       description: '**This endpoint allows you to retrieve your email statistics segmented
         by country and state/province.**
 
-
-        **We only store up to 7 days of email activity in our database.** By default,
-        500 items will be returned per request via the Advanced Stats API endpoints.
-
+        By default, 500 items will be returned per request via the Advanced Stats
+        API endpoints.
 
         For Regional (EU) subusers, this service is not available due to PII restrictions.
-
 
         Advanced Stats provide a more in-depth view of your email statistics and the
         actions taken by your recipients. You can segment these statistics by geographic
@@ -971,8 +957,6 @@ paths:
           type: string
           $ref: '#/components/schemas/Country'
       - $ref: '#/components/parameters/OnBehalfOf'
-      - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit'
-      - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetAggregatedBy'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetStartDate'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetEndDate'
@@ -1295,8 +1279,8 @@ paths:
         by recipient mailbox provider.**
 
 
-        **We only store up to 7 days of email activity in our database.** By default,
-        500 items will be returned per request via the Advanced Stats API endpoints.
+        By default, 500 items will be returned per request via the Advanced Stats
+        API endpoints.
 
 
         Advanced Stats provide a more in-depth view of your email statistics and the
@@ -1311,8 +1295,6 @@ paths:
         schema:
           type: string
       - $ref: '#/components/parameters/OnBehalfOf'
-      - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit'
-      - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetAggregatedBy'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetStartDate'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetEndDate'
@@ -1886,8 +1868,6 @@ paths:
         accounts will see only their own stats.'
       parameters:
       - $ref: '#/components/parameters/OnBehalfOf'
-      - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetLimit'
-      - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetOffset'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetAggregatedBy'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetStartDate'
       - $ref: '#/components/parameters/StatsAdvancedQueryStringsLimitOffsetEndDate'

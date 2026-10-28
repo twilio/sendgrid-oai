@@ -279,11 +279,13 @@ paths:
               schema:
                 type: object
         '400':
-          description: ''
+          description: The segment could not be deleted. If it is still used by other
+            resources, those resources are listed in the `resources` property of the
+            error and must stop using the segment before it can be deleted.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: '#/components/schemas/SegmentDeleteConflict'
         '401':
           $ref: '#/components/responses/Segments401'
         '403':
@@ -626,6 +628,66 @@ components:
       required:
       - name
       - query_dsl
+    InUseResource:
+      title: in_use_resource
+      type: object
+      description: A kind of resource that is using a segment, and so is blocking
+        its deletion.
+      properties:
+        type:
+          type: string
+          description: The kind of resource using the segment. New values may be added
+            over time, so clients should tolerate an unrecognized type.
+          $ref: '#/components/schemas/Type'
+        ids:
+          type: array
+          description: The IDs of the resources of this type using the segment.
+          items:
+            type: string
+            format: uuid
+      required:
+      - type
+      - ids
+    SegmentDeleteConflict:
+      title: segment_delete_conflict
+      type: object
+      description: Returned when a segment cannot be deleted. A single error is returned
+        however many kinds of resource are using the segment.
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: the field in the request that is incorrect
+              message:
+                type: string
+                description: a description of what is specifically wrong
+              resources:
+                type: array
+                description: When applicable, the resources currently using this segment.
+                  The segment cannot be deleted while they reference it. Absent when
+                  the request failed for any other reason.
+                items:
+                  $ref: '#/components/schemas/InUseResource'
+            required:
+            - field
+            - message
+      required:
+      - errors
+      example:
+        errors:
+        - field: segment_id
+          message: Segment cannot be deleted because it is used by other resources.
+          resources:
+          - type: automation
+            ids:
+            - 13646eaf-c57d-4fd4-9b1b-7d22ecb4db4e
+          - type: single_send
+            ids:
+            - f7deb9ea-92a3-11f1-ab0a-c2a00ce2124b
     ErrorResponse:
       type: object
       properties:
@@ -653,6 +715,11 @@ components:
         errors:
         - field: field_name
           message: error message
+    Type:
+      type: string
+      enum:
+      - automation
+      - single_send
   responses:
     Segments401:
       description: ''

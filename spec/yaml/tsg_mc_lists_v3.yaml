@@ -296,6 +296,14 @@ paths:
               schema:
                 type: string
                 description: 'The delete has been processed. '
+        '400':
+          description: The list could not be deleted. If it is still used by other
+            resources, those resources are listed in the `resources` property of the
+            error and must stop using the list before it can be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDeleteConflict'
         '404':
           description: ''
           content:
@@ -415,6 +423,65 @@ components:
           description: The number of contacts currently stored on the list.
         _metadata:
           $ref: '#/components/schemas/SelfMetadata'
+    InUseResource:
+      title: in_use_resource
+      type: object
+      description: A kind of resource that is using a list, and so is blocking its
+        deletion.
+      properties:
+        type:
+          type: string
+          description: The kind of resource using the list. New values may be added
+            over time, so clients should tolerate an unrecognized type.
+          $ref: '#/components/schemas/Type'
+        ids:
+          type: array
+          description: The IDs of the resources of this type using the list.
+          items:
+            type: string
+      required:
+      - type
+      - ids
+    ListDeleteConflict:
+      title: list_delete_conflict
+      type: object
+      description: Returned when a list cannot be deleted. A single error is returned
+        however many kinds of resource are using the list.
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: the field in the request that is incorrect
+              message:
+                type: string
+                description: a description of what is specifically wrong
+              resources:
+                type: array
+                description: When applicable, the resources currently using this list.
+                  The list cannot be deleted while they reference it. Absent when
+                  the request failed for any other reason.
+                items:
+                  $ref: '#/components/schemas/InUseResource'
+            required:
+            - field
+            - message
+      required:
+      - errors
+      example:
+        errors:
+        - field: list_id
+          message: List cannot be deleted because it is used by other resources.
+          resources:
+          - type: automation
+            ids:
+            - 05d032b4-350c-4b79-9e66-03ae1f844d90
+          - type: form
+            ids:
+            - 817407ee-929f-11f1-88ab-5aa0a2f938db
     Error:
       title: error
       type: object
@@ -532,6 +599,11 @@ components:
         self:
           type: string
           description: A link to this object.
+    Type:
+      type: string
+      enum:
+      - automation
+      - form
   responses: {}
   parameters: {}
   examples: {}

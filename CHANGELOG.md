@@ -1,5 +1,15 @@
 sendgrid-oai changelog
 ====================
+
+[2026-03-24] Version 1.0.0-rc.14
+--------------------------------
+**Mail activity**
+- Update the maximum size of substitutions to 100,000 bytes per personalization object
+
+**Mc designs v3**
+- Fix status code
+- Document the 400 returned when a list cannot be deleted because automations or forms still use it, including the new `resources` property listing them
+
 [2026-03-24] Version 1.0.0-rc.13
 --------------------------------
 **Email activity**

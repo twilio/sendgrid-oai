@@ -1,6 +1,12 @@
 sendgrid-oai changelog
 ====================
 
+[2026-03-24] Version 1.0.0-rc.15
+--------------------------------
+**Logs**
+- Update POST /v3/logs API to add containsAll function for full-text search on subject and reason
+- Update POST /v3/logs API to add additional query filters (from_email, api_key_id, event, outbound_ip) and LIKE/LIKE ANY operators
+
 [2026-03-24] Version 1.0.0-rc.14
 --------------------------------
 **Mail activity**

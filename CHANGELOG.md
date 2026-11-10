@@ -1,7 +1,7 @@
 sendgrid-oai changelog
 ====================
 
-[2026-03-24] Version 1.0.0-rc.15
+[2026-11-10] Version 1.0.0-rc.15
 --------------------------------
 **Logs**
 - Update POST /v3/logs API to add containsAll function for full-text search on subject and reason
